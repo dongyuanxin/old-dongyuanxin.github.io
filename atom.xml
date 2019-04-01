@@ -69,18 +69,12 @@
     <link href="https://godbmw.com/passages/2019-03-31-factory-pattern/"/>
     <id>https://godbmw.com/passages/2019-03-31-factory-pattern/</id>
     <published>2019-03-31T00:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
+    <updated>2019-04-01T15:37:42.267Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;a name=&quot;64336e72&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;1-什么是工厂模式？&quot;&gt;&lt;a href=&quot;#1-什么是工厂模式？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是工厂模式？&quot;&gt;&lt;/a&gt;1.
-        
-      
+      &lt;p&gt;工厂方法模式的实质是“定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。”&lt;/p&gt;
+&lt;p&gt;简单来说：&lt;strong&gt;就是把&lt;code&gt;new&lt;/code&gt;对象的操作包裹一层，对外提供一个可以根据不同参数创建不同对象的函数&lt;/strong&gt;。&lt;/p&gt;
     
     </summary>
     

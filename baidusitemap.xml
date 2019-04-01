@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
     <loc>https://godbmw.com/passages/2019-03-31-factory-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-12-08-weekly-share-1/</loc>
+    <loc>https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-12-24-weekly-share-2/</loc>
+    <loc>https://godbmw.com/passages/2018-11-25-command-pattern/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-12-08-weekly-share-1/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2019-03-15-weekly-share-3/</loc>
@@ -43,7 +43,7 @@
     <loc>https://godbmw.com/passages/2018-10-27-graph-traversal-application/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-11-25-command-pattern/</loc>
+    <loc>https://godbmw.com/passages/2018-12-24-weekly-share-2/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-12-12-composite-pattern/</loc>
@@ -304,6 +304,9 @@
     <loc>https://godbmw.com/passages/2018-08-17-webpack-css/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
+    <loc>https://godbmw.com/passages/2018-07-31-webpack-compile-es6/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-18-webpack-scss/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
@@ -311,9 +314,6 @@
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-07-30-webpack-pack-js/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-07-31-webpack-compile-es6/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>
 </urlset>
