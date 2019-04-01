@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>JavaScript基础知识梳理(上) | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端面试手记,面试,JavaScript,">
+  
+
+  
+  <meta name="description" content="👇 内容速览 👇普通函数和箭头函数的this原始数据类型及其判断和转化方法深浅拷贝及实现JS事件模型常见的高阶函数">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-03-26
+    </span>
+    
+      <span>
+        | <a href="/categories/前端面试手记/"><i class="fa fa-bookmark"></i>前端面试手记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    JavaScript基础知识梳理(上)
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://source.unsplash.com/400x400/?code,computer,Javascript);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <p>👇 内容速览 👇</p>
+<ul>
+<li>普通函数和箭头函数的<code>this</code></li>
+<li>原始数据类型及其判断和转化方法</li>
+<li>深浅拷贝及实现</li>
+<li>JS事件模型</li>
+<li>常见的高阶函数</li>
+</ul>
+<h3 id="普通函数和箭头函数的this"><a href="#普通函数和箭头函数的this" class="headerlink" title="普通函数和箭头函数的this"></a>普通函数和箭头函数的this</h3><p>还是一道经典题目，下面的这段代码的输出是什么？（为了方便解释，输出放在了注释中）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// 1. &#123;a: 100&#125;</span></span><br><span class="line">  <span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// 2. Window</span></span><br><span class="line">  &#125;)();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 普通 JS</span></span><br><span class="line">  arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// 3. Window</span></span><br><span class="line">    <span class="keyword">return</span> item + <span class="number">1</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 箭头函数</span></span><br><span class="line">  <span class="keyword">let</span> brr = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"es6"</span>, <span class="keyword">this</span>); <span class="comment">// 4. &#123;a: 100&#125;</span></span><br><span class="line">    <span class="keyword">return</span> item + <span class="number">1</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">fn.call(&#123; <span class="attr">a</span>: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>其实诀窍很简单，常见的基本是3种情况：es5普通函数、es6的箭头函数以及通过<code>bind</code>改变过上下文返回的新函数。</p>
+<p>① <strong>es5普通函数</strong>：</p>
+<ul>
+<li>函数被直接调用，上下文一定是<code>window</code></li>
+<li>函数作为对象属性被调用，例如：<code>obj.foo()</code>，上下文就是对象本身<code>obj</code></li>
+<li>通过<code>new</code>调用，<code>this</code>绑定在返回的实例上</li>
+</ul>
+<p>② <strong>es6箭头函数</strong>： 它本身没有<code>this</code>，会沿着作用域向上寻找，直到<code>global</code> / <code>window</code>。请看下面的这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> inner = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  inner()()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run.bind(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)() <span class="comment">// Output: 1</span></span><br></pre></td></tr></table></figure>
+<p>③ <strong>bind绑定上下文返回的新函数</strong>：就是被第一个bind绑定的上下文，而且bind对“箭头函数”无效。请看下面的这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run.bind(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)() <span class="comment">// output: 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 多次bind，上下文由第一个bind的上下文决定</span></span><br><span class="line">run</span><br><span class="line">  .bind(&#123;<span class="attr">a</span>: <span class="number">2</span>&#125;)</span><br><span class="line">  .bind(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)</span><br><span class="line">  () <span class="comment">// output: 2</span></span><br></pre></td></tr></table></figure>
+<p>最后，再说说这几种方法的优先级：new &gt; bind &gt; 对象调用 &gt; 直接调用</p>
+<p>至此，这道题目的输出就说可以解释明白了。</p>
+<h3 id="原始数据类型和判断方法"><a href="#原始数据类型和判断方法" class="headerlink" title="原始数据类型和判断方法"></a>原始数据类型和判断方法</h3><blockquote>
+<p>题目：JS中的原始数据类型？</p>
+</blockquote>
+<p>ECMAScript 中定义了 7 种原始类型：</p>
+<ul>
+<li>Boolean</li>
+<li>String</li>
+<li>Number</li>
+<li>Null</li>
+<li>Undefined</li>
+<li>Symbol（新定义）</li>
+<li>BigInt（新定义）</li>
+</ul>
+<p><strong>注意</strong>：原始类型不包含Object和Function</p>
+<blockquote>
+<p>题目：常用的判断方法？</p>
+</blockquote>
+<p>在进行判断的时候有<code>typeof</code>、<code>instanceof</code>。对于数组的判断，使用<code>Array.isArray()</code>：</p>
+<ul>
+<li><p>typeof：</p>
+<ul>
+<li>typeof基本都可以正确判断数据类型</li>
+<li><code>typeof null</code>和<code>typeof [1, 2, 3]</code>均返回”object”</li>
+<li>ES6新增：<code>typeof Symbol()</code>返回”symbol”</li>
+</ul>
+</li>
+<li><p>instanceof：</p>
+<ul>
+<li><p>专门用于实例和构造函数对应</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Obj</span>(<span class="params">value</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.value = value; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> Obj(<span class="string">"test"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> Obj); <span class="comment">// output: true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断是否是数组：<code>[1, 2, 3] instanceof Array</code></p>
+</li>
+</ul>
+</li>
+<li><p>Array.isArray()：ES6新增，用来判断是否是’Array’。<code>Array.isArray({})</code>返回<code>false</code>。</p>
+</li>
+</ul>
+<h3 id="原始类型转化"><a href="#原始类型转化" class="headerlink" title="原始类型转化"></a>原始类型转化</h3><p>当我们对一个“对象”进行数学运算操作时候，会涉及到对象 =&gt; 基础数据类型的转化问题。</p>
+<p>事实上，当一个对象执行例如加法操作的时候，如果它是原始类型，那么就不需要转换。否则，将遵循以下规则：</p>
+<ol>
+<li>调用实例的<code>valueOf()</code>方法，如果有返回的是基础类型，停止下面的过程；否则继续</li>
+<li>调用实例的<code>toString()</code>方法，如果有返回的是基础类型，停止下面的过程；否则继续</li>
+<li>都没返回原始类型，就会报错</li>
+</ol>
+<p>请看下面的测试代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'a'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = &#123;</span><br><span class="line">  valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">100</span></span><br><span class="line">  &#125;,</span><br><span class="line">  toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'b'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="built_in">Object</span>.create(<span class="literal">null</span>) <span class="comment">// 创建一个空对象</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a + <span class="string">'123'</span>) <span class="comment">// output: a123</span></span><br><span class="line"><span class="built_in">console</span>.log(b + <span class="number">1</span>) <span class="comment">// output: 101</span></span><br><span class="line"><span class="built_in">console</span>.log(c + <span class="string">'123'</span>) <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+<p>除了<code>valueOf</code>和<code>toString</code>，es6还提供了<code>Symbol.toPrimitive</code>供对象向原始类型转化，并且<strong>它的优先级最高</strong>！！稍微改造下上面的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b = &#123;</span><br><span class="line">  valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">100</span></span><br><span class="line">  &#125;,</span><br><span class="line">  toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'b'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  [<span class="built_in">Symbol</span>.toPrimitive]: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10000</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b + <span class="number">1</span>) <span class="comment">// output: 10001</span></span><br></pre></td></tr></table></figure>
+<p>最后，其实关于<code>instanceof</code>判断是否是某个对象的实例，es6也提供了<code>Symbol.hasInstance</code>接口，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Even</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> [<span class="built_in">Symbol</span>.hasInstance](num) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Number</span>(num) % <span class="number">2</span> === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Odd = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.hasInstance](num) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Number</span>(num) % <span class="number">2</span> !== <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> <span class="keyword">instanceof</span> Even); <span class="comment">// output: false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> <span class="keyword">instanceof</span> Odd); <span class="comment">// output: true</span></span><br></pre></td></tr></table></figure>
+<h3 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h3><blockquote>
+<p>题目：实现对象的深拷贝。</p>
+</blockquote>
+<p>在JS中，函数和对象都是浅拷贝（地址引用）；其他的，例如布尔值、数字等基础数据类型都是深拷贝（值引用）。</p>
+<p>值得提醒的是，ES6的<code>Object.assign()</code>和ES7的<code>...</code>解构运算符都是“浅拷贝”。实现深拷贝还是需要自己手动撸“轮子”或者借助第三方库（例如<code>lodash</code>）：</p>
+<ul>
+<li><p>手动做一个“完美”的深拷贝函数：<a href="https://godbmw.com/passages/2019-03-18-interview-js-code/">https://godbmw.com/passages/2019-03-18-interview-js-code/</a></p>
+</li>
+<li><p>借助第三方库：jq的<code>extend(true, result, src1, src2[ ,src3])</code>、lodash的<code>cloneDeep(src)</code></p>
+</li>
+<li><p><code>JSON.parse(JSON.stringify(src))</code>：这种方法有局限性，如果属性值是函数或者一个类的实例的时候，无法正确拷贝</p>
+</li>
+<li><p>借助HTML5的<code>MessageChannel</code>：这种方法有局限性，当属性值是函数的时候，会报错</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> &#123;port1, port2&#125; = <span class="keyword">new</span> MessageChannel();</span></span><br><span class="line"><span class="javascript">      port2.onmessage = <span class="function"><span class="params">ev</span> =&gt;</span> resolve(ev.data);</span></span><br><span class="line"><span class="undefined">      port1.postMessage(obj);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">const</span> obj = &#123;</span></span><br><span class="line"><span class="undefined">    a: 1,</span></span><br><span class="line"><span class="undefined">    b: &#123;</span></span><br><span class="line"><span class="undefined">      c: [1, 2],</span></span><br><span class="line"><span class="javascript">      d: <span class="string">'() =&gt; &#123;&#125;'</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  deepClone(obj)</span></span><br><span class="line"><span class="javascript">    .then(<span class="function"><span class="params">obj2</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="undefined">      obj2.b.c[0] = 100;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(obj.b.c); <span class="comment">// output: [1, 2]</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(obj2.b.c); <span class="comment">// output: [100, 2]</span></span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="JS事件流"><a href="#JS事件流" class="headerlink" title="JS事件流"></a>JS事件流</h3><h4 id="事件冒泡和事件捕获"><a href="#事件冒泡和事件捕获" class="headerlink" title="事件冒泡和事件捕获"></a>事件冒泡和事件捕获</h4><p>事件流分为：<strong>冒泡</strong>和<strong>捕获</strong>，顺序是先捕获再冒泡。</p>
+<p><strong>事件冒泡</strong>：子元素的触发事件会一直向父节点传递，一直到根结点停止。此过程中，可以在每个节点捕捉到相关事件。可以通过<code>stopPropagation</code>方法终止冒泡。</p>
+<p><strong>事件捕获</strong>：和“事件冒泡”相反，从根节点开始执行，一直向子节点传递，直到目标节点。</p>
+<p><code>addEventListener</code>给出了第三个参数同时支持冒泡与捕获：默认是<code>false</code>，事件冒泡；设置为<code>true</code>时，是事件捕获。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">style</span>=<span class="string">"width: 100vw; background: red;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 事件捕获：先输出 "外层click事件触发"; 再输出 "内层click事件触发"</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> useCapture = <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>);</span></span><br><span class="line"><span class="undefined">  btn.addEventListener(</span></span><br><span class="line"><span class="javascript">    <span class="string">"click"</span>,</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">"内层click事件触发"</span>);</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    useCapture</span></span><br><span class="line"><span class="undefined">  );</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> app = <span class="built_in">document</span>.getElementById(<span class="string">"app"</span>);</span></span><br><span class="line"><span class="javascript">  app.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">"外层click事件触发"</span>);</span></span><br><span class="line"><span class="undefined">  &#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="DOM0级-和-DOM2级"><a href="#DOM0级-和-DOM2级" class="headerlink" title="DOM0级 和 DOM2级"></a>DOM0级 和 DOM2级</h4><p><strong>DOM2级</strong>：前面说的<code>addEventListener</code>，它定义了<code>DOM</code>事件流，捕获 + 冒泡。</p>
+<p><strong>DOM0级</strong>：</p>
+<ul>
+<li>直接在html标签内绑定<code>on</code>事件</li>
+<li>在JS中绑定<code>on</code>系列事件</li>
+</ul>
+<p><strong>注意</strong>：现在通用<code>DOM2</code>级事件，优点如下：</p>
+<ol>
+<li>可以绑定 / 卸载事件</li>
+<li>支持事件流</li>
+<li>冒泡 + 捕获：相当于每个节点同一个事件，至少2次处理机会</li>
+<li>同一类事件，可以绑定多个函数</li>
+</ol>
+<h3 id="常见的高阶函数"><a href="#常见的高阶函数" class="headerlink" title="常见的高阶函数"></a>常见的高阶函数</h3><p>没什么好说的，跑一下下面的代码就可以理解了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map: 生成一个新数组，遍历原数组，</span></span><br><span class="line"><span class="comment">// 将每个元素拿出来做一些变换然后放入到新的数组中</span></span><br><span class="line"><span class="keyword">let</span> newArr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`New array is <span class="subst">$&#123;newArr&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// filter: 数组过滤, 根据返回的boolean</span></span><br><span class="line"><span class="comment">// 决定是否添加到数组中</span></span><br><span class="line"><span class="keyword">let</span> newArr2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>].filter(<span class="function"><span class="params">item</span> =&gt;</span> item !== <span class="number">6</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`New array2 is <span class="subst">$&#123;newArr2&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// reduce: 结果汇总为单个返回值</span></span><br><span class="line"><span class="comment">// acc: 累计值; current: 当前item</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> sum = arr.reduce(<span class="function">(<span class="params">acc, current</span>) =&gt;</span> acc + current);</span><br><span class="line"><span class="keyword">const</span> sum2 = arr.reduce(<span class="function">(<span class="params">acc, current</span>) =&gt;</span> acc + current, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">console</span>.log(sum); <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log(sum2); <span class="comment">// 106</span></span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#普通函数和箭头函数的this"><span class="toc-number">1.</span> <span class="toc-text">普通函数和箭头函数的this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原始数据类型和判断方法"><span class="toc-number">2.</span> <span class="toc-text">原始数据类型和判断方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原始类型转化"><span class="toc-number">3.</span> <span class="toc-text">原始类型转化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝和浅拷贝"><span class="toc-number">4.</span> <span class="toc-text">深拷贝和浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS事件流"><span class="toc-number">5.</span> <span class="toc-text">JS事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#事件冒泡和事件捕获"><span class="toc-number">5.1.</span> <span class="toc-text">事件冒泡和事件捕获</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM0级-和-DOM2级"><span class="toc-number">5.2.</span> <span class="toc-text">DOM0级 和 DOM2级</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的高阶函数"><span class="toc-number">6.</span> <span class="toc-text">常见的高阶函数</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-03-26-javascript-first/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/面试/"><i class="fa fa-tags"></i>面试</a>
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-03-26-javascript-first";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2019-03-27-javascript-second/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-03-20-css3-flex/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

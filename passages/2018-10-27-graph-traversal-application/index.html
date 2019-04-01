@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>图遍历实现及其应用 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="数据结构和算法,算法,C与C++,">
+  
+
+  
+  <meta name="description" content="介绍一些如何利用深度优先解决联通分量、是否联通、查找路径等相关问题，如何利用广度优先查找最短路径、计算最短距离等相关问题。本文代码中用到的SparseGraph和DenseGraph两个类的实现和封装，以及读取测试数据的类的封装，请见《稠密图和稀疏图实现及应用》中的讲解和实现。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-10-27
+    </span>
+    
+      <span>
+        | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    图遍历实现及其应用
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="1-稠密图和稀疏图实现及其应用"><a href="#1-稠密图和稀疏图实现及其应用" class="headerlink" title="1. 稠密图和稀疏图实现及其应用"></a>1. 稠密图和稀疏图实现及其应用</h2><p>下面的代码应用到的<code>SparseGraph</code>和<code>DenseGraph</code>两个类的实现和封装，以及读取测试数据的类的封装，请见<a href="https://godbmw.com/passage/82">《稠密图和稀疏图实现及应用》</a>中的讲解和实现。</p>
+<h2 id="2-深度优先遍历及其应用"><a href="#2-深度优先遍历及其应用" class="headerlink" title="2. 深度优先遍历及其应用"></a>2. 深度优先遍历及其应用</h2><p>深度优先的思路就不冗赘了（<em>网上博客文章一抓一大把</em>），记住是用递归找到所有点即可。</p>
+<p>这里就记录下如何利用深度优先解决图的联通分量、打印指定点的路径等问题。</p>
+<h3 id="2-1-找到图的联通分量"><a href="#2-1-找到图的联通分量" class="headerlink" title="2.1 找到图的联通分量"></a>2.1 找到图的联通分量</h3><p>思路如下：</p>
+<ol>
+<li>准备一个数组<code>id</code>：<code>id[i]</code>表示点 i 所在的联通分量的序号</li>
+<li>从图的第一个点开始循环，每个点进行深度优先遍历，并且将图的联通分量加 1</li>
+<li>每次对一个点进行遍历的时候，更新它对应的<code>id</code>数组的值</li>
+<li>如果遍历完一个联通分量，则会退出循环，回到第 2 步，继续执行。如果此时发现所有点都被遍历完了，则退出循环。</li>
+</ol>
+<p>实现的功能：</p>
+<ul>
+<li>判断图的联通分量的个数</li>
+<li>判断任意两点是否属于同一联通分量 / 是否联通</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// component.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/10/13.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GRAPH_COMPONENT_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GRAPH_COMPONENT_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Graph&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Component</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Graph &amp;G;</span><br><span class="line">    <span class="keyword">bool</span> *visited; <span class="comment">// visit[i]: 点i是否被访问过</span></span><br><span class="line">    <span class="keyword">int</span> ccount; <span class="comment">// 记录联通分量个数</span></span><br><span class="line">    <span class="keyword">int</span> *id; <span class="comment">// id[i]: 点i所在的联通分量的标记</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    深度优先遍历</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        visited[v] = <span class="literal">true</span>;</span><br><span class="line">        id[v] = ccount; <span class="comment">// 每个节点的联通分量的身份标识就采用当前发现的联通分量的个数</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">typename</span> Graph::<span class="function">graph_iterator <span class="title">iter</span><span class="params">(G, v)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = iter.begin(); !iter.end(); i = iter.next()) &#123;</span><br><span class="line">            <span class="keyword">if</span>( !visited[i] ) dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Component(Graph &amp;graph): G(graph) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;visited = <span class="keyword">new</span> <span class="keyword">bool</span>[G.V()];</span><br><span class="line">        <span class="keyword">this</span>-&gt;id = <span class="keyword">new</span> <span class="keyword">int</span>[G.V()];</span><br><span class="line">        <span class="keyword">this</span>-&gt;ccount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.V(); ++i) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;visited[i] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">this</span>-&gt;id[i] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        求图的联通分量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.V(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="keyword">this</span>-&gt;visited[i]) &#123;</span><br><span class="line">                <span class="comment">// 开始针对点i进行深度优先遍历</span></span><br><span class="line">                <span class="comment">// 此过程中，和节点i联通的所有点都会被遍历并且更新相关id数组的标识</span></span><br><span class="line">                ++<span class="keyword">this</span>-&gt;ccount;</span><br><span class="line">                <span class="keyword">this</span>-&gt;dfs(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Component() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;visited;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    返回联通分量</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;ccount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    判断点v和w是否联通</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">is_connected</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;id[v] == <span class="keyword">this</span>-&gt;id[w];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//GRAPH_COMPONENT_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-打印指定点的路径"><a href="#2-2-打印指定点的路径" class="headerlink" title="2.2 打印指定点的路径"></a>2.2 打印指定点的路径</h3><p>代码思路：</p>
+<ol>
+<li>准备一个数组<code>from</code>: <code>from[i]</code>表示节点 i 的上一个节点</li>
+<li>从起始点开始进行深度优先遍历</li>
+<li>在深度优先的过程中，更新节点在<code>from</code>数组中的相应值</li>
+<li>完成深度遍历的同时，<code>from</code>数组中也就填充完成了</li>
+</ol>
+<p>实现功能：</p>
+<ul>
+<li>打印从起始点到指定节点的路径</li>
+<li>判断起始点是否可以达到指定节点</li>
+</ul>
+<p><em>注意：深度优先无法保证路径是最短的，但可以保证路径是可以达到的。</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// path.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/10/13.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GRAPH_PATH_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GRAPH_PATH_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Graph&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Path</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Graph &amp;G;</span><br><span class="line">    <span class="keyword">int</span> s; <span class="comment">// 起始点</span></span><br><span class="line">    <span class="keyword">bool</span> *visited;</span><br><span class="line">    <span class="keyword">int</span> *from;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    深度优先遍历</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        visited[v] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">typename</span> Graph::<span class="function">graph_iterator <span class="title">iter</span><span class="params">(G, v)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = iter.begin(); !iter.end(); i = iter.next()) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[i]) &#123;</span><br><span class="line"><span class="comment">//                路径中节点i的前一个节点是v</span></span><br><span class="line">                from[i] = v;</span><br><span class="line">                dfs(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="comment">//    构造过程中，调用深度优先遍历，找到从s点到其他点的路径</span></span><br><span class="line">    Path(Graph &amp;graph, <span class="keyword">int</span> s):G(graph) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;s = s;</span><br><span class="line">        <span class="keyword">this</span>-&gt;visited = <span class="keyword">new</span> <span class="keyword">bool</span>[G.V()];</span><br><span class="line">        <span class="keyword">this</span>-&gt;from = <span class="keyword">new</span> <span class="keyword">int</span>[G.V()];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.V(); ++i) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;visited[i] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">this</span>-&gt;from[i] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;dfs(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Path() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;visited;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;from;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    检测从s到w是否有路径</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">has_path</span><span class="params">(<span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        如果有路径，那么在深度遍历的过程中一定被访问过</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;visited[w];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">path</span><span class="params">(<span class="keyword">int</span> p, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;vec)</span> </span>&#123;</span><br><span class="line">        vec.clear();</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>-&gt;has_path(p)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        深度遍历是递归调用，所以，from[i]对应的是i节点的父节点</span></span><br><span class="line"><span class="comment">//        借助栈，栈顶到栈底就是路径起点到路径终点</span></span><br><span class="line"><span class="comment">//        再依次取出栈元素，放入队列(这里用的vector)即可</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">while</span>(p != <span class="number">-1</span>) &#123;</span><br><span class="line">            s.push(p);</span><br><span class="line">            p = <span class="keyword">this</span>-&gt;from[p];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!s.empty()) &#123;</span><br><span class="line">            vec.push_back(s.top());</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show_path</span><span class="params">(<span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>-&gt;has_path(w)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">        <span class="keyword">this</span>-&gt;path(w, vec);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(vec.empty()) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vec.size() - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;vec[i]&lt;&lt;<span class="string">" -&gt; "</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;vec.back()&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//GRAPH_PATH_H</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="3-广度优先遍历及其应用"><a href="#3-广度优先遍历及其应用" class="headerlink" title="3. 广度优先遍历及其应用"></a>3. 广度优先遍历及其应用</h2><h3 id="3-1-广度优先遍历的思路"><a href="#3-1-广度优先遍历的思路" class="headerlink" title="3.1 广度优先遍历的思路"></a>3.1 广度优先遍历的思路</h3><ol>
+<li>从任意点开始，将此点放入队列</li>
+<li>如果队列为空，结束程序；否则，往下执行</li>
+<li>取出队列中的第一个节点，标记访问过</li>
+<li>遍历此节点的邻接节点，如果没有被访问过，则放入队列</li>
+<li>回到第 2 步骤</li>
+</ol>
+<p><em>注意：需要借助队列这种数据结构</em></p>
+<h3 id="3-2-找到最短路径"><a href="#3-2-找到最短路径" class="headerlink" title="3.2 找到最短路径"></a>3.2 找到最短路径</h3><p>代码思路：仿照深度优先遍历打印路径，只需要在广度优先遍历的过程中标记这个节点的上一个节点即可。</p>
+<p>实现功能：</p>
+<ul>
+<li>打印出起始点到任一点的最短路径</li>
+<li>找到起始点到任一节点的最短距离</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by AsuraDong on 2018/10/13.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GRAPH_SHORTEST_PATH_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GRAPH_SHORTEST_PATH_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Graph&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShortestPath</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Graph &amp;G;</span><br><span class="line">    <span class="keyword">int</span> s; <span class="comment">// 图的起始点</span></span><br><span class="line">    <span class="keyword">bool</span> *visited; <span class="comment">// visit[i]: 节点i是否被访问过</span></span><br><span class="line">    <span class="keyword">int</span> *from; <span class="comment">// from[i]: 路径上i的上一个节点</span></span><br><span class="line">    <span class="keyword">int</span> *ord; <span class="comment">// ord[i]: 节点i在路径中的次序</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ShortestPath(Graph &amp;graph, <span class="keyword">int</span> s):G(graph) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;visited = <span class="keyword">new</span> <span class="keyword">bool</span>[G.V()];</span><br><span class="line">        <span class="keyword">this</span>-&gt;from = <span class="keyword">new</span> <span class="keyword">int</span>[G.V()];</span><br><span class="line">        <span class="keyword">this</span>-&gt;ord = <span class="keyword">new</span> <span class="keyword">int</span>[G.V()];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.V(); i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;visited[i] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">this</span>-&gt;from[i] = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">this</span>-&gt;ord[i] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;s = s;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        q.push(s);</span><br><span class="line">        <span class="keyword">this</span>-&gt;visited[s] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ord[s] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">typename</span> Graph::<span class="function">graph_iterator <span class="title">iter</span><span class="params">(G, v)</span></span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = iter.begin(); !iter.end(); i = iter.next()) &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;visited[i]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">                q.push(i);</span><br><span class="line">                <span class="keyword">this</span>-&gt;visited[i] = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">this</span>-&gt;from[i] = v;</span><br><span class="line">                <span class="keyword">this</span>-&gt;ord[i] = <span class="keyword">this</span>-&gt;ord[v] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~ShortestPath()&#123;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;visited;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;from;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;ord;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    点s到点w的最短路径长度</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">(<span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;ord[w];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">has_path</span><span class="params">(<span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;visited[w];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    点s到点w的最短路径</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">path</span><span class="params">(<span class="keyword">int</span> p, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;vec)</span></span>&#123;</span><br><span class="line">        vec.clear();</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>-&gt;has_path(p)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">while</span>( p != <span class="number">-1</span> )&#123;</span><br><span class="line">            s.push(p);</span><br><span class="line">            p = <span class="keyword">this</span>-&gt;from[p];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>( !s.empty() )&#123;</span><br><span class="line">            vec.push_back( s.top() );</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show_path</span><span class="params">(<span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>-&gt;has_path(w)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">        <span class="keyword">this</span>-&gt;path(w, vec);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(vec.empty()) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vec.size() - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;vec[i]&lt;&lt;<span class="string">" -&gt; "</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;vec.back()&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//GRAPH_SHORTEST_PATH_H</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="4-代码测试和结果"><a href="#4-代码测试和结果" class="headerlink" title="4. 代码测试和结果"></a>4. 代码测试和结果</h2><h3 id="4-1-准备测试数据"><a href="#4-1-准备测试数据" class="headerlink" title="4.1 准备测试数据"></a>4.1 准备测试数据</h3><p>准备了<code>graph_data_1.txt</code>、<code>graph_data_2.txt</code>和<code>graph_data_3.txt</code>3 个图的数据。第一行的两个数据是节点个数和边的个数。剩下的行是相邻的两个节点的坐标。</p>
+<p><code>graph_data_1.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">13 13</span><br><span class="line">0 5</span><br><span class="line">4 3</span><br><span class="line">0 1</span><br><span class="line">9 12</span><br><span class="line">6 4</span><br><span class="line">5 4</span><br><span class="line">0 2</span><br><span class="line">11 12</span><br><span class="line">9 10</span><br><span class="line">0 6</span><br><span class="line">7 8</span><br><span class="line">9 11</span><br><span class="line">5 3</span><br></pre></td></tr></table></figure>
+<p><code>graph_data_2.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">6 8</span><br><span class="line">0 1</span><br><span class="line">0 2</span><br><span class="line">0 5</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">3 4</span><br><span class="line">3 5</span><br></pre></td></tr></table></figure>
+<p><code>graph_data_3.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">7 8</span><br><span class="line">0 1</span><br><span class="line">0 2</span><br><span class="line">0 5</span><br><span class="line">0 6</span><br><span class="line">3 4</span><br><span class="line">3 5</span><br><span class="line">4 5</span><br><span class="line">4 6</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-测试深度优先及其应用"><a href="#4-2-测试深度优先及其应用" class="headerlink" title="4.2 测试深度优先及其应用"></a>4.2 测试深度优先及其应用</h3><p>测试代码<code>main.cpp</code>如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"reader.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sparse_graph.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dense_graph.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"component.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"path.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"shortest_path.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用两种图的存储方式读取testG1.txt文件</span></span><br><span class="line">    <span class="built_in">string</span> filename = <span class="string">"F:/ClionProjects/Graph/graph_data_1.txt"</span>;</span><br><span class="line">    <span class="function">SparseGraph <span class="title">g1</span><span class="params">( <span class="number">13</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;SparseGraph&gt; readGraph1( g1 , filename );</span><br><span class="line">    Component&lt;SparseGraph&gt; component1(g1);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"TestG1.txt, Using Sparse Graph, Component Count: "</span>&lt;&lt;component1.count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">DenseGraph <span class="title">g2</span><span class="params">( <span class="number">13</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;DenseGraph&gt; readGraph2( g2 , filename );</span><br><span class="line">    Component&lt;DenseGraph&gt; component2(g2);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"TestG1.txt, Using Dense Graph, Component Count: "</span>&lt;&lt;component2.count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用两种图的存储方式读取testG2.txt文件</span></span><br><span class="line">    filename = <span class="string">"F:/ClionProjects/Graph/graph_data_2.txt"</span>;</span><br><span class="line">    <span class="function">SparseGraph <span class="title">g3</span><span class="params">( <span class="number">6</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;SparseGraph&gt; readGraph3( g3 , filename );</span><br><span class="line">    Component&lt;SparseGraph&gt; component3(g3);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"TestG2.txt, Using Sparse Graph, Component Count: "</span>&lt;&lt;component3.count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">DenseGraph <span class="title">g4</span><span class="params">( <span class="number">6</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;DenseGraph&gt; readGraph4( g4 , filename );</span><br><span class="line">    Component&lt;DenseGraph&gt; component4(g4);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"TestG2.txt, Using Dense Graph, Component Count: "</span>&lt;&lt;component4.count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果如下：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/图遍历实现及其应用/1.png" alt></p>
+<h3 id="4-3-测试广度优先及其应用"><a href="#4-3-测试广度优先及其应用" class="headerlink" title="4.3 测试广度优先及其应用"></a>4.3 测试广度优先及其应用</h3><p>测试代码<code>main.cpp</code>如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"reader.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sparse_graph.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dense_graph.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"component.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"path.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"shortest_path.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> filename = <span class="string">"F:/ClionProjects/Graph/graph_data_3.txt"</span>;</span><br><span class="line">    SparseGraph g = SparseGraph(<span class="number">7</span>, <span class="literal">false</span>);</span><br><span class="line">    Reader&lt;SparseGraph&gt; readGraph(g, filename);</span><br><span class="line">    g.show();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 比较使用深度优先遍历和广度优先遍历获得路径的不同</span></span><br><span class="line">    <span class="comment">// 广度优先遍历获得的是无权图的最短路径</span></span><br><span class="line">    Path&lt;SparseGraph&gt; dfs(g,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"DFS : "</span>;</span><br><span class="line">    dfs.show_path(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">    ShortestPath&lt;SparseGraph&gt; bfs(g,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"BFS : "</span>;</span><br><span class="line">    bfs.show_path(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    filename = <span class="string">"F:/ClionProjects/Graph/graph_data_1.txt"</span>;</span><br><span class="line">    SparseGraph g2 = SparseGraph(<span class="number">13</span>, <span class="literal">false</span>);</span><br><span class="line">    Reader&lt;SparseGraph&gt; readGraph2(g2, filename);</span><br><span class="line">    g2.show();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 比较使用深度优先遍历和广度优先遍历获得路径的不同</span></span><br><span class="line">    <span class="comment">// 广度优先遍历获得的是无权图的最短路径</span></span><br><span class="line">    Path&lt;SparseGraph&gt; dfs2(g2,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"DFS : "</span>;</span><br><span class="line">    dfs2.show_path(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">    ShortestPath&lt;SparseGraph&gt; bfs2(g,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"BFS : "</span>;</span><br><span class="line">    bfs2.show_path(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果如下所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/图遍历实现及其应用/2.png" alt></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-稠密图和稀疏图实现及其应用"><span class="toc-text">1. 稠密图和稀疏图实现及其应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-深度优先遍历及其应用"><span class="toc-text">2. 深度优先遍历及其应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-找到图的联通分量"><span class="toc-text">2.1 找到图的联通分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-打印指定点的路径"><span class="toc-text">2.2 打印指定点的路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-广度优先遍历及其应用"><span class="toc-text">3. 广度优先遍历及其应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-广度优先遍历的思路"><span class="toc-text">3.1 广度优先遍历的思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-找到最短路径"><span class="toc-text">3.2 找到最短路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-代码测试和结果"><span class="toc-text">4. 代码测试和结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-准备测试数据"><span class="toc-text">4.1 准备测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-测试深度优先及其应用"><span class="toc-text">4.2 测试深度优先及其应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-测试广度优先及其应用"><span class="toc-text">4.3 测试广度优先及其应用</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-10-27-graph-traversal-application/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+     
+      <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-10-27-graph-traversal-application";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-11-01-why-i-blog/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-10-25-stragegy-pattern/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

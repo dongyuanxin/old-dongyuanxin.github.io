@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>GPSR：贪婪转发与周边转发 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="算法,图论,路由协议,">
+  
+
+  
+  <meta name="description" content="这是之前学习《无线传感网络》这门课做的期末大作业，GPSR是”greedy perimeter stateless routing”的缩写。这是一种无状态的路由转发协议，巧妙地借助“贪婪转发”和“周边转发”有效地降低了每个物理节点的存储信息量，非常具有实用意义。除此之外，它还能快速地应对现实中外界条件、节点能耗等多种因素造成的频繁变化的节点分布。因此，特别重温一下，作为一次分享。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-03-02
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    GPSR：贪婪转发与周边转发
+  </h1>
+  
+  <article class="passage-article">
+    <p>这是之前学习《无线传感网络》这门课做的期末大作业，GPSR是”greedy perimeter stateless routing”的缩写。</p>
+<p>这是一种无状态的路由转发协议，巧妙地借助“贪婪转发”和“周边转发”有效地降低了每个物理节点的存储信息量，非常具有实用意义。</p>
+<p>除此之外，它还能快速地应对现实中外界条件、节点能耗等多种因素造成的频繁变化的节点分布。</p>
+<p>因此，特别重温一下，作为一次分享。</p>
+<h2 id="0-摘要"><a href="#0-摘要" class="headerlink" title="0. 摘要"></a>0. 摘要</h2><p>随着路由节点的增加以及拓扑结构变化率的增大，传统的路由转发协议算法效率低、鲁棒性差。贪婪周界无状态路由协议(GPSR)只使用拓扑结构中的临近信息节点进行“贪婪转发”决策。当数据包进入“路由空洞”的时候，算法会先构造GG平面图或者RNG平面图，然后采用“周边转发”绕过此区域。此过程中，算法会自动切换“贪婪转发”和“周边转发”这两种模式。在频繁变化或者节点数量多的拓扑结构中，并且每个节点存储的信息量少，GPSR可以较低的成本快速地响应变化，查询正确的路由路径。</p>
+<p><strong>关键词</strong>：GPSR, 贪婪转发, 周边转发, 路由空洞, 平面图</p>
+<h2 id="1-研究背景及意义"><a href="#1-研究背景及意义" class="headerlink" title="1. 研究背景及意义"></a>1. 研究背景及意义</h2><h3 id="1-1-研究背景与动机"><a href="#1-1-研究背景与动机" class="headerlink" title="1.1 研究背景与动机"></a>1.1 研究背景与动机</h3><p>当下的一些路由具有节点多、拓扑结构变化快的特点，例如：Ad-hoc网络（无基础设施，支持军事用户、灾后救援人员以及临时协作）、传感器网络（由小型传感器组成，节点资源匮乏）、“屋顶”网络（非移动，但是密集遍布大都市区域，节点数量数十万）。</p>
+<p>传统的路由算法的节点成本和消息成本过高，造成在高移动性和密集节点拓扑结构中的的低适应性。因此，需要一种新的节点成本低、鲁棒性高的路由算法。</p>
+<h3 id="1-2-研究意义"><a href="#1-2-研究意义" class="headerlink" title="1.2 研究意义"></a>1.2 研究意义</h3><p>论文提出的GPSR算法合理利用地理信息来实现高稳健性。在网络节点数量不断增加的情况下提高稳健性和迁移率，降低路由协议消息发送成本，各个路由节点消息传递成功率以及使得每个节点存储最少的信息量。</p>
+<h2 id="2-国内外研究现状"><a href="#2-国内外研究现状" class="headerlink" title="2. 国内外研究现状"></a>2. 国内外研究现状</h2><p>论文中提出的DV和LS算法，要求将整个网络拓扑结构的映射到所有的路由节点。在DV算法的描述中，每个路由节点都记录了最新周期中到所有网络目的地的距离；在LS算法的描述中，每个路由节点都会接受到链路改变的相关信息状态。</p>
+<p>当拓扑结构变化率增大，或者路由区域中的路由节点的数量增多，DV算法和LS算法的复杂度就会增加，同时增加的还有每个节点的信息量储备和节点之间沟通成本。</p>
+<p>虽然“缓存”技术可以减少节点负载，但是当节点数目过多或者拓扑结构变化率过大的时候，现有算法仍然不能保证较高的鲁棒性以及较低的节点开销。</p>
+<h2 id="3-研究内容"><a href="#3-研究内容" class="headerlink" title="3. 研究内容"></a>3. 研究内容</h2><h3 id="3-1-主要挑战及创新点"><a href="#3-1-主要挑战及创新点" class="headerlink" title="3.1 主要挑战及创新点"></a>3.1 主要挑战及创新点</h3><p>为了让节点存储最少的信息量，并且能够快速响应拓扑结构的变化。需要使用贪心法的思想，让每一步都是最优解，这个转发过程就是“贪心转发”。</p>
+<p>但是有些时候无法满足“贪心转发”的条件，此时的情况就是“路由空洞”。解决“路由空洞”的重要技术是“右手法则”，这个转发过程就是“周边转发”。而在周边转发之前需要将图处理成平面图，有GG和RNG两种平面图供选择。</p>
+<p>在转发过程中，根据节点条件，切换“贪心转发”模式和“周边转发”模式，直到到达最终的目的节点。</p>
+<h3 id="3-2-相关技术介绍"><a href="#3-2-相关技术介绍" class="headerlink" title="3.2 相关技术介绍"></a>3.2 相关技术介绍</h3><p>GPSR算法的实现过程中，需要配合“信标算法”来确定邻居节点的位置信息。</p>
+<p>“信标算法”中，每个节点周期性的以广播方式传送一个信标，信标包括节点自身的位置信息，位置信息被编码成两个4字节的浮点数值，用于标记节点的x坐标和y坐标。数据格式是<code>(IP, (x, y))</code>。</p>
+<p>为了避免邻居节点发送的信标产生冲突，用B表示信标间的时间间隔，节点发送信标的时间统一分布在<code>[0.5B, 1.5B]</code>之间。设节点保留位置信息的最长时间为T，在超过T时间间隔后仍然没有收到邻居节点发送的信标，就认为邻居节点失效或超出覆盖范围，删除对应的位置信息。</p>
+<p>借助这些地理信息，GPSR算法的可以避免探测包的盲目洪泛，从而进行有效的路由转发，并且针对节点变动进行有效的路由维护。甚至实现基于无状态的分布式的非端到端的数据转发。</p>
+<h3 id="3-3-贪婪转发"><a href="#3-3-贪婪转发" class="headerlink" title="3.3 贪婪转发"></a>3.3 贪婪转发</h3><p>贪婪转发的过程是指：</p>
+<ol>
+<li>数据包由源节点标记要发送数据包的目标节点或目标区域位置；</li>
+<li>每一个中间的转发节点都知道它的邻居节点的位置，转发节点在选择数据包的下一跳节点时使用<strong>贪婪转发策略</strong>，即选择<strong>地理位置最接近目标节点的节点</strong>作为下一跳节点；</li>
+<li>以此类推，每一次转发都会更加接近目标节点，直至到达目标节点。</li>
+</ol>
+<p>贪婪转发的原理就是利用“贪心”思想，让每个节点选择当前的最优选择（在满足条件的情况下），直到算法结束。</p>
+<p>如下图所示，根据贪婪转发的原则，节点x的下一跳节点就是节点y。毫无疑问，<strong>贪婪转发只需要保证节点的一条邻居信息即可</strong>。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/1.jpg" alt></p>
+<h3 id="3-3-贪婪转发困境·路由空洞"><a href="#3-3-贪婪转发困境·路由空洞" class="headerlink" title="3.3 贪婪转发困境·路由空洞"></a>3.3 贪婪转发困境·路由空洞</h3><p>路由空洞是指当前节点比所有其他一跳邻居节点更接近目的节点，此时，根据贪婪转发的规则，当前节点不会转发数据给一跳的邻居节点。如果存在这种网络拓扑结构，那么就称之为“路由空洞”。</p>
+<p>如下图所示，void区域就是没有满足“贪婪转发”条件的区域。因为节点x的覆盖范围与以直线xD为半径的圆的交叉区域没有邻居节点。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/2.jpg" alt></p>
+<h3 id="3-4-周边转发"><a href="#3-4-周边转发" class="headerlink" title="3.4 周边转发"></a>3.4 周边转发</h3><p>针对上述的“路由空洞”问题，算法会将模式（Mode）从贪婪转发切换到周边转发，进而绕过“路由空洞”。</p>
+<p>“周边转发”是根据“右手法则”来判断下一跳转节点：连接当前节点和目的结点形成直线，右手握住此线逆时针旋转，到达的第一条边（边代表其上的两个点可以互达）就是下一跳的方向。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/3.jpg" alt></p>
+<h3 id="3-5-周边转发困境"><a href="#3-5-周边转发困境" class="headerlink" title="3.5 周边转发困境"></a>3.5 周边转发困境</h3><p>虽然周边转发可以绕过“路由空洞”，但在一些情况下，单纯地进行周边转发可能会陷入死循环，最终只能回到当前节点，无法抵达目的节点。</p>
+<p>这里举一个例子进行介绍。下图是一个由X、W、U、Z以及目的节点D构成的图，节点之间的连线代表着两端节点是相邻的（可以互相达到）。假设现在从节点X开始出发。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/4.jpg" alt></p>
+<p>从X节点开始，根据“右手法则”依次抵达U节点、Z节点和W节点。此时，对W节点再次使用“右手法则”，算法又重新跳回了U节点。最后，对U节点使用“右手法则”，跳回了开始节点X。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/5.jpg" alt></p>
+<p>显而易见，此时的周边转发陷入困境。这主要是由于这张图不是一个“平面图”的原因。需要删除一些边，从而使其变成GG或者RNG平面图，才能走出此困境。</p>
+<h3 id="3-6-RNG平面图和GG平面图"><a href="#3-6-RNG平面图和GG平面图" class="headerlink" title="3.6 RNG平面图和GG平面图"></a>3.6 RNG平面图和GG平面图</h3><p>RNG平面图的定义是：若顶点U，V和任意其它顶点W之间的距离，全都大于或等于顶点u和v之间的距离d(u，v)，则在顶点U和V之间存在RNG边(u，v)。用方程式表示如下:</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/6.jpg" alt></p>
+<p>如下图所示，若(u，v)是RNG中的边，则在节点U和V之间的阴影半月形区域内，不能包含有任何证明节点w。<strong>此时，由于d(u, v) &gt; max(d(u,w), d(w,v)),为了构建RNG平面图，必须把边(u, v) 舍去</strong>。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/7.jpg" alt></p>
+<p>关于RNG平面实现的伪代码如下。其中，N是对于任意节点u来说的邻接节点列表，v是集合N中的任一节点。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/8.jpg" alt></p>
+<p>GG平面图的定义是：如果节点u和节点v之间，直径为uv的圆内，不存在其它顶点W，则节点u和节点v存在GG边(u，v)。用方程式表示如下:</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/9.jpg" alt></p>
+<p>如下图所示，若(u，v)是GG中的边，则在节点U和V之间的圆形阴影区域，<strong>不能包含</strong>有任何证明节点w。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/10.jpg" alt></p>
+<p>关于GG平面实现的伪代码如下。其中，N是对于任意节点u来说的邻接节点列表，v是集合N中的任一节点。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/11.jpg" alt></p>
+<p>对于GG和RNG两种平面图，RNG平面图是GG平面图的子集。它们之间的直接关系可以用下图表示出来：</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/12.jpg" alt></p>
+<h3 id="3-7-周边转发困境·RNG平面图解决"><a href="#3-7-周边转发困境·RNG平面图解决" class="headerlink" title="3.7 周边转发困境·RNG平面图解决"></a>3.7 周边转发困境·RNG平面图解决</h3><p>构造上述的RNG平面图或者GG平面图就可以解决“周边转发”无法到达目的节点的困境。这里以构造RNG平面图为例，还是使用之前的图形。为了方便讲述，规定边xu长度为12，边xw长度为11，边uw长度为10。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/13.jpg" alt></p>
+<p>根据RNG的定义，D(U, X) &gt; MAX(D(W, U), D(X, W))，所以移除UX边。此时，“周边转发”不再会陷入困境。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/14.jpg" alt></p>
+<h2 id="4-性能评估"><a href="#4-性能评估" class="headerlink" title="4. 性能评估"></a>4. 性能评估</h2><p>论文为了测试算法的性能，使用了Carnegie Mellon（卡梅隆）大学的测试数据。在畅通平面上，无线仿真模型节点进行运动。节点会在指定区域内随机选择一个目标，然后在指定范围内随机选择一个速度，以此速度到达目标并且停留一段时间。这个过程模拟了拓扑结构的高迁移率以及其中的节点。</p>
+<p>下图显示了不同的B（时间间隔）的情况下，GPSR传递成功的数据包。将从B=3s降低到B=1.5S并没有带来很大成功率提高，成功率也保持在97%以上。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/15.jpg" alt></p>
+<p>下图比较了DSR算法和GPSR算法的节点消耗，GPSR的节点消耗远远低于DSR的节点消耗，并且随着时间推移，GPSR节点的消耗也更加稳定。</p>
+<p><img src="https://godbmw.com/blog-static/img/2019-03-02-gpsr/16.jpg" alt></p>
+<p>因此，GPSR算法达到了设计的初衷：在迁移率高的拓扑结构中，能够保持较高的鲁棒性，并且每个节点的资源消耗都得到了改善。论文中还分节点状态、路径长度等维度进行了比较，也只是说明GPSR算法的优势。主要的性能测试还是上述的传包成功率和节点消耗，其它测试这里不再冗赘。</p>
+<h2 id="5-阅读心得"><a href="#5-阅读心得" class="headerlink" title="5. 阅读心得"></a>5. 阅读心得</h2><p>在本次论文的学习过程中，掌握了“贪婪转发”、“周边转发”、“RNG和GG平面图”，最重要的是理解了在GPSR算法中是如何调度进行状态转化（贪婪=&gt;周边 / 周边=&gt;贪婪），以及如何解决“路由空洞”和“周边转发困境”。除了算法的核心部分，也触类旁空地了解了“信标算法”的实现机制以及冲突解决方法。</p>
+<p>就我个人来看，GPSR算法和论文中提及的传统算法相比，已经实现了最小化节点的保存数据（节省节点资源），并且能够利用状态切换合理应对可变性高的拓扑结构。</p>
+<p>美中不足的是“信标机制”会带来额外的开销，但是相比于每个节点保存所有节点的信息，信标机制的这点开销完全可以忽略。</p>
+<h2 id="6-参考"><a href="#6-参考" class="headerlink" title="6. 参考"></a>6. 参考</h2><p>在阅读论文的过程中，我查找了大量的中文和英文资料，非常有助于理解这篇论文所讲述的GPSR算法。特此系统记录一下相关资料。</p>
+<ol>
+<li>论文：GPSR: Greedy Perimeter Stateless Routing for Wireless Networks</li>
+<li>Youtube Videos(印度英语)<ul>
+<li><a href="https://www.youtube.com/watch?v=pC9wNLnWIMc" target="_blank" rel="noopener">https://www.youtube.com/watch?v=pC9wNLnWIMc</a></li>
+<li><a href="https://www.youtube.com/watch?v=GisJUKkaHQQ&amp;t=16s&amp;app=desktop" target="_blank" rel="noopener">https://www.youtube.com/watch?v=GisJUKkaHQQ&amp;t=16s&amp;app=desktop</a></li>
+<li><a href="https://www.youtube.com/watch?v=8l7M9lY8y4A&amp;app=desktop" target="_blank" rel="noopener">https://www.youtube.com/watch?v=8l7M9lY8y4A&amp;app=desktop</a></li>
+</ul>
+</li>
+<li>百度文库讲义(从43页开始): <a href="https://wenku.baidu.com/view/c23bcb7bc950ad02de80d4d8d15abe23482f039d.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/c23bcb7bc950ad02de80d4d8d15abe23482f039d.html</a> </li>
+</ol>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-摘要"><span class="toc-text">0. 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-研究背景及意义"><span class="toc-text">1. 研究背景及意义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-研究背景与动机"><span class="toc-text">1.1 研究背景与动机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-研究意义"><span class="toc-text">1.2 研究意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-国内外研究现状"><span class="toc-text">2. 国内外研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-研究内容"><span class="toc-text">3. 研究内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-主要挑战及创新点"><span class="toc-text">3.1 主要挑战及创新点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-相关技术介绍"><span class="toc-text">3.2 相关技术介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-贪婪转发"><span class="toc-text">3.3 贪婪转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-贪婪转发困境·路由空洞"><span class="toc-text">3.3 贪婪转发困境·路由空洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-周边转发"><span class="toc-text">3.4 周边转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-周边转发困境"><span class="toc-text">3.5 周边转发困境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-RNG平面图和GG平面图"><span class="toc-text">3.6 RNG平面图和GG平面图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-周边转发困境·RNG平面图解决"><span class="toc-text">3.7 周边转发困境·RNG平面图解决</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-性能评估"><span class="toc-text">4. 性能评估</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-阅读心得"><span class="toc-text">5. 阅读心得</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-参考"><span class="toc-text">6. 参考</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-03-02-gpsr/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+     
+      <a href="/tags/图论/"><i class="fa fa-tags"></i>图论</a>
+     
+      <a href="/tags/路由协议/"><i class="fa fa-tags"></i>路由协议</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-03-02-gpsr";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2019-03-03-theme-ad-docs-zh/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-02-24-love/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

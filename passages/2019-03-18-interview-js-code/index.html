@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>前端面试中常考的源码实现 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端面试手记,ES6,面试,JavaScript,VueJS,">
+  
+
+  
+  <meta name="description" content="👇 内容速览 👇手动实现call/apply/bind实现深拷贝函数基于ES5/ES6实现双向绑定instanceof原理与实现实现支持绑定、解绑和派发的事件类">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-03-18
+    </span>
+    
+      <span>
+        | <a href="/categories/前端面试手记/"><i class="fa fa-bookmark"></i>前端面试手记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    前端面试中常考的源码实现
+  </h1>
+  
+  <article class="passage-article">
+    <p>👇 内容速览 👇</p>
+<ul>
+<li>手动实现<code>call</code>/<code>apply</code>/<code>bind</code></li>
+<li>实现深拷贝函数</li>
+<li>基于<code>ES5</code>/<code>ES6</code>实现双向绑定</li>
+<li><code>instanceof</code>原理与实现</li>
+<li>实现支持绑定、解绑和派发的事件类</li>
+</ul>
+<h2 id="手动撸个call-apply-bind"><a href="#手动撸个call-apply-bind" class="headerlink" title="手动撸个call/apply/bind"></a>手动撸个call/apply/bind</h2><h3 id="实现call"><a href="#实现call" class="headerlink" title="实现call"></a>实现call</h3><p>来看下<code>call</code>的原生表现形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a, <span class="keyword">this</span>.b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run.call(&#123;</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  b: <span class="string">'b'</span></span><br><span class="line">&#125;, <span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>好了，开始手动实现我们的<code>call2</code>。在实现的过程有个关键：</p>
+<p><strong>如果一个函数作为一个对象的属性，那么通过对象的<code>.</code>运算符调用此函数，<code>this</code>就是此对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  b: <span class="string">'b'</span>,</span><br><span class="line">  test: <span class="function"><span class="keyword">function</span> (<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">    <span class="comment">// this.a 就是 a; this.b 就是 b</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a, <span class="keyword">this</span>.b) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.test(<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>知道了实现关键，下面就是我们模拟的<code>call</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.call2 = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Error'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 默认上下文是window</span></span><br><span class="line">  context = context || <span class="built_in">window</span></span><br><span class="line">  <span class="comment">// 保存默认的fn</span></span><br><span class="line">  <span class="keyword">const</span> &#123; fn &#125; = context</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 前面讲的关键，将函数本身作为对象context的属性调用，自动绑定this</span></span><br><span class="line">  context.fn = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">const</span> args = [...arguments].slice(<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">const</span> result = context.fn(...args)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 恢复默认的fn</span></span><br><span class="line">  context.fn = fn</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下是测试代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a, <span class="keyword">this</span>.b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test.call2(&#123;</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  b: <span class="string">'b'</span></span><br><span class="line">&#125;, <span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="实现apply"><a href="#实现apply" class="headerlink" title="实现apply"></a>实现apply</h3><p><code>apply</code>和<code>call</code>实现类似，只是传入的参数形式是数组形式，而不是逗号分隔的参数序列。</p>
+<p>因此，借助es6提供的<code>...</code>运算符，就可以很方便的实现数组和参数序列的转化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.apply2 = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Error'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context = context || <span class="built_in">window</span></span><br><span class="line">  <span class="keyword">const</span> &#123; fn &#125; = context</span><br><span class="line"></span><br><span class="line">  context.fn = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">let</span> result</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(<span class="built_in">arguments</span>[<span class="number">1</span>])) &#123;</span><br><span class="line">    <span class="comment">// 通过...运算符将数组转换为用逗号分隔的参数序列</span></span><br><span class="line">    result = context.fn(...arguments[<span class="number">1</span>])</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = context.fn()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.fn = fn</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下是测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a, <span class="keyword">this</span>.b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test.apply2(&#123;</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  b: <span class="string">'b'</span></span><br><span class="line">&#125;, [<span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="实现bind"><a href="#实现bind" class="headerlink" title="实现bind"></a>实现bind</h3><p><code>bind</code>的实现有点意思，它有两个特点：</p>
+<ul>
+<li>本身返回一个新的函数，所以要考虑<code>new</code>的情况</li>
+<li>可以“保留”参数，内部实现了参数的拼接</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind2 = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Error'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> that = <span class="keyword">this</span></span><br><span class="line">  <span class="comment">// 保留之前的参数，为了下面的参数拼接</span></span><br><span class="line">  <span class="keyword">const</span> args = [...arguments].slice(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果被new创建实例，不会被改变上下文！</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> F) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> that(...args, ...arguments)</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// args.concat(...arguments): 拼接之前和现在的参数</span></span><br><span class="line">    <span class="comment">// 注意：arguments是个类Array的Object, 用解构运算符..., 直接拿值拼接</span></span><br><span class="line">    <span class="keyword">return</span> that.apply(context, args.concat(...arguments))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下是测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a, <span class="keyword">this</span>.b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> test2 = test.bind2(&#123;</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  b: <span class="string">'b'</span></span><br><span class="line">&#125;, <span class="number">1</span>) <span class="comment">// 参数 1</span></span><br><span class="line"></span><br><span class="line">test2(<span class="number">2</span>) <span class="comment">// 参数 2</span></span><br></pre></td></tr></table></figure>
+<h2 id="实现深拷贝函数"><a href="#实现深拷贝函数" class="headerlink" title="实现深拷贝函数"></a>实现深拷贝函数</h2><p>实现一个对象的深拷贝函数，需要考虑对象的元素类型以及对应的解决方案：</p>
+<ul>
+<li>基础类型：这种最简单，直接赋值即可</li>
+<li>对象类型：递归调用拷贝函数</li>
+<li>数组类型：这种最难，因为数组中的元素可能是基础类型、对象还可能数组，因此要专门做一个函数来处理数组的深拷贝</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 数组的深拷贝函数</span></span><br><span class="line"><span class="comment"> * @param &#123;Array&#125; src </span></span><br><span class="line"><span class="comment"> * @param &#123;Array&#125; target </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneArr</span>(<span class="params">src, target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> src) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(item)) &#123;</span><br><span class="line">      target.push(cloneArr(item, []))</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">'object'</span>) &#123;</span><br><span class="line">      target.push(deepClone(item, &#123;&#125;))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      target.push(item)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 对象的深拷贝实现</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; src </span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; target </span></span><br><span class="line"><span class="comment"> * @return &#123;Object&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">src, target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> keys = <span class="built_in">Reflect</span>.ownKeys(src)</span><br><span class="line">  <span class="keyword">let</span> value = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">of</span> keys) &#123;</span><br><span class="line">    value = src[key]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(value)) &#123;</span><br><span class="line">      target[key] = cloneArr(value, [])</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果是对象而且不是数组, 那么递归调用深拷贝</span></span><br><span class="line">      target[key] = deepClone(value, &#123;&#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      target[key] = value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码是不是比网上看到的多了很多？因为考虑很周全，请看下面的测试用例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个对象a是一个囊括以上所有情况的对象</span></span><br><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span>,</span><br><span class="line">  jobs: &#123;</span><br><span class="line">    first: <span class="string">"FE"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  schools: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'shenda'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'shiyan'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  arr: [</span><br><span class="line">    [</span><br><span class="line">      &#123;</span><br><span class="line">        value: <span class="string">'1'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">      &#123;</span><br><span class="line">        value: <span class="string">'2'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = &#123;&#125;</span><br><span class="line">deepClone(a, b)</span><br><span class="line"></span><br><span class="line">a.jobs.first = <span class="string">'native'</span></span><br><span class="line">a.schools[<span class="number">0</span>].name = <span class="string">'SZU'</span></span><br><span class="line">a.arr[<span class="number">0</span>][<span class="number">0</span>].value = <span class="string">'100'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.jobs.first, b.jobs.first) <span class="comment">// output: native FE</span></span><br><span class="line"><span class="built_in">console</span>.log(a.schools[<span class="number">0</span>], b.schools[<span class="number">0</span>]) <span class="comment">// output: &#123; name: 'SZU' &#125; &#123; name: 'shenda' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a.arr[<span class="number">0</span>][<span class="number">0</span>].value, b.arr[<span class="number">0</span>][<span class="number">0</span>].value) <span class="comment">// output: 100 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(a.arr[<span class="number">0</span>])) <span class="comment">// output: true</span></span><br></pre></td></tr></table></figure>
+<p>看到测试用例，应该会有人奇怪为什么最后要输出<code>Array.isArray(a.arr[0])</code>。这主要是因为网上很多实现方法没有针对array做处理，直接将其当成object，<strong>这样拷贝后虽然值没问题，但是array的元素会被转化为object</strong>。这显然是错误的做法。</p>
+<p>而上面所说的深拷贝函数就解决了这个问题。</p>
+<h2 id="基于ES5-ES6实现“双向绑定”"><a href="#基于ES5-ES6实现“双向绑定”" class="headerlink" title="基于ES5/ES6实现“双向绑定”"></a>基于ES5/ES6实现“双向绑定”</h2><p>要想实现，就要先看看什么是“双向数据绑定”，它和“单向数据绑定”有什么区别？这样才能知道要实现什么效果嘛。</p>
+<p><strong>双向绑定</strong>：视图（View）的变化能实时让数据模型（Model）发生变化，而数据的变化也能实时更新到视图层。</p>
+<p><strong>单向数据绑定</strong>：只有从数据到视图这一方向的关系。</p>
+<h3 id="ES5的Object-defineProperty"><a href="#ES5的Object-defineProperty" class="headerlink" title="ES5的Object.defineProperty"></a>ES5的Object.defineProperty</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> obj = &#123;</span></span><br><span class="line"><span class="javascript">        value: <span class="string">''</span></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">      </span></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">onKeyUp</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        obj.value = event.target.value</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">      </span></span><br><span class="line"><span class="javascript">      <span class="comment">// 对 obj.value 进行拦截</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">Object</span>.defineProperty(obj, <span class="string">'value'</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">get</span>: function() &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> value</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        <span class="keyword">set</span>: function(newValue) &#123;</span></span><br><span class="line"><span class="undefined">          value = newValue</span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.querySelector(<span class="string">'#value'</span>).innerHTML = newValue <span class="comment">// 更新视图层</span></span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>).value = newValue <span class="comment">// 数据模型改变</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    值是：<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"value"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">onkeyup</span>=<span class="string">"onKeyUp(event)"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ES6的Proxy"><a href="#ES6的Proxy" class="headerlink" title="ES6的Proxy"></a>ES6的Proxy</h3><p>随着，vue3.0放弃支持了IE浏览器。而且<code>Proxy</code>兼容性越来越好，能支持13种劫持操作。</p>
+<p>因此，vue3.0选择使用<code>Proxy</code>来实现双向数据绑定，而不再使用<code>Object.defineProperty</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">  &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">  &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;script&gt;</span></span><br><span class="line"><span class="regexp">    const obj = &#123;&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    const newObj = new Proxy(obj, &#123;</span></span><br><span class="line"><span class="regexp">      get: function(target, key, receiver) &#123;</span></span><br><span class="line"><span class="regexp">        return Reflect.get(target, key, receiver)</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      set: function(target, key, value, receiver) &#123;</span></span><br><span class="line"><span class="regexp">        if(key === 'value') &#123;</span></span><br><span class="line"><span class="regexp">          document.querySelector('#value').innerHTML = value</span></span><br><span class="line"><span class="regexp">          document.querySelector('input').value = value</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        return Reflect.set(target, key, value, receiver)</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">    </span></span><br><span class="line"><span class="regexp">    function onKeyUp(event) &#123;</span></span><br><span class="line"><span class="regexp">      newObj.value = event.target.value</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    </span></span><br><span class="line"><span class="regexp">  &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">  &lt;p&gt;</span></span><br><span class="line"><span class="regexp">    值是：&lt;span id="value"&gt;&lt;/</span>span&gt;</span><br><span class="line">  &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &lt;input type="text" onkeyup="onKeyUp(event)"&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="instanceof原理与实现"><a href="#instanceof原理与实现" class="headerlink" title="instanceof原理与实现"></a>instanceof原理与实现</h2><p><code>instanceof</code>是通过原型链来进行判断的，所以只要不断地通过访问<code>__proto__</code>，就可以拿到构造函数的原型<code>prototype</code>。直到<code>null</code>停止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断left是不是right类型的对象</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; left </span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; right </span></span><br><span class="line"><span class="comment"> * @return &#123;Boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">instanceof2</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prototype = right.prototype;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 沿着left的原型链, 看看是否有何prototype相等的节点</span></span><br><span class="line">  left = left.__proto__;</span><br><span class="line">  <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(left === <span class="literal">null</span> || left === <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(left === prototype) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    left = left.__proto__;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(instanceof2([], <span class="built_in">Array</span>)) <span class="comment">// output: true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test()</span><br><span class="line"><span class="built_in">console</span>.log(instanceof2(test, Test)) <span class="comment">// output: true</span></span><br></pre></td></tr></table></figure>
+<h2 id="实现支持绑定、解绑和派发的事件类"><a href="#实现支持绑定、解绑和派发的事件类" class="headerlink" title="实现支持绑定、解绑和派发的事件类"></a>实现支持绑定、解绑和派发的事件类</h2><p><strong>实现思路</strong>：这里涉及了“订阅/发布模式”的相关知识。参考<code>addEventListener(type, func)</code>和<code>removeEventListener(type, func)</code>的具体效果来实现即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组置空：</span></span><br><span class="line"><span class="comment">// arr = []; arr.length = 0; arr.splice(0, arr.length)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>._cache = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注册事件：如果不存在此种type，创建相关数组</span></span><br><span class="line">  on(type, callback) &#123;</span><br><span class="line">    <span class="keyword">this</span>._cache[type] = <span class="keyword">this</span>._cache[type] || [];</span><br><span class="line">    <span class="keyword">let</span> fns = <span class="keyword">this</span>._cache[type];</span><br><span class="line">    <span class="keyword">if</span> (fns.indexOf(callback) === <span class="number">-1</span>) &#123;</span><br><span class="line">      fns.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 触发事件：对于一个type中的所有事件函数，均进行触发</span></span><br><span class="line">  trigger(type, ...data) &#123;</span><br><span class="line">    <span class="keyword">let</span> fns = <span class="keyword">this</span>._cache[type];</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(fns)) &#123;</span><br><span class="line">      fns.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> &#123;</span><br><span class="line">        fn(...data);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除事件：删除事件类型对应的array</span></span><br><span class="line">  off(type, callback) &#123;</span><br><span class="line">    <span class="keyword">let</span> fns = <span class="keyword">this</span>._cache[type];</span><br><span class="line">    <span class="comment">// 检查是否存在type的事件绑定</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(fns)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">        <span class="comment">// 卸载指定的回调函数</span></span><br><span class="line">        <span class="keyword">let</span> index = fns.indexOf(callback);</span><br><span class="line">        <span class="keyword">if</span> (index !== <span class="number">-1</span>) &#123;</span><br><span class="line">          fns.splice(index, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 全部清空</span></span><br><span class="line">        fns = [];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下是测试函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> event = <span class="keyword">new</span> Event();</span><br><span class="line">event</span><br><span class="line">  .on(<span class="string">"test"</span>, a =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;)</span><br><span class="line">  .trigger(<span class="string">"test"</span>, <span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#手动撸个call-apply-bind"><span class="toc-text">手动撸个call/apply/bind</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现call"><span class="toc-text">实现call</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现apply"><span class="toc-text">实现apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现bind"><span class="toc-text">实现bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现深拷贝函数"><span class="toc-text">实现深拷贝函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于ES5-ES6实现“双向绑定”"><span class="toc-text">基于ES5/ES6实现“双向绑定”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES5的Object-defineProperty"><span class="toc-text">ES5的Object.defineProperty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6的Proxy"><span class="toc-text">ES6的Proxy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof原理与实现"><span class="toc-text">instanceof原理与实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现支持绑定、解绑和派发的事件类"><span class="toc-text">实现支持绑定、解绑和派发的事件类</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-03-18-interview-js-code/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+     
+      <a href="/tags/面试/"><i class="fa fa-tags"></i>面试</a>
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+     
+      <a href="/tags/VueJS/"><i class="fa fa-tags"></i>VueJS</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-03-18-interview-js-code";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2019-03-19-css3-nth-child/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-03-15-weekly-share-3/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

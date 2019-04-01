@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>堆、堆排序和优先队列的那些事 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="数据结构和算法,算法,C与C++,">
+  
+
+  
+  <meta name="description" content="堆的实现难度不大，主要是理解其中的shift_down和shift_up两种操作。而文中其他的过程，例如heapify，just a 语法糖！堆排序和优先队列都是依赖于堆这种数据结构。尤其是优先队列这种动态任务，进出操作的时间复杂度可以降低到O(logN)。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-09-25
+    </span>
+    
+      <span>
+        | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    堆、堆排序和优先队列的那些事
+  </h1>
+  
+  <article class="passage-article">
+    <h3 id="1-什么是堆？"><a href="#1-什么是堆？" class="headerlink" title="1. 什么是堆？"></a>1. 什么是堆？</h3><blockquote>
+<p>堆是一种数据结构，它是一颗完全二叉树。</p>
+</blockquote>
+<p>堆分为最大堆和最小堆：</p>
+<ol>
+<li>最大堆：任意节点的值不大于其父亲节点的值。</li>
+<li>最小堆：任意节点的值不小于其父亲节点的值。</li>
+</ol>
+<p>如下图所示，就是个最大堆：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/堆、堆排序和优先队列的那些事/2.png" alt></p>
+<p><em>注：本文中的代码实现是最大堆，最小堆的实现相似，不再冗赘。</em></p>
+<h3 id="2-堆有什么用途？"><a href="#2-堆有什么用途？" class="headerlink" title="2. 堆有什么用途？"></a>2. 堆有什么用途？</h3><blockquote>
+<p>堆最常用于优先队列以及相关动态问题。</p>
+</blockquote>
+<p>优先队列指的是元素入队和出队的顺序与时间无关，既不是先进先出，也不是先进后出，而是根据元素的重要性来决定的。</p>
+<p>例如，操作系统的任务执行是优先队列。一些情况下，会有新的任务进入，并且之前任务的重要性也会改变或者之前的任务被完成出队。而这个出队、入队的过程利用堆结构，时间复杂度是<code>O(log2_n)</code>。</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/堆、堆排序和优先队列的那些事/1.png" alt></p>
+<h3 id="3-实现堆结构"><a href="#3-实现堆结构" class="headerlink" title="3. 实现堆结构"></a>3. 实现堆结构</h3><h4 id="3-1-元素存储"><a href="#3-1-元素存储" class="headerlink" title="3.1 元素存储"></a>3.1 元素存储</h4><p>堆中的元素存储，一般是借用一个数组：<strong>这个数组是从 1 开始计算的</strong>。更方便子节点和父节点的表示。</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/堆、堆排序和优先队列的那些事/3.png" alt></p>
+<h4 id="3-2-入堆"><a href="#3-2-入堆" class="headerlink" title="3.2 入堆"></a>3.2 入堆</h4><p>入堆即向堆中添加新的元素，然后将元素移动到合适的位置，以保证堆的性质。</p>
+<p>在入堆的时候，需要<code>shift_up</code>操作，如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/堆、堆排序和优先队列的那些事/5.png" alt></p>
+<p>插入 52 元素后，不停将元素和上方父亲元素比较，如果大于，则交换元素；直到达到堆顶或者小于等于父亲元素。</p>
+<h4 id="3-3-出堆"><a href="#3-3-出堆" class="headerlink" title="3.3 出堆"></a>3.3 出堆</h4><p>出堆只能弹出堆顶元素（最大堆就是最大的元素），调整元素为止保证堆的性质。</p>
+<p>在入堆的时候，需要<code>shift_down</code>操作，如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/堆、堆排序和优先队列的那些事/4.png" alt></p>
+<p>已经取出了堆顶元素，然后将位于最后一个位置的元素放入堆顶（图中是<code>16</code>被放入堆顶）。</p>
+<p>重新调整元素位置。此时元素应该和子节点比较，如果大于等于子节点或者没有子节点，停止比较；否则，选择子节点中最大的元素，进行交换，执行此步，直到结束。</p>
+<h4 id="3-4-实现优化"><a href="#3-4-实现优化" class="headerlink" title="3.4 实现优化"></a>3.4 实现优化</h4><p>在优化的时候，有两个部分需要做：</p>
+<ol>
+<li><code>swap</code>操作应该被替换为：单次赋值，<strong>减少赋值次数</strong></li>
+<li>入堆操作：空间不够的时候，应该开辟 2 倍空间，<strong>防止数组溢出</strong></li>
+</ol>
+<h4 id="3-5-代码实现"><a href="#3-5-代码实现" class="headerlink" title="3.5 代码实现"></a>3.5 代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MaxHeap.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/9/19.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MAXHEAP_MAXHEAP_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXHEAP_MAXHEAP_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Item&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaxHeap</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Item* data; <span class="comment">// 堆数据存放</span></span><br><span class="line">    <span class="keyword">int</span> count; <span class="comment">// 堆目前所含数据量大小</span></span><br><span class="line">    <span class="keyword">int</span> capacity; <span class="comment">// 堆容量大小</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shift_up</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        Item new_item = <span class="keyword">this</span>-&gt;data[k]; <span class="comment">// 保存新插入的值</span></span><br><span class="line"><span class="comment">//      如果新插入的值比父节点的值小, 则父节点的值下移, 依次类推, 直到到达根节点或者满足最大堆定义</span></span><br><span class="line">        <span class="keyword">while</span>( k &gt; <span class="number">1</span> &amp;&amp; <span class="keyword">this</span>-&gt;data[k/<span class="number">2</span>] &lt; new_item ) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;data[k] = <span class="keyword">this</span>-&gt;data[k/<span class="number">2</span>];</span><br><span class="line">            k /= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data[k] = new_item; <span class="comment">// k就是 新插入元素 应该在堆中的位置</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shift_down</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        Item root = <span class="keyword">this</span>-&gt;data[<span class="number">1</span>];</span><br><span class="line"><span class="comment">//        在完全二叉树中判断是否有左孩子即可</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="number">2</span>*k &lt;= <span class="keyword">this</span>-&gt;count) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = k + k;</span><br><span class="line"><span class="comment">//            如果有右子节点，并且右节点 &gt; 左边点</span></span><br><span class="line">            <span class="keyword">if</span>( j + <span class="number">1</span> &lt;= <span class="keyword">this</span>-&gt;count &amp;&amp; <span class="keyword">this</span>-&gt;data[j + <span class="number">1</span>] &gt; <span class="keyword">this</span>-&gt;data[j]) &#123;</span><br><span class="line">                j += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="comment">//            root找到了堆中正确位置 k 满足堆性质, 跳出循环</span></span><br><span class="line">            <span class="keyword">if</span>(root &gt;= <span class="keyword">this</span>-&gt;data[j]) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>-&gt;data[k] = <span class="keyword">this</span>-&gt;data[j];</span><br><span class="line">            k = j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data[k] = root;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MaxHeap(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data = <span class="keyword">new</span> Item[capacity + <span class="number">1</span>]; <span class="comment">// 堆中数据从索引为1的位置开始存储</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    将数组构造成堆：heapify</span></span><br><span class="line">    MaxHeap(Item arr[], <span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data = <span class="keyword">new</span> Item[n+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">this</span>-&gt;capacity = n;</span><br><span class="line">        <span class="keyword">this</span>-&gt;count = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;data[i + <span class="number">1</span>] = arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n/<span class="number">2</span>; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;shift_down(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ~MaxHeap()&#123;</span><br><span class="line">        <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;data;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    返回堆中元素个数</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;count;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    返回布尔值：堆中是否为空</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">is_empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;count == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    向堆中插入元素</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Item item)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 堆空间已满, 开辟新的堆空间.</span></span><br><span class="line">        <span class="comment">// 按照惯例，容量扩大到原来的2倍</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;count &gt;= <span class="keyword">this</span>-&gt;capacity) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;capacity = <span class="keyword">this</span>-&gt;capacity + <span class="keyword">this</span>-&gt;capacity; <span class="comment">// 容量变成2倍</span></span><br><span class="line">            Item* more_data = <span class="keyword">new</span> Item[<span class="keyword">this</span>-&gt;capacity + <span class="number">1</span>]; <span class="comment">// data[0] 不存放任何元素</span></span><br><span class="line">            copy(<span class="keyword">this</span>-&gt;data, <span class="keyword">this</span>-&gt;data + <span class="keyword">this</span>-&gt;count + <span class="number">1</span>, more_data); <span class="comment">// 将原先 data 中的有效数据拷贝到 more_data 中</span></span><br><span class="line">            <span class="keyword">delete</span>[] <span class="keyword">this</span>-&gt;data;</span><br><span class="line">            <span class="keyword">this</span>-&gt;data = more_data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data[<span class="keyword">this</span>-&gt;count + <span class="number">1</span>] = item; <span class="comment">// 插入堆尾部</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;shift_up(<span class="keyword">this</span>-&gt;count + <span class="number">1</span>); <span class="comment">// 执行 shift_up，将新插入的元素移动到应该在的位置</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;count ++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    取出最大值</span></span><br><span class="line">    <span class="function">Item <span class="title">extract_max</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assert(<span class="keyword">this</span>-&gt;count &gt; <span class="number">0</span>);</span><br><span class="line">        Item ret = <span class="keyword">this</span>-&gt;data[<span class="number">1</span>]; <span class="comment">// 取出根节点</span></span><br><span class="line">        swap(<span class="keyword">this</span>-&gt;data[<span class="number">1</span>], <span class="keyword">this</span>-&gt;data[<span class="keyword">this</span>-&gt;count]); <span class="comment">// 将根节点元素和最后元素交换</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;count --; <span class="comment">// 删除最后一个元素</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;shift_down(<span class="number">1</span>); <span class="comment">// shift_down 将元素放到应该在的位置</span></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//MAXHEAP_MAXHEAP_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="4-堆排序"><a href="#4-堆排序" class="headerlink" title="4. 堆排序"></a>4. 堆排序</h3><p>根据实现的<code>MaxHeap</code>类，实现堆排序很简单：将元素逐步<code>insert</code>进入堆，然后再<code>extract_max</code>逐个取出即可。当然，这个建堆的平均时间复杂度是<code>O(n*log2_n)</code>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort1</span><span class="params">(T arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    MaxHeap&lt;T&gt; max_heap = MaxHeap&lt;T&gt;(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        max_heap.insert(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n <span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        arr[i] = max_heap.extract_max();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仔细观察前面实现的构造函数，构造函数可以传入数组参数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    将数组构造成堆：heapify</span></span><br><span class="line">MaxHeap(Item arr[], <span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;data = <span class="keyword">new</span> Item[n+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">this</span>-&gt;capacity = n;</span><br><span class="line">    <span class="keyword">this</span>-&gt;count = n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data[i + <span class="number">1</span>] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n/<span class="number">2</span>; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;shift_down(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>过程叫做<code>heapify</code>,实现思路如下：</p>
+<ol>
+<li>将数组的值逐步复制到<code>this-&gt;data</code></li>
+<li>从第一个非叶子节点开始，执行<code>shift_down</code></li>
+<li>重复第 2 步，直到堆顶元素</li>
+</ol>
+<p>这种建堆方法的时间复杂度是: <code>O(n)</code>。因此, 编写<code>heap_sort2</code>函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  建堆复杂度：O(N)</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort2</span><span class="params">(T arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    MaxHeap&lt;T&gt; max_heap = MaxHeap&lt;T&gt;(arr, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n <span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        arr[i] = max_heap.extract_max();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面阐述的两种排序方法，借助实现的最大堆这个类，都需要在类中开辟<code>this-&gt;data</code>，空间复杂度为<code>O(n)</code>。<strong>其实，借助<code>shift_down</code>可以实现原地堆排序</strong>，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的 swap 操作并没有优化</span></span><br><span class="line"><span class="comment">// 请对比 MaxHeap 中的 shift_down 函数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> __shift_down(T arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</span><br><span class="line">    <span class="keyword">while</span>( <span class="number">2</span>*k + <span class="number">1</span> &lt; n) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">2</span> * k + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>( j + <span class="number">1</span> &lt; n &amp;&amp; arr[j + <span class="number">1</span>] &gt; arr[j]) &#123;</span><br><span class="line">            j += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(arr[k] &gt;= arr[j]) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr[k], arr[j]);</span><br><span class="line">        k = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  原地堆排序</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort3</span><span class="params">(T arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = (n <span class="number">-1</span>)/<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        __shift_down(arr, n, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr[<span class="number">0</span>], arr[i]);</span><br><span class="line">        __shift_down(arr, i, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-测试"><a href="#5-测试" class="headerlink" title="5. 测试"></a>5. 测试</h3><h4 id="5-1-测试MaxHeap类"><a href="#5-1-测试MaxHeap类" class="headerlink" title="5.1 测试MaxHeap类"></a>5.1 测试<code>MaxHeap</code>类</h4><p>测试代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MaxHeap.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"SortHelper.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HEAP_CAPACITY 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUM 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MaxHeap&lt;<span class="keyword">int</span>&gt; max_heap = MaxHeap&lt;<span class="keyword">int</span>&gt;(HEAP_CAPACITY);</span><br><span class="line">    srand(time(<span class="literal">NULL</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; HEAP_CAPACITY + <span class="number">5</span>; i++) &#123; <span class="comment">// 容量超出初始化时的容量。测试：自动</span></span><br><span class="line">        max_heap.insert(rand() % MAX_NUM);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>( !max_heap.is_empty() ) &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt; max_heap.extract_max() &lt;&lt; <span class="string">" "</span>; <span class="comment">// 控制台输出数据是从大到小</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-测试堆排序"><a href="#5-2-测试堆排序" class="headerlink" title="5.2 测试堆排序"></a>5.2 测试堆排序</h4><p>借助前几篇文章的<code>SortHelper.h</code>封装的测试函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MaxHeap.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"SortHelper.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HEAP_CAPACITY 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUM 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">100000</span>;</span><br><span class="line">    <span class="keyword">int</span>* arr = SortTestHelper::generateRandomArray&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>, n);</span><br><span class="line">    <span class="keyword">int</span>* brr = SortTestHelper::copyArray&lt;<span class="keyword">int</span>&gt;(arr, n);</span><br><span class="line">    <span class="keyword">int</span>* crr = SortTestHelper::copyArray&lt;<span class="keyword">int</span>&gt;(arr, n);</span><br><span class="line">    SortTestHelper::testSort&lt;<span class="keyword">int</span>&gt;(arr, n, heap_sort1&lt;<span class="keyword">int</span>&gt;, <span class="string">"first heap_sort"</span>);</span><br><span class="line">    SortTestHelper::testSort&lt;<span class="keyword">int</span>&gt;(brr, n, heap_sort2&lt;<span class="keyword">int</span>&gt;, <span class="string">"second heap_sort"</span>);</span><br><span class="line">    SortTestHelper::testSort&lt;<span class="keyword">int</span>&gt;(crr, n, heap_sort3&lt;<span class="keyword">int</span>&gt;, <span class="string">"third heap_sort"</span>);</span><br><span class="line">    <span class="keyword">delete</span>[] arr;</span><br><span class="line">    <span class="keyword">delete</span>[] brr;</span><br><span class="line">    <span class="keyword">delete</span>[] crr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是堆？"><span class="toc-text">1. 什么是堆？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-堆有什么用途？"><span class="toc-text">2. 堆有什么用途？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-实现堆结构"><span class="toc-text">3. 实现堆结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-元素存储"><span class="toc-text">3.1 元素存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-入堆"><span class="toc-text">3.2 入堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-出堆"><span class="toc-text">3.3 出堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-实现优化"><span class="toc-text">3.4 实现优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-代码实现"><span class="toc-text">3.5 代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-堆排序"><span class="toc-text">4. 堆排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-测试"><span class="toc-text">5. 测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-测试MaxHeap类"><span class="toc-text">5.1 测试MaxHeap类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-测试堆排序"><span class="toc-text">5.2 测试堆排序</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-09-25-heap-algorithm/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+     
+      <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-09-25-heap-algorithm";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-09-26-index-heap/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-09-19-base-sort/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

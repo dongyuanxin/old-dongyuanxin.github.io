@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>canvas离屏技术与放大镜实现 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript,图像处理,HTML5,canvas,">
+  
+
+  
+  <meta name="description" content="如何借助canvas的为图片打上自己的御用水印？如何借助canvas实现一个简单实用的放大镜？一起来玩一下canvas的离屏技术吧！">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-08-30
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    canvas离屏技术与放大镜实现
+  </h1>
+  
+  <article class="passage-article">
+    <blockquote>
+<p>利用<code>canvas</code>除了可以实现滤镜，还可以利用<strong>离屏技术</strong>放大镜功能。</p>
+</blockquote>
+<p>为了方便讲解，本文分为 2 个应用部分：</p>
+<ol>
+<li>实现水印和中心缩放</li>
+<li>实现放大镜</li>
+</ol>
+<h3 id="1-什么是离屏技术？"><a href="#1-什么是离屏技术？" class="headerlink" title="1. 什么是离屏技术？"></a>1. 什么是离屏技术？</h3><p><a href="https://godbmw.com/passage/39">canvas 学习和滤镜实现</a>介绍过<code>drawImage</code>接口。除了绘制图像，这个接口还可以：<strong>将一个<code>canvas</code>对象绘制到另一个<code>canvas</code>对象上</strong>。这就是离屏技术。</p>
+<h3 id="2-实现水印和中心缩放"><a href="#2-实现水印和中心缩放" class="headerlink" title="2. 实现水印和中心缩放"></a>2. 实现水印和中心缩放</h3><p>在代码中，有两个 canvas 标签。分别是可见与不可见。<strong>不可见的 canvas 对象上的 Context 对象，就是我们放置图像水印的地方。</strong></p>
+<p>更多详解，请看代码注释：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Learn Canvas<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    canvas &#123;</span></span><br><span class="line"><span class="undefined">      display: block;</span></span><br><span class="line"><span class="undefined">      margin: 0 auto;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#222</span>;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    input &#123;</span></span><br><span class="line"><span class="undefined">      display: block;</span></span><br><span class="line"><span class="undefined">      margin: 20px auto;</span></span><br><span class="line"><span class="undefined">      width: 800px</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"my-canvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"range"</span> <span class="attr">value</span>=<span class="string">"1.0"</span> <span class="attr">min</span>=<span class="string">"0.5"</span> <span class="attr">max</span>=<span class="string">"3.0"</span> <span class="attr">step</span>=<span class="string">"0.1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"watermark-canvas"</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> watermarkCanvas = <span class="built_in">document</span>.querySelector(<span class="string">"#watermark-canvas"</span>)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> slider = <span class="built_in">document</span>.querySelector(<span class="string">"input"</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> scale = slider.value</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> watermarkCtx = watermarkCanvas.getContext(<span class="string">"2d"</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 给第二个canvas获取的Context对象添加水印 */</span></span></span><br><span class="line"><span class="undefined">      watermarkCanvas.width = 300</span></span><br><span class="line"><span class="undefined">      watermarkCanvas.height = 100</span></span><br><span class="line"><span class="javascript">      watermarkCtx.font = <span class="string">"bold 20px Arial"</span></span></span><br><span class="line"><span class="javascript">      watermarkCtx.lineWidth = <span class="string">"1"</span></span></span><br><span class="line"><span class="javascript">      watermarkCtx.fillStyle = <span class="string">"rgba(255 , 255 , 255, 0.5)"</span></span></span><br><span class="line"><span class="javascript">      watermarkCtx.fillText(<span class="string">"=== yuanxin.me ==="</span>, <span class="number">50</span>, <span class="number">50</span>)</span></span><br><span class="line"><span class="javascript">      <span class="comment">/****************************************/</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> img = <span class="keyword">new</span> Image()</span></span><br><span class="line"><span class="javascript">      img.src = <span class="string">"./img/photo.jpg"</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 加载图片后执行操作 */</span></span></span><br><span class="line"><span class="javascript">      img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        canvas.width = img.width;</span></span><br><span class="line"><span class="undefined">        canvas.height = img.height;</span></span><br><span class="line"><span class="undefined">        drawImageByScale(canvas, ctx, img, scale, watermarkCanvas);</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 监听input标签的mousemove事件</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 注意：mousemove实时监听值的变化，内存消耗较大</span></span></span><br><span class="line"><span class="javascript">        slider.onmousemove = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">          scale = slider.value</span></span><br><span class="line"><span class="undefined">          drawImageByScale(canvas, ctx, img, scale, watermarkCanvas);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="javascript">      <span class="comment">/******************/</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Object</span>&#125; canvas 画布对象</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Object</span>&#125; ctx</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Object</span>&#125; img</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Number</span>&#125; scale 缩放比例</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Object</span>&#125; watermark 水印对象</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">drawImageByScale</span>(<span class="params">canvas, ctx, img, scale, watermark</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 图像按照比例进行缩放</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> width = img.width * scale,</span></span><br><span class="line"><span class="undefined">        height = img.height * scale</span></span><br><span class="line"><span class="javascript">      <span class="comment">// (dx, dy): 画布上绘制img的起始坐标</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> dx = canvas.width / <span class="number">2</span> - width / <span class="number">2</span>,</span></span><br><span class="line"><span class="undefined">        dy = canvas.height / 2 - height / 2</span></span><br><span class="line"><span class="javascript">      ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height) <span class="comment">// No1 清空画布</span></span></span><br><span class="line"><span class="javascript">      ctx.drawImage(img, dx, dy, width, height) <span class="comment">// No2 重新绘制图像</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (watermark) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// No3 判断是否有水印: 有, 绘制水印</span></span></span><br><span class="line"><span class="undefined">        ctx.drawImage(watermark, canvas.width - watermark.width, canvas.height - watermark.height)</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实现效果如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/JavaScript/canvas离屏技术与放大镜实现/1.png" alt></p>
+<p>拖动滑竿，即可放大和缩小图像。然后右键保存图像。保存后的图像，就有已经有了水印，如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/JavaScript/canvas离屏技术与放大镜实现/2.png" alt></p>
+<h3 id="3-实现放大镜"><a href="#3-实现放大镜" class="headerlink" title="3. 实现放大镜"></a>3. 实现放大镜</h3><p>在上述中心缩放的基础上，实现放大镜主需要注意以下 2 个部分：</p>
+<ol>
+<li>细化处理<code>canvas</code>的鼠标响应事件：滑入、滑出、点击和松开</li>
+<li>重新计算离屏坐标（详细公式计算思路请见代码注释）</li>
+<li>重新计算鼠标相对于 canvas 标签的坐标（详细公式计算思路请见代码注释）</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    canvas &#123;</span></span><br><span class="line"><span class="undefined">      display: block;</span></span><br><span class="line"><span class="undefined">      margin: 0 auto;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#222</span>;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"my-canvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"off-canvas"</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> isMouseDown = <span class="literal">false</span>,</span></span><br><span class="line"><span class="undefined">      scale = 1.0</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> offCanvas = <span class="built_in">document</span>.querySelector(<span class="string">"#off-canvas"</span>) <span class="comment">// 离屏 canvas</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> offCtx = offCanvas.getContext(<span class="string">"2d"</span>) <span class="comment">// 离屏 canvas 的 Context对象</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image()</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      img.src = <span class="string">"./img/photo.jpg"</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        canvas.width = img.width</span></span><br><span class="line"><span class="undefined">        canvas.height = img.height</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        offCanvas.width = img.width</span></span><br><span class="line"><span class="undefined">        offCanvas.height = img.height</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 计算缩放比例</span></span></span><br><span class="line"><span class="undefined">        scale = offCanvas.width / canvas.width</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 初识状态下, 两个canvas均绘制Image</span></span></span><br><span class="line"><span class="undefined">        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)</span></span><br><span class="line"><span class="undefined">        offCtx.drawImage(img, 0, 0, canvas.width, canvas.height)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 鼠标按下</span></span></span><br><span class="line"><span class="javascript">      canvas.onmousedown = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        event.preventDefault() <span class="comment">// 禁用默认事件</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> point = windowToCanvas(event.clientX, event.clientY) <span class="comment">// 获取鼠标相对于 canvas 标签的坐标</span></span></span><br><span class="line"><span class="javascript">        isMouseDown = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">        drawCanvasWithMagnifier(<span class="literal">true</span>, point) <span class="comment">// 绘制在离屏canvas上绘制放大后的图像</span></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 鼠标移动</span></span></span><br><span class="line"><span class="javascript">      canvas.onmousemove = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        event.preventDefault() <span class="comment">// 禁用默认事件</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (isMouseDown === <span class="literal">true</span>) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">var</span> point = windowToCanvas(event.clientX, event.clientY)</span></span><br><span class="line"><span class="javascript">          drawCanvasWithMagnifier(<span class="literal">true</span>, point)</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 鼠标松开</span></span></span><br><span class="line"><span class="javascript">      canvas.onmouseup = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        event.preventDefault() <span class="comment">// 禁用默认事件</span></span></span><br><span class="line"><span class="javascript">        isMouseDown = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">        drawCanvasWithMagnifier(<span class="literal">false</span>) <span class="comment">// 不绘制离屏放大镜</span></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 鼠标移出canvas标签</span></span></span><br><span class="line"><span class="javascript">      canvas.onmouseout = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        event.preventDefault() <span class="comment">// 禁用默认事件</span></span></span><br><span class="line"><span class="javascript">        isMouseDown = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">        drawCanvasWithMagnifier(<span class="literal">false</span>) <span class="comment">// 不绘制离屏放大镜</span></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 返回鼠标相对于canvas左上角的坐标</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Number</span>&#125; x 鼠标的屏幕坐标x</span></span><br><span class="line"><span class="javascript">    * @param &#123;<span class="built_in">Number</span>&#125; y 鼠标的屏幕坐标y</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">windowToCanvas</span>(<span class="params">x, y</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> bbox = canvas.getBoundingClientRect() <span class="comment">// bbox中存储的是canvas相对于屏幕的坐标</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">        x: x - bbox.x,</span></span><br><span class="line"><span class="undefined">        y: y - bbox.y</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">drawCanvasWithMagnifier</span>(<span class="params">isShow, point</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height) <span class="comment">// 清空画布</span></span></span><br><span class="line"><span class="javascript">      ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height) <span class="comment">// 在画布上绘制图像</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 利用离屏，绘制放大镜 */</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (isShow) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> &#123; x, y &#125; = point</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> mr = <span class="number">50</span> <span class="comment">// 正方形放大镜边长</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// (sx, sy): 待放大图像的开始坐标</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> sx = x - mr / <span class="number">2</span>,</span></span><br><span class="line"><span class="undefined">          sy = y - mr / 2</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// (dx, dy): 已放大图像的开始坐标</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> dx = x - mr,</span></span><br><span class="line"><span class="undefined">          dy = y - mr</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 将offCanvas上的(sx,sy)开始的长宽均为mr的正方形区域</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 放大到</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// canvas上的(dx,dy)开始的长宽均为 2 * mr 的正方形可视区域</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 由此实现放大效果</span></span></span><br><span class="line"><span class="undefined">        ctx.drawImage(offCanvas, sx, sy, mr, mr, dx, dy, 2 * mr, 2 * mr)</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="javascript">      <span class="comment">/*********************/</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>放大镜效果如下图所示(被红笔标出的区域就是我们的正方形放大镜)：</p>
+<p><img src="https://godbmw.com/blog-static/images/JavaScript/canvas离屏技术与放大镜实现/3.png" alt></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是离屏技术？"><span class="toc-text">1. 什么是离屏技术？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-实现水印和中心缩放"><span class="toc-text">2. 实现水印和中心缩放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-实现放大镜"><span class="toc-text">3. 实现放大镜</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-08-30-canvas-off-screen/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+     
+      <a href="/tags/图像处理/"><i class="fa fa-tags"></i>图像处理</a>
+     
+      <a href="/tags/HTML5/"><i class="fa fa-tags"></i>HTML5</a>
+     
+      <a href="/tags/canvas/"><i class="fa fa-tags"></i>canvas</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-08-30-canvas-off-screen";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-09-01-js-tree-shaking/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-08-29-interview-material/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

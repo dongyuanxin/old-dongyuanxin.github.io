@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>JavaScript基础知识梳理(下) | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端面试手记,面试,JavaScript,">
+  
+
+  
+  <meta name="description" content="👇 内容速览 👇实现ES5继承的4种方法原型和原型链作用域和作用域链Event Loop执行上下文闭包的理解和分析">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-03-27
+    </span>
+    
+      <span>
+        | <a href="/categories/前端面试手记/"><i class="fa fa-bookmark"></i>前端面试手记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    JavaScript基础知识梳理(下)
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://source.unsplash.com/400x400/?code,computer);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <p>👇 内容速览 👇</p>
+<ul>
+<li>实现ES5继承的4种方法</li>
+<li>原型和原型链</li>
+<li>作用域和作用域链</li>
+<li>Event Loop</li>
+<li>执行上下文</li>
+<li>闭包的理解和分析</li>
+</ul>
+<h3 id="ES5继承"><a href="#ES5继承" class="headerlink" title="ES5继承"></a>ES5继承</h3><blockquote>
+<p>题目：ES5中常用继承方法。</p>
+</blockquote>
+<p><strong>方法一：绑定构造函数</strong></p>
+<p>缺点：不能继承父类原型方法/属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.species = <span class="string">'动物'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 执行父类的构造方法, 上下文为实例对象</span></span><br><span class="line">  Animal.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat()</span><br><span class="line"><span class="built_in">console</span>.log(cat.species) <span class="comment">// output: 动物</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法二：原型链继承</strong></p>
+<p>缺点：无法向父类构造函数中传递参数；子类原型链上定义的方法有先后顺序问题。</p>
+<p><strong>注意</strong>：js中交换原型链，均需要修复<code>prototype.constructor</code>指向问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">species</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.species = species</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Animal'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * func方法是无效的, 因为后面原型链被重新指向了Animal实例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Cat.prototype.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Cat'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal()</span><br><span class="line">Cat.prototype.constructor = Cat <span class="comment">// 修复: 将Cat.prototype.constructor重新指向本身</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat()</span><br><span class="line">cat.func() <span class="comment">// output: Animal</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.species) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法3:组合继承</strong></p>
+<p>结合绑定构造函数和原型链继承2种方式，缺点是：调用了2次父类的构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">species</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.species = species</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Animal'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  Animal.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal()</span><br><span class="line">Cat.prototype.constructor = Cat </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat(<span class="string">'cat'</span>)</span><br><span class="line">cat.func() <span class="comment">// output: Animal</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.species) <span class="comment">// output: cat</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法4:寄生组合继承</strong></p>
+<p>改进了组合继承的缺点，只需要调用1次父类的构造函数。<strong>它是引用类型最理想的继承范式</strong>。（引自：《JavaScript高级程序设计》）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 寄生组合继承的核心代码</span></span><br><span class="line"><span class="comment"> * @param &#123;Function&#125; sub 子类</span></span><br><span class="line"><span class="comment"> * @param &#123;Function&#125; parent 父类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">sub, parent</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 拿到父类的原型</span></span><br><span class="line">  <span class="keyword">var</span> prototype = <span class="built_in">Object</span>(parent.prototype) </span><br><span class="line">  <span class="comment">// 改变constructor指向</span></span><br><span class="line">  prototype.constructor = sub</span><br><span class="line">  <span class="comment">// 父类原型赋给子类</span></span><br><span class="line">  sub.prototype = prototype</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">species</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.species = species</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Animal'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  Animal.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>) <span class="comment">// 只调用了1次构造函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inheritPrototype(Cat, Animal)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat(<span class="string">'cat'</span>)</span><br><span class="line">cat.func() <span class="comment">// output: Animal</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.species) <span class="comment">// output: cat</span></span><br></pre></td></tr></table></figure>
+<h3 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h3><ul>
+<li>所有的引用类型（数组、对象、函数），都有一个<code>__proto__</code>属性，<del>属性值是一个普通的对象</del></li>
+<li>所有的函数，都有一个prototype属性，属性值也是一个普通的对象</li>
+<li>所有的引用类型（数组、对象、函数），<code>__proto__</code>属性值指向它的构造函数的prototype属性值</li>
+</ul>
+<p><strong>注</strong>：ES6的箭头函数没有<code>prototype</code>属性，但是有<code>__proto__</code>属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"><span class="comment">// 引用类型的 __proto__ 属性值指向它的构造函数的 prototype 属性值</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.__proto__ === <span class="built_in">Object</span>.prototype); <span class="comment">// output: true</span></span><br></pre></td></tr></table></figure>
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><blockquote>
+<p>题目：如何JS中的原型？</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line">Foo.prototype.alertName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建示例</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> Foo(<span class="string">'zhangsan'</span>)</span><br><span class="line">f.printName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line">f.printName()</span><br><span class="line">f.alertName()</span><br></pre></td></tr></table></figure>
+<p>但是执行<code>alertName</code>时发生了什么？这里再记住一个重点 <strong>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的<code>__proto__</code>（即它的构造函数的<code>prototype</code>）中寻找</strong>，因此<code>f.alertName</code>就会找到<code>Foo.prototype.alertName</code>。</p>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><blockquote>
+<p>题目：如何JS中的原型链？</p>
+</blockquote>
+<p>以上一题为基础，如果调用<code>f.toString()</code>。</p>
+<ol>
+<li><code>f</code>试图从<code>__proto__</code>中寻找（即<code>Foo.prototype</code>），还是没找到<code>toString()</code>方法。</li>
+<li>继续向上找，从<code>f.__proto__.__proto__</code>中寻找（即<code>Foo.prototype.__proto__</code>中）。<strong>因为<code>Foo.prototype</code>就是一个普通对象，因此<code>Foo.prototype.__proto__ = Object.prototype</code></strong> </li>
+<li>最终对应到了<code>Object.prototype.toString</code> </li>
+</ol>
+<p>这是对深度遍历的过程，寻找的依据就是一个链式结构，所以叫做“原型链”。</p>
+<h3 id="作用域和作用域链"><a href="#作用域和作用域链" class="headerlink" title="作用域和作用域链"></a>作用域和作用域链</h3><blockquote>
+<p>题目：如何理解 JS 的作用域和作用域链。</p>
+</blockquote>
+<p><strong>①作用域</strong></p>
+<p>ES5有”全局作用域“和”函数作用域“。ES6的<code>let</code>和<code>const</code>使得JS用了”块级作用域“。</p>
+<p>为了解决ES5的全局冲突，一般都是闭包编写：<code>(function(){ ... })()</code>。将变量封装到函数作用域。</p>
+<p><strong>②作用域链</strong></p>
+<p>当前作用域没有找到定义，继续向父级作用域寻找，直至全局作用域。<strong>这种层级关系，就是作用域链</strong>。</p>
+<h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><h4 id="单线程"><a href="#单线程" class="headerlink" title="单线程"></a>单线程</h4><blockquote>
+<p>题目：讲解下面代码的执行过程和结果。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">true</span>;</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    a = <span class="literal">false</span>;</span><br><span class="line">&#125;, <span class="number">100</span>)</span><br><span class="line"><span class="keyword">while</span>(a)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'while执行了'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码会一直执行并且输出”while…”。<strong>JS是单线程的，先跑执行栈里的同步任务，然后再跑任务队列的异步任务</strong>。</p>
+<h4 id="执行栈和任务队列"><a href="#执行栈和任务队列" class="headerlink" title="执行栈和任务队列"></a>执行栈和任务队列</h4><blockquote>
+<p>题目：说一下JS的Event Loop。</p>
+</blockquote>
+<p>简单总结如下：</p>
+<ol>
+<li>JS是单线程的，其上面的所有任务都是在两个地方执行：<strong>执行栈和任务队列</strong>。前者是存放同步任务；后者是异步任务有结果后，就在其中放入一个事件。</li>
+<li>当执行栈的任务都执行完了（栈空），js会读取任务队列，并将可以执行的任务从任务队列丢到执行栈中执行。</li>
+<li>这个过程是循环进行，所以称作<code>Loop</code>。</li>
+</ol>
+<h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><blockquote>
+<p>题目：解释下“全局执行上下文“和“函数执行上下文”。</p>
+</blockquote>
+<p>①<strong>全局执行上下文</strong></p>
+<p>解析JS时候，创建一个 <strong>全局执行上下文</strong> 环境。把代码中即将执行的（<strong>内部函数的不算，因为你不知道函数何时执行</strong>）变量、函数声明都拿出来。<strong>未赋值的变量就是<code>undefined</code></strong>。</p>
+<p>下面这段代码输出：<code>undefined</code>；而不是抛出<code>Error</code>。因为在解析JS的时候，变量a已经存入了全局执行上下文中了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>②<strong>函数执行上下文</strong></p>
+<p>和全局执行上下文差不多，但是多了<code>this</code>和<code>arguments</code>和参数。</p>
+<p>在JS中，<code>this</code>是关键字，它作为内置变量，<strong>其值是在执行的时候确定（不是定义的时候确定）</strong>。</p>
+<h3 id="闭包的理解和分析"><a href="#闭包的理解和分析" class="headerlink" title="闭包的理解和分析"></a>闭包的理解和分析</h3><blockquote>
+<p>题目：解释下js的闭包</p>
+</blockquote>
+<p>直接上<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN</a>的解释：闭包是<strong>函数</strong>和<strong>声明该函数的词法环境</strong>的组合。</p>
+<p>而在JavaScript中，函数是被作为一级对象使用的，它既可以本当作值返回，还可以当作参数传递。理解了：“<strong>Js中的函数运行在它们被定义的作用域，而不是它们被执行的作用域</strong>”（摘自《JavaScript语言精粹》） 这句话即可。</p>
+<blockquote>
+<p>题目：闭包优缺点</p>
+</blockquote>
+<p>闭包封住了变量作用域，有效地防止了全局污染；但同时，它也存在<strong>内存泄漏</strong>的风险：</p>
+<ul>
+<li>在浏览器端可以通过强制刷新解决，对用户体验影响不大</li>
+<li>在服务端，由于node的内存限制和累积效应，可能会造成进程退出甚至服务器沓机</li>
+</ul>
+<p>解决方法是显式对外暴露一个接口，专门用以清理变量：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mockData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> mem = &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    clear: <span class="function"><span class="params">()</span> =&gt;</span> mem = <span class="literal">null</span>, <span class="comment">// 显式暴露清理接口</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span>: (page) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span>(page <span class="keyword">in</span> mem) &#123;</span><br><span class="line">        <span class="keyword">return</span> mem[page]</span><br><span class="line">      &#125;</span><br><span class="line">      mem[page] = <span class="built_in">Math</span>.random()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES5继承"><span class="toc-number">1.</span> <span class="toc-text">ES5继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型和原型链"><span class="toc-number">2.</span> <span class="toc-text">原型和原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原型"><span class="toc-number">2.1.</span> <span class="toc-text">原型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型链"><span class="toc-number">2.2.</span> <span class="toc-text">原型链</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域和作用域链"><span class="toc-number">3.</span> <span class="toc-text">作用域和作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Loop"><span class="toc-number">4.</span> <span class="toc-text">Event Loop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单线程"><span class="toc-number">4.1.</span> <span class="toc-text">单线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行栈和任务队列"><span class="toc-number">4.2.</span> <span class="toc-text">执行栈和任务队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文"><span class="toc-number">5.</span> <span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包的理解和分析"><span class="toc-number">6.</span> <span class="toc-text">闭包的理解和分析</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-03-27-javascript-second/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/面试/"><i class="fa fa-tags"></i>面试</a>
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-03-27-javascript-second";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2019-03-31-factory-pattern/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-03-26-javascript-first/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>董沅鑫的个人网站</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://godbmw.com/"/>
+  <updated>2019-04-01T15:24:23.322Z</updated>
+  <id>https://godbmw.com/</id>
+  
+  <author>
+    <name>董沅鑫</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式手册之抽象工厂模式</title>
+    <link href="https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/"/>
+    <id>https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/</id>
+    <published>2019-04-01T00:00:00.000Z</published>
+    <updated>2019-04-01T15:24:23.322Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;抽象工厂模式就是：围绕一个超级工厂类，创建其他工厂类；再围绕工厂类，创建实体类。&lt;/p&gt;
+&lt;p&gt;相较于传统的工厂模式，它多出了一个&lt;strong&gt;超级工厂类&lt;/strong&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>时间永留简史</title>
+    <link href="https://godbmw.com/passages/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/2019-04-01-brief-history-of-time/"/>
+    <id>https://godbmw.com/passages/夜话杂谈/2019-04-01-brief-history-of-time/</id>
+    <published>2019-04-01T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;那些为爱咬牙坚持的勇气，那些战胜命运的决心，贯穿着整部电影。&lt;/p&gt;
+&lt;p&gt;2小时的影片从开始到1.5小时，我所感受到的就是灰暗，穿插的获奖和肯定更像是嘲讽，衬托霍金的不堪。心有悸动，却只是点湿眼角。直到影片的最后20分钟，简的try my
+        
+      
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之工厂模式</title>
+    <link href="https://godbmw.com/passages/2019-03-31-factory-pattern/"/>
+    <id>https://godbmw.com/passages/2019-03-31-factory-pattern/</id>
+    <published>2019-03-31T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a name=&quot;64336e72&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;1-什么是工厂模式？&quot;&gt;&lt;a href=&quot;#1-什么是工厂模式？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是工厂模式？&quot;&gt;&lt;/a&gt;1.
+        
+      
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript基础知识梳理(下)</title>
+    <link href="https://godbmw.com/passages/2019-03-27-javascript-second/"/>
+    <id>https://godbmw.com/passages/2019-03-27-javascript-second/</id>
+    <published>2019-03-26T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;👇 内容速览 👇&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实现ES5继承的4种方法&lt;/li&gt;
+&lt;li&gt;原型和原型链&lt;/li&gt;
+&lt;li&gt;作用域和作用域链&lt;/li&gt;
+&lt;li&gt;Event Loop&lt;/li&gt;
+&lt;li&gt;执行上下文&lt;/li&gt;
+&lt;li&gt;闭包的理解和分析&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
+    
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript基础知识梳理(上)</title>
+    <link href="https://godbmw.com/passages/2019-03-26-javascript-first/"/>
+    <id>https://godbmw.com/passages/2019-03-26-javascript-first/</id>
+    <published>2019-03-25T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;👇 内容速览 👇&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;普通函数和箭头函数的&lt;code&gt;this&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;原始数据类型及其判断和转化方法&lt;/li&gt;
+&lt;li&gt;深浅拷贝及实现&lt;/li&gt;
+&lt;li&gt;JS事件模型&lt;/li&gt;
+&lt;li&gt;常见的高阶函数&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
+    
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flex上手与实战</title>
+    <link href="https://godbmw.com/passages/2019-03-20-css3-flex/"/>
+    <id>https://godbmw.com/passages/2019-03-20-css3-flex/</id>
+    <published>2019-03-19T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;Flex&lt;/code&gt;之于CSS3就如&lt;code&gt;Promise&lt;/code&gt;之于ES6，都解决了开发者的痛点问题，大大提高了生产力。&lt;/p&gt;
+&lt;p&gt;借助&lt;code&gt;Flex&lt;/code&gt;，可以轻松实现&lt;strong&gt;栅栏布局&lt;/strong&gt;、&lt;strong&gt;水平/垂直居中&lt;/strong&gt;、&lt;strong&gt;自定义排列方向和顺序&lt;/strong&gt;等等需求。因此，&lt;code&gt;Flex&lt;/code&gt;几乎是CSS3的必考内容。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
+    
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你了解css3的nth-child吗</title>
+    <link href="https://godbmw.com/passages/2019-03-19-css3-nth-child/"/>
+    <id>https://godbmw.com/passages/2019-03-19-css3-nth-child/</id>
+    <published>2019-03-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;:nth-child(n)&lt;/code&gt; 选择器匹配属于其父元素的第 n 个子元素，借助这个特性，可以实现选择第偶数次序的子元素、选择一定范围内的子元素等“&lt;strong&gt;批量选择操作&lt;/strong&gt;”。&lt;/p&gt;
+&lt;p&gt;而它比较难理解的地方是参数表达式中&lt;code&gt;n&lt;/code&gt;的含义，以及如何进行数学运算，这也是面试中考察的难点。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
+    
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端面试中常考的源码实现</title>
+    <link href="https://godbmw.com/passages/2019-03-18-interview-js-code/"/>
+    <id>https://godbmw.com/passages/2019-03-18-interview-js-code/</id>
+    <published>2019-03-17T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;👇 内容速览 👇&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;手动实现&lt;code&gt;call&lt;/code&gt;/&lt;code&gt;apply&lt;/code&gt;/&lt;code&gt;bind&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;实现深拷贝函数&lt;/li&gt;
+&lt;li&gt;基于&lt;code&gt;ES5&lt;/code&gt;/&lt;code&gt;ES6&lt;/code&gt;实现双向绑定&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;instanceof&lt;/code&gt;原理与实现&lt;/li&gt;
+&lt;li&gt;实现支持绑定、解绑和派发的事件类&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周分享第 3 期</title>
+    <link href="https://godbmw.com/passages/2019-03-15-weekly-share-3/"/>
+    <id>https://godbmw.com/passages/2019-03-15-weekly-share-3/</id>
+    <published>2019-03-15T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt; 每周分享会系统梳理过去一周我看的的值得记录和分享的技术、工具、文章/段子，致力于为收藏夹“瘦身”！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;👇 内容速览 👇&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何在Scss中书写媒体查询&lt;/li&gt;
+&lt;li&gt;响应&lt;code&gt;mousedown&lt;/code&gt;而不是&lt;code&gt;click&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;stopImmediatePropagation&lt;/code&gt;与&lt;code&gt;stopPropagation&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;VueJS源码解析教程&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
+    
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+      <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[置顶]一份值得收藏的知识清单</title>
+    <link href="https://godbmw.com/passages/2019-03-04-please-mark/"/>
+    <id>https://godbmw.com/passages/2019-03-04-please-mark/</id>
+    <published>2019-03-03T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;随着学习的深入，越来越发现&lt;strong&gt;知识体系&lt;/strong&gt;的重要性。平时积累的零碎知识，如果不做关联，在一些时候（比如面试）会不堪一击。&lt;/p&gt;
+&lt;p&gt;所以，特别整理和分享自己这份&lt;strong&gt;开袋即食&lt;/strong&gt;的知识清单，方便自己看，也希望对大家有帮助哈~&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Theme Art Design 中文文档</title>
+    <link href="https://godbmw.com/passages/2019-03-03-theme-ad-docs-zh/"/>
+    <id>https://godbmw.com/passages/2019-03-03-theme-ad-docs-zh/</id>
+    <published>2019-03-02T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;伴随着Theme AD Version 1.0.0的正式发布，文档热气出炉，敬请食用！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;周天写了一下午 + 一晚上，是按照&lt;code&gt;theme next&lt;/code&gt;文档的模板写的。如有错误或建议，欢迎指正和提出。&lt;/p&gt;
+&lt;p&gt;顺便吐槽下，写文档真的好累，也希望大家用的顺手！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="UI设计" scheme="https://godbmw.com/tags/UI%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="Hexo" scheme="https://godbmw.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GPSR：贪婪转发与周边转发</title>
+    <link href="https://godbmw.com/passages/2019-03-02-gpsr/"/>
+    <id>https://godbmw.com/passages/2019-03-02-gpsr/</id>
+    <published>2019-03-01T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是之前学习《无线传感网络》这门课做的期末大作业，GPSR是”greedy perimeter stateless routing”的缩写。&lt;/p&gt;
+&lt;p&gt;这是一种无状态的路由转发协议，巧妙地借助“贪婪转发”和“周边转发”有效地降低了每个物理节点的存储信息量，非常具有实用意义。&lt;/p&gt;
+&lt;p&gt;除此之外，它还能快速地应对现实中外界条件、节点能耗等多种因素造成的频繁变化的节点分布。&lt;/p&gt;
+&lt;p&gt;因此，特别重温一下，作为一次分享。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="图论" scheme="https://godbmw.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="路由协议" scheme="https://godbmw.com/tags/%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>所爱隔山海</title>
+    <link href="https://godbmw.com/passages/2019-02-24-love/"/>
+    <id>https://godbmw.com/passages/2019-02-24-love/</id>
+    <published>2019-02-24T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直写东西给别人看，是时候写些东西给自己看了。毕竟生活不是只有代码。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;PS：别看了，您没权限的…&lt;/em&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之模板模式</title>
+    <link href="https://godbmw.com/passages/2019-01-31-template-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-31-template-pattern/</id>
+    <published>2019-01-31T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;模板模式是抽象父类定义了子类需要重写的相关方法。&lt;br&gt;而这些方法，仍然是通过&lt;strong&gt;父类方法调用&lt;/strong&gt;的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根据描述，“模板”的思想体现在：父类定义的接口方法。&lt;/p&gt;
+&lt;p&gt;除此之外，子类方法的调用，也是被父类控制的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之备忘录模式</title>
+    <link href="https://godbmw.com/passages/2019-01-26-memento-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-26-memento-pattern/</id>
+    <published>2019-01-26T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;它属于行为模式，保存某个状态，并且在&lt;strong&gt;需要&lt;/strong&gt;的时候直接获取，而不是&lt;strong&gt;重复计算&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最典型的例子是“斐波那契数列”递归实现。&lt;br&gt;不借助备忘录模式，数据一大，就容易爆栈；借助备忘录，算法的时间复杂度可以降低到$ O(N) $&lt;/p&gt;
+&lt;p&gt;除此之外，数据的缓存等也是常见应用场景。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之解释器模式</title>
+    <link href="https://godbmw.com/passages/2019-01-25-interpreter-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-25-interpreter-pattern/</id>
+    <published>2019-01-25T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;解释器模式: 提供了评估语言的&lt;strong&gt;语法&lt;/strong&gt;或&lt;strong&gt;表达式&lt;/strong&gt;的方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;实现这种模式的&lt;strong&gt;核心&lt;/strong&gt;是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;抽象表达式：主要有一个&lt;code&gt;interpret()&lt;/code&gt;操作&lt;ul&gt;
+&lt;li&gt;终结符表达式：&lt;code&gt;R = R1 + R2&lt;/code&gt;中，&lt;code&gt;R1&lt;/code&gt; &lt;code&gt;R2&lt;/code&gt;就是终结符&lt;/li&gt;
+&lt;li&gt;非终结符表达式：&lt;code&gt;R = R1 - R2&lt;/code&gt;中，&lt;code&gt;-&lt;/code&gt;就是终结符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;环境(Context): &lt;strong&gt;存放&lt;/strong&gt;文法中各个&lt;strong&gt;终结符&lt;/strong&gt;所对应的具体值。比如前面&lt;code&gt;R1&lt;/code&gt;和&lt;code&gt;R2&lt;/code&gt;的值。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之桥接模式</title>
+    <link href="https://godbmw.com/passages/2019-01-19-bridge-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-19-bridge-pattern/</id>
+    <published>2019-01-19T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在封装开源库的组件时候，经常会用到这种设计模式。&lt;/p&gt;
+&lt;p&gt;例如，对外提供暴露一个&lt;code&gt;afterFinish&lt;/code&gt;函数,&lt;br&gt;如果用户有传入此函数, 那么就会在某一段代码逻辑中调用。&lt;/p&gt;
+&lt;p&gt;这个过程中，组件起到了“桥”的作用，而具体实现是用户自定义。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之适配器模式</title>
+    <link href="https://godbmw.com/passages/2019-01-17-adapter-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-17-adapter-pattern/</id>
+    <published>2019-01-17T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;适配器模式为多个不兼容接口之间提供“转化器”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;它的实现非常&lt;strong&gt;简单&lt;/strong&gt;，检查接口的数据，&lt;br&gt;进行过滤、重组等操作，使另一接口可以使用数据即可。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之状态模式</title>
+    <link href="https://godbmw.com/passages/2019-01-16-state-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-16-state-pattern/</id>
+    <published>2019-01-16T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;状态模式：对象行为是&lt;strong&gt;基于状态&lt;/strong&gt;来改变的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;内部的状态转化，导致了行为表现形式不同。&lt;br&gt;所以，用户在外面看起来，&lt;strong&gt;好像&lt;/strong&gt;是修改了行为。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式手册之装饰者模式</title>
+    <link href="https://godbmw.com/passages/2019-01-12-decorator-pattern/"/>
+    <id>https://godbmw.com/passages/2019-01-12-decorator-pattern/</id>
+    <published>2019-01-12T00:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;装饰者模式：在&lt;strong&gt;不改变&lt;/strong&gt;对象自身的基础上，&lt;strong&gt;动态&lt;/strong&gt;地添加功能代码。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根据描述，装饰者显然比继承等方式更灵活，而且&lt;strong&gt;不污染&lt;/strong&gt;原来的代码，代码逻辑松耦合。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+</feed>

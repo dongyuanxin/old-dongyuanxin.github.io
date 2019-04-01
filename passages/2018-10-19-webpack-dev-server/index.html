@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>webpack4 系列教程(十五)：开发模式与webpack-dev-server | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="webpack4系列教程,Node,webpack,">
+  
+
+  
+  <meta name="description" content="为什么需要开发模式？借助webpack，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而source-map更是准确定位代码错误的利器。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-10-19
+    </span>
+    
+      <span>
+        | <a href="/categories/webpack4系列教程/"><i class="fa fa-bookmark"></i>webpack4系列教程</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    webpack4 系列教程(十五)：开发模式与webpack-dev-server
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="0-课程介绍和资料"><a href="#0-课程介绍和资料" class="headerlink" title="0. 课程介绍和资料"></a>0. 课程介绍和资料</h2><ul>
+<li><a href="https://github.com/dongyuanxin/webpack-demos/tree/master/demo15" target="_blank" rel="noopener">&gt;&gt;&gt;本节课源码</a></li>
+<li><a href="https://github.com/dongyuanxin/webpack-demos" target="_blank" rel="noopener">&gt;&gt;&gt;所有课程源码</a></li>
+</ul>
+<p>本节课的代码目录如下：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/38.png" alt></p>
+<p>本节课用的 plugin 和 loader 的配置文件<code>package.json</code>如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"dev"</span>: <span class="string">"webpack-dev-server --open"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"clean-webpack-plugin"</span>: <span class="string">"^0.1.19"</span>,</span><br><span class="line">    <span class="attr">"html-webpack-plugin"</span>: <span class="string">"^3.2.0"</span>,</span><br><span class="line">    <span class="attr">"jquery"</span>: <span class="string">"^3.3.1"</span>,</span><br><span class="line">    <span class="attr">"webpack"</span>: <span class="string">"^4.16.1"</span>,</span><br><span class="line">    <span class="attr">"webpack-cli"</span>: <span class="string">"^3.1.0"</span>,</span><br><span class="line">    <span class="attr">"webpack-dev-server"</span>: <span class="string">"^3.1.4"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-为什么需要开发模式？"><a href="#1-为什么需要开发模式？" class="headerlink" title="1. 为什么需要开发模式？"></a>1. 为什么需要开发模式？</h2><p>在之前的课程中，我们都没有指定参数<code>mode</code>。但是执行<code>webpack</code>进行打包的时候，自动设置为<code>production</code>，但是控制台会爆出<code>warning</code>的提示。<strong>而开发模式就是指定<code>mode</code>为<code>development</code>。</strong></p>
+<p>在开发模式下，我们需要对代码进行调试。对应的配置就是：<code>devtool</code>设置为<code>source-map</code>。在非开发模式下，需要关闭此选项，以减小打包体积。</p>
+<p>在开发模式下，还需要热重载、路由重定向、挂代理等功能，<code>webpack4</code>已经提供了<code>devServer</code>选项，启动一个本地服务器，让开发者使用这些功能。</p>
+<h2 id="2-如何使用开发模式？"><a href="#2-如何使用开发模式？" class="headerlink" title="2. 如何使用开发模式？"></a>2. 如何使用开发模式？</h2><p>根据文章开头的<code>package.json</code>的配置，只需要在命令行输入：<code>npm run dev</code>即可启动开发者模式。</p>
+<p>启动效果如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/39.png" alt></p>
+<p>虽然控制台输出了打包信息（假设我们已经配置了热重载），但是磁盘上并没有创建<code>/dist/</code>文件夹和打包文件。<strong>控制台的打包文件的相关内容是存储在内存之中的。</strong></p>
+<h2 id="3-编写一些需要的文件"><a href="#3-编写一些需要的文件" class="headerlink" title="3. 编写一些需要的文件"></a>3. 编写一些需要的文件</h2><p>首先，编写一下入口的 html 文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  This is Index html</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后，按照项目目录，简单封装下<code>/vendor/</code>下的三个 js 文件，以方便<code>app.js</code>调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// minus.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// multi.js</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, factory</span>) </span>&#123;</span><br><span class="line"><span class="meta">  "use strict"</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a * b;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"I am sum.js"</span>);</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，准备进入正题。</p>
+<h2 id="4-编写-webpack-配置文件"><a href="#4-编写-webpack-配置文件" class="headerlink" title="4. 编写 webpack 配置文件"></a>4. 编写 webpack 配置文件</h2><h3 id="4-1-配置代码"><a href="#4-1-配置代码" class="headerlink" title="4.1 配置代码"></a>4.1 配置代码</h3><p><em>由于配置内容有点多，所以放代码，再放讲解。</em></p>
+<p><code>webpack.config.js</code>配置如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">"webpack"</span>);</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">"html-webpack-plugin"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">"./app.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    publicPath: <span class="string">"/"</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">"dist"</span>),</span><br><span class="line">    filename: <span class="string">"[name]-[hash:5].bundle.js"</span>,</span><br><span class="line">    chunkFilename: <span class="string">"[name]-[hash:5].chunk.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mode: <span class="string">"development"</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  devtool: <span class="string">"source-map"</span>, <span class="comment">// 开启调试</span></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: path.join(__dirname, <span class="string">"dist"</span>),</span><br><span class="line">    port: <span class="number">8000</span>, <span class="comment">// 本地服务器端口号</span></span><br><span class="line">    hot: <span class="literal">true</span>, <span class="comment">// 热重载</span></span><br><span class="line">    overlay: <span class="literal">true</span>, <span class="comment">// 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架</span></span><br><span class="line">    proxy: &#123;</span><br><span class="line">      <span class="comment">// 跨域代理转发</span></span><br><span class="line">      <span class="string">"/comments"</span>: &#123;</span><br><span class="line">        target: <span class="string">"https://m.weibo.cn"</span>,</span><br><span class="line">        changeOrigin: <span class="literal">true</span>,</span><br><span class="line">        logLevel: <span class="string">"debug"</span>,</span><br><span class="line">        headers: &#123;</span><br><span class="line">          Cookie: <span class="string">""</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    historyApiFallback: &#123;</span><br><span class="line">      <span class="comment">// HTML5 history模式</span></span><br><span class="line">      rewrites: [&#123; <span class="attr">from</span>: <span class="regexp">/.*/</span>, <span class="attr">to</span>: <span class="string">"/index.html"</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      filename: <span class="string">"index.html"</span>,</span><br><span class="line">      template: <span class="string">"./index.html"</span>,</span><br><span class="line">      chunks: [<span class="string">"app"</span>]</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),</span><br><span class="line">    <span class="keyword">new</span> webpack.NamedModulesPlugin(),</span><br><span class="line">    <span class="keyword">new</span> webpack.ProvidePlugin(&#123;</span><br><span class="line">      $: <span class="string">"jquery"</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-模块热更新"><a href="#4-2-模块热更新" class="headerlink" title="4.2 模块热更新"></a>4.2 模块热更新</h3><p>模块热更新需要<code>HotModuleReplacementPlugin</code>和<code>NamedModulesPlugin</code>这两个插件，并且顺序不能错。并且指定<code>devServer.hot</code>为<code>true</code>。</p>
+<p>有了这两个插件，在项目的 js 代码中可以针对侦测到变更的文件并且做出相关处理。</p>
+<p>比如，我们启动开发模式后，修改了<code>vendor/sum.js</code>这个文件，此时，需要在浏览器的控制台打印一些信息。那么，<code>app.js</code>中就可以这么写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</span><br><span class="line">  <span class="comment">// 检测是否有模块热更新</span></span><br><span class="line">  <span class="built_in">module</span>.hot.accept(<span class="string">"./vendor/sum.js"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 针对被更新的模块, 进行进一步操作</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"/vendor/sum.js is changed"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每当<code>sum.js</code>被修改后，都可以自动执行回调函数。</p>
+<h3 id="4-3-跨域代理"><a href="#4-3-跨域代理" class="headerlink" title="4.3 跨域代理"></a>4.3 跨域代理</h3><p>随着前后端分离开发的普及，跨域请求变得越来越常见。为了快速开发，可以利用<code>devServer.proxy</code>做一个代理转发，来绕过浏览器的跨域限制。</p>
+<p>按照前面的配置文件，如果想调用微博的一个接口：<code>https://m.weibo.cn/comments/hotflow</code>。只需要在代码中对<code>/comments/hotflow</code>进行请求即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="keyword">get</span>(</span><br><span class="line">  "/comments/hotflow",</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="string">"4263554020904293"</span>,</span><br><span class="line">    mid: <span class="string">"4263554020904293"</span>,</span><br><span class="line">    max_id_type: <span class="string">"0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-HTML5–History"><a href="#4-4-HTML5–History" class="headerlink" title="4.4 HTML5–History"></a>4.4 HTML5–History</h3><p>当项目使用<code>HTML5 History API</code> 时，任意的 404 响应都可能需要被替代为 <code>index.html</code>。</p>
+<p>在 SPA（单页应用）中，任何响应直接被替代为<code>index.html</code>。</p>
+<p>在 vuejs 官方的脚手架<code>vue-cli</code>中，开发模式下配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">historyApiFallback: &#123;</span><br><span class="line">  rewrites: [&#123; <span class="attr">from</span>: <span class="regexp">/.*/</span>, <span class="attr">to</span>: <span class="string">"/index.html"</span> &#125;];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-编写入口文件"><a href="#5-编写入口文件" class="headerlink" title="5. 编写入口文件"></a>5. 编写入口文件</h2><p>最后，在前面所有的基础上，让我们来编写下入口文件<code>app.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sum <span class="keyword">from</span> <span class="string">"./vendor/sum"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"sum(1, 2) = "</span>, sum(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"><span class="keyword">var</span> minus = <span class="built_in">require</span>(<span class="string">"./vendor/minus"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"minus(1, 2) = "</span>, minus(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"><span class="built_in">require</span>([<span class="string">"./vendor/multi"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">multi</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"multi(1, 2) = "</span>, multi(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.<span class="keyword">get</span>(</span><br><span class="line">  "/comments/hotflow",</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="string">"4263554020904293"</span>,</span><br><span class="line">    mid: <span class="string">"4263554020904293"</span>,</span><br><span class="line">    max_id_type: <span class="string">"0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</span><br><span class="line">  <span class="comment">// 检测是否有模块热更新</span></span><br><span class="line">  <span class="built_in">module</span>.hot.accept(<span class="string">"./vendor/sum.js"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 针对被更新的模块, 进行进一步操作</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"/vendor/sum.js is changed"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-效果检测"><a href="#6-效果检测" class="headerlink" title="6. 效果检测"></a>6. 效果检测</h2><p>在命令行键入：<code>npm run dev</code>开启服务器后，会自动打开浏览器。如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/40.png" alt></p>
+<p>打开控制台，可以看到代码都正常运行没有出错。除此之外，由于开启了<code>source-map</code>，所以可以定位代码位置（下图绿框内）：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/41.png" alt></p>
+<h2 id="7-参考资料"><a href="#7-参考资料" class="headerlink" title="7. 参考资料"></a>7. 参考资料</h2><ul>
+<li>dev-server 文档: <a href="https://www.webpackjs.com/configuration/dev-server/" target="_blank" rel="noopener">https://www.webpackjs.com/configuration/dev-server/</a></li>
+<li>开发模式 文档:<a href="https://www.webpackjs.com/guides/development/" target="_blank" rel="noopener">https://www.webpackjs.com/guides/development/</a></li>
+</ul>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-课程介绍和资料"><span class="toc-text">0. 课程介绍和资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-为什么需要开发模式？"><span class="toc-text">1. 为什么需要开发模式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-如何使用开发模式？"><span class="toc-text">2. 如何使用开发模式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-编写一些需要的文件"><span class="toc-text">3. 编写一些需要的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-编写-webpack-配置文件"><span class="toc-text">4. 编写 webpack 配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-配置代码"><span class="toc-text">4.1 配置代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-模块热更新"><span class="toc-text">4.2 模块热更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-跨域代理"><span class="toc-text">4.3 跨域代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-HTML5–History"><span class="toc-text">4.4 HTML5–History</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-编写入口文件"><span class="toc-text">5. 编写入口文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-效果检测"><span class="toc-text">6. 效果检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-参考资料"><span class="toc-text">7. 参考资料</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-10-19-webpack-dev-server/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
+     
+      <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-10-19-webpack-dev-server";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-10-21-how-to-use-site/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-10-19-webpack-dev-and-prod/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

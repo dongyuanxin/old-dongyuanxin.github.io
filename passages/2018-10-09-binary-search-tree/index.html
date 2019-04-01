@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>二叉搜索树的实现与常见用法 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="数据结构和算法,C与C++,数据结构,">
+  
+
+  
+  <meta name="description" content="二叉搜索树是一颗空树，或者具有以下性质的二叉树：若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值任意节点的左、右子树也分别为二叉查找树没有键值相等的节点这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-10-09
+    </span>
+    
+      <span>
+        | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    二叉搜索树的实现与常见用法
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="1-为什么需要二叉搜索树？"><a href="#1-为什么需要二叉搜索树？" class="headerlink" title="1. 为什么需要二叉搜索树？"></a>1. 为什么需要二叉搜索树？</h2><blockquote>
+<p>选择数据结构的核心在于解决问题，而不是为了使用而使用。</p>
+</blockquote>
+<p>由于二叉搜索树的定义和特性，它可以高效解决以下问题：</p>
+<ul>
+<li>查找问题：二分查找</li>
+<li>高级结构：字典结构实现</li>
+<li>数据变动：节点的插入、删除</li>
+<li>遍历问题：前序、中序、后序和层次遍历</li>
+<li>数值运算：<code>ceil</code>、<code>floor</code>、找到第 n 大的元素、找到指定元素在排序好的数组的位置 等等</li>
+</ul>
+<p>值得一提的是，除了遍历算法，上述各种问题的算法时间复杂度都是 : $O(\log_2 n)$</p>
+<h2 id="2-二叉搜索树的定义和性质"><a href="#2-二叉搜索树的定义和性质" class="headerlink" title="2. 二叉搜索树的定义和性质"></a>2. 二叉搜索树的定义和性质</h2><p>二叉搜索树是一颗空树，或者具有以下性质的二叉树：</p>
+<ul>
+<li>若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值</li>
+<li>若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值</li>
+<li>任意节点的左、右子树也分别为二叉查找树</li>
+<li>没有键值相等的节点</li>
+</ul>
+<p><strong>需要注意的是，二叉搜索树不一定是一颗完全二叉树，因此，二叉搜索树不能用数组来存储。</strong></p>
+<h2 id="3-二叉搜索树的实现"><a href="#3-二叉搜索树的实现" class="headerlink" title="3. 二叉搜索树的实现"></a>3. 二叉搜索树的实现</h2><p>第 3 部分实现的测试代码地址：<a href="https://gist.github.com/dongyuanxin/d0803a8821c6797e9ce8522a676cf44b" target="_blank" rel="noopener">https://gist.github.com/dongyuanxin/d0803a8821c6797e9ce8522a676cf44b</a>。</p>
+<p>这是 Github 的 GIST，请自备梯子。</p>
+<h3 id="3-1-树结构实现"><a href="#3-1-树结构实现" class="headerlink" title="3.1 树结构实现"></a>3.1 树结构实现</h3><p>借助<code>struct</code>和指针模拟树的结构，并且将其封装到<code>BST</code>这个类之中：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BST.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/9/27.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BINARYSEARCH_BST_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BINARYSEARCH_BST_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">        Key key;</span><br><span class="line">        Value value;</span><br><span class="line">        Node  *left;</span><br><span class="line">        Node *right;</span><br><span class="line"></span><br><span class="line">        Node(Key key, Value value) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;key = key;</span><br><span class="line">            <span class="keyword">this</span>-&gt;value = value;</span><br><span class="line">            <span class="keyword">this</span>-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">            <span class="keyword">this</span>-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node(Node* node) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;key = node-&gt;key;</span><br><span class="line">            <span class="keyword">this</span>-&gt;value = node-&gt;value;</span><br><span class="line">            <span class="keyword">this</span>-&gt;left = node-&gt;left;</span><br><span class="line">            <span class="keyword">this</span>-&gt;right = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    Node *root;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BST() &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;root = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~BST() &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;destroy(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;root == <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//BINARYSEARCH_BST_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-实现节点插入"><a href="#3-2-实现节点插入" class="headerlink" title="3.2 实现节点插入"></a>3.2 实现节点插入</h3><p>插入采取递归的写法，思路如下：</p>
+<ol>
+<li>递归到底层情况：新建节点，并且返回</li>
+<li>非底层情况：如果当前键等于插入键，则更新当前节点的值；小于，进入当前节点的左子树；大于，进入当前节点的右子树。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">insert</span><span class="params">(Node* node, Key key, Value value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Node(key, value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(key == node-&gt;key) &#123;</span><br><span class="line">            node-&gt;value = value;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>( key &lt; node-&gt;key) &#123;</span><br><span class="line">            node-&gt;left = insert(node-&gt;left, key, value);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            node-&gt;right = insert(node-&gt;right, key, value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Key key, Value value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;root = <span class="keyword">this</span>-&gt;insert(<span class="keyword">this</span>-&gt;root, key, value);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-实现节点的查找"><a href="#3-3-实现节点的查找" class="headerlink" title="3.3 实现节点的查找"></a>3.3 实现节点的查找</h3><p>查找包含 2 个函数：<code>contain</code>和<code>search</code>。前者返回布尔型，表示树中是否有这个节点；后者返回指针类型，表示树中节点对应的值。</p>
+<p><strong><code>search</code>为什么返回值的指针类型呢：</strong></p>
+<ul>
+<li>如果要查找的节点不存在，指针可以直接返回<code>NULL</code>。</li>
+<li>如果返回<code>Node*</code>，就破坏了类的封装性。原则上，内部数据结构不对外展示。</li>
+<li>如果查找的节点存在，返回去键对应的值，用户可以修改，并不影响树结构。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contain</span><span class="params">(Node* node, Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(key == node-&gt;key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(key &lt; node-&gt;key) &#123;</span><br><span class="line">            <span class="keyword">return</span> contain(node-&gt;left, key);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> contain(node-&gt;right, key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Value* <span class="title">search</span><span class="params">(Node* node, Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(key == node-&gt;key) &#123;</span><br><span class="line">            <span class="keyword">return</span> &amp;(node-&gt;value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; node-&gt;key) &#123;</span><br><span class="line">            <span class="keyword">return</span> search(node-&gt;left, key);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> search(node-&gt;right, key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contain</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;contain(<span class="keyword">this</span>-&gt;root, key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    注意返回值类型</span></span><br><span class="line">    <span class="function">Value* <span class="title">search</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;search(<span class="keyword">this</span>-&gt;root, key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-遍历实现"><a href="#3-4-遍历实现" class="headerlink" title="3.4 遍历实现"></a>3.4 遍历实现</h3><p>前序、中序和后序遍历的思路很简单，根据定义，直接递归调用即可。</p>
+<p>对于层次遍历，需要借助队列<code>queue</code>这种数据结构。思路如下：</p>
+<ol>
+<li>首先，将根节点放入队列</li>
+<li>如果队列不空，进入循环</li>
+<li>取出队列头部元素，输出信息。并将这个元素出队</li>
+<li>将这个元素非空的左右节点依次放入队列</li>
+<li>检测队列是否为空，不空的进入第 3 步；空的话，跳出循环。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pre_order</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;node-&gt;key&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            pre_order(node-&gt;left);</span><br><span class="line">            pre_order(node-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">in_order</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            in_order(node-&gt;left);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;node-&gt;key&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            in_order(node-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">post_order</span><span class="params">(Node *node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            post_order(node-&gt;left);</span><br><span class="line">            post_order(node-&gt;right);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;node-&gt;key&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">level_order</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">queue</span>&lt;Node*&gt; q;</span><br><span class="line">        q.push(node);</span><br><span class="line">        <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">            Node* node = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt; node-&gt;key &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(node-&gt;left) &#123;</span><br><span class="line">                q.push(node-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(node-&gt;right) &#123;</span><br><span class="line">                q.push(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pre_order</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;pre_order(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">in_order</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;in_order(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">post_order</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;post_order(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">level_order</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;level_order(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-实现节点删除"><a href="#3-5-实现节点删除" class="headerlink" title="3.5 实现节点删除"></a>3.5 实现节点删除</h3><p>为了方便实现，首先封装了获取最小键值和最大键值的两个方法：<code>minimum</code>和<code>maximum</code>。</p>
+<p>删除节点的原理很简单（<em>忘了什么名字，是一个计算机科学家提出的</em>），思路如下：</p>
+<ol>
+<li>如果左节点为空，删除本节点，返回右节点。</li>
+<li>如果右节点为空，删除本节点，返回左节点。</li>
+<li>如果左右节点都为空，是 1 或者 2 的子情况。</li>
+<li><strong>如果左右节点都不为空，找到当前节点的右子树的最小节点，并用这个最小节点替换本节点。</strong></li>
+</ol>
+<p>为什么第 4 步这样可以继续保持二叉搜索树的性质呢？</p>
+<p>显然，右子树的最小节点，能满足小于右子树的所有节点，并且大于左子树的全部节点。</p>
+<p>如下图所示，要删除<code>58</code>这个节点，就应该用<code>59</code>这个节点替换：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/二叉搜索树的实现与常见用法/1.png" alt></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="comment">//    寻找最小键值</span></span><br><span class="line">    <span class="function">Node* <span class="title">minimum</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minimum(node-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    寻找最大键值</span></span><br><span class="line">    <span class="function">Node* <span class="title">maximum</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maximum(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Node* <span class="title">remove_min</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            Node* right = node-&gt;right;</span><br><span class="line">            <span class="keyword">delete</span> node;</span><br><span class="line">            count--;</span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;</span><br><span class="line">        node-&gt;left = remove_min(node-&gt;left);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node* <span class="title">remove_max</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            Node* left = node-&gt;left;</span><br><span class="line">            <span class="keyword">delete</span> node;</span><br><span class="line">            count--;</span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;</span><br><span class="line">        node-&gt;right = remove_max(node-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    删除掉以node为根的二分搜索树中键值为key的节点</span></span><br><span class="line"><span class="comment">//    返回删除节点后新的二分搜索树的根</span></span><br><span class="line">    <span class="function">Node* <span class="title">remove</span><span class="params">(Node* node, Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(key &lt; node-&gt;key) &#123;</span><br><span class="line">            node-&gt;left = remove(node-&gt;left, key);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; node-&gt;key)&#123;</span><br><span class="line">            node-&gt;right = remove(node-&gt;right, key);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//            key == node-&gt;key</span></span><br><span class="line">            <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                Node* right = node-&gt;right;</span><br><span class="line">                <span class="keyword">delete</span> node;</span><br><span class="line">                count--;</span><br><span class="line">                <span class="keyword">return</span> right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(node-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                Node *left = node-&gt;left;</span><br><span class="line">                <span class="keyword">delete</span> node;</span><br><span class="line">                count--;</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="comment">//            node-&gt;right != NULL &amp;&amp; node-&gt;left != NULL</span></span><br><span class="line">            Node* successor = <span class="keyword">new</span> Node(minimum(node-&gt;right));</span><br><span class="line">            count++;</span><br><span class="line"><span class="comment">//            "count --" in "function remove_min(node-&gt;right)"</span></span><br><span class="line">            successor-&gt;right = remove_min(node-&gt;right);</span><br><span class="line">            successor-&gt;left = node-&gt;left;</span><br><span class="line">            <span class="keyword">delete</span> node;</span><br><span class="line">            count--;</span><br><span class="line">            <span class="keyword">return</span> successor;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="comment">//    寻找最小键值</span></span><br><span class="line">    <span class="function">Key* <span class="title">minimum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;count == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        Node* min_node = <span class="keyword">this</span>-&gt;minimum(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">        <span class="keyword">return</span> &amp;(min_node-&gt;key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    寻找最大键值</span></span><br><span class="line">    <span class="function">Key* <span class="title">maximum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;count == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        Node* max_node = <span class="keyword">this</span>-&gt;maximum(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">        <span class="keyword">return</span> &amp;(max_node-&gt;key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove_min</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;root = <span class="keyword">this</span>-&gt;remove_min(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove_max</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;root = <span class="keyword">this</span>-&gt;remove_max(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;root = remove(<span class="keyword">this</span>-&gt;root, key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-数值运算：floor和ceil"><a href="#3-6-数值运算：floor和ceil" class="headerlink" title="3.6 数值运算：floor和ceil"></a>3.6 数值运算：<code>floor</code>和<code>ceil</code></h3><p><code>floor</code>和<code>ceil</code>分别是地板和天花板的意思。在一个数组中，对于指定元素<code>n</code>，如果数组中存在<code>n</code>，那么<code>n</code>的两个值就是它本身；如果不存在，那么分别是距离最近的小于指定元素的值 和 距离最近的大于指定元素的值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">floor</span><span class="params">(Node* node, Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        key等于node-&gt;key：floor的结果就是node本身</span></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;key == key) &#123;</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        key小于node—&gt;key：floor的结果肯定在node节点的左子树</span></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;key &gt; key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">floor</span>(node-&gt;left, key);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        key大于node-&gt;key：右子树可能存在比node-&gt;key大，但是比key小的节点</span></span><br><span class="line"><span class="comment">//        如果存在上述情况，返回这个被选出来的节点</span></span><br><span class="line"><span class="comment">//        否则，函数最后返回node本身</span></span><br><span class="line">        Node* tmp = <span class="built_in">floor</span>(node-&gt;right, key);</span><br><span class="line">        <span class="keyword">if</span>(tmp != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> tmp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node* <span class="title">ceil</span><span class="params">(Node* node, Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;key == key) &#123;</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;key &lt; key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">ceil</span>(node-&gt;right, key);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node* tmp = <span class="built_in">ceil</span>(node-&gt;left, key);</span><br><span class="line">        <span class="keyword">if</span>(tmp != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> tmp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Key* <span class="title">floor</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">        Key* min_key = <span class="keyword">this</span>-&gt;minimum();</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;isEmpty() || key &lt; *min_key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        floor node</span></span><br><span class="line">        Node *node = <span class="built_in">floor</span>(<span class="keyword">this</span>-&gt;root, key);</span><br><span class="line">        <span class="keyword">return</span> &amp;(node-&gt;key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Key* <span class="title">ceil</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">        Key* max_key = <span class="keyword">this</span>-&gt;maximum();</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;isEmpty() || key &gt; *max_key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        ceil node</span></span><br><span class="line">        Node* node = <span class="built_in">ceil</span>(<span class="keyword">this</span>-&gt;root, key);</span><br><span class="line">        <span class="keyword">return</span> &amp;(node-&gt;key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-代码测试"><a href="#4-代码测试" class="headerlink" title="4. 代码测试"></a>4. 代码测试</h2><p>第 3 部分实现的测试代码地址：<a href="https://gist.github.com/dongyuanxin/759d16e1ce87913ad2f359d49d5f5016" target="_blank" rel="noopener">https://gist.github.com/dongyuanxin/759d16e1ce87913ad2f359d49d5f5016</a>。</p>
+<p>这是 Github 的 GIST，请自备梯子。</p>
+<h2 id="5-拓展延伸"><a href="#5-拓展延伸" class="headerlink" title="5. 拓展延伸"></a>5. 拓展延伸</h2><p><strong>考虑一种数据类型，如果是基本有序的一组数据，一次<code>insert</code>进入二叉搜索树，那么，二叉搜索树就退化为了链表。此时，上述所有操作的时间复杂度都会退化为 $O(log_2 N)$。</strong></p>
+<p>为了避免这种情况，就有了红黑树等数据结构，来保证树的平衡性：左右子树的高度差小于等于 1。</p>
+<h2 id="6-致谢"><a href="#6-致谢" class="headerlink" title="6. 致谢"></a>6. 致谢</h2><p>本篇博客是总结于慕课网的<a href="https://coding.imooc.com/class/chapter/71.html" target="_blank" rel="noopener">《学习算法思想 修炼编程内功》</a>的笔记，强推强推强推。</p>
+<p><a href="https://blog.csdn.net/qq_19782019/article/details/78882392" target="_blank" rel="noopener">二分搜索树的删除节点操作</a></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-为什么需要二叉搜索树？"><span class="toc-text">1. 为什么需要二叉搜索树？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-二叉搜索树的定义和性质"><span class="toc-text">2. 二叉搜索树的定义和性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-二叉搜索树的实现"><span class="toc-text">3. 二叉搜索树的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-树结构实现"><span class="toc-text">3.1 树结构实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-实现节点插入"><span class="toc-text">3.2 实现节点插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-实现节点的查找"><span class="toc-text">3.3 实现节点的查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-遍历实现"><span class="toc-text">3.4 遍历实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-实现节点删除"><span class="toc-text">3.5 实现节点删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-数值运算：floor和ceil"><span class="toc-text">3.6 数值运算：floor和ceil</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-代码测试"><span class="toc-text">4. 代码测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-拓展延伸"><span class="toc-text">5. 拓展延伸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-致谢"><span class="toc-text">6. 致谢</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-10-09-binary-search-tree/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+     
+      <a href="/tags/数据结构/"><i class="fa fa-tags"></i>数据结构</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-10-09-binary-search-tree";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-10-11-union-find/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-10-09-webpack-chracter-file/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

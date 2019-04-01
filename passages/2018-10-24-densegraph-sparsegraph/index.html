@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>稠密图和稀疏图的最优实现及应用 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="数据结构和算法,C与C++,数据结构,">
+  
+
+  
+  <meta name="description" content="本文介绍了稠密图和稀疏图对应的实现方式：邻接矩阵和邻接表。实现的亮点在于两种类的内部迭代器和函数接口对外一致，方便进一步编写遍历算法、解决图的相关问题。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-10-24
+    </span>
+    
+      <span>
+        | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    稠密图和稀疏图的最优实现及应用
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="1-稀疏图和稠密图的界定"><a href="#1-稀疏图和稠密图的界定" class="headerlink" title="1. 稀疏图和稠密图的界定"></a>1. 稀疏图和稠密图的界定</h2><p>首先说明：这只是划分图种类的一种方法。不同于有向图和无向图等划分方法，稀疏图和稠密图的界定很有意思，并没有确定的界限。</p>
+<p>比如，下面这张图是稠密图还是稀疏图？</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/稠密图和稀疏图的最优实现及应用/1.png" alt></p>
+<p>没有经验的人会将这张图划分为稠密图。<strong>但是，仔细观察每个点可以发现：每个点连接的边只有 5 条边，而整张的点有几十个，5 个点显然只是这些点的一小部分。由此，可以界定这张图是“稀疏图”。</strong></p>
+<p>根据这个经验，“完全图”可以被界定为“稠密图”。</p>
+<h2 id="2-邻接表和邻接矩阵"><a href="#2-邻接表和邻接矩阵" class="headerlink" title="2. 邻接表和邻接矩阵"></a>2. 邻接表和邻接矩阵</h2><p>图的实现通常有 2 中数据结构：邻接表和邻接矩阵。<strong>这也是为什么前面要界定稀疏图和稠密图的原因：稀疏图常采取邻接表实现，稠密图常采取邻接矩阵实现。</strong></p>
+<p>下面两张图分别是邻接表和邻接矩阵：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/稠密图和稀疏图的最优实现及应用/2.png" alt></p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/稠密图和稀疏图的最优实现及应用/3.png" alt></p>
+<p>一般而言，图多采用邻接表实现，原因如下：</p>
+<ul>
+<li>大部分图都是稀疏图</li>
+<li>邻接表的空间复杂度是 $O(N)$，邻接矩阵的空间复杂度是 $O(N^{2})$</li>
+<li>邻接表遍历的时间复杂度是 $O(E)$，邻接矩阵遍历的时间复杂是 $O(N^{2})$</li>
+</ul>
+<p><em>注：N 是节点个数，E 是边数</em></p>
+<h2 id="3-图的代码实现"><a href="#3-图的代码实现" class="headerlink" title="3. 图的代码实现"></a>3. 图的代码实现</h2><p>实现针对稠密图和稀疏图的两种数据类型：邻接矩阵和邻接表。</p>
+<p>两种图应该对外表现一致（相同的调用方法），以方便之后进行路径算法等算法的编写封装。</p>
+<p>两种图应该实现初始化、给节点添加边、检查节点是否相连等函数。</p>
+<p>除此之外，还需要在类的内部实现迭代器，以方便用户遍历访问图的节点和相邻节点。</p>
+<h3 id="3-1-实现迭代器"><a href="#3-1-实现迭代器" class="headerlink" title="3.1 实现迭代器"></a>3.1 实现迭代器</h3><p>为了方便外部用户遍历图中的节点元素，访问节点的相邻节点，并且防止用户篡改图的节点数据。利用“迭代器模式”，分别针对稀疏图和稠密图的迭代器。</p>
+<p>在下面的两种图的实现中，<code>DenseGraph</code>和<code>SparseGraph</code>两个类的内部均实现了<code>graph_iterator</code>类。此时，可以使用如下方法使用迭代器：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DenseGraph <span class="title">g</span><span class="params">(<span class="number">10</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">DenseGraph::<span class="function">graph_iterator <span class="title">iter</span><span class="params">(g,<span class="number">0</span>)</span></span>; <span class="comment">// 生成迭代器</span></span><br><span class="line"><span class="comment">// 逐个访问节点元素</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> w = iter.begin(); !iter.end(); w = iter.next()) &#123;</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt; w &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-实现稠密图"><a href="#3-2-实现稠密图" class="headerlink" title="3.2 实现稠密图"></a>3.2 实现稠密图</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dense_graph.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/10/12.</span></span><br><span class="line"><span class="comment">// 稠密图：邻接矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GRAPH_DENSE_GRAPH_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GRAPH_DENSE_GRAPH_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DenseGraph</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> n; <span class="comment">// 节点数</span></span><br><span class="line">    <span class="keyword">int</span> m; <span class="comment">// 边数</span></span><br><span class="line">    <span class="keyword">bool</span> directed; <span class="comment">// 是否有向</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; g; <span class="comment">// 邻接表具体数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    DenseGraph(<span class="keyword">int</span> n, <span class="keyword">bool</span> directed) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;n = n;</span><br><span class="line">        <span class="keyword">this</span>-&gt;m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;directed = directed;</span><br><span class="line">        g = <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt;(n, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(n, <span class="literal">false</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~DenseGraph()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">V</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;n; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">E</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;m; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;g[v][w] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;has_edge(v,w)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>-&gt;directed) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;g[w][v] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;m++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">has_edge</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;g[v][w];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示图的信息</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i ++ )&#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; n ; j ++ )</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;g[i][j]&lt;&lt;<span class="string">"\t"</span>;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">graph_iterator</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        DenseGraph &amp;G;</span><br><span class="line">        <span class="keyword">int</span> v;</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        graph_iterator(DenseGraph &amp;graph, <span class="keyword">int</span> v):G(graph) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;v = v;</span><br><span class="line">            <span class="keyword">this</span>-&gt;index = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ~graph_iterator()&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        返回图G中与顶点v相连接的第一个顶点</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">begin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;index = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>-&gt;next();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;index += <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(; <span class="keyword">this</span>-&gt;index &lt; G.V(); <span class="keyword">this</span>-&gt;index++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(G.g[v][<span class="keyword">this</span>-&gt;index]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>-&gt;index;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">end</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>-&gt;index &gt;= G.V();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//GRAPH_DENSE_GRAPH_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-实现稀疏图"><a href="#3-3-实现稀疏图" class="headerlink" title="3.3 实现稀疏图"></a>3.3 实现稀疏图</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sparse_graph.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/10/12.</span></span><br><span class="line"><span class="comment">// 稀疏图：邻接表</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GRAPH_SPARSE_GRAPH_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GRAPH_SPARSE_GRAPH_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SparseGraph</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> n; <span class="comment">// 节点数</span></span><br><span class="line">    <span class="keyword">int</span> m; <span class="comment">// 边数</span></span><br><span class="line">    <span class="keyword">bool</span> directed; <span class="comment">// 是否有向</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; g; <span class="comment">// 邻接表具体数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    SparseGraph(<span class="keyword">int</span> n, <span class="keyword">bool</span> directed) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;n = n;</span><br><span class="line">        <span class="keyword">this</span>-&gt;m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;directed = directed;</span><br><span class="line">        g = <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~SparseGraph()&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">V</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> n;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">E</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    节点v和w之间增加一条边</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        邻接表 has_edge 操作时间复杂度为 O(n)</span></span><br><span class="line"><span class="comment">//        更好的做法是在创建完整张图后，再剔除平行边</span></span><br><span class="line"><span class="comment">//        if(this-&gt;has_edge(v, w)) return ;</span></span><br><span class="line"></span><br><span class="line">        g[v].push_back(w);</span><br><span class="line">        <span class="keyword">if</span>(v != w &amp;&amp; !directed) &#123;</span><br><span class="line">            g[w].push_back(v);</span><br><span class="line">        &#125;</span><br><span class="line">        m++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    图中v和w两个点之间是否有边</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">has_edge</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g[v].size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(g[v][i] == w) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示图的信息</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i ++ )&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"vertex "</span>&lt;&lt;i&lt;&lt;<span class="string">":\t"</span>;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; g[i].size() ; j ++ )</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;g[i][j]&lt;&lt;<span class="string">"\t"</span>;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">graph_iterator</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        SparseGraph &amp;G;</span><br><span class="line">        <span class="keyword">int</span> v;</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        graph_iterator(SparseGraph &amp;graph, <span class="keyword">int</span> v):G(graph) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;v = v;</span><br><span class="line">            <span class="keyword">this</span>-&gt;index = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ~graph_iterator()&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        返回图G中与顶点v相连接的第一个顶点</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">begin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;index = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(G.g[v].size()) &#123;</span><br><span class="line">                <span class="keyword">return</span> G.g[v][<span class="keyword">this</span>-&gt;index];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;index += <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>( !<span class="keyword">this</span>-&gt;end() ) &#123;</span><br><span class="line">                <span class="keyword">return</span> G.g[v][<span class="keyword">this</span>-&gt;index];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">end</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>-&gt;index &gt;= G.g[v].size();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//GRAPH_SPARSE_GRAPH_H</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="4-代码测试和结果"><a href="#4-代码测试和结果" class="headerlink" title="4. 代码测试和结果"></a>4. 代码测试和结果</h2><h3 id="4-1-准备测试数据"><a href="#4-1-准备测试数据" class="headerlink" title="4.1 准备测试数据"></a>4.1 准备测试数据</h3><p>准备了<code>graph_data_1.txt</code>和<code>graph_data_2.txt</code>两个图的数据。第一行的两个数据是节点个数和边的个数。剩下的行是相邻的两个节点的坐标。</p>
+<p><code>graph_data_1.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">13 13</span><br><span class="line">0 5</span><br><span class="line">4 3</span><br><span class="line">0 1</span><br><span class="line">9 12</span><br><span class="line">6 4</span><br><span class="line">5 4</span><br><span class="line">0 2</span><br><span class="line">11 12</span><br><span class="line">9 10</span><br><span class="line">0 6</span><br><span class="line">7 8</span><br><span class="line">9 11</span><br><span class="line">5 3</span><br></pre></td></tr></table></figure>
+<p><code>graph_data_2.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">6 8</span><br><span class="line">0 1</span><br><span class="line">0 2</span><br><span class="line">0 5</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">3 4</span><br><span class="line">3 5</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-读取测试数据"><a href="#4-2-读取测试数据" class="headerlink" title="4.2 读取测试数据"></a>4.2 读取测试数据</h3><p>此时，就可以看到之前两个类对外统一接口的好处了。此时只需要写一套代码即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reader.h</span></span><br><span class="line"><span class="comment">// Created by godbmw.com on 2018/10/12.</span></span><br><span class="line"><span class="comment">// 从文件中读取图</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GRAPH_READER_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GRAPH_READER_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Graph&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reader</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="comment">//    从filename中读取图信息，并且存储图信息</span></span><br><span class="line">    Reader(Graph &amp;graph, <span class="keyword">const</span> <span class="built_in">string</span> &amp;filename) &#123;</span><br><span class="line">        <span class="function">ifstream <span class="title">file</span><span class="params">(filename)</span></span>;</span><br><span class="line">        <span class="built_in">string</span> line;</span><br><span class="line">        <span class="keyword">int</span> V, E;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(file.is_open() == <span class="literal">false</span>) &#123;</span><br><span class="line">            perror(<span class="string">"Fail to open the file "</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        从第一行读取图中的节点个数和边的个数</span></span><br><span class="line">        assert( getline(file, line) );</span><br><span class="line">        <span class="function"><span class="built_in">stringstream</span> <span class="title">ss</span><span class="params">(line)</span></span>;</span><br><span class="line">        ss&gt;&gt;V&gt;&gt;E;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( V != graph.V()) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"Error info\n"</span>;</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; E; i++) &#123;</span><br><span class="line">            assert(getline(file, line));</span><br><span class="line">            <span class="function"><span class="built_in">stringstream</span> <span class="title">ss</span><span class="params">(line)</span></span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> a, b;</span><br><span class="line">            ss&gt;&gt;a&gt;&gt;b;</span><br><span class="line">            assert( a &gt;= <span class="number">0</span> &amp;&amp; a &lt; V );</span><br><span class="line">            assert( b &gt;= <span class="number">0</span> &amp;&amp; b &lt; V );</span><br><span class="line">            graph.add_edge( a , b );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//GRAPH_READER_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="4-3-测试结果"><a href="#4-3-测试结果" class="headerlink" title="4.3 测试结果"></a>4.3 测试结果</h3><p>编写我们的测试代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"reader.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sparse_graph.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dense_graph.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用两种图的存储方式读取testG1.txt文件</span></span><br><span class="line">    <span class="built_in">string</span> filename = <span class="string">"F:/ClionProjects/Graph/graph_data_1.txt"</span>;</span><br><span class="line">    <span class="function">SparseGraph <span class="title">g1</span><span class="params">( <span class="number">13</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;SparseGraph&gt; readGraph1( g1 , filename );</span><br><span class="line">    g1.show();</span><br><span class="line"></span><br><span class="line">    <span class="function">DenseGraph <span class="title">g2</span><span class="params">( <span class="number">13</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;DenseGraph&gt; readGraph2( g2 , filename );</span><br><span class="line">    g2.show();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用两种图的存储方式读取testG2.txt文件</span></span><br><span class="line">    filename = <span class="string">"F:/ClionProjects/Graph/graph_data_2.txt"</span>;</span><br><span class="line">    <span class="function">SparseGraph <span class="title">g3</span><span class="params">( <span class="number">6</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;SparseGraph&gt; readGraph3( g3 , filename );</span><br><span class="line">    g3.show();</span><br><span class="line"></span><br><span class="line">    <span class="function">DenseGraph <span class="title">g4</span><span class="params">( <span class="number">6</span> , <span class="literal">false</span> )</span></span>;</span><br><span class="line">    Reader&lt;DenseGraph&gt; readGraph4( g4 , filename );</span><br><span class="line">    g4.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/稠密图和稀疏图的最优实现及应用/4.png" alt></p>
+<h2 id="5-致谢"><a href="#5-致谢" class="headerlink" title="5. 致谢"></a>5. 致谢</h2><p>本篇博客是总结于慕课网的<a href="https://coding.imooc.com/class/chapter/71.html" target="_blank" rel="noopener">《学习算法思想 修炼编程内功》</a>的笔记，liuyubobobo 老师人和讲课都很 nice，欢迎去买他的课程。</p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-稀疏图和稠密图的界定"><span class="toc-text">1. 稀疏图和稠密图的界定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-邻接表和邻接矩阵"><span class="toc-text">2. 邻接表和邻接矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-图的代码实现"><span class="toc-text">3. 图的代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-实现迭代器"><span class="toc-text">3.1 实现迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-实现稠密图"><span class="toc-text">3.2 实现稠密图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-实现稀疏图"><span class="toc-text">3.3 实现稀疏图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-代码测试和结果"><span class="toc-text">4. 代码测试和结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-准备测试数据"><span class="toc-text">4.1 准备测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-读取测试数据"><span class="toc-text">4.2 读取测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-测试结果"><span class="toc-text">4.3 测试结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-致谢"><span class="toc-text">5. 致谢</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-10-24-densegraph-sparsegraph/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+     
+      <a href="/tags/数据结构/"><i class="fa fa-tags"></i>数据结构</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-10-24-densegraph-sparsegraph";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-10-25-stragegy-pattern/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-10-23-singleton-pattern/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

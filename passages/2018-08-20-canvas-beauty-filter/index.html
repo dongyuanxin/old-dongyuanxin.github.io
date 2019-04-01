@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>canvas学习和滤镜实现 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript,图像处理,HTML5,canvas,">
+  
+
+  
+  <meta name="description" content="最近学习了 HTML5 中的重头戏–canvas。利用 canvas，前端人员可以很轻松地、进行图像处理。其 API 繁多，这次主要学习常用的 API，并且完成以下两个代码：实现去色滤镜：实现负色(反色)滤镜">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-08-20
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    canvas学习和滤镜实现
+  </h1>
+  
+  <article class="passage-article">
+    <blockquote>
+<p>最近学习了 HTML5 中的重头戏–<code>canvas</code>。利用 canvas，前端人员可以很轻松地、进行图像处理。其 API 繁多，这次主要学习常用的 API，并且完成以下两个代码：</p>
+</blockquote>
+<ol>
+<li>实现去色滤镜</li>
+<li>实现负色(反色)滤镜</li>
+</ol>
+<h2 id="1-了解-canvas？"><a href="#1-了解-canvas？" class="headerlink" title="1 了解 canvas？"></a>1 了解 canvas？</h2><h3 id="1-1-什么是-canvas？"><a href="#1-1-什么是-canvas？" class="headerlink" title="1.1 什么是 canvas？"></a>1.1 什么是 canvas？</h3><p>这个 HTML 元素是为了客户端矢量图形而设计的。它自己没有行为，但却把一个绘图 API 展现给客户端 JavaScript 以使脚本能够把想绘制的东西都绘制到一块画布上。</p>
+<h3 id="1-2-canvas-和-svg、vml-的区别？"><a href="#1-2-canvas-和-svg、vml-的区别？" class="headerlink" title="1.2 canvas 和 svg、vml 的区别？"></a>1.2 canvas 和 svg、vml 的区别？</h3><p><code>&lt;canvas&gt;</code> 标记和 SVG 以及 VML 之间的一个重要的不同是，<code>&lt;canvas&gt;</code> 有一个基于 JavaScript 的绘图 API，而 SVG 和 VML 使用一个 XML 文档来描述绘图。</p>
+<h2 id="2-canvas-绘图学习"><a href="#2-canvas-绘图学习" class="headerlink" title="2 canvas 绘图学习"></a>2 canvas 绘图学习</h2><p>大多数 Canvas 绘图 API 都没有定义在 <code>&lt;canvas&gt;</code> 元素本身上，而是定义在通过画布的<code>getContext()</code>方法获得的一个“绘图环境”对象上。而<code>&lt;canvas&gt;</code>元素本身默认的宽高分别是 300px、150px。</p>
+<h3 id="2-1-canvas-绘制矩形"><a href="#2-1-canvas-绘制矩形" class="headerlink" title="2.1 canvas 绘制矩形"></a>2.1 canvas 绘制矩形</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理canvas元素</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>);</span><br><span class="line">c.width = <span class="number">150</span>;</span><br><span class="line">c.height = <span class="number">70</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 指定canvas标签 上的context对象</span></span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.fillStyle = <span class="string">"#FF0000"</span>; <span class="comment">// 颜色</span></span><br><span class="line">ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">75</span>); <span class="comment">// 形状</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-canvas-绘制路径"><a href="#2-2-canvas-绘制路径" class="headerlink" title="2.2 canvas 绘制路径"></a>2.2 canvas 绘制路径</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.moveTo(<span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 开始坐标</span></span><br><span class="line">ctx.lineTo(<span class="number">200</span>, <span class="number">100</span>); <span class="comment">// 结束坐标</span></span><br><span class="line">ctx.stroke(); <span class="comment">// 立即绘制</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-canvas-绘制圆形"><a href="#2-3-canvas-绘制圆形" class="headerlink" title="2.3 canvas 绘制圆形"></a>2.3 canvas 绘制圆形</h3><p>对于<code>ctx.arc()</code>这个接口，5 个参数是:<code>(x,y,r,start,stop)</code>。其中，x 和 y 是圆心坐标，r 是半径。</p>
+<p>而<code>start</code>和<code>stop</code>的单位是<strong>弧度制</strong>。不是长度，也不是 °。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.beginPath();</span><br><span class="line">ctx.arc(<span class="number">95</span>, <span class="number">50</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="built_in">Math</span>.PI);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-canvas-绘制文字"><a href="#2-4-canvas-绘制文字" class="headerlink" title="2.4 canvas 绘制文字"></a>2.4 canvas 绘制文字</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.font = <span class="string">"30px Arial"</span>;</span><br><span class="line">ctx.fillText(<span class="string">"Hello World"</span>, <span class="number">10</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="3-canvas-图像处理学习"><a href="#3-canvas-图像处理学习" class="headerlink" title="3 canvas 图像处理学习"></a>3 canvas 图像处理学习</h2><h3 id="3-1-常用-API-接口"><a href="#3-1-常用-API-接口" class="headerlink" title="3.1 常用 API 接口"></a>3.1 常用 API 接口</h3><blockquote>
+<p>关于图像处理的 API，主要有 4 个：</p>
+<ul>
+<li>绘制图像： <code>drawImage(img,x,y,width,height)</code> 或 <code>drawImage(img,sx,sy,swidth,sheight,x,y,width,height)</code></li>
+<li>获取图像数据： <code>getImageData(x,y,width,height)</code></li>
+<li>重写图像数据： <code>putImageData(imgData,x,y[,dirtyX,dirtyY,dirtyWidth,dirtyHeight])</code></li>
+<li>导出图像： <code>toDataURL([type, encoderOptions])</code></li>
+</ul>
+</blockquote>
+<p>更详细的 API 和参数说明请看：<a href="https://www.jb51.net/article/123995.htm" target="_blank" rel="noopener">canvas 图像处理 API 参数讲解</a></p>
+<h3 id="3-2-绘制图像"><a href="#3-2-绘制图像" class="headerlink" title="3.2 绘制图像"></a>3.2 绘制图像</h3><p>在此些 API 的基础上，我们就可以在<code>canvas</code>元素中绘制我们的图片。假设我们图片是<code>./img/photo.jpg</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image() <span class="comment">// 声明新的Image对象</span></span><br><span class="line">    img.src = <span class="string">"./img/photo.jpg"</span></span><br><span class="line">    <span class="comment">// 图片加载后</span></span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>);</span><br><span class="line">      <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 根据image大小，指定canvas大小</span></span><br><span class="line">      canvas.width = img.width</span><br><span class="line">      canvas.height = img.height</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 绘制图像</span></span><br><span class="line">      ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如下图所示，图片被画入了 canvas：<br><img src="https://godbmw.com/blog-static/images/JavaScript/canvas学习和滤镜实现/1.png" alt="canvas插入图片"></p>
+<h2 id="4-实现滤镜"><a href="#4-实现滤镜" class="headerlink" title="4 实现滤镜"></a>4 实现滤镜</h2><blockquote>
+<p>这里我们主要借用<code>getImageData</code>函数，他返回每个像素的 RGBA 值。借助图像处理公式，操作像素进行相应的、数学运算即可。</p>
+</blockquote>
+<p><a href="http://www.css88.com/book/css/values/color/rgba.htm" target="_blank" rel="noopener">什么是 RGBA？</a></p>
+<p><a href="https://www.cnblogs.com/st-leslie/p/8317850.html?utm_source=debugrun&amp;utm_medium=referral" target="_blank" rel="noopener">更多滤镜实现</a></p>
+<h3 id="4-1-去色效果"><a href="#4-1-去色效果" class="headerlink" title="4.1 去色效果"></a>4.1 去色效果</h3><p>去色效果相当于就是老旧相机拍出来的黑白照片。人们根据人眼的敏感程度，给出了如下公式：</p>
+<p><code>gray = red * 0.3 + green * 0.59 + blue * 0.11</code></p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image()</span><br><span class="line">    img.src = <span class="string">"./img/photo.jpg"</span></span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>);</span><br><span class="line">      <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">      canvas.width = img.width</span><br><span class="line">      canvas.height = img.height</span><br><span class="line">      ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 开始滤镜处理</span></span><br><span class="line">      <span class="keyword">var</span> imgData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; imgData.data.length / <span class="number">4</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">var</span> red = imgData.data[i * <span class="number">4</span>],</span><br><span class="line">          green = imgData.data[i * <span class="number">4</span> + <span class="number">1</span>],</span><br><span class="line">          blue = imgData.data[i * <span class="number">4</span> + <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">var</span> gray = <span class="number">0.3</span> * red + <span class="number">0.59</span> * green + <span class="number">0.11</span> * blue; <span class="comment">// 计算gray</span></span><br><span class="line">        <span class="comment">// 刷新RGB，注意：</span></span><br><span class="line">        <span class="comment">// imgData.data[i * 4 + 3]存放的是alpha，不需要改动</span></span><br><span class="line">        imgData.data[i * <span class="number">4</span>] = gray;</span><br><span class="line">        imgData.data[i * <span class="number">4</span> + <span class="number">1</span>] = gray;</span><br><span class="line">        imgData.data[i * <span class="number">4</span> + <span class="number">2</span>] = gray;</span><br><span class="line">      &#125;</span><br><span class="line">      ctx.putImageData(imgData, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 重写图像数据</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果如下图所示：<br><img src="https://godbmw.com/blog-static/images/JavaScript/canvas学习和滤镜实现/2.png" alt="去色滤镜"></p>
+<h3 id="4-2-负色效果"><a href="#4-2-负色效果" class="headerlink" title="4.2 负色效果"></a>4.2 负色效果</h3><p>负色效果就是用最大值减去当前值。而 getImageData 获得的 RGB 中的数值理论最大值是：255。所以，公式如下：</p>
+<p><code>new_val = 255 - val</code></p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image()</span><br><span class="line">    img.src = <span class="string">"./img/photo.jpg"</span></span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#my-canvas"</span>);</span><br><span class="line">      <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">      canvas.width = img.width</span><br><span class="line">      canvas.height = img.height</span><br><span class="line">      ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 开始滤镜处理</span></span><br><span class="line">      <span class="keyword">var</span> imgData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; imgData.data.length / <span class="number">4</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">var</span> red = imgData.data[i * <span class="number">4</span>],</span><br><span class="line">          green = imgData.data[i * <span class="number">4</span> + <span class="number">1</span>],</span><br><span class="line">          blue = imgData.data[i * <span class="number">4</span> + <span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 刷新RGB，注意：</span></span><br><span class="line">        <span class="comment">// imgData.data[i * 4 + 3]存放的是alpha，不需要改动</span></span><br><span class="line">        imgData.data[i * <span class="number">4</span>] = <span class="number">255</span> - imgData.data[i * <span class="number">4</span>];</span><br><span class="line">        imgData.data[i * <span class="number">4</span> + <span class="number">1</span>] = <span class="number">255</span> - imgData.data[i * <span class="number">4</span> + <span class="number">1</span>];</span><br><span class="line">        imgData.data[i * <span class="number">4</span> + <span class="number">2</span>] = <span class="number">255</span> - imgData.data[i * <span class="number">4</span> + <span class="number">2</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      ctx.putImageData(imgData, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 重写图像数据</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果图如下：<br><img src="https://godbmw.com/blog-static/images/JavaScript/canvas学习和滤镜实现/3.png" alt="负色滤镜"></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-了解-canvas？"><span class="toc-text">1 了解 canvas？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-什么是-canvas？"><span class="toc-text">1.1 什么是 canvas？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-canvas-和-svg、vml-的区别？"><span class="toc-text">1.2 canvas 和 svg、vml 的区别？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-canvas-绘图学习"><span class="toc-text">2 canvas 绘图学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-canvas-绘制矩形"><span class="toc-text">2.1 canvas 绘制矩形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-canvas-绘制路径"><span class="toc-text">2.2 canvas 绘制路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-canvas-绘制圆形"><span class="toc-text">2.3 canvas 绘制圆形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-canvas-绘制文字"><span class="toc-text">2.4 canvas 绘制文字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-canvas-图像处理学习"><span class="toc-text">3 canvas 图像处理学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-常用-API-接口"><span class="toc-text">3.1 常用 API 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-绘制图像"><span class="toc-text">3.2 绘制图像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-实现滤镜"><span class="toc-text">4 实现滤镜</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-去色效果"><span class="toc-text">4.1 去色效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-负色效果"><span class="toc-text">4.2 负色效果</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-08-20-canvas-beauty-filter/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+     
+      <a href="/tags/图像处理/"><i class="fa fa-tags"></i>图像处理</a>
+     
+      <a href="/tags/HTML5/"><i class="fa fa-tags"></i>HTML5</a>
+     
+      <a href="/tags/canvas/"><i class="fa fa-tags"></i>canvas</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-08-20-canvas-beauty-filter";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-08-21-momentjs/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-08-19-websocket-group-chat/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

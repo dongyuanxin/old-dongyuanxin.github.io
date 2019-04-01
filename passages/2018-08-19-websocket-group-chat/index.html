@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>websocket学习和群聊实现 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Node,JavaScript,服务器,WebSocket,">
+  
+
+  
+  <meta name="description" content="WebSocket协议可以实现前后端全双工通信，从而取代浪费资源的长轮询。在此协议的基础上，可以实现前后端数据、多端数据，真正的实时响应。在学习WebSocket的过程中，实现了一个简化版群聊，过程和代码详细记录在这篇文章中。简易版的实时群聊效果图如下：">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-08-19
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    websocket学习和群聊实现
+  </h1>
+  
+  <article class="passage-article">
+    <blockquote>
+<p><code>WebSocket</code>协议可以实现前后端全双工通信，从而取代浪费资源的长轮询。在此协议的基础上，可以实现前后端数据、多端数据，真正的<strong>实时响应</strong>。在学习<code>WebSocket</code>的过程中，实现了一个简化版群聊，过程和代码详细记录在这篇文章中。</p>
+</blockquote>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><h3 id="1-1-WebSocket-是什么？"><a href="#1-1-WebSocket-是什么？" class="headerlink" title="1.1 WebSocket 是什么？"></a>1.1 WebSocket 是什么？</h3><ol>
+<li>建立在 TCP 协议之上的网络通信协议</li>
+<li>全双工通信协议</li>
+<li>没有同源限制</li>
+<li>可以发送文本、二进制数据等</li>
+</ol>
+<h3 id="1-2-为什么需要-WebSocket？"><a href="#1-2-为什么需要-WebSocket？" class="headerlink" title="1.2 为什么需要 WebSocket？"></a>1.2 为什么需要 WebSocket？</h3><p>了解计算机网络协议的人，应该都知道：HTTP 协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求/响应模型。通信请求只能由客户端发起，服务端对请求做出应答处理。</p>
+<p>这种通信模型有一个弊端：HTTP 协议无法实现服务器主动向客户端发起消息。</p>
+<p>因此，如果在客户端想实时监听服务器变化，必须使用 ajax 来进行轮询，效率低，浪费资源。</p>
+<p>而 websocket 就可以使得<strong>前后端进行全双工通信（两方都可以向对方进行数据推送），是真正的平等对话</strong>。</p>
+<h2 id="2-WebSocket-客户端"><a href="#2-WebSocket-客户端" class="headerlink" title="2 WebSocket 客户端"></a>2 WebSocket 客户端</h2><p>支持<code>HTML5</code>的浏览器支持 WebSocket 协议：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(url); <span class="comment">// 创建一个websocket对象</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-1-WebSocket-属性"><a href="#2-1-WebSocket-属性" class="headerlink" title="2.1 WebSocket 属性"></a>2.1 WebSocket 属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ws.readyState</td>
+<td>只读属性 readyState 表示连接状态，可以是以下值：0 - 表示连接尚未建立。1 - 表示连接已建立，可以进行通信。2 - 表示连接正在进行关闭。3 - 表示连接已经关闭或者连接不能打开。</td>
+</tr>
+<tr>
+<td>ws.bufferedAmount</td>
+<td>只读属性 bufferedAmount 已被 send() 放入正在队列中等待传输，但是还没有发出的 UTF-8 文本字节数。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-2-WebSocket-方法"><a href="#2-2-WebSocket-方法" class="headerlink" title="2.2 WebSocket 方法"></a>2.2 WebSocket 方法</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ws.send()</td>
+<td>数据发送</td>
+</tr>
+<tr>
+<td>ws.close()</td>
+<td>关闭连接</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3-Websocket-事件"><a href="#2-3-Websocket-事件" class="headerlink" title="2.3 Websocket 事件"></a>2.3 Websocket 事件</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open</td>
+<td>连接建立触发</td>
+</tr>
+<tr>
+<td>message</td>
+<td>通信时触发</td>
+</tr>
+<tr>
+<td>error</td>
+<td>出错触发</td>
+</tr>
+<tr>
+<td>close</td>
+<td>关闭连接触发</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-4-代码实现"><a href="#2-4-代码实现" class="headerlink" title="2.4 代码实现"></a>2.4 代码实现</h3><p>假设我们在本地<code>8080</code>端口打开了websocket服务，那么，下面代码可以在浏览器中实现和这个服务的通信：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:8080/"</span>);</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 建立连接触发</span></span></span><br><span class="line"><span class="javascript">    ws.onopen = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      ws.send(<span class="string">"open ws"</span>);</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">"open ws"</span>);</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 接收服务端数据触发</span></span></span><br><span class="line"><span class="javascript">    ws.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> data = evt.data;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">"Data is "</span>, data);</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 断开连接触发</span></span></span><br><span class="line"><span class="javascript">    ws.onclose = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">"close ws"</span>);</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-WebSocket-服务端"><a href="#3-WebSocket-服务端" class="headerlink" title="3 WebSocket 服务端"></a>3 WebSocket 服务端</h2><blockquote>
+<p>关于服务端实现，根据技术选型不同，可以选用不同的库和包。我这里使用的是<code>node</code>的<code>ws</code>库来websocket服务端。</p>
+</blockquote>
+<p>在<a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html" target="_blank" rel="noopener">阮一峰的博文</a>提到的<code>socket.io</code>库，在浏览器端的写法不兼容原生API，准确来说，它们自己实现了一套websocket。所以，使用的时候前后端都应该引用第三方库。<strong>这样就造成了代码迁移性，严重下降。</strong></p>
+<p>综上所述，<code>ws</code>库有以下优点：</p>
+<ol>
+<li>兼容性好，兼容浏览器原生API</li>
+<li>长期维护，效果稳定</li>
+<li>使用方便（往下看就知道了）</li>
+</ol>
+<h2 id="4-实现群聊"><a href="#4-实现群聊" class="headerlink" title="4 实现群聊"></a>4 实现群聊</h2><h3 id="4-1-群聊-服务端实现"><a href="#4-1-群聊-服务端实现" class="headerlink" title="4.1 群聊 服务端实现"></a>4.1 群聊 服务端实现</h3><p>首先，在命令行中，安装<code>ws</code>库: <code>npm install ws --save</code></p>
+<p>现在，利用<code>ws</code>来实现一个监听<code>8080</code>端口的websocket服务器，<strong>讲解都在代码注释里，一目了然</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PORT = <span class="number">8080</span>; <span class="comment">// 监听端口</span></span><br><span class="line"><span class="keyword">const</span> WebSocket = <span class="built_in">require</span>(<span class="string">"ws"</span>); <span class="comment">// 引入 ws 库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wss = <span class="keyword">new</span> WebSocket.Server(&#123; <span class="attr">port</span>: PORT &#125;); <span class="comment">// 声明wss对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 向除了本身之外所有客户端发送消息，实现群聊功能</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; data 要发送的数据</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; ws 客户端连接对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">wss.broadcastToElse = <span class="function"><span class="keyword">function</span> <span class="title">broadcast</span>(<span class="params">data, ws</span>) </span>&#123; </span><br><span class="line">  wss.clients.forEach(<span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">client</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (client !== ws &amp;&amp; client.readyState === WebSocket.OPEN) &#123;</span><br><span class="line">      client.send(data);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 客户端接入，触发 connection */</span></span><br><span class="line">wss.on(<span class="string">"connection"</span>, <span class="function"><span class="keyword">function</span> <span class="title">connection</span>(<span class="params">ws, req</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> ip = req.connection.remoteAddress; <span class="comment">// 通过req对象可以获得客户端信息，比如：ip，headers等</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 客户端发送消息，触发 message */</span></span><br><span class="line">  ws.on(<span class="string">"message"</span>, <span class="function"><span class="keyword">function</span> <span class="title">incoming</span>(<span class="params">message</span>) </span>&#123; </span><br><span class="line">    ws.send(message); <span class="comment">// 向客户端发送消息</span></span><br><span class="line">    wss.broadcastToElse(message, ws); <span class="comment">// 向 其他的 客户端发送消息，实现群聊效果</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-群聊-客户端实现"><a href="#4-2-群聊-客户端实现" class="headerlink" title="4.2 群聊 客户端实现"></a>4.2 群聊 客户端实现</h3><p>为了方便编写，这里引入了<code>jquery</code>和<code>bootstrap</code>这两个库，只需要关注js代码即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>群聊<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">rows</span>=<span class="string">"30"</span> <span class="attr">disabled</span>=<span class="string">"disabled"</span> <span class="attr">id</span>=<span class="string">"show-area"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"请输入聊天内容"</span> <span class="attr">id</span>=<span class="string">"chat-input"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-info"</span> <span class="attr">id</span>=<span class="string">"send-btn"</span>&gt;</span>发送<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> userName = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">1000</span>, <span class="number">10</span>) <span class="comment">// 随机用户名, 以标识身份</span></span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> sendBtn = $(<span class="string">"#send-btn"</span>), <span class="comment">// 发送信息按钮</span></span></span><br><span class="line"><span class="javascript">      chatInput = $(<span class="string">"#chat-input"</span>), <span class="comment">// 聊天信息输入框</span></span></span><br><span class="line"><span class="javascript">      showArea = $(<span class="string">"#show-area"</span>) <span class="comment">// 聊天信息展示框</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:8080/"</span>) <span class="comment">// 初始化WebSocket对象</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    sendBtn.on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> content = chatInput.val()</span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (content.length === <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> alert(<span class="string">"请不要输入空白内容"</span>)</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="javascript">      content = <span class="string">"At "</span> + (<span class="keyword">new</span> <span class="built_in">Date</span>()).toString() + <span class="string">"\n"</span> + <span class="string">"来自用户"</span> + userName + <span class="string">"\n"</span> + content <span class="comment">// 拼接用户信息、时间信息和消息</span></span></span><br><span class="line"><span class="javascript">      ws.send(content) <span class="comment">// 发送消息</span></span></span><br><span class="line"><span class="javascript">      chatInput.val(<span class="string">""</span>) <span class="comment">// 清空输入框</span></span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    ws.onopen = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">"Conncet open"</span>) &#125;</span></span><br><span class="line"><span class="javascript">    ws.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> data = evt.data</span></span><br><span class="line"><span class="javascript">      showArea.val(showArea.val() + data + <span class="string">"\n\n"</span>) <span class="comment">// 刷新聊天信息展示框：显示群聊信息</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    ws.onclose = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">"Connect close"</span>) &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-3-群聊-效果展示"><a href="#4-3-群聊-效果展示" class="headerlink" title="4.3 群聊 效果展示"></a>4.3 群聊 效果展示</h3><p>首先启动我们的服务端代码：<code>node server.js</code> 。其中，<code>server.js</code>是放置服务端代码的文件。</p>
+<p>然后，我们打开2次编写的<code>html</code>代码，这相当于，打开2个客户端。来检测群聊功能。</p>
+<p><img src="https://godbmw.com/blog-static/images/JavaScript/websocket学习和群聊实现/1.png" alt="效果图"></p>
+<h2 id="5-相关资料"><a href="#5-相关资料" class="headerlink" title="5. 相关资料"></a>5. 相关资料</h2><ul>
+<li>概念解释：<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2017/05/websocket.html</a></li>
+<li><a href="https://www.cnblogs.com/jingmoxukong/p/7755643.html" target="_blank" rel="noopener">https://www.cnblogs.com/jingmoxukong/p/7755643.html</a></li>
+</ul>
+</li>
+<li><code>ws</code>文档：<a href="https://www.npmjs.com/package/ws" target="_blank" rel="noopener">https://www.npmjs.com/package/ws</a></li>
+</ul>
+<p>我的博客即将搬运同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=3oxp5s3jfsw0g" target="_blank" rel="noopener">https://cloud.tencent.com/developer/support-plan?invite_code=3oxp5s3jfsw0g</a></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-概述"><span class="toc-text">1 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-WebSocket-是什么？"><span class="toc-text">1.1 WebSocket 是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-为什么需要-WebSocket？"><span class="toc-text">1.2 为什么需要 WebSocket？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-WebSocket-客户端"><span class="toc-text">2 WebSocket 客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-WebSocket-属性"><span class="toc-text">2.1 WebSocket 属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-WebSocket-方法"><span class="toc-text">2.2 WebSocket 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Websocket-事件"><span class="toc-text">2.3 Websocket 事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-代码实现"><span class="toc-text">2.4 代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-WebSocket-服务端"><span class="toc-text">3 WebSocket 服务端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-实现群聊"><span class="toc-text">4 实现群聊</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-群聊-服务端实现"><span class="toc-text">4.1 群聊 服务端实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-群聊-客户端实现"><span class="toc-text">4.2 群聊 客户端实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-群聊-效果展示"><span class="toc-text">4.3 群聊 效果展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-相关资料"><span class="toc-text">5. 相关资料</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-08-19-websocket-group-chat/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+     
+      <a href="/tags/服务器/"><i class="fa fa-tags"></i>服务器</a>
+     
+      <a href="/tags/WebSocket/"><i class="fa fa-tags"></i>WebSocket</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-08-19-websocket-group-chat";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-08-20-canvas-beauty-filter/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-08-18-webpack-scss/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

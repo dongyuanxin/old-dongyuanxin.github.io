@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title> | 第7页 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="董沅鑫的个人网站, 安静写些东西.">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: false,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      <div class="home">
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-26
+            </span>
+            
+              <span>
+                | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-26-index-heap/">进击的堆：最大索引堆</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p>我们为什么需要实现索引堆？</p>
+</blockquote>
+<p>堆结构的数据增删操作，需要<code>swap</code>操作。虽然可以被优化成每次一次赋值，然而<strong>当元素类型是复杂数据机构（例如：类、浮点数、结构体等），赋值操作的消耗不容小觑。</strong></p>
+<p>因此，如果可以通过交换整数数据，来实现堆的数据操作，就会大大提高程序性能。索引堆就是为此而生！</p>
+<p>除此之外，<strong>借助索引堆，还能实现原地修改堆中的元素</strong>，并且，不需要全部重新建堆！</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-26-index-heap/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+             
+              <a href="/tags/数据结构/"><i class="fa fa-tags"></i>数据结构</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-25
+            </span>
+            
+              <span>
+                | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-25-heap-algorithm/">堆、堆排序和优先队列的那些事</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>堆的实现难度不大，主要是理解其中的<code>shift_down</code>和<code>shift_up</code>两种操作。</p>
+<p>而文中其他的过程，例如<code>heapify</code>，just a 语法糖！</p>
+<p>堆排序和优先队列都是依赖于堆这种数据结构。尤其是优先队列这种动态任务，进出操作的时间复杂度可以降低到<code>O(logN)</code>。</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-25-heap-algorithm/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+             
+              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-19
+            </span>
+            
+              <span>
+                | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。</p>
+<p>但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。</p>
+<p>因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。</p>
+<p><a href="https://godbmw.com/passage/56">一起来看下吧 &gt;&gt;&gt;</a></p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-19-base-sort/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+             
+              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-19
+            </span>
+            
+              <span>
+                | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-19-advance-sort/">高级排序算法实现与优化</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p>本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。</p>
+</blockquote>
+<p>我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。</p>
+<p>优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-19-advance-sort/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+             
+              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-19
+            </span>
+            
+              <span>
+                | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-19-auto-init-data/">测试数据之自动生成</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p>最近在学习排序算法的时候，需要利用程序自动生成测试数据，代码和思路整理在这篇文章里面。</p>
+</blockquote>
+<p>对于排序算法来说，自动生成测试数据的类型需要有以下几种：</p>
+<ol>
+<li><code>[a, b]</code>范围内的<code>n</code>个随机数据，比如：1、2、100、-1…</li>
+<li><code>n</code>个近乎有序的数据，比如：1、2、3、7、5、6、4…</li>
+<li><code>n</code>个近乎相同的数据，比如：1、1、1、2、2、2、2、2…</li>
+</ol>
+<p>如果排序算法在这三种数据类型中的跑分都和理论分析一样，才能保证算法较好的稳健性。</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-19-auto-init-data/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+             
+              <a href="/tags/自动化/"><i class="fa fa-tags"></i>自动化</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-17
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-17-machine-learn-first/">机器学习，了解一下？</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p>老师在上课时候说：传统算法解决确定性问题，而机器学习解决非确定性问题。</p>
+</blockquote>
+<p>仔细思考一下，机器学习算法和传统算法区别确实很大，不论是如何评价算法、如何调整算法还是如何划分算法的类别。</p>
+<p>借助<a href="https://coding.imooc.com/class/169.html" target="_blank" rel="noopener">Python3 入门机器学习 经典算法与应用</a>，趁机系统的学习一下机器学习！</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-17-machine-learn-first/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/机器学习/"><i class="fa fa-tags"></i>机器学习</a>
+             
+              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-11
+            </span>
+            
+              <span>
+                | <a href="/categories/webpack4系列教程/"><i class="fa fa-bookmark"></i>webpack4系列教程</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-11-webpack-image/">webpack4 系列教程(十): 图片处理汇总</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>本节课会讲述<code>webpack4</code>中的图片常用的基础操作：</p>
+<ul>
+<li>图片处理 和 <code>Base64</code>编码</li>
+<li>图片压缩</li>
+<li>合成雪碧图</li>
+</ul>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-11-webpack-image/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+             
+              <a href="/tags/图像处理/"><i class="fa fa-tags"></i>图像处理</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-09
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-09-mysql-blog-ui/">个人博客全新UI：我心中你最美</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>不知道你是否也有想过完全用自己的代码实现自己的个人博客？定制专属 UI、定制专属逻辑、在信息爆炸的时代真正地沉淀下属于自己的东西。</p>
+<p>我也曾经历了同样的纠结，最终下定决心做了自己的个人博客。虽然过程曲折，但一路风景很好、小路很多。看着被自己全新改版的网站，心里只有满足感，也笃定了知识分享和结识更多好友的初衷。</p>
+<blockquote>
+<p>就以此篇记录下网站 UI 改版的过程和感受吧，缅怀过去，勿忘初心。</p>
+</blockquote>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-09-mysql-blog-ui/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/UI设计/"><i class="fa fa-tags"></i>UI设计</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-07
+            </span>
+            
+              <span>
+                | <a href="/categories/Git实战手册/"><i class="fa fa-bookmark"></i>Git实战手册</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-07-git-stash/">Git实战手册(三): stash解惑与妙用</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>在实际项目开发中，总会遇到代码写到一半（没法去打<code>commit</code>），去开启新的分支 修复Bug 或者 增加功能 的情况。</p>
+<p>如果不做处理，未修改的代码就会被带入临时创建的新的分支，没写完的代码 和 要修复的代码混合在一起，绝对苦逼。</p>
+<blockquote>
+<p>而Git中的<code>stash</code>就是用来对付这种情况。</p>
+</blockquote>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-07-git-stash/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/Git/"><i class="fa fa-tags"></i>Git</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-06
+            </span>
+            
+              <span>
+                | <a href="/categories/Git实战手册/"><i class="fa fa-bookmark"></i>Git实战手册</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-09-06-git-tag-and-version/">Git实战手册(二): 标签应用和版本管理</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p>当一个代码仓库进过长时间的迭代，针对不同的时期和需求，必定会有不同的版本。而借助 Git 提供的标签功能，可以快捷方便地记录代码版本。无论什么时候，想取回某个版本，不再需要查找冗长的<code>commit_id</code>，只需要取出打标签的历史版本即可。</p>
+</blockquote>
+<p>可以这么理解：<strong>标签是版本库的一个快照</strong>。在主流的 Git 平台上，版本可以直接下载的，节省了开发者的不少精力。</p>
+<p>本文记录了如何借助”标签”进行版本管理。</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-09-06-git-tag-and-version/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/GitHub/"><i class="fa fa-tags"></i>GitHub</a>
+             
+              <a href="/tags/Git/"><i class="fa fa-tags"></i>Git</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+</div>
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/page/6/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/page/8/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="javascript:void(0);" data-enable="false">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>webpack4 系列教程(十): 图片处理汇总 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="webpack4系列教程,webpack,图像处理,">
+  
+
+  
+  <meta name="description" content="本节课会讲述webpack4中的图片常用的基础操作：图片处理 和 Base64编码图片压缩合成雪碧图">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-09-11
+    </span>
+    
+      <span>
+        | <a href="/categories/webpack4系列教程/"><i class="fa fa-bookmark"></i>webpack4系列教程</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    webpack4 系列教程(十): 图片处理汇总
+  </h1>
+  
+  <article class="passage-article">
+    <h3 id="0-课程源码和资料"><a href="#0-课程源码和资料" class="headerlink" title="0. 课程源码和资料"></a>0. 课程源码和资料</h3><p>本次课程的代码目录(如下图所示)：<br><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/19.png" alt></p>
+<p><a href="https://github.com/dongyuanxin/webpack-demos/tree/master/demo10" target="_blank" rel="noopener">&gt;&gt;&gt; 本节课源码</a></p>
+<p><a href="https://github.com/dongyuanxin/webpack-demos" target="_blank" rel="noopener">&gt;&gt;&gt; 所有课程源码</a></p>
+<p>本节课会讲述<code>webpack4</code>中的图片常用的基础操作：</p>
+<ul>
+<li>图片处理 和 <code>Base64</code>编码</li>
+<li>图片压缩</li>
+<li>合成雪碧图</li>
+</ul>
+<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>如项目代码目录展示的那样，除了常见的<code>app.js</code>作为入口文件，我们将用到的 3 张图片放在<code>/src/assets/img/</code>目录下，并在样式文件<code>base.css</code>中引用这些图片。</p>
+<p>剩下的内容交给<code>webpack</code>打包处理即可。样式文件和入口 js 文件的代码分别如下所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* base.css */</span></span><br><span class="line">*,</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-class">.ani1</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">"./../assets/imgs/1.jpg"</span>) no-repeat;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-class">.ani2</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">"./../assets/imgs/2.jpg"</span>) no-repeat;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-class">.ani3</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">"./../assets/imgs/3.png"</span>) no-repeat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"style-loader/lib/addStyles"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"css-loader/lib/css-base"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./css/base.css"</span>;</span><br></pre></td></tr></table></figure>
+<p>在处理图片和进行<code>base64</code>编码的时候，需要使用<code>url-loader</code>。</p>
+<p>在压缩图片的时候，要使用<code>img-loader</code>插件，并且针对不同的图片类型启用不同的子插件。</p>
+<p>而<code>postcss-loader</code>和<code>postcss-sprites</code>则用来合成雪碧图，减少网络请求。</p>
+<p>因此，在 npm 安装完相关插件后，<code>package.json</code>的内容如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"css-loader"</span>: <span class="string">"^1.0.0"</span>,</span><br><span class="line">    <span class="attr">"extract-text-webpack-plugin"</span>: <span class="string">"^4.0.0-beta.0"</span>,</span><br><span class="line">    <span class="attr">"file-loader"</span>: <span class="string">"^1.1.11"</span>,</span><br><span class="line">    <span class="attr">"imagemin"</span>: <span class="string">"^5.3.1"</span>,</span><br><span class="line">    <span class="attr">"imagemin-pngquant"</span>: <span class="string">"^5.1.0"</span>,</span><br><span class="line">    <span class="attr">"img-loader"</span>: <span class="string">"^3.0.0"</span>,</span><br><span class="line">    <span class="attr">"postcss-loader"</span>: <span class="string">"^2.1.6"</span>,</span><br><span class="line">    <span class="attr">"postcss-sprites"</span>: <span class="string">"^4.2.1"</span>,</span><br><span class="line">    <span class="attr">"style-loader"</span>: <span class="string">"^0.21.0"</span>,</span><br><span class="line">    <span class="attr">"url-loader"</span>: <span class="string">"^1.0.1"</span>,</span><br><span class="line">    <span class="attr">"webpack"</span>: <span class="string">"^4.16.1"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时，我们编写如下<code>index.html</code>(假设已经打包好了项目文件，现在直接引入)：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./dist/app.min.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ani1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ani2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ani3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./dist/app.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-图片处理-和-Base64-编码"><a href="#2-图片处理-和-Base64-编码" class="headerlink" title="2. 图片处理 和 Base64 编码"></a>2. 图片处理 和 Base64 编码</h3><h4 id="2-1-webpack-配置"><a href="#2-1-webpack-配置" class="headerlink" title="2.1 webpack 配置"></a>2.1 webpack 配置</h4><p>为了方便样式提取，还是利用<code>extract-text-webpack-plugin</code>来提取样式文件。</p>
+<p>同时，在<code>module.rules</code>选项中进行配置，以实现让 loader 识别图片后缀名，并且进行指定的处理操作。</p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">"extract-text-webpack-plugin"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> extractTextPlugin = <span class="keyword">new</span> ExtractTextPlugin(&#123;</span><br><span class="line">  filename: <span class="string">"[name].min.css"</span>,</span><br><span class="line">  allChunks: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">"./src/app.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    publicPath: __dirname + <span class="string">"/dist/"</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">"dist"</span>),</span><br><span class="line">    filename: <span class="string">"[name].bundle.js"</span>,</span><br><span class="line">    chunkFilename: <span class="string">"[name].chunk.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">          fallback: &#123;</span><br><span class="line">            loader: <span class="string">"style-loader"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          use: [</span><br><span class="line">            &#123;</span><br><span class="line">              loader: <span class="string">"css-loader"</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jpg|jpeg|gif)$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">"url-loader"</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              name: <span class="string">"[name]-[hash:5].min.[ext]"</span>,</span><br><span class="line">              limit: <span class="number">20000</span>, <span class="comment">// size &lt;= 20KB</span></span><br><span class="line">              publicPath: <span class="string">"static/"</span>,</span><br><span class="line">              outputPath: <span class="string">"static/"</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [extractTextPlugin]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>通过配置<code>url-loader</code>的 limit 选项，可以根据图片大小来决定是否进行<code>base64</code>编码。这次配置的是：小于 20kb 的图片进行<code>base64</code>编码。</p>
+<h4 id="2-2-打包结果"><a href="#2-2-打包结果" class="headerlink" title="2.2 打包结果"></a>2.2 打包结果</h4><p>之前提到过，在项目中引入了 3 张图片，其中<code>3.png</code>是小于 20kb 的图片。在命令行中运行<code>webpack</code>进行打包，size 小于 20kb 的图片被编码，只打包了 2 个 size 大于 20kb 的图片文件：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/20.png" alt></p>
+<p>打开浏览器的控制台，我们的图片已经被成功编码：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/21.png" alt></p>
+<h3 id="3-图片压缩"><a href="#3-图片压缩" class="headerlink" title="3. 图片压缩"></a>3. 图片压缩</h3><h4 id="3-1-压缩配置"><a href="#3-1-压缩配置" class="headerlink" title="3.1 压缩配置"></a>3.1 压缩配置</h4><p>图片压缩需要使用<code>img-loader</code>，除此之外，针对不同的图片类型，还要引用不同的插件。比如，我们项目中使用的是 png 图片，因此，需要引入<code>imagemin-pngquant</code>，并且指定压缩率。</p>
+<p>我们只需要在上面的配置文件中将下方代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.(png|jpg|jpeg|gif)$/</span>,</span><br><span class="line">  use: [</span><br><span class="line">    &#123;</span><br><span class="line">      loader: <span class="string">"url-loader"</span>,</span><br><span class="line">      options: &#123;</span><br><span class="line">        name: <span class="string">"[name]-[hash:5].min.[ext]"</span>,</span><br><span class="line">        limit: <span class="number">20000</span>, <span class="comment">// size &lt;= 20KB</span></span><br><span class="line">        publicPath: <span class="string">"static/"</span>,</span><br><span class="line">        outputPath: <span class="string">"static/"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>替换为下方代码即可，因为执行顺序问题，我们将 url-loader 的 limit 设置成 1kb，来防止压缩后的 png 图片被 base64 编码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.(png|jpg|jpeg|gif)$/</span>,</span><br><span class="line">  use: [</span><br><span class="line">    &#123;</span><br><span class="line">      loader: <span class="string">"url-loader"</span>,</span><br><span class="line">      options: &#123;</span><br><span class="line">        name: <span class="string">"[name]-[hash:5].min.[ext]"</span>,</span><br><span class="line">        limit: <span class="number">1000</span>, <span class="comment">// size &lt;= 1KB</span></span><br><span class="line">        publicPath: <span class="string">"static/"</span>,</span><br><span class="line">        outputPath: <span class="string">"static/"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// img-loader for zip img</span></span><br><span class="line">    &#123;</span><br><span class="line">      loader: <span class="string">"img-loader"</span>,</span><br><span class="line">      options: &#123;</span><br><span class="line">        plugins: [</span><br><span class="line">          <span class="built_in">require</span>(<span class="string">"imagemin-pngquant"</span>)(&#123;</span><br><span class="line">            quality: <span class="string">"80"</span> <span class="comment">// the quality of zip</span></span><br><span class="line">          &#125;)</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-2-打包结果"><a href="#3-2-打包结果" class="headerlink" title="3.2 打包结果"></a>3.2 打包结果</h4><p>运行 webpack 打包，查看打包结果：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/22.png" alt></p>
+<p>是的，如你所见，10.5kb 大小的迅雷图标，被压缩到了 1.8kb。图片信息可以去 github 上查看，在文章开头有提及 github 地址。</p>
+<h4 id="3-3-遗留问题"><a href="#3-3-遗留问题" class="headerlink" title="3.3 遗留问题"></a>3.3 遗留问题</h4><p>并没有解决<code>jpg</code>格式图片压缩。根据<a href="https://www.npmjs.com/package/img-loader" target="_blank" rel="noopener"><code>img-loader</code>的官方文档</a>，安装了<code>imagemin-mozjpeg</code>插件。</p>
+<p>但是这个插件的最新版本是<code>7.0.0</code>，然而配置后，webpack 启动会用报错。</p>
+<p>查看了 github 上的 issue，我将版本回退到<code>6.0.0</code>。可以安装，也可以配置运行，正常打包。但是打包后的 jpg 图片大小并没有变化，也就是说，并没有被压缩！！！</p>
+<p><strong>希望有大佬可以指点一下小生，万分感谢</strong></p>
+<h3 id="4-合成雪碧图"><a href="#4-合成雪碧图" class="headerlink" title="4. 合成雪碧图"></a>4. 合成雪碧图</h3><h4 id="4-1-webpack-配置"><a href="#4-1-webpack-配置" class="headerlink" title="4.1 webpack 配置"></a>4.1 webpack 配置</h4><p>在之前的基础上，配置还是很简单的，loader 的引入和环境变量都在注释里面了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">"extract-text-webpack-plugin"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> extractTextPlugin = <span class="keyword">new</span> ExtractTextPlugin(&#123;</span><br><span class="line">  filename: <span class="string">"[name].min.css"</span>,</span><br><span class="line">  allChunks: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*********** sprites config ***************/</span></span><br><span class="line"><span class="keyword">let</span> spritesConfig = &#123;</span><br><span class="line">  spritePath: <span class="string">"./dist/static"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/******************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">"./src/app.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    publicPath: __dirname + <span class="string">"/dist/"</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">"dist"</span>),</span><br><span class="line">    filename: <span class="string">"[name].bundle.js"</span>,</span><br><span class="line">    chunkFilename: <span class="string">"[name].chunk.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">          fallback: &#123;</span><br><span class="line">            loader: <span class="string">"style-loader"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          use: [</span><br><span class="line">            &#123;</span><br><span class="line">              loader: <span class="string">"css-loader"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">/*********** loader for sprites ***************/</span></span><br><span class="line">            &#123;</span><br><span class="line">              loader: <span class="string">"postcss-loader"</span>,</span><br><span class="line">              options: &#123;</span><br><span class="line">                ident: <span class="string">"postcss"</span>,</span><br><span class="line">                plugins: [<span class="built_in">require</span>(<span class="string">"postcss-sprites"</span>)(spritesConfig)]</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">/*********************************************/</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jpg|jpeg|gif)$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">"url-loader"</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              name: <span class="string">"[name]-[hash:5].min.[ext]"</span>,</span><br><span class="line">              limit: <span class="number">10000</span>, <span class="comment">// size &lt;= 20KB</span></span><br><span class="line">              publicPath: <span class="string">"static/"</span>,</span><br><span class="line">              outputPath: <span class="string">"static/"</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">"img-loader"</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              plugins: [</span><br><span class="line">                <span class="built_in">require</span>(<span class="string">"imagemin-pngquant"</span>)(&#123;</span><br><span class="line">                  quality: <span class="string">"80"</span></span><br><span class="line">                &#125;)</span><br><span class="line">              ]</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [extractTextPlugin]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-效果展示"><a href="#4-2-效果展示" class="headerlink" title="4.2 效果展示"></a>4.2 效果展示</h4><p>按照我们的配置，打包好的雪碧图被放入了<code>/dist/static/</code>目录下，如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/webpack/webpack4系列教程/23.png" alt></p>
+<h4 id="4-3-雪碧图的实际应用"><a href="#4-3-雪碧图的实际应用" class="headerlink" title="4.3 雪碧图的实际应用"></a>4.3 雪碧图的实际应用</h4><p>雪碧图是为了减少网络请求，所以被处理雪碧图的图片多为各式各样的 logo 或者大小相等的小图片。而对于大图片，还是不推荐使用雪碧图。</p>
+<p>除此之外，雪碧图要配合 css 代码进行定制化使用。要通过 css 代码在雪碧图上精准定位需要的图片（可以理解成从雪碧图上裁取需要的图片），更多可以百度或者 google。</p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-课程源码和资料"><span class="toc-text">0. 课程源码和资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-准备工作"><span class="toc-text">1. 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-图片处理-和-Base64-编码"><span class="toc-text">2. 图片处理 和 Base64 编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-webpack-配置"><span class="toc-text">2.1 webpack 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-打包结果"><span class="toc-text">2.2 打包结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图片压缩"><span class="toc-text">3. 图片压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-压缩配置"><span class="toc-text">3.1 压缩配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-打包结果"><span class="toc-text">3.2 打包结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-遗留问题"><span class="toc-text">3.3 遗留问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-合成雪碧图"><span class="toc-text">4. 合成雪碧图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-webpack-配置"><span class="toc-text">4.1 webpack 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-效果展示"><span class="toc-text">4.2 效果展示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-雪碧图的实际应用"><span class="toc-text">4.3 雪碧图的实际应用</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-09-11-webpack-image/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+     
+      <a href="/tags/图像处理/"><i class="fa fa-tags"></i>图像处理</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-09-11-webpack-image";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-09-17-machine-learn-first/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-09-09-mysql-blog-ui/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

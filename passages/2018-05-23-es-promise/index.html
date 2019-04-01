@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>Promise 概述 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="ES6,">
+  
+
+  
+  <meta name="description" content="Promise实例一旦被创建就会被执行Promise过程分为两个分支：pending=&amp;gt;resolved和pending=&amp;gt;rejectedPromise状态改变后，依然会执行之后的代码：123456789const warnDemo = ctx =&amp;gt; &amp;#123;  const promise = new Promise(resolve =&amp;gt; &amp;#123;    resolve(ctx);    console.log(After resolved, but Run); // 依然会执行这个语句  &amp;#125;);  return promise;&amp;#125;;warnDemo(ctx).then(ctx =&amp;gt; console.log(`This is $&amp;#123;ctx&amp;#125;`));">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-05-23
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Promise 概述
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="关于Promise"><a href="#关于Promise" class="headerlink" title="关于Promise"></a>关于<code>Promise</code></h2><ul>
+<li><code>Promise</code>实例一旦被创建就会被执行</li>
+<li><code>Promise</code>过程分为两个分支：<code>pending=&gt;resolved</code>和<code>pending=&gt;rejected</code></li>
+<li><code>Promise</code>状态改变后，依然会执行之后的代码：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> warnDemo = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(ctx);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"After resolved, but Run"</span>); <span class="comment">// 依然会执行这个语句</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">warnDemo(<span class="string">"ctx"</span>).then(<span class="function"><span class="params">ctx</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`This is <span class="subst">$&#123;ctx&#125;</span>`</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="then方法"><a href="#then方法" class="headerlink" title="then方法"></a><code>then</code>方法</h2><p>在<code>Console</code>键入以下内容：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> t = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;);</span><br><span class="line">t.__proto__</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，<code>then</code>方法是定义在原型对象<code>Promise.prototype</code>上的。</p>
+<p><code>then</code>方法的第一个参数是<code>resolved</code>状态的回调函数，第二个参数（可选）是<code>rejected</code>状态的回调函数。</p>
+<h4 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 必须返回一个Promise实例</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(...)&#123;</span><br><span class="line">            resolve(...) <span class="comment">// 传入resolve函数的参数</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(...) </span><br><span class="line">            reject(err) <span class="comment">// reject参数必须是Error对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func(ARGS).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// resolve 函数</span></span><br><span class="line">&#125;,()=&gt;&#123;</span><br><span class="line">    <span class="comment">// reject 函数</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="连续调用then"><a href="#连续调用then" class="headerlink" title="连续调用then"></a>连续调用<code>then</code></h4><p>因为<code>then</code>方法返回另一个<code>Promise</code>对象。当这个对象状态发生改变，就会分别调用<code>resolve</code>和<code>reject</code></p>
+<p>写法如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">func(ARGS).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;).then(</span><br><span class="line">    ()=&gt;&#123; ... &#125;,</span><br><span class="line">    () =&gt; &#123; ... &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloWorld</span>(<span class="params">ready</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ready)&#123;</span><br><span class="line">            resolve(<span class="string">"Right"</span>) </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"arg is false"</span>)</span><br><span class="line">            reject(error) <span class="comment">// 传入Error对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">helloWorld(<span class="literal">false</span>).then(<span class="function">(<span class="params">msg</span>)=&gt;</span>&#123; <span class="comment">// true：helloWorld的参数</span></span><br><span class="line">    <span class="comment">// 参数msg：在上面的Promise对象中传入了</span></span><br><span class="line">    <span class="built_in">console</span>.log(msg)</span><br><span class="line">&#125;,(error)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="catch方法"><a href="#catch方法" class="headerlink" title="catch方法"></a><code>catch</code>方法</h2><p>等同于 <code>.then(null, rejection)</code>。另外，<code>then</code>方法指定的回调函数运行中的错误，也会被<code>catch</code>捕获。</p>
+<p>所以，之前的写法可以改为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 必须返回一个Promise实例</span></span><br><span class="line">    <span class="keyword">const</span> promise =  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(...)&#123;</span><br><span class="line">            resolve(...) </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(...) </span><br><span class="line">            reject(err) </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> promise</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func(ARGS).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// resolve 函数</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// reject 函数</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 没有错误就会跳过上面的catch</span></span><br><span class="line">&#125;)...</span><br></pre></td></tr></table></figure></p>
+<h2 id="finally方法"><a href="#finally方法" class="headerlink" title="finally方法"></a><code>finally</code>方法</h2><blockquote>
+<p>指定不管 <code>Promise</code> 对象最后状态如何，都会执行的操作。可以理解为<code>then</code>方法的实例，即在<code>resolve</code>和<code>reject</code>里面的公共操作函数</p>
+</blockquote>
+<h2 id="all方法"><a href="#all方法" class="headerlink" title="all方法"></a><code>all</code>方法</h2><blockquote>
+<p>用于将多个 <code>Promise</code> 实例，包装成一个新的 <code>Promise</code> 实例。它接收一个具有<code>Iterator</code>接口的参数。其中，<code>item</code>如果不是<code>Promise</code>对象，会自动调用<code>Promise.resolve</code>方法</p>
+</blockquote>
+<p>以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.all([p1, p2, p3]); <span class="comment">// p是新包装好的一个Promise对象</span></span><br></pre></td></tr></table></figure></p>
+<p>对于<code>Promise.all()</code>包装的<code>Promise</code>对象，只有实例的状态都变成<code>fulfilled</code>。</p>
+<p>可以用来操作数据库：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> databasePromise = connectDatabase();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> booksPromise = databasePromise</span><br><span class="line">  .then(findAllBooks);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userPromise = databasePromise</span><br><span class="line">  .then(getCurrentUser);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([</span><br><span class="line">  booksPromise,</span><br><span class="line">  userPromise</span><br><span class="line">])</span><br><span class="line">.then(<span class="function">(<span class="params">[books, user]</span>) =&gt;</span> pickTopRecommentations(books, user));</span><br></pre></td></tr></table></figure></p>
+<p>或者其中有一个变为<code>rejected</code>，才会调用<code>Promise.all</code>方法后面的回调函数。而对于每个<code>promise</code>对象，一旦它被自己定义<code>catch</code>方法捕获异常，那么状态就会更新为<code>resolved</code>而不是<code>rejected</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="string">'hello'</span>);</span><br><span class="line">&#125;).then(</span><br><span class="line">    result =&gt; result</span><br><span class="line">).catch(</span><br><span class="line">    e =&gt; e</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"p2 error"</span>)</span><br><span class="line">&#125;).then(</span><br><span class="line">    result =&gt; result</span><br><span class="line">).catch( </span><br><span class="line">    <span class="comment">// 如果注释掉 catch，进入情况2</span></span><br><span class="line">    <span class="comment">// 否则，情况1</span></span><br><span class="line">    e =&gt; e.message</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2]).then(</span><br><span class="line">    result =&gt; <span class="built_in">console</span>.log(result) <span class="comment">// 情况1</span></span><br><span class="line">).catch(</span><br><span class="line">    e =&gt; <span class="built_in">console</span>.log(<span class="string">"error in all"</span>) <span class="comment">// 情况2</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="race方法"><a href="#race方法" class="headerlink" title="race方法"></a><code>race方法</code></h2><blockquote>
+<p>和<code>all</code>方法类似，<code>Promise.race</code>方法同样是将多个 <code>Promise</code> 实例，包装成一个新的 <code>Promise</code> 实例。而且只要有一个状态被改变，那么新的<code>Promise</code>状态会立即改变</p>
+</blockquote>
+<p>也是来自阮一峰大大的例子，如果5秒内无法<code>fetech</code>，那么<code>p</code>状态就会变为<code>rejected</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.race([</span><br><span class="line">  fetch(<span class="string">'/resource-that-may-take-a-while'</span>),</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'request timeout'</span>)), <span class="number">5000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">]);</span><br><span class="line">p.then(<span class="function"><span class="params">response</span> =&gt;</span> <span class="built_in">console</span>.log(response));</span><br><span class="line">p.catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(error));</span><br></pre></td></tr></table></figure></p>
+<h2 id="重要性质"><a href="#重要性质" class="headerlink" title="重要性质"></a>重要性质</h2><h3 id="状态只改变一次"><a href="#状态只改变一次" class="headerlink" title="状态只改变一次"></a>状态只改变一次</h3><blockquote>
+<p><code>Promise</code> 的状态一旦改变，就永久保持该状态，不会再变了。</p>
+</blockquote>
+<p>下面代码中，<code>Promise</code>对象<code>resolved</code>后，状态就无法再变成<code>rejected</code>了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    resolve(<span class="string">'ok'</span>) <span class="comment">// 状态变成 resolved</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"test"</span>) <span class="comment">// Promise 的状态一旦改变，就永久保持该状态</span></span><br><span class="line">&#125;)</span><br><span class="line">promise.then(<span class="function">(<span class="params">val</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(val)</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">error</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message) <span class="comment">// 所以，无法捕获错误</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="错误冒泡"><a href="#错误冒泡" class="headerlink" title="错误冒泡"></a>错误冒泡</h3><blockquote>
+<p><code>Promise</code> 对象的错误具有“冒泡”性质，<strong>会一直向后传递，直到被捕获为止</strong>。也就是说，错误总是会被下一个<code>catch</code>语句捕获</p>
+</blockquote>
+<h3 id="“吃掉错误”机制"><a href="#“吃掉错误”机制" class="headerlink" title="“吃掉错误”机制"></a>“吃掉错误”机制</h3><blockquote>
+<p><code>Promise</code>会吃掉内部的错误，并不影响外部代码的运行。所以需要<code>catch</code>，以防丢掉错误信息。</p>
+</blockquote>
+<p>阮一峰大大给出的demo：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> someAsyncThing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 下面一行会报错，因为x没有声明</span></span><br><span class="line">        resolve(x + <span class="number">2</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">  </span><br><span class="line">someAsyncThing().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'everything is great'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">  </span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="number">123</span>) &#125;, <span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
+<p>还有如下demo</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">someAsyncThing().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> someOtherAsyncThing();</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'oh no'</span>, error);</span><br><span class="line">  <span class="comment">// 下面一行会报错，因为y没有声明</span></span><br><span class="line">  y + <span class="number">2</span>;</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'carry on'</span>, error);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// oh no [ReferenceError: x is not defined]</span></span><br><span class="line"><span class="comment">// carry on [ReferenceError: y is not defined]</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>demo基本可以在<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">阮一峰的Es6讲解</a>中找到，只是为了理解做了一些修改。</li>
+<li>还有网上的一些博客，这里就不一一说明了</li>
+</ul>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于Promise"><span class="toc-text">关于Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#then方法"><span class="toc-text">then方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#写法"><span class="toc-text">写法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#连续调用then"><span class="toc-text">连续调用then</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#catch方法"><span class="toc-text">catch方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#finally方法"><span class="toc-text">finally方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#all方法"><span class="toc-text">all方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#race方法"><span class="toc-text">race方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要性质"><span class="toc-text">重要性质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#状态只改变一次"><span class="toc-text">状态只改变一次</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#错误冒泡"><span class="toc-text">错误冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“吃掉错误”机制"><span class="toc-text">“吃掉错误”机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-05-23-es-promise/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-05-23-es-promise";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-05-23-es6-const/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-05-23-var-vs-let/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

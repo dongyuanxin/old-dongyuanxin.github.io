@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>高级排序算法实现与优化 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="数据结构和算法,算法,C与C++,">
+  
+
+  
+  <meta name="description" content="本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-09-19
+    </span>
+    
+      <span>
+        | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    高级排序算法实现与优化
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="1-谈谈高级排序"><a href="#1-谈谈高级排序" class="headerlink" title="1. 谈谈高级排序"></a>1. 谈谈高级排序</h2><p>本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。</p>
+<p>对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。</p>
+<h2 id="2-归并排序"><a href="#2-归并排序" class="headerlink" title="2. 归并排序"></a>2. 归并排序</h2><h3 id="2-1-设计和分析"><a href="#2-1-设计和分析" class="headerlink" title="2.1 设计和分析"></a>2.1 设计和分析</h3><p>在算法思想上：归并排序是分治法，所以需要等分数组，并且逐个完成排序，然后再合并在一起。而因为等分，所以树结构是平衡的（快速排序就不一定，需要进一步优化）。</p>
+<p>在空间使用上：归并排序需要开启辅助空间，所以，在算法效率上自然比不上快速排序。</p>
+<h3 id="2-2-自顶向下的归并"><a href="#2-2-自顶向下的归并" class="headerlink" title="2.2 自顶向下的归并"></a>2.2 自顶向下的归并</h3><h4 id="2-2-1-三处优化"><a href="#2-2-1-三处优化" class="headerlink" title="2.2.1 三处优化"></a>2.2.1 三处优化</h4><p>第一处优化是关于选取中间索引值的问题。显然，使用<code>(l + r) / 2</code>可能会造成溢出。</p>
+<p>所以，此处应该是：<code>int mid = l + (r - l) / 2;</code>。</p>
+<p>同时，不能是 <code>r + (l - r) / 2</code> 。 比如: l = 0, r = 1 的时候，这条式子的结果和<code>(l + r) / 2</code>不同。<strong>因为 c++的自动向下取整</strong>。</p>
+<p>第二处优化是关于递归到底层的时候，比如被切分出来的数据长度小于 15，此时可以使用插入排序来优化。</p>
+<p>第三处优化是当归并前，先判断前一部分数据的最后一个值和后一部分数据最后一个值的大小关系，再决定是否优化。</p>
+<h4 id="2-2-2-代码实现"><a href="#2-2-2-代码实现" class="headerlink" title="2.2.2 代码实现"></a>2.2.2 代码实现</h4><p>实现中比较困难的部分是归并过程，在处理边界的时候，需要特别注意。示意图如下：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/高级排序算法实现与优化/1.png" alt></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将 arr[l, ... , mid] 和 arr[mid, ... , r]两个部分进行归并</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> __merge(T arr[], <span class="keyword">int</span> l, <span class="keyword">int</span> mid, <span class="keyword">int</span> r) &#123;</span><br><span class="line">    T* aux = <span class="keyword">new</span> T[r - l + <span class="number">1</span>]; <span class="comment">// 辅助空间</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = l; i&lt;=r; i++) &#123;</span><br><span class="line">        aux[i - l] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = l, j = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = l; k &lt;= r; k++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i &gt; mid) &#123;</span><br><span class="line">            arr[k] = aux[j - l];</span><br><span class="line">            j++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (j &gt; r) &#123;</span><br><span class="line">            arr[k] = aux[i - l];</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(aux[i - l] &lt; aux[j - l]) &#123;</span><br><span class="line">            arr[k] = aux[i - l];</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            arr[k] = aux[j - l];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>[] aux;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归使用归并排序, 对arr[l, ... , r]的范围的数据进行排序</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> __mergeSort(T arr[], <span class="keyword">int</span> l, <span class="keyword">int</span> r) &#123;</span><br><span class="line">    <span class="comment">// 递归到底层的情况</span></span><br><span class="line">    <span class="keyword">if</span>( r - l &lt;= <span class="number">15</span> )&#123;</span><br><span class="line">        SortBase::insertionSort(arr, l, r);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = l + (r - l)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 防止溢出：同时，不能是 r + (l - r) / 2 。 比如: l = 0, r = 1</span></span><br><span class="line"></span><br><span class="line">    __mergeSort(arr, l, mid);</span><br><span class="line">    __mergeSort(arr, mid + <span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">if</span>(arr[mid] &gt; arr[mid + <span class="number">1</span>]) &#123;</span><br><span class="line">        __merge(arr, l, mid, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(T arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    __mergeSort(arr, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-自底向上的归并"><a href="#2-3-自底向上的归并" class="headerlink" title="2.3 自底向上的归并"></a>2.3 自底向上的归并</h3><p>自底向上的归并排序不如自顶向下的归并好理解。但是可以不写递归函数，并且可以访问数组索引。</p>
+<p>有道面试题：对于一个链表（每个节点存储一个数据），要求在 O(NlogN)时间内完成排序，并且使用常数级别的空间。利用的就是</p>
+<p>先看自底向上的归并的实现，就会有思路了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSortBU</span><span class="params">(T arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> min_size = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> sz = <span class="number">1</span>; sz &lt;= n; sz += sz) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i + sz &lt; n; i += sz + sz) &#123; <span class="comment">// i + sz &lt; n: 保证第二部分的数组存在，并且 i + sz -1 不越界</span></span><br><span class="line"><span class="comment">//                 对 arr[i, ... ,i+sz-1] 和 [i+sz, ... ,i+2*sz-1] 进行归并</span></span><br><span class="line">            <span class="keyword">if</span>(arr[i + sz - <span class="number">1</span>] &gt; arr[i + sz]) &#123;</span><br><span class="line">                __merge(arr, i, i + sz <span class="number">-1</span>, min(i + sz + sz <span class="number">-1</span>, n<span class="number">-1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码是针对数组的，如果针对链表，只需要移动指针即可，而空间也可以新开一个指针空间做原地操作。<a href="https://www.cnblogs.com/bakari/p/4009526.html" target="_blank" rel="noopener">&gt;&gt;&gt;请看这篇博文</a></p>
+<h2 id="3-快速排序"><a href="#3-快速排序" class="headerlink" title="3. 快速排序"></a>3. 快速排序</h2><h3 id="3-1-二路快速排序"><a href="#3-1-二路快速排序" class="headerlink" title="3.1 二路快速排序"></a>3.1 二路快速排序</h3><h4 id="3-1-1-三处优化"><a href="#3-1-1-三处优化" class="headerlink" title="3.1.1 三处优化"></a>3.1.1 三处优化</h4><p>第一处优化是关于递归到底层的时候，比如被切分出来的数据长度小于 15，此时可以使用插入排序来优化。</p>
+<p>第二处优化是：随机选择标定元素。一般的快排选定的是最左边的元素作为标定元素，排序后的数组标定元素移动到应该所处的位置，其前面是比他小的元素，后面是比他大的元素。</p>
+<p>然而，无法保证快速排序递归树的平衡度。比如：<code>2, 2, 2,..., 2, 1</code> 近乎有序且有大量重复的数组。如果选定最左边，<strong>快速排序就会退化到 O(N*N)</strong>。如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/高级排序算法实现与优化/2.png" alt></p>
+<p><strong>优化方法是：随机选择一个元素，与第一个元素交换后作为标定元素。这样可以保证递归树深度的期望值是 logN。</strong></p>
+<p>第三处优化是针对数组中有大量重复元素的情况。在执行<code>partition</code>操作的时候，判断是否移动交换元素的条件算上<code>=</code>即可。（具体可以看之后代码）</p>
+<h4 id="3-1-2-代码实现"><a href="#3-1-2-代码实现" class="headerlink" title="3.1.2 代码实现"></a>3.1.2 代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">int</span> __partition2(T arr[], <span class="keyword">int</span> l, <span class="keyword">int</span> r) &#123;</span><br><span class="line">    swap(arr[l], arr[rand()%(r - l + <span class="number">1</span>) + l]); <span class="comment">// 随机化防止树不平衡</span></span><br><span class="line">    T v = arr[l];</span><br><span class="line"></span><br><span class="line"><span class="comment">//        arr[l+1, ... , i) &lt;= v; arr(j, ... , r] &gt;= v</span></span><br><span class="line">    <span class="keyword">int</span> i = l + <span class="number">1</span>, j = r;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= r &amp;&amp; arr[i] &lt; v) i++;</span><br><span class="line">        <span class="keyword">while</span>(j &gt;= l+<span class="number">1</span> &amp;&amp; arr[j] &gt; v) j--;</span><br><span class="line">        <span class="keyword">if</span>(i &gt; j) <span class="keyword">break</span>;</span><br><span class="line">        swap(arr[i], arr[j]);</span><br><span class="line">        i ++;</span><br><span class="line">        j --;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr[l], arr[j]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> __quickSort(T arr[], <span class="keyword">int</span> l, <span class="keyword">int</span> r) &#123;</span><br><span class="line">    <span class="keyword">if</span>(r - l &lt;= <span class="number">15</span>) &#123;</span><br><span class="line">        SortBase::insertionSort(arr, l, r);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> p = __partition2(arr, l, r);</span><br><span class="line">    __quickSort(arr, l, p<span class="number">-1</span>);</span><br><span class="line">    __quickSort(arr, p+<span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(T arr[] ,<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    srand(time(<span class="literal">NULL</span>));</span><br><span class="line">    __quickSort(arr, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-三路快速排序"><a href="#3-2-三路快速排序" class="headerlink" title="3.2 三路快速排序"></a>3.2 三路快速排序</h3><p>三路排序和二路不同的是：<strong>将相同的元素单独放在一起，每次递归不再参与排序。</strong></p>
+<p>代码中各个边界变量的含义如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/高级排序算法实现与优化/3.png" alt></p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> __quickSort3Ways(T arr[], <span class="keyword">int</span> l, <span class="keyword">int</span> r) &#123;</span><br><span class="line">    <span class="keyword">if</span>(r - l &lt;= <span class="number">15</span>) &#123;</span><br><span class="line">        SortBase::insertionSort(arr, l, r);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    swap(arr[l], arr[rand() % (r - l + <span class="number">1</span>) + l]);</span><br><span class="line">    T v = arr[l];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> lt = l; <span class="comment">// arr[l + 1, ... , lt] &lt; v</span></span><br><span class="line">    <span class="keyword">int</span> gt = r + <span class="number">1</span>; <span class="comment">// arr[gt, ... ,r] &gt; v</span></span><br><span class="line">    <span class="keyword">int</span> i = l + <span class="number">1</span>; <span class="comment">// arr[lt + 1, ... , i) == v</span></span><br><span class="line">    <span class="keyword">while</span>( i &lt; gt ) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] &lt; v) &#123;</span><br><span class="line">            swap(arr[i], arr[lt + <span class="number">1</span>]);</span><br><span class="line">            lt ++;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(arr[i] &gt; v) &#123;</span><br><span class="line">            swap(arr[i], arr[gt - <span class="number">1</span>]);</span><br><span class="line">            gt --;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr[l], arr[lt]);</span><br><span class="line">    __quickSort3Ways(arr, l, lt<span class="number">-1</span>);</span><br><span class="line">    __quickSort3Ways(arr, gt, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-性能测试"><a href="#4-性能测试" class="headerlink" title="4. 性能测试"></a>4. 性能测试</h2><h3 id="4-1-测试随机数据"><a href="#4-1-测试随机数据" class="headerlink" title="4.1 测试随机数据"></a>4.1 测试随机数据</h3><p>为了保证普适性，先测试大量随机数据的算法表现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"SortHelper.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"SortBase.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"SortAdvance.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">100000</span>, left = <span class="number">0</span>, right = n;</span><br><span class="line">    <span class="keyword">int</span> *arr = SortTestHelper::generateRandomArray&lt;<span class="keyword">int</span>&gt;(n, left, <span class="number">5</span>);</span><br><span class="line">    <span class="keyword">int</span> *brr = SortTestHelper::copyArray&lt;<span class="keyword">int</span>&gt;(arr, n);</span><br><span class="line">    <span class="keyword">int</span> *crr = SortTestHelper::copyArray&lt;<span class="keyword">int</span>&gt;(arr, n);</span><br><span class="line">    <span class="keyword">int</span> *drr = SortTestHelper::copyArray&lt;<span class="keyword">int</span>&gt;(arr, n);</span><br><span class="line"></span><br><span class="line">    SortTestHelper::testSort&lt;<span class="keyword">int</span>&gt;(brr, n, SortAdvance::mergeSort&lt;<span class="keyword">int</span>&gt;, <span class="string">"merge sort"</span>);</span><br><span class="line">    SortTestHelper::testSort&lt;<span class="keyword">int</span>&gt;(crr, n, SortAdvance::mergeSortBU&lt;<span class="keyword">int</span>&gt;, <span class="string">"merge sort from bottom to up"</span>);</span><br><span class="line">    SortTestHelper::testSort&lt;<span class="keyword">int</span>&gt;(drr, n, SortAdvance::quickSort&lt;<span class="keyword">int</span>&gt;, <span class="string">"quick sort"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src="https://godbmw.com/blog-static/images/算法与数学/高级排序算法实现与优化/4.png" alt></p>
+<p>对于特殊数据，例如含有大量重复元素的数组：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">int</span> *arr = SortTestHelper::generateRandomArray&lt;<span class="keyword">int</span>&gt;(n, left, <span class="number">5</span>);</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>结果如下图所示：<br><img src="https://godbmw.com/blog-static/images/算法与数学/高级排序算法实现与优化/5.png" alt></p>
+<h3 id="4-2-1亿数据量测试"><a href="#4-2-1亿数据量测试" class="headerlink" title="4.2 1亿数据量测试"></a>4.2 1亿数据量测试</h3><p>因为使用的 CLion 做了安全限制，所以当数组大小开到 100w 的时候，就报出堆栈错误。</p>
+<p>换用了 DevC 来跑 1 亿的数据，快排本来是 17s（忘记截图了），再跑就是 27s，如下图所示：</p>
+<p><img src="https://godbmw.com/blog-static/images/算法与数学/高级排序算法实现与优化/6.png" alt></p>
+<p>大家可以在自己电脑跑一下百度百科的快排，就知道优化的作用了 :)</p>
+<h2 id="5-感谢"><a href="#5-感谢" class="headerlink" title="5. 感谢"></a>5. 感谢</h2><p>本篇博客是总结于慕课网的<a href="https://coding.imooc.com/class/chapter/71.html" target="_blank" rel="noopener">《学习算法思想 修炼编程内功》</a>的笔记，liuyubobobo 老师人和讲课都很 nice，欢迎去买他的课程。</p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-谈谈高级排序"><span class="toc-text">1. 谈谈高级排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-归并排序"><span class="toc-text">2. 归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-设计和分析"><span class="toc-text">2.1 设计和分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-自顶向下的归并"><span class="toc-text">2.2 自顶向下的归并</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-三处优化"><span class="toc-text">2.2.1 三处优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-代码实现"><span class="toc-text">2.2.2 代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-自底向上的归并"><span class="toc-text">2.3 自底向上的归并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-快速排序"><span class="toc-text">3. 快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-二路快速排序"><span class="toc-text">3.1 二路快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-三处优化"><span class="toc-text">3.1.1 三处优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-代码实现"><span class="toc-text">3.1.2 代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-三路快速排序"><span class="toc-text">3.2 三路快速排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-性能测试"><span class="toc-text">4. 性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-测试随机数据"><span class="toc-text">4.1 测试随机数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1亿数据量测试"><span class="toc-text">4.2 1亿数据量测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-感谢"><span class="toc-text">5. 感谢</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2018-09-19-advance-sort/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
+     
+      <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2018-09-19-advance-sort";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2018-09-19-base-sort/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2018-09-19-auto-init-data/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

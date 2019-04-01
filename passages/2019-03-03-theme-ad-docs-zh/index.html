@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>Theme Art Design 中文文档 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="开源项目,UI设计,Hexo,">
+  
+
+  
+  <meta name="description" content="伴随着Theme AD Version 1.0.0的正式发布，文档热气出炉，敬请食用！周天写了一下午 + 一晚上，是按照theme next文档的模板写的。如有错误或建议，欢迎指正和提出。顺便吐槽下，写文档真的好累，也希望大家用的顺手！">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-03-03
+    </span>
+    
+      <span>
+        | <a href="/categories/开源项目/"><i class="fa fa-bookmark"></i>开源项目</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Theme Art Design 中文文档
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="0-一些说明"><a href="#0-一些说明" class="headerlink" title="0. 一些说明"></a>0. 一些说明</h2><p>文档较长，如果您是一位hexo老玩家或者使用过<code>theme-bmw</code>，那么可以考虑直接打开右侧目录，阅读所需要的章节。</p>
+<p>把联系方式放在开头，真害怕大家没耐心看下去（有很多好玩的功能，别错过哦）。</p>
+<ul>
+<li>Email：<a href="mailto:yuanxin.me@gmail.com" target="_blank" rel="noopener">yuanxin.me@gmail.com</a></li>
+<li>QQ群：534018786</li>
+<li>网站留言</li>
+</ul>
+<h2 id="1-安装Art-Design"><a href="#1-安装Art-Design" class="headerlink" title="1. 安装Art Design"></a>1. 安装Art Design</h2><h3 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h3><p>在终端窗口下，定位到 Hexo 站点目录下。使用 <code>Git</code> checkout 代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd your-blog</span><br><span class="line">git clone https://github.com/dongyuanxin/theme-ad.git themes/ad</span><br></pre></td></tr></table></figure>
+<h3 id="启用主题"><a href="#启用主题" class="headerlink" title="启用主题"></a>启用主题</h3><p>当 克隆/下载 完成后，打开<strong>站点配置文件</strong>， 需要完成下面2件事情：</p>
+<ol>
+<li><strong>必做</strong>：找到 <code>theme</code> 字段，并将其值更改为 <code>ad</code>。</li>
+<li><strong>推荐</strong>：找到<code>permalink</code>字段，并将其更改为<code>passages/:title/</code>。</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 位置：大概位于 18 行</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">passages/:title/</span> <span class="comment"># 如果您需要开启评论和文章统计，请修改此配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 位置：大概位于 76 行</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">ad</span> <span class="comment"># 启用 "Art Design" 主题</span></span><br></pre></td></tr></table></figure>
+<p>现在，运行<code>hexo s</code>，来看看主题的样子吧！</p>
+<h2 id="2-文章发布"><a href="#2-文章发布" class="headerlink" title="2. 文章发布"></a>2. 文章发布</h2><h3 id="文件名称"><a href="#文件名称" class="headerlink" title="文件名称"></a>文件名称</h3><p>为了更好的标识文章和防止重复，文章对应的markdown文件的命名应该遵循：<code>YYYY-MM-DD-title</code> 格式。</p>
+<p>例如，今天是2019年3月3日，文章内容是与ES6有关。那么，文件名是<code>2019-03-03-es6.md</code>。</p>
+<h3 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h3><p>主题通过文章Front-matter中的信息，自动生成对应页面和渲染UI。</p>
+<p>下面，是一个符合要求的Front-matter：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"文章标题"</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-11</span><span class="bullet">-28</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">文章分类</span> <span class="comment"># 分类只能有1个</span></span><br><span class="line"><span class="attr">tags:</span> <span class="comment"># 标签可以有多个</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">标签1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">标签2</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">更多标签</span></span><br><span class="line"><span class="attr">cover:</span> <span class="string">"https://text.com/demo.png"</span> <span class="comment"># 文章封面图片URL</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+<h3 id="摘要与正文"><a href="#摘要与正文" class="headerlink" title="摘要与正文"></a>摘要与正文</h3><p><code>AD</code>主题推荐分开书写文章的摘要与正文，展示页面渲染的是文章摘要部分，文章页面渲染的是文章正文部分。</p>
+<p><strong>方法1</strong>：推荐使用<code>&lt;!-- more --&gt;</code>，除了可以精确控制需要显示的摘录内容以外， 这种方式也可以让 Hexo 中的插件更好的识别。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">文章摘要写在前面，支持markdown左右语法。</span></span><br><span class="line"></span><br><span class="line"><span class="string">&lt;!--</span> <span class="string">more</span> <span class="bullet">--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">文章正文写在这里。</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法2</strong>：在Front-matter中设置<code>description</code>字段。这种方式会覆盖方法1的摘要，并且只支持原生文本。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"文章标题"</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-11</span><span class="bullet">-28</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">"文章摘要... ..."</span></span><br><span class="line"><span class="attr">categories:</span> </span><br><span class="line"><span class="attr">tags:</span> </span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+<h3 id="密码拦截"><a href="#密码拦截" class="headerlink" title="密码拦截"></a>密码拦截</h3><p>在数据隐私愈发重要的今天，主题为文章提供了<strong>密码拦截</strong>功能。</p>
+<p>主题使用的是<code>sha256</code>不可逆加密算法，例如密码是<code>godbmw</code>，那么放在配置文件中的密码字段应该是：<code>efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec</code></p>
+<p><strong>方法1</strong>：在主题配置文件中修改<code>passwords</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">passwords:</span> </span><br><span class="line"><span class="bullet">  -</span> <span class="string">efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法2</strong>：在指定文章的Front-matter中设置<code>passwords</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"文章标题"</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-11</span><span class="bullet">-28</span></span><br><span class="line"><span class="attr">categories:</span> </span><br><span class="line"><span class="attr">tags:</span> </span><br><span class="line"><span class="attr">passwords:</span> </span><br><span class="line"><span class="bullet">  -</span> <span class="string">efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>方法1添加的<code>passwords</code>具有全部加锁文章的阅读权限。可以用来保存只有自己知道的密码，方便阅读。</li>
+<li>方法2添加的<code>passwords</code>只有对应文章的阅读权限。可以为专门向特定的人开启对应的权限，比如他 / 她。</li>
+<li>密码具有72小时的有效期，一旦超过了72小时，下次阅读需要重新输入。</li>
+<li><strong>仅具有拦截功能和警示作用，并不是完全安全</strong>。</li>
+</ol>
+<h2 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3. 主题配置"></a>3. 主题配置</h2><p><strong>注意</strong>：请在<strong>主题配置文件</strong>中修改如下配置。并且配置信息的优先级是：主题配置文件 &gt; 站点配置文件 &gt; 主题默认配置信息。</p>
+<h3 id="设置导航栏"><a href="#设置导航栏" class="headerlink" title="设置导航栏"></a>设置导航栏</h3><p>更改<code>nav_name</code>和<code>motto</code>字段，修改导航栏左侧文字Logo和子标题 / 座右铭，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">nav_name:</span> <span class="string">GODBMW</span> <span class="comment"># 导航栏头部名称</span></span><br><span class="line"></span><br><span class="line"><span class="attr">motto:</span> <span class="string">"安静写些东西"</span> <span class="comment"># 导航栏座右铭</span></span><br></pre></td></tr></table></figure>
+<p>更改<code>nav</code>字段，修改导航栏的快速跳转链接。</p>
+<p><strong>注意</strong>：如果没有详细阅读使用文档，请不要修改此字段。</p>
+<h3 id="开启「标签云」页面"><a href="#开启「标签云」页面" class="headerlink" title="开启「标签云」页面"></a>开启「标签云」页面</h3><p>“标签云”页面展示站点的所有标签，主题以为您设计好了相关UI。</p>
+<ol>
+<li><p>创建标签页：<code>hexo new page tags</code></p>
+</li>
+<li><p>配置标签页：修改标签页对应的md文件(<code>your-blog/source/tags/index.md</code>)的Front-matter，为其添加<code>type</code>属性</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019</span><span class="bullet">-02</span><span class="bullet">-15</span> <span class="number">14</span><span class="string">:51:22</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"tags"</span> <span class="comment"># 必须显式设置为"tags"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="开启「分类」页面"><a href="#开启「分类」页面" class="headerlink" title="开启「分类」页面"></a>开启「分类」页面</h3><p>“分类”页面展示站点的所有分类，主题以为您设计好了相关UI。</p>
+<ol>
+<li><p>创建分类页：<code>hexo new page categories</code></p>
+</li>
+<li><p>配置分类页：修改分类页对应的md文件(<code>your-blog/source/categories/index.md</code>)的Front-matter，为其添加<code>type</code>属性</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019</span><span class="bullet">-02</span><span class="bullet">-15</span> <span class="number">14</span><span class="string">:51:22</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"categories"</span> <span class="comment"># 必须显式设置为"categories"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="开启「友链」页面"><a href="#开启「友链」页面" class="headerlink" title="开启「友链」页面"></a>开启「友链」页面</h3><p>友链界面是专门为友链设计，采用卡片式的UI。</p>
+<ol>
+<li><p>创建友链页：<code>hexo new page friends</code></p>
+</li>
+<li><p>配置友链页：修改友链页对应的md文件(<code>your-blog/source/friends/index.md</code>)的Front-matter，为其添加<code>type</code>属性</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">friends</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019</span><span class="bullet">-02</span><span class="bullet">-15</span> <span class="number">21</span><span class="string">:52:40</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"friends"</span> <span class="comment"># 必须显式设置为"friends"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写友链页面内容：直接在友链页对应的md文件(<code>your-blog/source/friends/index.md</code>)编写内容，相关内容会被自动渲染到友链页面。推荐放置友链的招入信息和要求；当然，您也可以不编写任何内容。</p>
+</li>
+</ol>
+<h3 id="开启「介绍」页面"><a href="#开启「介绍」页面" class="headerlink" title="开启「介绍」页面"></a>开启「介绍」页面</h3><p>介绍页面是专门为个人展示设计，可以放置站点信息、个人简历等等。</p>
+<ol>
+<li><p>创建介绍页：<code>hexo new page about</code></p>
+</li>
+<li><p>配置介绍页：修改介绍页对应的md文件(<code>your-blog/source/about/index.md</code>)的Front-matter，为其添加<code>type</code>属性</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">about</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019</span><span class="bullet">-02</span><span class="bullet">-15</span> <span class="number">21</span><span class="string">:34:33</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"about"</span> <span class="comment"># 必须显式设置为"about"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写介绍页：直接在介绍野对应的md文件(<code>your-blog/source/about/index.md</code>)编写内容，相关内容会被自动渲染到介绍页面。</p>
+</li>
+</ol>
+<h3 id="设置「代码高亮主题」"><a href="#设置「代码高亮主题」" class="headerlink" title="设置「代码高亮主题」"></a>设置「代码高亮主题」</h3><p><code>AD</code> 使用 <a href="https://github.com/chriskempson/tomorrow-theme" target="_blank" rel="noopener">Tomorrow Theme</a> 作为代码高亮，共有5款主题供你选择。 <code>AD</code>默认使用的是 白色的 <code>night eighties</code> 主题，可选的值有 <code>normal</code>，<code>night</code>， <code>night blue</code>， <code>night bright</code>， <code>night eighties</code></p>
+<p>更改<code>highlight_theme</code>字段，选择对应的主题，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">highlight_theme:</span> <span class="string">night</span> <span class="string">eighties</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置「数学公式渲染」"><a href="#设置「数学公式渲染」" class="headerlink" title="设置「数学公式渲染」"></a>设置「数学公式渲染」</h3><p>为了方便数学、深度学习、物理工程等领域的文章的展示和书写，主题提供了对<code>Latex</code>数学公式的全面支持。</p>
+<p>更改<code>mathjax</code>字段，开启数学公式渲染：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置友情链接"><a href="#设置友情链接" class="headerlink" title="设置友情链接"></a>设置友情链接</h3><p>更改<code>friends</code>字段，添加友链信息，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">friends:</span></span><br><span class="line"><span class="bullet">  -</span></span><br><span class="line"><span class="attr">    nickname:</span> <span class="string">GodBMW</span> <span class="comment"># 友链名称</span></span><br><span class="line"><span class="attr">    avatar:</span> <span class="string">/images/friends/godbmw.jpeg</span> <span class="comment"># 友链头像</span></span><br><span class="line"><span class="attr">    site:</span> <span class="attr">https://godbmw.com/</span> <span class="comment"># 友链地址</span></span><br><span class="line"><span class="attr">    meta:</span> <span class="string">主题作者</span> <span class="comment"># 友链介绍</span></span><br><span class="line"><span class="attr">    show:</span> <span class="literal">true</span> <span class="comment"># 是否展示此友链</span></span><br></pre></td></tr></table></figure>
+<p>如果您的友链头像都保存在其他服务器上，可以通过更改<code>friends_avatar_cdn</code>字段来配置前缀地址，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">friends_avatar_cdn:</span> <span class="string">"https://godbmw.com/blog-static"</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：此功能需要正确开启「友链」页面。</p>
+<h3 id="开启侧边栏分享链接"><a href="#开启侧边栏分享链接" class="headerlink" title="开启侧边栏分享链接"></a>开启侧边栏分享链接</h3><p>侧边栏分享支持twitter、facebook、weibo、qq和wechat总共5个常用社交平台的快速分享，可以借助它们让浏览者快速分享<strong>任何</strong>页面。</p>
+<p>更改<code>share</code>字段，选择社交平台，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">share:</span></span><br><span class="line"><span class="attr">  twitter:</span> <span class="literal">true</span> <span class="comment"># true 是开启</span></span><br><span class="line"><span class="attr">  facebook:</span> <span class="literal">false</span> <span class="comment"># false 是关闭</span></span><br><span class="line"><span class="attr">  weibo:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  qq:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  wechat:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="开启打赏功能"><a href="#开启打赏功能" class="headerlink" title="开启打赏功能"></a>开启打赏功能</h3><p>付费阅读时代的到来，特意增加了以“二维码”为支付方式的打赏功能，可以添加不限数量的支付平台的二维码信息。</p>
+<p>更改<code>reward</code>字段，添加打赏二维码，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">reward:</span></span><br><span class="line"><span class="bullet">  -</span></span><br><span class="line"><span class="attr">    src:</span> <span class="string">/images/wechat.png</span> <span class="comment"># 二维码图片地址</span></span><br><span class="line"><span class="attr">    alt:</span> <span class="string">"WeChat"</span> <span class="comment"># 二维码信息</span></span><br><span class="line"><span class="bullet">  -</span></span><br><span class="line"><span class="attr">    src:</span> <span class="string">/images/alipay.png</span></span><br><span class="line"><span class="attr">    alt:</span> <span class="string">"AliPay"</span></span><br></pre></td></tr></table></figure>
+<h3 id="开启版权保护"><a href="#开启版权保护" class="headerlink" title="开启版权保护"></a>开启版权保护</h3><p>主题全局监听了浏览者在网站上的所有复制操作，并且自动为内容追加了网站的版权信息。</p>
+<p>但是对于<strong>搜索引擎</strong>等自动爬取网站的机器人，需要在文章底部添加版权信息，以达到声明版权的目的。</p>
+<p>更改<code>copyright</code>字段，开启版权保护，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">copyright:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># 是否开启</span></span><br><span class="line"><span class="attr">  author:</span> <span class="string">"董沅鑫"</span> <span class="comment"># 作者信息</span></span><br><span class="line"><span class="attr">  show_link:</span> <span class="literal">true</span> <span class="comment"># 是否展示文章链接</span></span><br><span class="line"><span class="attr">  more:</span> <span class="string">'版权声明: 本博客所有文章除特别声明外, 均采用CC BY-NC-SA 4.0许可协议. 转载请注明出处!'</span> <span class="comment"># 自定义字段，支持HTML渲染</span></span><br></pre></td></tr></table></figure>
+<h3 id="Github快速通道"><a href="#Github快速通道" class="headerlink" title="Github快速通道"></a>Github快速通道</h3><p>主题在页面右上角提供了Github快速跳转的按钮。可以放置个人github地址、博客文章仓库地址等等。</p>
+<p>更改<code>github</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">github:</span> <span class="string">"https://github.com/dongyuanxin/"</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-进阶设定"><a href="#4-进阶设定" class="headerlink" title="4. 进阶设定"></a>4. 进阶设定</h2><p><strong>注意</strong>：除了“配置静态图片CDN”修改<strong><code>package.json</code></strong>，其他均是修改<strong>主题配置文件</strong>。</p>
+<h3 id="Leancloud"><a href="#Leancloud" class="headerlink" title="Leancloud"></a>Leancloud</h3><p>主题的评论功能、PV统计和提醒功能均是依托于<code>Leancloud</code>平台，借助<code>ServerLess</code>实现了无后台服务和数据统一管理。</p>
+<p>更改<code>leancloud</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud:</span></span><br><span class="line"><span class="attr">  appid:</span> <span class="string">Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz</span> <span class="comment"># 填写您的appid</span></span><br><span class="line"><span class="attr">  appkey:</span> <span class="string">WaR7nrzhliHj9aVwdQzkdlGd</span> <span class="comment"># 填写您的appkey</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：请用自己账户应用的<code>appid</code>和<code>appkey</code>替换主题配置文件中的示例。</p>
+<h3 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h3><p>评论数据均在您的<code>Leancloud</code>账号对应应用的<code>Comment</code>表中。</p>
+<p>更改<code>leancloud.comment</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud:</span></span><br><span class="line"><span class="attr">  appid:</span> <span class="string">Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz</span> <span class="comment"># 填写您的appid</span></span><br><span class="line"><span class="attr">  appkey:</span> <span class="string">WaR7nrzhliHj9aVwdQzkdlGd</span> <span class="comment"># 填写您的appkey</span></span><br><span class="line"><span class="attr">  comment:</span> <span class="literal">true</span> <span class="comment"># 开启评论功能</span></span><br></pre></td></tr></table></figure>
+<h3 id="PV统计"><a href="#PV统计" class="headerlink" title="PV统计"></a>PV统计</h3><p>PV数据均在您的<code>Leancloud</code>账号对应应用的<code>Counter</code>表中。同时，PV数据会在页脚进行展示。</p>
+<p>更改<code>leancloud.count</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud:</span></span><br><span class="line"><span class="attr">  appid:</span> <span class="string">Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz</span> <span class="comment"># 填写您的appid</span></span><br><span class="line"><span class="attr">  appkey:</span> <span class="string">WaR7nrzhliHj9aVwdQzkdlGd</span> <span class="comment"># 填写您的appkey</span></span><br><span class="line"><span class="attr">  count:</span> <span class="literal">true</span> <span class="comment"># 是否开启文章统计</span></span><br></pre></td></tr></table></figure>
+<h3 id="访问提醒功能"><a href="#访问提醒功能" class="headerlink" title="访问提醒功能"></a>访问提醒功能</h3><p>开启此功能会在浏览者第一次进入网站时进行提醒；如果浏览者超过一定时间（默认30天）没有登陆网站，主题也会自动提醒。</p>
+<p>更改<code>leancloud.welcome</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">welcome:</span> </span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># 是否开启提醒功能</span></span><br><span class="line"><span class="attr">  interval:</span> <span class="number">30</span> <span class="comment"># 多久不浏览会再次提醒，单位：天</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：提醒功能需要开启<code>Leancloud</code>。</p>
+<h3 id="SEO优化"><a href="#SEO优化" class="headerlink" title="SEO优化"></a>SEO优化</h3><p>为了让网站更容易被搜索引擎收录，获得更高SEO，主题提供了百度、谷歌和360这3种搜索引擎的自动推送服务。</p>
+<p>更改<code>analytics</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">analytics:</span></span><br><span class="line"><span class="attr">  baidu:</span></span><br><span class="line"><span class="attr">    enable:</span> <span class="literal">true</span> <span class="comment"># 开启对Baidu的自动推送</span></span><br><span class="line"><span class="attr">  google:</span></span><br><span class="line"><span class="attr">    enable:</span> <span class="literal">true</span> <span class="comment"># 开启对Google的自动推送</span></span><br><span class="line"><span class="attr">    id:</span> <span class="comment"># Google跟踪代码的id</span></span><br><span class="line">  <span class="string">"360"</span><span class="string">:</span></span><br><span class="line"><span class="attr">    enable:</span> <span class="literal">true</span> <span class="comment"># 开启对360的自动推送</span></span><br><span class="line"><span class="attr">    id:</span> <span class="comment"># 360跟踪代码的id</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：360和谷歌的自动推送，需要对应平台的跟踪代码的id，请查阅对应平台的手册内容。</p>
+<h3 id="配置静态图片CDN"><a href="#配置静态图片CDN" class="headerlink" title="配置静态图片CDN"></a>配置静态图片CDN</h3><p>为了更方便地管理文章和静态图片资源，主题提供了配置静态资源CDN。</p>
+<p>更改主题文件夹下的<code>package.json</code>文件的<code>imgcdn</code>字段，例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"imgcdn"</span>: <span class="string">"https://godbmw.com/blog-static"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>文章中如果使用了图片资源，例如 <code>![](/images/test.png)</code>。都会被替换为：<code>https://godbmw.com/blog-static/images/test.png</code>。</p>
+<p>借助此功能，使用者可以将静态图片资源部署在CDN或者其他服务器上，文章仓库仅仅存放文章对应的<code>Markdown</code>。避免随着文章数量的增加，静态图片资源造成的仓库大小不断膨胀。</p>
+<h3 id="底部导航栏"><a href="#底部导航栏" class="headerlink" title="底部导航栏"></a>底部导航栏</h3><p>底部导航栏采用多列多行的“栅栏式”布局，可以放置“推荐博客”、“开源项目”、“特别支持”等常用但不属于网站主体的内容。</p>
+<p>更改<code>footer</code>字段，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer:</span></span><br><span class="line"><span class="bullet">  -</span> </span><br><span class="line"><span class="attr">    title:</span> <span class="string">"博客推荐"</span></span><br><span class="line"><span class="attr">    children:</span></span><br><span class="line"><span class="bullet">      -</span> </span><br><span class="line"><span class="attr">        name:</span> <span class="string">"GodBMW"</span></span><br><span class="line"><span class="attr">        path:</span> <span class="string">"https://godbmw.com/"</span></span><br><span class="line"><span class="bullet">      -</span> </span><br><span class="line"><span class="attr">        name:</span> <span class="string">"阮一峰的个人网站"</span></span><br><span class="line"><span class="attr">        path:</span> <span class="string">"http://ruanyifeng.com/"</span></span><br><span class="line"><span class="bullet">  -</span></span><br><span class="line"><span class="attr">    title:</span> <span class="string">"抓到我"</span></span><br><span class="line"><span class="attr">    children:</span> </span><br><span class="line"><span class="bullet">      -</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">"掘金"</span></span><br><span class="line"><span class="attr">        path:</span> <span class="string">"https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5"</span></span><br><span class="line"><span class="bullet">      -</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">"知乎"</span></span><br><span class="line"><span class="attr">        path:</span> <span class="string">"https://www.zhihu.com/people/godbmw/activities"</span></span><br></pre></td></tr></table></figure>
+<h3 id="底部其他信息"><a href="#底部其他信息" class="headerlink" title="底部其他信息"></a>底部其他信息</h3><p>更改<code>footer_contact</code>字段，填写自己的联系方式，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Email:</span> <span class="string">yuanxin.me@gmail.com</span></span><br></pre></td></tr></table></figure>
+<p>更改<code>start_time</code>字段，填写建站时间，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">start_time:</span> <span class="string">"2018-02-10"</span></span><br></pre></td></tr></table></figure>
+<h3 id="自定义脚本与样式文件"><a href="#自定义脚本与样式文件" class="headerlink" title="自定义脚本与样式文件"></a>自定义脚本与样式文件</h3><p>更改<code>custom_styles</code>字段，引入自定义样式文件，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">custom_styles:</span> </span><br><span class="line"><span class="bullet">  -</span> <span class="string">style.css</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">style2.css</span></span><br></pre></td></tr></table></figure>
+<p>更改<code>custom_scripts</code>字段，引入自定义脚本文件，例如：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">custom_scripts:</span> </span><br><span class="line"><span class="bullet">  -</span> <span class="string">script.js</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">script2.js</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：为了不阻塞页面，自定义脚本文件被插入到<code>&lt;/body&gt;</code>前，而不是<code>&lt;head&gt;</code>中。</p>
+<h2 id="5-警告"><a href="#5-警告" class="headerlink" title="5. 警告"></a>5. 警告</h2><h3 id="尊重原创"><a href="#尊重原创" class="headerlink" title="尊重原创"></a>尊重原创</h3><ol>
+<li>您可以根据个人需要修改页面底部的说明信息，但请不要去除<code>theme-ad</code>主题的版权声明 </li>
+<li>评论系统采用了<code>Valine</code>，请不要去除Valine的版权声明 </li>
+<li>尊重原创，也祝您在开源社区玩得开心</li>
+</ol>
+<h3 id="Web安全"><a href="#Web安全" class="headerlink" title="Web安全"></a>Web安全</h3><p>如果您开启了<code>Leancloud</code>平台，以及相关评论功能、PV功能或者访问提醒功能，请仔细阅读此节！</p>
+<p>借助了<code>Leancloud</code>规避了后端部署，傻瓜式一键启动相关功能。但随之而来的是，暴露在浏览器环境下的<code>appid</code>和<code>appkey</code>带来的安全问题。</p>
+<p>请进入<code>leancloud</code>中您的应用 =&gt; 左侧导航栏 =&gt; 设置 =&gt; 安全中心，进行相关配置：</p>
+<p><img src="https://godbmw.com/blog-static/images/开源项目/Theme-BMW中文文档/8.png" alt></p>
+<p>首先，关闭不需要的“服务开关” (仅保留“数据存储”服务)：</p>
+<p><img src="https://godbmw.com/blog-static/images/开源项目/Theme-BMW中文文档/9.png" alt></p>
+<p>最后，设置您的“Web”安全域名 (博客/个人网站地址):</p>
+<p><img src="https://godbmw.com/blog-static/images/开源项目/Theme-BMW中文文档/10.png" alt></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-一些说明"><span class="toc-text">0. 一些说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-安装Art-Design"><span class="toc-text">1. 安装Art Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载主题"><span class="toc-text">下载主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用主题"><span class="toc-text">启用主题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-文章发布"><span class="toc-text">2. 文章发布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件名称"><span class="toc-text">文件名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Front-matter"><span class="toc-text">Front-matter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#摘要与正文"><span class="toc-text">摘要与正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码拦截"><span class="toc-text">密码拦截</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-主题配置"><span class="toc-text">3. 主题配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置导航栏"><span class="toc-text">设置导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启「标签云」页面"><span class="toc-text">开启「标签云」页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启「分类」页面"><span class="toc-text">开启「分类」页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启「友链」页面"><span class="toc-text">开启「友链」页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启「介绍」页面"><span class="toc-text">开启「介绍」页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置「代码高亮主题」"><span class="toc-text">设置「代码高亮主题」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置「数学公式渲染」"><span class="toc-text">设置「数学公式渲染」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置友情链接"><span class="toc-text">设置友情链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启侧边栏分享链接"><span class="toc-text">开启侧边栏分享链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启打赏功能"><span class="toc-text">开启打赏功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启版权保护"><span class="toc-text">开启版权保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github快速通道"><span class="toc-text">Github快速通道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-进阶设定"><span class="toc-text">4. 进阶设定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Leancloud"><span class="toc-text">Leancloud</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评论功能"><span class="toc-text">评论功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PV统计"><span class="toc-text">PV统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#访问提醒功能"><span class="toc-text">访问提醒功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEO优化"><span class="toc-text">SEO优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置静态图片CDN"><span class="toc-text">配置静态图片CDN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#底部导航栏"><span class="toc-text">底部导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#底部其他信息"><span class="toc-text">底部其他信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义脚本与样式文件"><span class="toc-text">自定义脚本与样式文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-警告"><span class="toc-text">5. 警告</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尊重原创"><span class="toc-text">尊重原创</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web安全"><span class="toc-text">Web安全</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-03-03-theme-ad-docs-zh/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/UI设计/"><i class="fa fa-tags"></i>UI设计</a>
+     
+      <a href="/tags/Hexo/"><i class="fa fa-tags"></i>Hexo</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-03-03-theme-ad-docs-zh";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/2019-03-04-please-mark/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-03-02-gpsr/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>
