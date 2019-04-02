@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-02T16:25:43.031Z</updated>
+  <updated>2019-04-02T16:28:07.246Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -21,17 +21,13 @@
     <link href="https://godbmw.com/passages/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2019-04-02-pwa-service-worker/"/>
     <id>https://godbmw.com/passages/学习笔记/2019-04-02-pwa-service-worker/</id>
     <published>2019-04-02T00:00:00.000Z</published>
-    <updated>2019-04-02T16:25:43.031Z</updated>
+    <updated>2019-04-02T16:28:07.246Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;背景介绍&quot;&gt;&lt;a href=&quot;#背景介绍&quot; class=&quot;headerlink&quot; title=&quot;背景介绍&quot;&gt;&lt;/a&gt;背景介绍&lt;/h2&gt;&lt;p&gt;最近实战了Service
-        
-      
+      &lt;p&gt;最近实战了Service Worker来进行网站缓存，以实现离线状态下，网站仍然可以正常使用。&lt;/p&gt;
+&lt;p&gt;尤其对于个人博客这种以内容为主体的静态网站，离线访问和缓存优化尤其重要；并且Ajax交互较少，离线访问和缓存优化的实现壁垒因此较低。&lt;/p&gt;
+&lt;p&gt;在被各路博客坑了之后，简明扼要的记录下目前我在sw上的最佳实践。&lt;/p&gt;
     
     </summary>
     
