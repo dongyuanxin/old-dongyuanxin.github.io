@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-03T03:31:39.579Z</updated>
+  <updated>2019-04-03T04:40:19.666Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Service Worker离线缓存实战</title>
-    <link href="https://godbmw.com/passages/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2019-04-02-pwa-service-worker/"/>
-    <id>https://godbmw.com/passages/学习笔记/2019-04-02-pwa-service-worker/</id>
+    <link href="https://godbmw.com/passages/2019-04-02-pwa-service-worker/"/>
+    <id>https://godbmw.com/passages/2019-04-02-pwa-service-worker/</id>
     <published>2019-04-02T00:00:00.000Z</published>
-    <updated>2019-04-03T03:31:39.579Z</updated>
+    <updated>2019-04-03T04:40:19.666Z</updated>
     
     <summary type="html">
     
@@ -237,9 +237,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
@@ -273,11 +273,11 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
