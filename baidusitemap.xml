@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://godbmw.com/passages/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2019-04-02-pwa-service-worker/</loc>
-    <lastmod>2019-04-02</lastmod>
+    <lastmod>2019-04-03</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/2019-04-01-brief-history-of-time/</loc>
     <lastmod>2019-04-01</lastmod>
@@ -130,13 +130,13 @@
     <loc>https://godbmw.com/passages/2018-09-17-machine-learn-first/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-30-tencent-cdn/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
     <loc>https://godbmw.com/passages/2018-10-03-js-mathjax/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-10-07-ubuntu-user/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-09-11-webpack-image/</loc>
@@ -199,10 +199,10 @@
     <loc>https://godbmw.com/passages/2018-10-11-union-find/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-10-24-densegraph-sparsegraph/</loc>
+    <loc>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</loc>
+    <loc>https://godbmw.com/passages/2018-10-24-densegraph-sparsegraph/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-10-17-automatic-html/</loc>
@@ -250,7 +250,7 @@
     <loc>https://godbmw.com/passages/2019-02-24-love/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/</loc>
+    <loc>https://godbmw.com/passages/2018-09-30-tencent-cdn/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-05-23-es-promise/</loc>
@@ -280,25 +280,13 @@
     <loc>https://godbmw.com/passages/2018-11-28-try-web-interview/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-01-js-tree-shaking/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-02-css-tree-shaking/</loc>
+    <loc>https://godbmw.com/passages/2018-08-08-webpack-spa-split-lazy/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-09-06-git-tag-and-version/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-06-19-batch-edit-log/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-07-git-stash/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-06-webpack-mutiple-pages/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-08-08-webpack-spa-split-lazy/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-17-webpack-css/</loc>
@@ -308,6 +296,18 @@
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-28-webpack-scss-lazy/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-09-01-js-tree-shaking/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-09-02-css-tree-shaking/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-06-19-batch-edit-log/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-09-07-git-stash/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-07-29-webpack-demos-introduction/</loc>

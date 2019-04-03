@@ -477,16 +477,17 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-05-29-scss-fisrt-step/">初识scss：配置与运行</a>
+            <a href="/passages/2018-05-29-scss-more/">详解scss的继承、占位符和混合宏</a>
           </h1>
           <div class="home-article-content passage-article">
             
               <blockquote>
-<p><code>Sass</code> 和 <code>SCSS</code> 其实是同一种东西，我们平时都称之为 <code>Sass</code>。<strong>他们都是用<code>Ruby</code>开发Css预处理器，<code>boostrap4</code>已经将<code>less</code>换成了<code>sass</code>。</strong></p>
+<p>如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇</p>
 </blockquote>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$height</span>: <span class="number">15px</span> !default;</span><br><span class="line"><span class="variable">$width</span>: <span class="number">18px</span> !default;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> size(<span class="variable">$list</span>...) &#123;</span><br><span class="line">  @<span class="keyword">if</span> length(<span class="variable">$list</span>) == 0 &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$height</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$width</span>;   </span><br><span class="line">  &#125;@<span class="keyword">else</span> if length(<span class="variable">$list</span>) == 1 &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$list</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$list</span>;</span><br><span class="line">  &#125;@<span class="keyword">else</span> if length(<span class="variable">$list</span>) == 2 &#123;</span><br><span class="line">    <span class="attribute">height</span>: nth(<span class="variable">$list</span> , <span class="number">1</span>);</span><br><span class="line">    <span class="attribute">width</span>: nth(<span class="variable">$list</span> , <span class="number">2</span>);</span><br><span class="line">  &#125;@<span class="keyword">else</span> &#123;</span><br><span class="line">    @<span class="keyword">debug</span> <span class="string">"Too many parameters"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-05-29-scss-fisrt-step/">
+          <a class="home-article-read" href="/passages/2018-05-29-scss-more/">
             README MORE >>>
           </a>
           
@@ -536,9 +537,9 @@
           
             <div class="passage-tags">
              
-              <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
-             
               <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+             
+              <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
              
               <a href="/tags/面试/"><i class="fa fa-tags"></i>面试</a>
             
@@ -564,17 +565,16 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-05-29-scss-more/">详解scss的继承、占位符和混合宏</a>
+            <a href="/passages/2018-05-29-scss-fisrt-step/">初识scss：配置与运行</a>
           </h1>
           <div class="home-article-content passage-article">
             
               <blockquote>
-<p>如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇</p>
+<p><code>Sass</code> 和 <code>SCSS</code> 其实是同一种东西，我们平时都称之为 <code>Sass</code>。<strong>他们都是用<code>Ruby</code>开发Css预处理器，<code>boostrap4</code>已经将<code>less</code>换成了<code>sass</code>。</strong></p>
 </blockquote>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$height</span>: <span class="number">15px</span> !default;</span><br><span class="line"><span class="variable">$width</span>: <span class="number">18px</span> !default;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> size(<span class="variable">$list</span>...) &#123;</span><br><span class="line">  @<span class="keyword">if</span> length(<span class="variable">$list</span>) == 0 &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$height</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$width</span>;   </span><br><span class="line">  &#125;@<span class="keyword">else</span> if length(<span class="variable">$list</span>) == 1 &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$list</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$list</span>;</span><br><span class="line">  &#125;@<span class="keyword">else</span> if length(<span class="variable">$list</span>) == 2 &#123;</span><br><span class="line">    <span class="attribute">height</span>: nth(<span class="variable">$list</span> , <span class="number">1</span>);</span><br><span class="line">    <span class="attribute">width</span>: nth(<span class="variable">$list</span> , <span class="number">2</span>);</span><br><span class="line">  &#125;@<span class="keyword">else</span> &#123;</span><br><span class="line">    @<span class="keyword">debug</span> <span class="string">"Too many parameters"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-05-29-scss-more/">
+          <a class="home-article-read" href="/passages/2018-05-29-scss-fisrt-step/">
             README MORE >>>
           </a>
           
