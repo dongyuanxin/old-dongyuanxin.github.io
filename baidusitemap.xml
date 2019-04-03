@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://godbmw.com/passages/2019-04-02-pwa-service-worker/</loc>
+    <loc>https://godbmw.com/passages/2019-04-01-brief-history-of-time/</loc>
     <lastmod>2019-04-03</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/2019-04-01-brief-history-of-time/</loc>
-    <lastmod>2019-04-01</lastmod>
+    <loc>https://godbmw.com/passages/2019-04-02-pwa-service-worker/</loc>
+    <lastmod>2019-04-03</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2019-03-31-factory-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
@@ -295,6 +295,15 @@
     <loc>https://godbmw.com/passages/2018-07-31-webpack-compile-es6/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
+    <loc>https://godbmw.com/passages/2018-07-30-webpack-pack-js/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-07-29-webpack-demos-introduction/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-09-07-git-stash/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-06-webpack-mutiple-pages/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
@@ -308,15 +317,6 @@
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-28-webpack-scss-lazy/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-07-git-stash/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-07-29-webpack-demos-introduction/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-07-30-webpack-pack-js/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>
 </urlset>
