@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-03T04:40:19.666Z</updated>
+  <updated>2019-04-08T12:01:52.732Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React中的组件通信</title>
+    <link href="https://godbmw.com/passages/2019-04-08-react-components-communication/"/>
+    <id>https://godbmw.com/passages/2019-04-08-react-components-communication/</id>
+    <published>2019-04-08T00:00:00.000Z</published>
+    <updated>2019-04-08T12:01:52.732Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在做react开发的时候，需要在多级组件之间进行有效通信。这里所说的多级组件，可能是父子组件、兄弟组件，还可能是两个完全不相关的组件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;那么问题是：有没有一种方法可以统一实现组件之间的通信？不借助redux等第三方库，降低依赖性，保证代码简洁，还要保证通用性&lt;/strong&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
+    
+      <category term="前端开发" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Service Worker离线缓存实战</title>
@@ -131,9 +154,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -160,9 +183,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -206,11 +229,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -239,9 +262,9 @@
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
@@ -273,13 +296,13 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
-      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
     
@@ -498,33 +521,6 @@
 &lt;p&gt;适配器模式为多个不兼容接口之间提供“转化器”。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;它的实现非常&lt;strong&gt;简单&lt;/strong&gt;，检查接口的数据，&lt;br&gt;进行过滤、重组等操作，使另一接口可以使用数据即可。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
-    
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式手册之状态模式</title>
-    <link href="https://godbmw.com/passages/2019-01-16-state-pattern/"/>
-    <id>https://godbmw.com/passages/2019-01-16-state-pattern/</id>
-    <published>2019-01-16T00:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;状态模式：对象行为是&lt;strong&gt;基于状态&lt;/strong&gt;来改变的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;内部的状态转化，导致了行为表现形式不同。&lt;br&gt;所以，用户在外面看起来，&lt;strong&gt;好像&lt;/strong&gt;是修改了行为。&lt;/p&gt;
     
     </summary>
     
