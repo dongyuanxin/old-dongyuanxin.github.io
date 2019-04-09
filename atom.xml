@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-09T02:33:12.712Z</updated>
+  <updated>2019-04-09T16:05:49.463Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTML5原生拖放学习与实践</title>
+    <link href="https://godbmw.com/passages/2019-04-10-html5-drag-drop/"/>
+    <id>https://godbmw.com/passages/2019-04-10-html5-drag-drop/</id>
+    <published>2019-04-10T00:00:00.000Z</published>
+    <updated>2019-04-09T16:05:49.463Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前学习了HTML5的拖放事件，开发中也用到了拖拽组件。为了厘清整体的逻辑，专门做了一个小例子。&lt;/p&gt;
+&lt;p&gt;具体实现的效果也很简单：元素可以在容器中任意拖动，元素被移入容器的时候，还会有相关样式的改变已达到更好的展示效果。&lt;/p&gt;
+&lt;p&gt;例子基本运用了拖放事件的全部事件，并且尽量简洁的展示了出来。特此记录。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="HTML5" scheme="https://godbmw.com/tags/HTML5/"/>
+    
+  </entry>
   
   <entry>
     <title>ES6重难点整理</title>
@@ -184,9 +208,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -213,9 +237,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -259,11 +283,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -290,11 +314,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
@@ -328,11 +352,11 @@
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
-    
-      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
     
@@ -509,32 +533,6 @@
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式手册之桥接模式</title>
-    <link href="https://godbmw.com/passages/2019-01-19-bridge-pattern/"/>
-    <id>https://godbmw.com/passages/2019-01-19-bridge-pattern/</id>
-    <published>2019-01-19T00:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在封装开源库的组件时候，经常会用到这种设计模式。&lt;/p&gt;
-&lt;p&gt;例如，对外提供暴露一个&lt;code&gt;afterFinish&lt;/code&gt;函数,&lt;br&gt;如果用户有传入此函数, 那么就会在某一段代码逻辑中调用。&lt;/p&gt;
-&lt;p&gt;这个过程中，组件起到了“桥”的作用，而具体实现是用户自定义。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
-    
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
     
   </entry>
   
