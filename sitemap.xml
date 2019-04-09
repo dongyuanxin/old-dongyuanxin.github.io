@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://godbmw.com/passages/2019-04-09-es6/</loc>
+    
+    <lastmod>2019-04-09T02:27:21.494Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://godbmw.com/passages/2019-04-08-react-components-communication/</loc>
     
     <lastmod>2019-04-08T12:08:00.247Z</lastmod>
@@ -37,7 +44,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-12-16-flyweight-pattern/</loc>
+    <loc>https://godbmw.com/passages/2018-12-24-weekly-share-2/</loc>
     
     <lastmod>2019-04-01T15:22:04.539Z</lastmod>
     
@@ -100,14 +107,14 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-12-24-weekly-share-2/</loc>
+    <loc>https://godbmw.com/passages/2018-05-17-first-test/</loc>
     
     <lastmod>2019-04-01T15:22:04.539Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-05-17-first-test/</loc>
+    <loc>https://godbmw.com/passages/2018-12-16-flyweight-pattern/</loc>
     
     <lastmod>2019-04-01T15:22:04.539Z</lastmod>
     
@@ -170,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-23-singleton-pattern/</loc>
+    <loc>https://godbmw.com/passages/2018-10-23-site-v4/</loc>
     
     <lastmod>2019-04-01T15:22:04.539Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-23-site-v4/</loc>
+    <loc>https://godbmw.com/passages/2018-10-23-singleton-pattern/</loc>
     
     <lastmod>2019-04-01T15:22:04.539Z</lastmod>
     
@@ -205,7 +212,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-07-ubuntu-user/</loc>
+    <loc>https://godbmw.com/passages/2018-10-09-binary-search-tree/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -254,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-11-01-why-i-blog/</loc>
+    <loc>https://godbmw.com/passages/2019-03-03-theme-ad-docs-zh/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2019-03-03-theme-ad-docs-zh/</loc>
+    <loc>https://godbmw.com/passages/2018-11-01-why-i-blog/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -296,14 +303,14 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-23-design-pattern-code/</loc>
+    <loc>https://godbmw.com/passages/2019-03-26-javascript-first/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2019-03-26-javascript-first/</loc>
+    <loc>https://godbmw.com/passages/2018-10-23-design-pattern-code/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -324,14 +331,14 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</loc>
+    <loc>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</loc>
+    <loc>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -366,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</loc>
+    <loc>https://godbmw.com/passages/2018-12-06-theme-bmw-v4/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -380,14 +387,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-10-09-binary-search-tree/</loc>
-    
-    <lastmod>2019-04-01T15:22:04.535Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://godbmw.com/passages/2018-12-06-theme-bmw-v4/</loc>
+    <loc>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -395,6 +395,13 @@
   
   <url>
     <loc>https://godbmw.com/passages/2018-11-28-try-web-interview/</loc>
+    
+    <lastmod>2019-04-01T15:22:04.535Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://godbmw.com/passages/2018-10-07-ubuntu-user/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -499,14 +506,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-05-23-node-exports/</loc>
-    
-    <lastmod>2019-04-01T15:22:04.535Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://godbmw.com/passages/2018-05-23-var-vs-let/</loc>
+    <loc>https://godbmw.com/passages/2018-05-23-es-promise/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -514,6 +514,13 @@
   
   <url>
     <loc>https://godbmw.com/passages/2018-05-23-es6-const/</loc>
+    
+    <lastmod>2019-04-01T15:22:04.535Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://godbmw.com/passages/2018-05-23-node-exports/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -534,7 +541,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</loc>
+    <loc>https://godbmw.com/passages/2018-05-23-var-vs-let/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -548,7 +555,7 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-05-23-es-promise/</loc>
+    <loc>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -611,14 +618,14 @@
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-05-29-scss-more/</loc>
+    <loc>https://godbmw.com/passages/2018-05-29-scss-fisrt-step/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://godbmw.com/passages/2018-05-29-scss-fisrt-step/</loc>
+    <loc>https://godbmw.com/passages/2018-05-29-scss-more/</loc>
     
     <lastmod>2019-04-01T15:22:04.535Z</lastmod>
     
@@ -758,6 +765,13 @@
   </url>
   
   <url>
+    <loc>https://godbmw.com/about/index.html</loc>
+    
+    <lastmod>2019-04-01T15:21:11.775Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://godbmw.com/categories/index.html</loc>
     
     <lastmod>2019-04-01T15:21:11.775Z</lastmod>
@@ -766,13 +780,6 @@
   
   <url>
     <loc>https://godbmw.com/demos/index.html</loc>
-    
-    <lastmod>2019-04-01T15:21:11.775Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://godbmw.com/about/index.html</loc>
     
     <lastmod>2019-04-01T15:21:11.775Z</lastmod>
     

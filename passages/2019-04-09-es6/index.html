@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>ES6重难点整理 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端面试手记,ES6,面试,">
+  
+
+  
+  <meta name="description" content="👇 内容速览 👇let和constSet和MapGenerator和yieldPromise、async/await介绍Proxy代理器…">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-04-09
+    </span>
+    
+      <span>
+        | <a href="/categories/前端面试手记/"><i class="fa fa-bookmark"></i>前端面试手记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    ES6重难点整理
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(/[https:/source.unsplash.com/400x400/](https:/source.unsplash.com/400x400/?code,computer)?es6,javascript,code);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <p>👇 内容速览 👇</p>
+<ul>
+<li>let和const</li>
+<li>Set和Map</li>
+<li>Generator和yield</li>
+<li>Promise、async/await介绍</li>
+<li>Proxy代理器</li>
+<li>…</li>
+</ul>
+<h3 id="let和const"><a href="#let和const" class="headerlink" title="let和const"></a>let和const</h3><p>ES6新增了<code>let</code>和<code>const</code>，它们声明的变量，都处于“块级作用域”。并且不存在“变量提升”，不允许重复声明。</p>
+<p>同时，<code>const</code>声明的变量所指向的内存地址保存的数据不得改变：</p>
+<ul>
+<li>对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。</li>
+<li>对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指向实际数据的指针，<code>const</code>只能保证这个指针是固定的（即总是指向另一个固定的地址），不能保证指向的数据结构不可变。</li>
+</ul>
+<p>如果要保证指向的数据结构也不可变，需要自行封装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 冻结对象</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; obj </span></span><br><span class="line"><span class="comment"> * @return &#123;Object&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">constantize</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">Object</span>.isFrozen(obj)) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Reflect</span>.ownKeys(obj).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 如果属性是对象，递归冻结</span></span><br><span class="line">    <span class="keyword">typeof</span> obj[key] === <span class="string">'object'</span> &amp;&amp; (obj[key] = constantize(obj[key]))</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.freeze(obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/********测试代码 **********/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    c: <span class="number">2</span>,</span><br><span class="line">    d: &#123;</span><br><span class="line">      a: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  d: [</span><br><span class="line">    <span class="number">1</span>,</span><br><span class="line">    <span class="number">2</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fronzenObj = constantize(obj)</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  fronzenObj.d = []</span><br><span class="line">  fronzenObj.b.c = <span class="number">3</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(error) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error.message)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Set和Map"><a href="#Set和Map" class="headerlink" title="Set和Map"></a>Set和Map</h3><blockquote>
+<p>题目：解释下<code>Set</code>和<code>Map</code>。</p>
+</blockquote>
+<ul>
+<li>Set元素不允许重复</li>
+<li>Map类似对象，但是它的键（key）可以是任意数据类型</li>
+</ul>
+<p><strong>①Set常用方法</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化一个set</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">set</span> = new Set([1, 2, 3, 4]);</span><br><span class="line"></span><br><span class="line">// 遍历<span class="keyword">set</span></span><br><span class="line">for (let item of <span class="keyword">set</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加元素，返回Set本身</span></span><br><span class="line"><span class="keyword">set</span>.add(5).add(6);</span><br><span class="line"></span><br><span class="line">// Set大小</span><br><span class="line">console.log(<span class="keyword">set</span>.size);</span><br><span class="line"></span><br><span class="line">// 检查元素存在</span><br><span class="line">console.log(<span class="keyword">set</span>.has(0));</span><br><span class="line"></span><br><span class="line">// 删除指定元素，返回bool</span><br><span class="line">let success = <span class="keyword">set</span>.delete(1);</span><br><span class="line">console.log(success);</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>.clear();</span><br></pre></td></tr></table></figure>
+<p>其他遍历方法：由于没有键名，<code>values()</code>和<code>keys()</code>返回同样结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> <span class="keyword">set</span>.keys()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> <span class="keyword">set</span>.values()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> <span class="keyword">set</span>.entries()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>②Map常用方法</strong></p>
+<p>Map接口基本和Set一致。不同的是增加新元素的API是：<code>set(key, value)</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以任意对象为 Key 值</span></span><br><span class="line"><span class="comment">// 这里以 Date 对象为例</span></span><br><span class="line"><span class="keyword">let</span> key = <span class="keyword">new</span> <span class="built_in">Date</span>(); </span><br><span class="line">map.set(key, <span class="string">"today"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.get(key));</span><br></pre></td></tr></table></figure>
+<h3 id="Generator与yield"><a href="#Generator与yield" class="headerlink" title="Generator与yield"></a>Generator与yield</h3><p><code>generator</code>函数是es6提供的新特性，它的最大特点是：<strong>控制函数的执行</strong>。让我们从网上最火的一个例子来看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">2</span> * (<span class="keyword">yield</span> x + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> z = <span class="keyword">yield</span> y / <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> x + y + z;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = foo(<span class="number">5</span>);</span><br><span class="line">b.next(); <span class="comment">// &#123; value:6, done:false &#125;</span></span><br><span class="line">b.next(<span class="number">12</span>); <span class="comment">// &#123; value:8, done:false &#125;</span></span><br><span class="line">b.next(<span class="number">13</span>); <span class="comment">// &#123; value:42, done:true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>通俗的解释下为什么会有这种输出：</p>
+<ol>
+<li>给函数foo传入参数5，但由于它是generator，所以执行到<strong>第一个yield前</strong>就停止了。</li>
+<li>第一次调用next()，<strong>这次传入的参数会被忽略</strong>暂停**。</li>
+<li>第二次调用next(12)，<strong>传入的参数会被当作上一个yield表达式的返回值</strong>。因此，y = 2 * 12 = 24。执行到第二个yield，返回其后的表达式的值 24 / 3 = 8。然后函数在此处暂停。</li>
+<li>第三次调用next(13)，没有yield，只剩return了，按照正常函数那样返回return的表达式的值，并且<code>done</code>为<code>true</code>。</li>
+</ol>
+<p><strong>难点</strong>：在于为什么最后的<code>value</code>是42呢？</p>
+<p>首先，<code>x</code>的值是刚开始调用foo函数传入的5。而最后传入的13被当作第二个yield的返回值，所以<code>z</code>的值是13。对于<code>y</code>的值，我们在前面第三步中已经计算出来了，就是24。</p>
+<p>所以，<code>x + y + z = 5 + 24 + 13 = 42</code></p>
+<p>看懂了上面的分析，再看下面这段代码就很好理解了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">2</span> * (<span class="keyword">yield</span> x + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> z = <span class="keyword">yield</span> y / <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> x + y + z;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = foo(<span class="number">5</span>);</span><br><span class="line">a.next(); <span class="comment">// Object&#123;value:6, done:false&#125;</span></span><br><span class="line">a.next(); <span class="comment">// Object&#123;value:NaN, done:false&#125;</span></span><br><span class="line">a.next(); <span class="comment">// Object&#123;value:NaN, done:true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>只有第一次调用next函数的时候，输出的value是6。其他时候由于没有给next传入参数，因此yield的返回值都是<code>undefined</code>，进行运算后自然是<code>NaN</code>。</p>
+<h3 id="Promise介绍"><a href="#Promise介绍" class="headerlink" title="Promise介绍"></a>Promise介绍</h3><p>简单归纳下 Promise：<strong>三个状态、两个过程、一个方法</strong></p>
+<ul>
+<li>三个状态：<code>pending</code>、<code>fulfilled</code>、<code>rejected</code></li>
+<li>两个过程（<strong>单向不可逆</strong>）：<ul>
+<li><code>pending</code>-&gt;<code>fulfilled</code></li>
+<li><code>pending</code>-&gt;<code>rejected</code></li>
+</ul>
+</li>
+<li>一个方法<code>then</code>：<code>Promise</code>本质上只有一个方法，<code>catch</code>和<code>all</code>方法都是基于<code>then</code>方法实现的。</li>
+</ul>
+<p>请看下面这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造 Promise 时候, 内部函数立即执行</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"new Promise"</span>);</span><br><span class="line">  resolve(<span class="string">"success"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"finifsh"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  then 中 使用了 return，那么 return 的值会被 Promise.resolve() 包装</span></span><br><span class="line"><span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res); <span class="comment">// =&gt; 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>; <span class="comment">// 包装成 Promise.resolve(2)</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res); <span class="comment">// =&gt; 2</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="async-await介绍"><a href="#async-await介绍" class="headerlink" title="async/await介绍"></a>async/await介绍</h3><p><code>async</code>函数返回一个<code>Promise</code>对象，可以使用<code>then</code>方法添加回调函数。</p>
+<p>当函数执行的时候，一旦遇到<code>await</code>就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。</p>
+<p>这也是它最受欢迎的地方：<strong>能让异步代码写起来像同步代码，并且方便控制顺序</strong>。</p>
+<p>可以利用它实现一个<code>sleep</code>函数阻塞进程：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">millisecond</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> resolve, millisecond)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下是测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>) <span class="comment">// 睡眠1秒</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test() <span class="comment">// 执行测试函数</span></span><br></pre></td></tr></table></figure>
+<p>虽然方便，<strong>但是它也不能取代<code>Promise</code>，尤其是我们可以很方便地用<code>Promise.all()</code>来实现并发</strong>，而<code>async/await</code>只能实现串行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">second</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">Math</span>.random());</span><br><span class="line">      resolve();</span><br><span class="line">    &#125;, second);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">chuanXingDemo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">bingXingDemo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tasks = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">    tasks.push(sleep(<span class="number">1000</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.all(tasks);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行<code>bingXingDemo()</code>，几乎同时输出，它是并发执行；运行<code>chuanXingDemo()</code>，每个输出间隔1s，它是串行执行。</p>
+<h3 id="ES6对象和ES5对象"><a href="#ES6对象和ES5对象" class="headerlink" title="ES6对象和ES5对象"></a>ES6对象和ES5对象</h3><blockquote>
+<p>题目：es6 class 的new实例和es5的new实例有什么区别？</p>
+</blockquote>
+<p>在<code>ES6</code>中（和<code>ES5</code>相比），<code>class</code>的<code>new</code>实例有以下特点：</p>
+<ul>
+<li><code>class</code>的构造参数必须是<code>new</code>来调用，不可以将其作为普通函数执行</li>
+<li><code>es6</code> 的<code>class</code>不存在变量提升</li>
+<li><strong>最重要的是：es6内部方法不可以枚举</strong>。es5的<code>prototype</code>上的方法可以枚举。</li>
+</ul>
+<p>为此我做了以下测试代码进行验证：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(ES5Class()) <span class="comment">// es5:可以直接作为函数运行</span></span><br><span class="line"><span class="comment">// console.log(new ES6Class()) // 会报错：不存在变量提升</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ES5Class</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ES5Class.prototype.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">"Hello world"</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ES6Class</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>()&#123;&#125;</span><br><span class="line">  func()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Hello world"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> es5 = <span class="keyword">new</span> ES5Class()</span><br><span class="line"><span class="keyword">let</span> es6 = <span class="keyword">new</span> ES6Class()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 推荐在循环对象属性的时候，使用for...in</span></span><br><span class="line"><span class="comment">// 在遍历数组的时候的时候，使用for...of</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"ES5 :"</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> _ <span class="keyword">in</span> es5)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(_)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// es6:不可枚举</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"ES6 :"</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> _ <span class="keyword">in</span> es6)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(_)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>参考/推荐</strong>：<a href="https://fed.renren.com/2017/08/07/js-oop-es52es6/" target="_blank" rel="noopener">《JavaScript创建对象—从es5到es6》</a></p>
+<h3 id="Proxy代理器"><a href="#Proxy代理器" class="headerlink" title="Proxy代理器"></a>Proxy代理器</h3><p>他可以实现js中的“元编程”：在目标对象之前架设拦截，可以过滤和修改外部的访问。</p>
+<p>它支持多达13种拦截操作，例如下面代码展示的<code>set</code>和<code>get</code>方法，分别可以在设置对象属性和访问对象属性时候进行拦截。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="comment">// receiver 指向 proxy 实例</span></span><br><span class="line">  <span class="keyword">get</span>(target, property, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`GET: target is <span class="subst">$&#123;target&#125;</span>, property is <span class="subst">$&#123;property&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, property, receiver)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, property, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`SET: target is <span class="subst">$&#123;target&#125;</span>, property is <span class="subst">$&#123;property&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, property, value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="number">1</span> , <span class="attr">b</span>: &#123;<span class="attr">c</span>: <span class="number">0</span>, <span class="attr">d</span>: &#123;<span class="attr">e</span>: <span class="number">-1</span>&#125;&#125;&#125;</span><br><span class="line"><span class="keyword">const</span> newObj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj, handler)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下是测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">newObj.a <span class="comment">// output: GET...</span></span><br><span class="line">newObj.b.c <span class="comment">// output: GET...</span></span><br><span class="line"></span><br><span class="line">newObj.a = <span class="number">123</span> <span class="comment">// output: SET...</span></span><br><span class="line">newObj.b.c = <span class="number">-1</span> <span class="comment">// output: GET...</span></span><br></pre></td></tr></table></figure>
+<p>运行这段代码，会发现最后一行的输出是 <code>GET ...</code>。也就是说它触发的是<code>get</code>拦截器，而不是期望的<code>set</code>拦截器。<strong>这是因为对于对象的深层属性，需要专门对其设置Proxy</strong>。</p>
+<p><strong>更多请见</strong>：<a href="http://es6.ruanyifeng.com/#docs/proxy" target="_blank" rel="noopener">《阮一峰ES6入门：Proxy》</a></p>
+<h3 id="EsModule和CommonJS的比较"><a href="#EsModule和CommonJS的比较" class="headerlink" title="EsModule和CommonJS的比较"></a>EsModule和CommonJS的比较</h3><p>目前js社区有4种模块管理规范：AMD、CMD、CommonJS和EsModule。 ES Module 是原生实现的模块化方案，与 CommonJS 有以下几个区别：</p>
+<ul>
+<li>CommonJS 支持动态导入，也就是 <code>require(${path}/xx.js)</code>，后者目前不支持，但是已有提案：<code>import(xxx)</code></li>
+<li>CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响</li>
+<li>commonJs输出的是值的浅拷贝，esModule输出值的引用</li>
+<li>ES Module 会编译成 <code>require/exports</code> 来执行的</li>
+</ul>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#let和const"><span class="toc-number">1.</span> <span class="toc-text">let和const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set和Map"><span class="toc-number">2.</span> <span class="toc-text">Set和Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generator与yield"><span class="toc-number">3.</span> <span class="toc-text">Generator与yield</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise介绍"><span class="toc-number">4.</span> <span class="toc-text">Promise介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#async-await介绍"><span class="toc-number">5.</span> <span class="toc-text">async/await介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6对象和ES5对象"><span class="toc-number">6.</span> <span class="toc-text">ES6对象和ES5对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proxy代理器"><span class="toc-number">7.</span> <span class="toc-text">Proxy代理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EsModule和CommonJS的比较"><span class="toc-number">8.</span> <span class="toc-text">EsModule和CommonJS的比较</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-04-09-es6/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+     
+      <a href="/tags/面试/"><i class="fa fa-tags"></i>面试</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-04-09-es6";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-04-08-react-components-communication/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>
