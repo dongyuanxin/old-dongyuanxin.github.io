@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-09T02:27:21.494Z</updated>
+  <updated>2019-04-09T02:33:12.712Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://godbmw.com/passages/2019-04-09-es6/"/>
     <id>https://godbmw.com/passages/2019-04-09-es6/</id>
     <published>2019-04-08T16:00:00.000Z</published>
-    <updated>2019-04-09T02:27:21.494Z</updated>
+    <updated>2019-04-09T02:33:12.712Z</updated>
     
     <summary type="html">
     
@@ -96,25 +96,6 @@
   </entry>
   
   <entry>
-    <title>《万物理论》影评：时间永留简史</title>
-    <link href="https://godbmw.com/passages/2019-04-01-brief-history-of-time/"/>
-    <id>https://godbmw.com/passages/2019-04-01-brief-history-of-time/</id>
-    <published>2019-04-01T00:00:00.000Z</published>
-    <updated>2019-04-03T04:41:45.429Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;整部电影，没有幸与不幸，也不是爱情主题，仅仅是简简单单地向观众推导了霍金的幸福方程式。最后想说: 时间永留简史。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://cdn.nlark.com/yuque/0/2019/png/233327/1554133684177-0708dd74-074d-4f18-b389-44bdce15f4c6.png#align=left&amp;amp;display=inline&amp;amp;height=358&amp;amp;name=image.png&amp;amp;originHeight=696&amp;amp;originWidth=1452&amp;amp;size=1503476&amp;amp;status=done&amp;amp;width=746&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>设计模式手册之抽象工厂模式</title>
     <link href="https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/"/>
     <id>https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/</id>
@@ -134,6 +115,25 @@
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《万物理论》影评：时间永留简史</title>
+    <link href="https://godbmw.com/passages/2019-04-01-brief-history-of-time/"/>
+    <id>https://godbmw.com/passages/2019-04-01-brief-history-of-time/</id>
+    <published>2019-04-01T00:00:00.000Z</published>
+    <updated>2019-04-03T04:41:45.429Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;整部电影，没有幸与不幸，也不是爱情主题，仅仅是简简单单地向观众推导了霍金的幸福方程式。最后想说: 时间永留简史。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn.nlark.com/yuque/0/2019/png/233327/1554133684177-0708dd74-074d-4f18-b389-44bdce15f4c6.png#align=left&amp;amp;display=inline&amp;amp;height=358&amp;amp;name=image.png&amp;amp;originHeight=696&amp;amp;originWidth=1452&amp;amp;size=1503476&amp;amp;status=done&amp;amp;width=746&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
     
   </entry>
   
@@ -290,9 +290,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
@@ -326,11 +326,11 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
