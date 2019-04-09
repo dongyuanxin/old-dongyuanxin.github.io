@@ -194,11 +194,18 @@
 <tbody>
 <tr>
 <td>dragstart</td>
+<td>在元素开始被拖动时候触发</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>在元素被拖动时反复触发</td>
+</tr>
+<tr>
+<td>dragend</td>
+<td>在拖动操作完成时触发</td>
 </tr>
 </tbody>
 </table>
-<p> | 在元素开始被拖动时候触发 |<br>| drag | 在元素被拖动时反复触发 |<br>| dragend</p>
-<p> | 在拖动操作完成时触发 |</p>
 <p><strong>2、容器的相关事件</strong> ：</p>
 <table>
 <thead>
@@ -214,11 +221,14 @@
 </tr>
 <tr>
 <td>dragover</td>
+<td>当被拖动元素在目的地元素内时触发，<strong>一般需要取消浏览器的默认行为</strong>。</td>
+</tr>
+<tr>
+<td>dragleave</td>
+<td>当被拖动元素没有放下就离开目的地元素时触发</td>
 </tr>
 </tbody>
 </table>
-<p> | 当被拖动元素在目的地元素内时触发，<strong>一般需要取消浏览器的默认行为</strong>。 |<br>| dragleave</p>
-<p> | 当被拖动元素没有放下就离开目的地元素时触发 |</p>
 <p><strong>3、释放事件</strong> ：</p>
 <table>
 <thead>
@@ -234,7 +244,6 @@
 </tr>
 </tbody>
 </table>
-<p> |</p>
 <h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><p>为了方便说明，先看代码实现的效果。请前往 <a href="https://github.com/dongyuanxin/html5-drag-drop" target="_blank" rel="noopener">Github仓库</a> 下载 <code>demo.html</code> 和 <code>demo.js</code> 到本地，然后用Chrome打开html文件，初始效果如下图：</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2019/png/233327/1554824440934-6b099e29-5d03-47c8-9fcd-358dfac034ce.png#align=left&amp;display=inline&amp;height=489&amp;name=image.png&amp;originHeight=612&amp;originWidth=329&amp;size=8385&amp;status=done&amp;width=263" alt="image.png"></p>
 <p>将图中的可拖拽元素，拖放到下面的容器中，这个过程的效果如下所示。箭头表示拖拽方向，方框代表动态改变的容器样式。</p>
