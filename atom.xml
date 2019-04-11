@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-09T16:11:45.217Z</updated>
+  <updated>2019-04-11T02:35:15.652Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>清明长沙游</title>
+    <link href="https://godbmw.com/passages/2019-04-11-changsha-travel/"/>
+    <id>https://godbmw.com/passages/2019-04-11-changsha-travel/</id>
+    <published>2019-04-11T00:00:00.000Z</published>
+    <updated>2019-04-11T02:35:15.652Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;清明放假前，终于过了腾讯云的提校招提前批，阿里的面试也基本告一段落。忙完了所有事情，匆忙准备下，准备好了money，就出发去了广东北部的湖南长沙。&lt;/p&gt;
+&lt;p&gt;也多亏晓和健哥不辞辛苦地当导游，ღ( ´･ᴗ･` )比心。让两天的旅途丰富多彩，该吃的都吃了，该玩的都玩了，特此记录一下有意义的事情。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="环游记" scheme="https://godbmw.com/categories/%E7%8E%AF%E6%B8%B8%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>HTML5原生拖放事件的学习与实践</title>
@@ -283,11 +302,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -318,9 +337,9 @@
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
-      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
-    
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -352,11 +371,11 @@
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
-    
-      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
     
@@ -500,39 +519,6 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式手册之解释器模式</title>
-    <link href="https://godbmw.com/passages/2019-01-25-interpreter-pattern/"/>
-    <id>https://godbmw.com/passages/2019-01-25-interpreter-pattern/</id>
-    <published>2019-01-25T00:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;解释器模式: 提供了评估语言的&lt;strong&gt;语法&lt;/strong&gt;或&lt;strong&gt;表达式&lt;/strong&gt;的方式。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;实现这种模式的&lt;strong&gt;核心&lt;/strong&gt;是：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;抽象表达式：主要有一个&lt;code&gt;interpret()&lt;/code&gt;操作&lt;ul&gt;
-&lt;li&gt;终结符表达式：&lt;code&gt;R = R1 + R2&lt;/code&gt;中，&lt;code&gt;R1&lt;/code&gt; &lt;code&gt;R2&lt;/code&gt;就是终结符&lt;/li&gt;
-&lt;li&gt;非终结符表达式：&lt;code&gt;R = R1 - R2&lt;/code&gt;中，&lt;code&gt;-&lt;/code&gt;就是终结符&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;环境(Context): &lt;strong&gt;存放&lt;/strong&gt;文法中各个&lt;strong&gt;终结符&lt;/strong&gt;所对应的具体值。比如前面&lt;code&gt;R1&lt;/code&gt;和&lt;code&gt;R2&lt;/code&gt;的值。&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
-    
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
