@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-11T02:35:15.652Z</updated>
+  <updated>2019-04-11T02:41:05.722Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://godbmw.com/passages/2019-04-11-changsha-travel/"/>
     <id>https://godbmw.com/passages/2019-04-11-changsha-travel/</id>
     <published>2019-04-11T00:00:00.000Z</published>
-    <updated>2019-04-11T02:35:15.652Z</updated>
+    <updated>2019-04-11T02:41:05.722Z</updated>
     
     <summary type="html">
     
@@ -227,9 +227,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -256,9 +256,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -333,13 +333,13 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
-      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
   </entry>
   
