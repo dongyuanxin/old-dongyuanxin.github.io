@@ -1,0 +1,6 @@
+@media screen and (min-width: 769px) {
+  .site-header {
+    border-bottom: transparent solid 2px;
+    box-shadow: 0 2px 2px #eee;
+  }
+}

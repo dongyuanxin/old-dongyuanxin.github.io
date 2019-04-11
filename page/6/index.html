@@ -22,8 +22,6 @@
   
 
   
-    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
-  
 
   
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
@@ -32,13 +30,15 @@
   
 
   
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
 
   <script>
   // theme-ad's config script
   // it can be used in every script
   
   window.AD_CONFIG = {
-    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":false},
     welcome: {"enable":true,"interval":30},
     start_time: "2018-02-10",
     passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
@@ -68,6 +68,8 @@
 <link rel="stylesheet" href="/styles/components/highlight/highlight.css">
 
   
+    <link rel="stylesheet" href="/custom/style.css">
+  
 </head>
   <body>
     <header class="site-header">
@@ -84,17 +86,23 @@
   <div class="site-header-right">
     <nav class="site-header-navigation">
       
-        <a href="/" target="_self">首页</a>
+        <a href="/archives/" target="_self">文章归档</a>
       
-        <a href="/archives/" target="_self">归档</a>
+        <a href="/categories/设计模式手册/" target="_self">设计模式手册</a>
       
-        <a href="/categories/" target="_self">分类</a>
+        <a href="/categories/前端面试手记/" target="_self">前端体系整理</a>
       
-        <a href="/tags/" target="_self">标签</a>
+        <a href="/categories/webpack4系列教程/" target="_self">Webpack4教程</a>
       
-        <a href="/friends/" target="_self">友链</a>
+        <a href="/categories/" target="_self">分类云</a>
       
-        <a href="/about/" target="_self">关于</a>
+        <a href="/tags/" target="_self">标签云</a>
+      
+        <a href="/friends/" target="_self">友情链接</a>
+      
+        <a href="/about/" target="_self">了解本站</a>
+      
+        <a href="https://godbmw.com/atom.xml" target="_blank">快速订阅</a>
       
     </nav>
     <div class="site-header-btn">
@@ -120,38 +128,56 @@
     <ol class="toc">
       
         <li class="toc-item">
-          <a href="/" target="_self">
-            首页
+          <a href="/archives/" target="_self">
+            文章归档
           </a>
         </li>
       
         <li class="toc-item">
-          <a href="/archives/" target="_self">
-            归档
+          <a href="/categories/设计模式手册/" target="_self">
+            设计模式手册
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/前端面试手记/" target="_self">
+            前端体系整理
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/webpack4系列教程/" target="_self">
+            Webpack4教程
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/categories/" target="_self">
-            分类
+            分类云
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/tags/" target="_self">
-            标签
+            标签云
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/friends/" target="_self">
-            友链
+            友情链接
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/about/" target="_self">
-            关于
+            了解本站
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="https://godbmw.com/atom.xml" target="_blank">
+            快速订阅
           </a>
         </li>
       
@@ -181,25 +207,25 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-10-19-webpack-dev-and-prod/">webpack4 系列教程(十六)：开发模式和生产模式·实战</a>
+            <a href="/passages/2018-10-19-webpack-dev-server/">webpack4 系列教程(十五)：开发模式与webpack-dev-server</a>
           </h1>
           <div class="home-article-content passage-article">
             
               <blockquote>
-<p>这是<code>webpack4</code>系列最后一篇教程了。这篇文章在之前所有教程的基础上，做了一个真正意义上的 webpack 项目！我花费了三个月整理了这份教程，并且完善了相关示例代码，也更熟悉 webpack 的理论和应用，当然，也感谢大家的支持。</p>
+<p>为什么需要开发模式？</p>
 </blockquote>
-<p>好了，感慨完毕，开始正题 ?</p>
+<p>借助<code>webpack</code>，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而<code>source-map</code>更是准确定位代码错误的利器。</p>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-10-19-webpack-dev-and-prod/">
+          <a class="home-article-read" href="/passages/2018-10-19-webpack-dev-server/">
             README MORE >>>
           </a>
           
             <div class="passage-tags">
              
-              <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
-             
               <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+             
+              <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
             
             </div>
           
@@ -394,60 +420,6 @@
             </span>
             
               <span>
-                | <a href="/categories/webpack4系列教程/"><i class="fa fa-bookmark"></i>webpack4系列教程</a>
-              </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/2018-10-09-webpack-js-pacakge/">webpack4 系列教程(十二)：处理第三方JavaScript库</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              <p>项目做大之后，开发者会更多专注在业务逻辑上，其他方面则尽力使用第三方<code>JS</code>库来实现。</p>
-<p>由于<code>js</code>变化实在太快，所以出现了多种引入和管理第三方库的方法，常用的有 3 中：</p>
-<ol>
-<li>CDN：<code>&lt;script&gt;&lt;/script&gt;</code>标签引入即可</li>
-<li>npm 包管理： 目前最常用和最推荐的方法</li>
-<li>本地<code>js</code>文件：一些库由于历史原因，没有提供<code>es6</code>版本，需要手动下载，放入项目目录中，再手动引入。</li>
-</ol>
-<blockquote>
-<p>本文详细介绍了：在上面3种方法的基础上，如何配合<code>webpack</code>更优雅地引入和使用第三方<code>js</code>库。</p>
-</blockquote>
-            
-          </div>
-          <a class="home-article-read" href="/passages/2018-10-09-webpack-js-pacakge/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
-             
-              <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
-             
-              <a href="/tags/第三方库/"><i class="fa fa-tags"></i>第三方库</a>
-            
-            </div>
-          
-        </div>
-        
-      </div>
-    </div>
-  
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2018-10-09
-            </span>
-            
-              <span>
                 | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
               </span>
             
@@ -483,52 +455,6 @@
               <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
              
               <a href="/tags/数据结构/"><i class="fa fa-tags"></i>数据结构</a>
-            
-            </div>
-          
-        </div>
-        
-      </div>
-    </div>
-  
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2018-10-09
-            </span>
-            
-              <span>
-                | <a href="/categories/网站日志/"><i class="fa fa-bookmark"></i>网站日志</a>
-              </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/2018-10-09-server-dead-first/">第一次遭遇云服务器完全崩溃</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              <blockquote>
-<p>第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、<strong>控制台无法强制关机</strong>。一度怀疑人生。</p>
-</blockquote>
-<p>到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。</p>
-            
-          </div>
-          <a class="home-article-read" href="/passages/2018-10-09-server-dead-first/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/服务器/"><i class="fa fa-tags"></i>服务器</a>
-             
-              <a href="/tags/网络安全/"><i class="fa fa-tags"></i>网络安全</a>
             
             </div>
           
@@ -592,6 +518,106 @@
         <div class="home-article-inner" data-cover="false">
           <div class="passage-meta">
             <span>
+              <i class="fa fa-calendar"></i>2018-10-09
+            </span>
+            
+              <span>
+                | <a href="/categories/webpack4系列教程/"><i class="fa fa-bookmark"></i>webpack4系列教程</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-10-09-webpack-js-pacakge/">webpack4 系列教程(十二)：处理第三方JavaScript库</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>项目做大之后，开发者会更多专注在业务逻辑上，其他方面则尽力使用第三方<code>JS</code>库来实现。</p>
+<p>由于<code>js</code>变化实在太快，所以出现了多种引入和管理第三方库的方法，常用的有 3 中：</p>
+<ol>
+<li>CDN：<code>&lt;script&gt;&lt;/script&gt;</code>标签引入即可</li>
+<li>npm 包管理： 目前最常用和最推荐的方法</li>
+<li>本地<code>js</code>文件：一些库由于历史原因，没有提供<code>es6</code>版本，需要手动下载，放入项目目录中，再手动引入。</li>
+</ol>
+<blockquote>
+<p>本文详细介绍了：在上面3种方法的基础上，如何配合<code>webpack</code>更优雅地引入和使用第三方<code>js</code>库。</p>
+</blockquote>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-10-09-webpack-js-pacakge/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+             
+              <a href="/tags/第三方库/"><i class="fa fa-tags"></i>第三方库</a>
+             
+              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-10-09
+            </span>
+            
+              <span>
+                | <a href="/categories/网站日志/"><i class="fa fa-bookmark"></i>网站日志</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-10-09-server-dead-first/">第一次遭遇云服务器完全崩溃</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p>第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、<strong>控制台无法强制关机</strong>。一度怀疑人生。</p>
+</blockquote>
+<p>到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-10-09-server-dead-first/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/服务器/"><i class="fa fa-tags"></i>服务器</a>
+             
+              <a href="/tags/网络安全/"><i class="fa fa-tags"></i>网络安全</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
               <i class="fa fa-calendar"></i>2018-10-07
             </span>
             
@@ -635,10 +661,60 @@
   <footer class="site-footer">
     
       <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-ad" target="_blank">Theme Art Design</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme BMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API Next</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">技术社交</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">JueJin</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">SegmentDefault</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://blog.csdn.net/AsuraDong" target="_blank">CSDN</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
         <h5 class="site-footer-title">博客推荐</h5>
         
           <span class="site-footer-item">
-            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+            <a href="https://github.com/dongyuanxin/blog" target="_blank">博客精彩文章</a>
           </span>
         
           <span class="site-footer-item">
@@ -651,71 +727,13 @@
         
       </div>
     
-      <div class="site-footer-col">
-        <h5 class="site-footer-title">系列教程</h5>
-        
-          <span class="site-footer-item">
-            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
-          </span>
-        
-      </div>
-    
-      <div class="site-footer-col">
-        <h5 class="site-footer-title">实验室</h5>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
-          </span>
-        
-      </div>
-    
-      <div class="site-footer-col">
-        <h5 class="site-footer-title">抓到我</h5>
-        
-          <span class="site-footer-item">
-            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
-          </span>
-        
-      </div>
-    
     <div class="site-footer-info">
       <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
     </div>
     
       <div class="site-footer-info">
-        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+        <i class="fa fa-paw"></i>
+        <span id="busuanzi_container_site_pv">您是本站第 <span id="busuanzi_value_site_pv"></span> 位访客</span> | 历史数据为 134728 位访客(未迁移)
       </div>
     
     

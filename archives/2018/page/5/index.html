@@ -22,8 +22,6 @@
   
 
   
-    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
-  
 
   
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
@@ -32,13 +30,15 @@
   
 
   
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
 
   <script>
   // theme-ad's config script
   // it can be used in every script
   
   window.AD_CONFIG = {
-    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":true},
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":false},
     welcome: {"enable":true,"interval":30},
     start_time: "2018-02-10",
     passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
@@ -68,6 +68,8 @@
 <link rel="stylesheet" href="/styles/components/highlight/highlight.css">
 
   
+    <link rel="stylesheet" href="/custom/style.css">
+  
 </head>
   <body>
     <header class="site-header">
@@ -84,17 +86,23 @@
   <div class="site-header-right">
     <nav class="site-header-navigation">
       
-        <a href="/" target="_self">首页</a>
+        <a href="/archives/" target="_self">文章归档</a>
       
-        <a href="/archives/" target="_self">归档</a>
+        <a href="/categories/设计模式手册/" target="_self">设计模式手册</a>
       
-        <a href="/categories/" target="_self">分类</a>
+        <a href="/categories/前端面试手记/" target="_self">前端体系整理</a>
       
-        <a href="/tags/" target="_self">标签</a>
+        <a href="/categories/webpack4系列教程/" target="_self">Webpack4教程</a>
       
-        <a href="/friends/" target="_self">友链</a>
+        <a href="/categories/" target="_self">分类云</a>
       
-        <a href="/about/" target="_self">关于</a>
+        <a href="/tags/" target="_self">标签云</a>
+      
+        <a href="/friends/" target="_self">友情链接</a>
+      
+        <a href="/about/" target="_self">了解本站</a>
+      
+        <a href="https://godbmw.com/atom.xml" target="_blank">快速订阅</a>
       
     </nav>
     <div class="site-header-btn">
@@ -120,38 +128,56 @@
     <ol class="toc">
       
         <li class="toc-item">
-          <a href="/" target="_self">
-            首页
+          <a href="/archives/" target="_self">
+            文章归档
           </a>
         </li>
       
         <li class="toc-item">
-          <a href="/archives/" target="_self">
-            归档
+          <a href="/categories/设计模式手册/" target="_self">
+            设计模式手册
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/前端面试手记/" target="_self">
+            前端体系整理
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/webpack4系列教程/" target="_self">
+            Webpack4教程
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/categories/" target="_self">
-            分类
+            分类云
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/tags/" target="_self">
-            标签
+            标签云
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/friends/" target="_self">
-            友链
+            友情链接
           </a>
         </li>
       
         <li class="toc-item">
           <a href="/about/" target="_self">
-            关于
+            了解本站
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="https://godbmw.com/atom.xml" target="_blank">
+            快速订阅
           </a>
         </li>
       
@@ -180,13 +206,13 @@
     
     <div class="timeline-item">
       <time>2018-09-19</time>
-      <a target="_self" href="/passages/2018-09-19-auto-init-data/">测试数据之自动生成</a>
+      <a target="_self" href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
     </div>
   
     
     <div class="timeline-item">
       <time>2018-09-19</time>
-      <a target="_self" href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
+      <a target="_self" href="/passages/2018-09-19-auto-init-data/">测试数据之自动生成</a>
     </div>
   
     
@@ -232,10 +258,60 @@
   <footer class="site-footer">
     
       <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-ad" target="_blank">Theme Art Design</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme BMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API Next</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">技术社交</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">JueJin</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">SegmentDefault</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://blog.csdn.net/AsuraDong" target="_blank">CSDN</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
         <h5 class="site-footer-title">博客推荐</h5>
         
           <span class="site-footer-item">
-            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+            <a href="https://github.com/dongyuanxin/blog" target="_blank">博客精彩文章</a>
           </span>
         
           <span class="site-footer-item">
@@ -248,71 +324,13 @@
         
       </div>
     
-      <div class="site-footer-col">
-        <h5 class="site-footer-title">系列教程</h5>
-        
-          <span class="site-footer-item">
-            <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://godbmw.com/categories/设计模式手册/" target="_blank">设计模式手册</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://godbmw.com/leetcode/" target="_blank">Leetcode解题报告</a>
-          </span>
-        
-      </div>
-    
-      <div class="site-footer-col">
-        <h5 class="site-footer-title">实验室</h5>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme bmw</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
-          </span>
-        
-      </div>
-    
-      <div class="site-footer-col">
-        <h5 class="site-footer-title">抓到我</h5>
-        
-          <span class="site-footer-item">
-            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://segmentfault.com/u/godbmw" target="_blank">思否</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
-          </span>
-        
-          <span class="site-footer-item">
-            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
-          </span>
-        
-      </div>
-    
     <div class="site-footer-info">
       <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
     </div>
     
       <div class="site-footer-info">
-        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+        <i class="fa fa-paw"></i>
+        <span id="busuanzi_container_site_pv">您是本站第 <span id="busuanzi_value_site_pv"></span> 位访客</span> | 历史数据为 134728 位访客(未迁移)
       </div>
     
     
