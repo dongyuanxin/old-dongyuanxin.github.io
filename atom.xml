@@ -208,7 +208,7 @@
     <link href="https://godbmw.com/passages/2019-03-27-javascript-second/"/>
     <id>https://godbmw.com/passages/2019-03-27-javascript-second/</id>
     <published>2019-03-26T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
+    <updated>2019-04-13T16:37:29.443Z</updated>
     
     <summary type="html">
     
@@ -302,11 +302,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -337,9 +337,9 @@
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
-      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
-    
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -371,11 +371,11 @@
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
-    
-      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
     
@@ -815,9 +815,9 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="HTML" scheme="https://godbmw.com/tags/HTML/"/>
-    
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="HTML" scheme="https://godbmw.com/tags/HTML/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
@@ -1076,6 +1076,25 @@
   </entry>
   
   <entry>
+    <title>[置顶]我为什么坚持写博客</title>
+    <link href="https://godbmw.com/passages/2018-11-01-why-i-blog/"/>
+    <id>https://godbmw.com/passages/2018-11-01-why-i-blog/</id>
+    <published>2018-10-31T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://github.com/dongyuanxin/theme-bmw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo-theme-bmw&lt;/a&gt;(&lt;strong&gt;版本代号：微声&lt;/strong&gt;)重磅来袭：&lt;strong&gt;为自己发声&lt;/strong&gt;！&lt;/p&gt;
+&lt;p&gt;✨ 分享功能、打赏功能、版权声明、幻灯片播放、音乐播放、评论社交… 一大波高逼格功能已抵达 ✨&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>设计模式手册之代理模式</title>
     <link href="https://godbmw.com/passages/2018-11-01-proxy-pattern/"/>
     <id>https://godbmw.com/passages/2018-11-01-proxy-pattern/</id>
@@ -1101,25 +1120,6 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[置顶]我为什么坚持写博客</title>
-    <link href="https://godbmw.com/passages/2018-11-01-why-i-blog/"/>
-    <id>https://godbmw.com/passages/2018-11-01-why-i-blog/</id>
-    <published>2018-10-31T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/dongyuanxin/theme-bmw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo-theme-bmw&lt;/a&gt;(&lt;strong&gt;版本代号：微声&lt;/strong&gt;)重磅来袭：&lt;strong&gt;为自己发声&lt;/strong&gt;！&lt;/p&gt;
-&lt;p&gt;✨ 分享功能、打赏功能、版权声明、幻灯片播放、音乐播放、评论社交… 一大波高逼格功能已抵达 ✨&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
-    
     
   </entry>
   
@@ -1201,29 +1201,25 @@
   </entry>
   
   <entry>
-    <title>设计模式手册之单例模式</title>
-    <link href="https://godbmw.com/passages/2018-10-23-singleton-pattern/"/>
-    <id>https://godbmw.com/passages/2018-10-23-singleton-pattern/</id>
+    <title>网站version 4.0版本上线</title>
+    <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
+    <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
     <published>2018-10-22T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.539Z</updated>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;单例模式定义：保证一个类仅有一个实例，并提供访问此实例的全局访问点。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果一个类负责连接数据库的线程池、日志记录逻辑等等，&lt;strong&gt;此时需要单例模式来保证对象不被重复创建，以达到降低开销的目的。&lt;/strong&gt;&lt;/p&gt;
+      &lt;p&gt;更新时间：2018-10-22 ~ 2018-10-23&lt;/p&gt;
+&lt;p&gt;更新内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前端&lt;/li&gt;
+&lt;li&gt;服务端&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
-      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
     
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
     
   </entry>
   
@@ -1259,25 +1255,29 @@
   </entry>
   
   <entry>
-    <title>网站version 4.0版本上线</title>
-    <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
-    <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
+    <title>设计模式手册之单例模式</title>
+    <link href="https://godbmw.com/passages/2018-10-23-singleton-pattern/"/>
+    <id>https://godbmw.com/passages/2018-10-23-singleton-pattern/</id>
     <published>2018-10-22T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.539Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;更新时间：2018-10-22 ~ 2018-10-23&lt;/p&gt;
-&lt;p&gt;更新内容：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;前端&lt;/li&gt;
-&lt;li&gt;服务端&lt;/li&gt;
-&lt;/ul&gt;
+      &lt;blockquote&gt;
+&lt;p&gt;单例模式定义：保证一个类仅有一个实例，并提供访问此实例的全局访问点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果一个类负责连接数据库的线程池、日志记录逻辑等等，&lt;strong&gt;此时需要单例模式来保证对象不被重复创建，以达到降低开销的目的。&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
     
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
     
   </entry>
   
@@ -1311,32 +1311,6 @@
   </entry>
   
   <entry>
-    <title>全网最贴心webpack系列教程和配套代码</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
-    <published>2018-10-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
     <title>webpack4 系列教程(十六)：开发模式和生产模式·实战</title>
     <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/"/>
     <id>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</id>
@@ -1355,9 +1329,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -1380,9 +1354,35 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
-      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+  </entry>
+  
+  <entry>
+    <title>全网最贴心webpack系列教程和配套代码</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
+    <published>2018-10-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -1484,33 +1484,60 @@
   </entry>
   
   <entry>
-    <title>二叉搜索树的实现与常见用法</title>
-    <link href="https://godbmw.com/passages/2018-10-09-binary-search-tree/"/>
-    <id>https://godbmw.com/passages/2018-10-09-binary-search-tree/</id>
+    <title>第一次遭遇云服务器完全崩溃</title>
+    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
+    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack4 系列教程(十二)：处理第三方JavaScript库</title>
+    <link href="https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/"/>
+    <id>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</id>
     <published>2018-10-08T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;二叉搜索树是一颗空树，或者具有以下性质的二叉树：&lt;/p&gt;
+      &lt;p&gt;项目做大之后，开发者会更多专注在业务逻辑上，其他方面则尽力使用第三方&lt;code&gt;JS&lt;/code&gt;库来实现。&lt;/p&gt;
+&lt;p&gt;由于&lt;code&gt;js&lt;/code&gt;变化实在太快，所以出现了多种引入和管理第三方库的方法，常用的有 3 中：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CDN：&lt;code&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;标签引入即可&lt;/li&gt;
+&lt;li&gt;npm 包管理： 目前最常用和最推荐的方法&lt;/li&gt;
+&lt;li&gt;本地&lt;code&gt;js&lt;/code&gt;文件：一些库由于历史原因，没有提供&lt;code&gt;es6&lt;/code&gt;版本，需要手动下载，放入项目目录中，再手动引入。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文详细介绍了：在上面3种方法的基础上，如何配合&lt;code&gt;webpack&lt;/code&gt;更优雅地引入和使用第三方&lt;code&gt;js&lt;/code&gt;库。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值&lt;/li&gt;
-&lt;li&gt;若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值&lt;/li&gt;
-&lt;li&gt;任意节点的左、右子树也分别为二叉查找树&lt;/li&gt;
-&lt;li&gt;没有键值相等的节点&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$&lt;/p&gt;
     
     </summary>
     
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
-      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
   </entry>
   
@@ -1544,60 +1571,33 @@
   </entry>
   
   <entry>
-    <title>webpack4 系列教程(十二)：处理第三方JavaScript库</title>
-    <link href="https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/"/>
-    <id>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</id>
+    <title>二叉搜索树的实现与常见用法</title>
+    <link href="https://godbmw.com/passages/2018-10-09-binary-search-tree/"/>
+    <id>https://godbmw.com/passages/2018-10-09-binary-search-tree/</id>
     <published>2018-10-08T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;项目做大之后，开发者会更多专注在业务逻辑上，其他方面则尽力使用第三方&lt;code&gt;JS&lt;/code&gt;库来实现。&lt;/p&gt;
-&lt;p&gt;由于&lt;code&gt;js&lt;/code&gt;变化实在太快，所以出现了多种引入和管理第三方库的方法，常用的有 3 中：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;CDN：&lt;code&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;标签引入即可&lt;/li&gt;
-&lt;li&gt;npm 包管理： 目前最常用和最推荐的方法&lt;/li&gt;
-&lt;li&gt;本地&lt;code&gt;js&lt;/code&gt;文件：一些库由于历史原因，没有提供&lt;code&gt;es6&lt;/code&gt;版本，需要手动下载，放入项目目录中，再手动引入。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;本文详细介绍了：在上面3种方法的基础上，如何配合&lt;code&gt;webpack&lt;/code&gt;更优雅地引入和使用第三方&lt;code&gt;js&lt;/code&gt;库。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第一次遭遇云服务器完全崩溃</title>
-    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
-    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
       &lt;blockquote&gt;
-&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
+&lt;p&gt;二叉搜索树是一颗空树，或者具有以下性质的二叉树：&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值&lt;/li&gt;
+&lt;li&gt;若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值&lt;/li&gt;
+&lt;li&gt;任意节点的左、右子树也分别为二叉查找树&lt;/li&gt;
+&lt;li&gt;没有键值相等的节点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$&lt;/p&gt;
     
     </summary>
     
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -1620,6 +1620,33 @@
       <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
       <category term="Ubuntu" scheme="https://godbmw.com/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>music-api-next 中文文档</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/</id>
+    <published>2018-10-04T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;music-api-next&lt;/code&gt;中文文档：一个可以快速从QQ音乐、虾米音乐和网易音乐获得歌曲搜索结果、歌曲链接信息和歌曲评论的第三方库。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果您有任何问题或者建议，欢迎在本文页面评论。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
     
   </entry>
   
@@ -1688,33 +1715,6 @@
   </entry>
   
   <entry>
-    <title>music-api-next 中文文档</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/</id>
-    <published>2018-10-04T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;music-api-next&lt;/code&gt;中文文档：一个可以快速从QQ音乐、虾米音乐和网易音乐获得歌曲搜索结果、歌曲链接信息和歌曲评论的第三方库。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果您有任何问题或者建议，欢迎在本文页面评论。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
-    
-      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
-    
-  </entry>
-  
-  <entry>
     <title>MathJax：让前端支持数学公式</title>
     <link href="https://godbmw.com/passages/2018-10-03-js-mathjax/"/>
     <id>https://godbmw.com/passages/2018-10-03-js-mathjax/</id>
@@ -1735,9 +1735,9 @@
     </summary>
     
     
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
       <category term="Latex" scheme="https://godbmw.com/tags/Latex/"/>
     
@@ -1819,6 +1819,37 @@
   </entry>
   
   <entry>
+    <title>测试数据之自动生成</title>
+    <link href="https://godbmw.com/passages/2018-09-19-auto-init-data/"/>
+    <id>https://godbmw.com/passages/2018-09-19-auto-init-data/</id>
+    <published>2018-09-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近在学习排序算法的时候，需要利用程序自动生成测试数据，代码和思路整理在这篇文章里面。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于排序算法来说，自动生成测试数据的类型需要有以下几种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;[a, b]&lt;/code&gt;范围内的&lt;code&gt;n&lt;/code&gt;个随机数据，比如：1、2、100、-1…&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;个近乎有序的数据，比如：1、2、3、7、5、6、4…&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;个近乎相同的数据，比如：1、1、1、2、2、2、2、2…&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果排序算法在这三种数据类型中的跑分都和理论分析一样，才能保证算法较好的稳健性。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
+    
+      <category term="自动化" scheme="https://godbmw.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>高级排序算法实现与优化</title>
     <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
     <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
@@ -1870,37 +1901,6 @@
   </entry>
   
   <entry>
-    <title>测试数据之自动生成</title>
-    <link href="https://godbmw.com/passages/2018-09-19-auto-init-data/"/>
-    <id>https://godbmw.com/passages/2018-09-19-auto-init-data/</id>
-    <published>2018-09-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近在学习排序算法的时候，需要利用程序自动生成测试数据，代码和思路整理在这篇文章里面。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;对于排序算法来说，自动生成测试数据的类型需要有以下几种：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;[a, b]&lt;/code&gt;范围内的&lt;code&gt;n&lt;/code&gt;个随机数据，比如：1、2、100、-1…&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;个近乎有序的数据，比如：1、2、3、7、5、6、4…&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;个近乎相同的数据，比如：1、1、1、2、2、2、2、2…&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;如果排序算法在这三种数据类型中的跑分都和理论分析一样，才能保证算法较好的稳健性。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
-      <category term="自动化" scheme="https://godbmw.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
     <title>机器学习，了解一下？</title>
     <link href="https://godbmw.com/passages/2018-09-17-machine-learn-first/"/>
     <id>https://godbmw.com/passages/2018-09-17-machine-learn-first/</id>
@@ -1918,9 +1918,9 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://godbmw.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="机器学习" scheme="https://godbmw.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -2044,11 +2044,11 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
       <category term="前端优化" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -2071,9 +2071,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
       <category term="前端优化" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
     
@@ -2127,28 +2127,6 @@
   </entry>
   
   <entry>
-    <title>Mysql连接缓慢</title>
-    <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
-    <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在客户端和连接逐渐增多的情况下，禁用Mysql的&lt;code&gt;DNS&lt;/code&gt;解析服务，可以极大提高连接速度，解决&lt;code&gt;Handshake inactivity timeout&lt;/code&gt;等&lt;code&gt;TIMEOUT&lt;/code&gt;类型报错。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="Mysql" scheme="https://godbmw.com/tags/Mysql/"/>
-    
-      <category term="数据库" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>webpack4 系列教程(七): SCSS提取和懒加载</title>
     <link href="https://godbmw.com/passages/2018-08-28-webpack-scss-lazy/"/>
     <id>https://godbmw.com/passages/2018-08-28-webpack-scss-lazy/</id>
@@ -2168,13 +2146,35 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
       <category term="前端优化" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql连接缓慢</title>
+    <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
+    <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在客户端和连接逐渐增多的情况下，禁用Mysql的&lt;code&gt;DNS&lt;/code&gt;解析服务，可以极大提高连接速度，解决&lt;code&gt;Handshake inactivity timeout&lt;/code&gt;等&lt;code&gt;TIMEOUT&lt;/code&gt;类型报错。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="Mysql" scheme="https://godbmw.com/tags/Mysql/"/>
+    
+      <category term="数据库" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -2242,9 +2242,9 @@
     </summary>
     
     
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
   </entry>
   
@@ -2351,9 +2351,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -2484,9 +2484,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -2508,9 +2508,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -2678,29 +2678,23 @@
   </entry>
   
   <entry>
-    <title>谈谈promise/async/await的执行顺序与V8引擎的BUG</title>
-    <link href="https://godbmw.com/passages/2018-05-29-promise-async-await-order/"/>
-    <id>https://godbmw.com/passages/2018-05-29-promise-async-await-order/</id>
+    <title>详解scss的继承、占位符和混合宏</title>
+    <link href="https://godbmw.com/passages/2018-05-29-scss-more/"/>
+    <id>https://godbmw.com/passages/2018-05-29-scss-more/</id>
     <published>2018-05-28T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;故事还是要从下面这道面试题说起：请问下面这段代码的输出是什么？&lt;/p&gt;
+&lt;p&gt;如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;script start&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;async1&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; async2()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;async1 end&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;async2&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;async2 end&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;async1()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;setTimeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;setTimeout&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;resolve&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;Promise&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  resolve()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  .then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;promise1&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  .then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;promise2&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;script end&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;15px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;18px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;mixin&lt;/span&gt; size(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;...) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 0 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 1 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 2 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @&lt;span class=&quot;keyword&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Too many parameters&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
-      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
-    
-      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
     
   </entry>
   
@@ -2725,23 +2719,29 @@
   </entry>
   
   <entry>
-    <title>详解scss的继承、占位符和混合宏</title>
-    <link href="https://godbmw.com/passages/2018-05-29-scss-more/"/>
-    <id>https://godbmw.com/passages/2018-05-29-scss-more/</id>
+    <title>谈谈promise/async/await的执行顺序与V8引擎的BUG</title>
+    <link href="https://godbmw.com/passages/2018-05-29-promise-async-await-order/"/>
+    <id>https://godbmw.com/passages/2018-05-29-promise-async-await-order/</id>
     <published>2018-05-28T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇&lt;/p&gt;
+&lt;p&gt;故事还是要从下面这道面试题说起：请问下面这段代码的输出是什么？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;15px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;18px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;mixin&lt;/span&gt; size(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;...) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 0 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 1 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 2 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @&lt;span class=&quot;keyword&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Too many parameters&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;script start&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;async1&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; async2()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;async1 end&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;async2&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;async2 end&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;async1()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;setTimeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;setTimeout&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;resolve&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;Promise&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  resolve()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  .then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;promise1&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  .then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;promise2&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;script end&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
+      <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
-      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
     
   </entry>
   
@@ -2768,29 +2768,6 @@
     
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Promise 概述</title>
-    <link href="https://godbmw.com/passages/2018-05-23-es-promise/"/>
-    <id>https://godbmw.com/passages/2018-05-23-es-promise/</id>
-    <published>2018-05-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;实例一旦被创建就会被执行&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;过程分为两个分支：&lt;code&gt;pending=&amp;gt;resolved&lt;/code&gt;和&lt;code&gt;pending=&amp;gt;rejected&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;状态改变后，依然会执行之后的代码：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; warnDemo = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; promise = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;resolve&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resolve(ctx);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;After resolved, but Run&quot;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// 依然会执行这个语句&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; promise;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;warnDemo(&lt;span class=&quot;string&quot;&gt;&quot;ctx&quot;&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;`This is &lt;span class=&quot;subst&quot;&gt;$&amp;#123;ctx&amp;#125;&lt;/span&gt;`&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
   </entry>
   
@@ -2835,6 +2812,29 @@
     
     
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Promise 概述</title>
+    <link href="https://godbmw.com/passages/2018-05-23-es-promise/"/>
+    <id>https://godbmw.com/passages/2018-05-23-es-promise/</id>
+    <published>2018-05-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;实例一旦被创建就会被执行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;过程分为两个分支：&lt;code&gt;pending=&amp;gt;resolved&lt;/code&gt;和&lt;code&gt;pending=&amp;gt;rejected&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;状态改变后，依然会执行之后的代码：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; warnDemo = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; promise = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;resolve&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resolve(ctx);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;After resolved, but Run&quot;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// 依然会执行这个语句&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; promise;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;warnDemo(&lt;span class=&quot;string&quot;&gt;&quot;ctx&quot;&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;`This is &lt;span class=&quot;subst&quot;&gt;$&amp;#123;ctx&amp;#125;&lt;/span&gt;`&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
   </entry>
   
