@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-04-11T02:41:05.722Z</updated>
+  <updated>2019-04-18T15:30:28.523Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -21,12 +21,12 @@
     <link href="https://godbmw.com/passages/2019-04-11-changsha-travel/"/>
     <id>https://godbmw.com/passages/2019-04-11-changsha-travel/</id>
     <published>2019-04-11T00:00:00.000Z</published>
-    <updated>2019-04-11T02:41:05.722Z</updated>
+    <updated>2019-04-18T15:30:28.523Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;清明放假前，终于过了腾讯云的提校招提前批，阿里的面试也基本告一段落。忙完了所有事情，匆忙准备下，准备好了money，就出发去了广东北部的湖南长沙。&lt;/p&gt;
-&lt;p&gt;也多亏晓和健哥不辞辛苦地当导游，ღ( ´･ᴗ･` )比心。让两天的旅途丰富多彩，该吃的都吃了，该玩的都玩了，特此记录一下有意义的事情。&lt;/p&gt;
+&lt;p&gt;也多亏晓和健哥不辞辛苦地当导游，ღ( ´･ᴗ･` )比心！让两天的旅途丰富多彩，该吃的都吃了，该玩的都玩了，特此记录一下有意义的事情。&lt;/p&gt;
     
     </summary>
     
@@ -227,9 +227,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -256,9 +256,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -333,13 +333,13 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
-      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
   </entry>
   
@@ -1004,6 +1004,31 @@
   </entry>
   
   <entry>
+    <title>被DDos后的及时补救与一些思考</title>
+    <link href="https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/"/>
+    <id>https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/</id>
+    <published>2018-11-05T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近3天，我的小站&lt;a href=&quot;https://godbmw.com&quot;&gt;godbmw.com&lt;/a&gt;经历了2次DDoS。第一次因为没有限制QPS，短短几分钟内CDN被盗刷了300G流量。第二次完善了相关保护措施后，CDN依然被D了90G的流量。经过2天的迁移和补救，终于使得网站服务恢复正常。用此篇记录下整个奋战过程。希望对广大站长有帮助。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;如果是个人项目，强烈推荐使用国外的“cloudflare”，免费、不限流量、抗攻击，就像国外的JetBrians（教育版免费），都是有情怀、不坑用户的公司，致敬！！！&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="CDN" scheme="https://godbmw.com/tags/CDN/"/>
+    
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式手册之迭代器模式</title>
     <link href="https://godbmw.com/passages/2018-11-06-iter-pattern/"/>
     <id>https://godbmw.com/passages/2018-11-06-iter-pattern/</id>
@@ -1027,31 +1052,6 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>被DDos后的及时补救与一些思考</title>
-    <link href="https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/"/>
-    <id>https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/</id>
-    <published>2018-11-05T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近3天，我的小站&lt;a href=&quot;https://godbmw.com&quot;&gt;godbmw.com&lt;/a&gt;经历了2次DDoS。第一次因为没有限制QPS，短短几分钟内CDN被盗刷了300G流量。第二次完善了相关保护措施后，CDN依然被D了90G的流量。经过2天的迁移和补救，终于使得网站服务恢复正常。用此篇记录下整个奋战过程。希望对广大站长有帮助。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;如果是个人项目，强烈推荐使用国外的“cloudflare”，免费、不限流量、抗攻击，就像国外的JetBrians（教育版免费），都是有情怀、不坑用户的公司，致敬！！！&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="CDN" scheme="https://godbmw.com/tags/CDN/"/>
-    
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -1201,29 +1201,6 @@
   </entry>
   
   <entry>
-    <title>网站version 4.0版本上线</title>
-    <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
-    <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
-    <published>2018-10-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;更新时间：2018-10-22 ~ 2018-10-23&lt;/p&gt;
-&lt;p&gt;更新内容：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;前端&lt;/li&gt;
-&lt;li&gt;服务端&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>每天一个设计模式·多语言实现</title>
     <link href="https://godbmw.com/passages/2018-10-23-design-pattern-code/"/>
     <id>https://godbmw.com/passages/2018-10-23-design-pattern-code/</id>
@@ -1244,9 +1221,9 @@
       <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
@@ -1282,6 +1259,29 @@
   </entry>
   
   <entry>
+    <title>网站version 4.0版本上线</title>
+    <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
+    <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
+    <published>2018-10-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;更新时间：2018-10-22 ~ 2018-10-23&lt;/p&gt;
+&lt;p&gt;更新内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前端&lt;/li&gt;
+&lt;li&gt;服务端&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>小站实用手册</title>
     <link href="https://godbmw.com/passages/2018-10-21-how-to-use-site/"/>
     <id>https://godbmw.com/passages/2018-10-21-how-to-use-site/</id>
@@ -1307,6 +1307,32 @@
     
       <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>全网最贴心webpack系列教程和配套代码</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
+    <published>2018-10-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -1355,32 +1381,6 @@
     
     
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>全网最贴心webpack系列教程和配套代码</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
-    <published>2018-10-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
     
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
@@ -1484,6 +1484,37 @@
   </entry>
   
   <entry>
+    <title>二叉搜索树的实现与常见用法</title>
+    <link href="https://godbmw.com/passages/2018-10-09-binary-search-tree/"/>
+    <id>https://godbmw.com/passages/2018-10-09-binary-search-tree/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;二叉搜索树是一颗空树，或者具有以下性质的二叉树：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值&lt;/li&gt;
+&lt;li&gt;若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值&lt;/li&gt;
+&lt;li&gt;任意节点的左、右子树也分别为二叉查找树&lt;/li&gt;
+&lt;li&gt;没有键值相等的节点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
+    
+      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>第一次遭遇云服务器完全崩溃</title>
     <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
     <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
@@ -1571,37 +1602,6 @@
   </entry>
   
   <entry>
-    <title>二叉搜索树的实现与常见用法</title>
-    <link href="https://godbmw.com/passages/2018-10-09-binary-search-tree/"/>
-    <id>https://godbmw.com/passages/2018-10-09-binary-search-tree/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;二叉搜索树是一颗空树，或者具有以下性质的二叉树：&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值&lt;/li&gt;
-&lt;li&gt;若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值&lt;/li&gt;
-&lt;li&gt;任意节点的左、右子树也分别为二叉查找树&lt;/li&gt;
-&lt;li&gt;没有键值相等的节点&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
-      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ubuntu创建新用户的正确姿势</title>
     <link href="https://godbmw.com/passages/2018-10-07-ubuntu-user/"/>
     <id>https://godbmw.com/passages/2018-10-07-ubuntu-user/</id>
@@ -1624,18 +1624,28 @@
   </entry>
   
   <entry>
-    <title>music-api-next 中文文档</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/</id>
+    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
     <published>2018-10-04T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;music-api-next&lt;/code&gt;中文文档：一个可以快速从QQ音乐、虾米音乐和网易音乐获得歌曲搜索结果、歌曲链接信息和歌曲评论的第三方库。&lt;/p&gt;
+&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;如果您有任何问题或者建议，欢迎在本文页面评论。&lt;/p&gt;
+&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
+&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
+&lt;li&gt;支持音乐链接下载&lt;/li&gt;
+&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
+&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
+&lt;li&gt;可用、高效、稳定&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -1678,28 +1688,18 @@
   </entry>
   
   <entry>
-    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
+    <title>music-api-next 中文文档</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/</id>
     <published>2018-10-04T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;music-api-next&lt;/code&gt;中文文档：一个可以快速从QQ音乐、虾米音乐和网易音乐获得歌曲搜索结果、歌曲链接信息和歌曲评论的第三方库。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
-&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
-&lt;li&gt;支持音乐链接下载&lt;/li&gt;
-&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
-&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
-&lt;li&gt;可用、高效、稳定&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;如果您有任何问题或者建议，欢迎在本文页面评论。&lt;/p&gt;
     
     </summary>
     
@@ -1850,19 +1850,18 @@
   </entry>
   
   <entry>
-    <title>高级排序算法实现与优化</title>
-    <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
-    <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
+    <title>基础排序算法详解与优化</title>
+    <link href="https://godbmw.com/passages/2018-09-19-base-sort/"/>
+    <id>https://godbmw.com/passages/2018-09-19-base-sort/</id>
     <published>2018-09-18T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。&lt;/p&gt;
-&lt;p&gt;优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。&lt;/p&gt;
+      &lt;p&gt;常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。&lt;/p&gt;
+&lt;p&gt;但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。&lt;/p&gt;
+&lt;p&gt;因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://godbmw.com/passage/56&quot;&gt;一起来看下吧 &amp;gt;&amp;gt;&amp;gt;&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1876,18 +1875,19 @@
   </entry>
   
   <entry>
-    <title>基础排序算法详解与优化</title>
-    <link href="https://godbmw.com/passages/2018-09-19-base-sort/"/>
-    <id>https://godbmw.com/passages/2018-09-19-base-sort/</id>
+    <title>高级排序算法实现与优化</title>
+    <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
+    <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
     <published>2018-09-18T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。&lt;/p&gt;
-&lt;p&gt;但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。&lt;/p&gt;
-&lt;p&gt;因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://godbmw.com/passage/56&quot;&gt;一起来看下吧 &amp;gt;&amp;gt;&amp;gt;&lt;/a&gt;&lt;/p&gt;
+      &lt;blockquote&gt;
+&lt;p&gt;本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。&lt;/p&gt;
+&lt;p&gt;优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。&lt;/p&gt;
     
     </summary>
     
@@ -2157,28 +2157,6 @@
   </entry>
   
   <entry>
-    <title>Mysql连接缓慢</title>
-    <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
-    <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在客户端和连接逐渐增多的情况下，禁用Mysql的&lt;code&gt;DNS&lt;/code&gt;解析服务，可以极大提高连接速度，解决&lt;code&gt;Handshake inactivity timeout&lt;/code&gt;等&lt;code&gt;TIMEOUT&lt;/code&gt;类型报错。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="Mysql" scheme="https://godbmw.com/tags/Mysql/"/>
-    
-      <category term="数据库" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>来点音乐--吐槽大会</title>
     <link href="https://godbmw.com/passages/2018-08-28-laidianmusic-chat/"/>
     <id>https://godbmw.com/passages/2018-08-28-laidianmusic-chat/</id>
@@ -2201,6 +2179,28 @@
     
       <category term="合作推广" scheme="https://godbmw.com/categories/%E5%90%88%E4%BD%9C%E6%8E%A8%E5%B9%BF/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql连接缓慢</title>
+    <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
+    <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在客户端和连接逐渐增多的情况下，禁用Mysql的&lt;code&gt;DNS&lt;/code&gt;解析服务，可以极大提高连接速度，解决&lt;code&gt;Handshake inactivity timeout&lt;/code&gt;等&lt;code&gt;TIMEOUT&lt;/code&gt;类型报错。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="Mysql" scheme="https://godbmw.com/tags/Mysql/"/>
+    
+      <category term="数据库" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -2295,9 +2295,9 @@
     </summary>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
@@ -2739,9 +2739,9 @@
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
-      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
-    
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+      <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -2772,29 +2772,6 @@
   </entry>
   
   <entry>
-    <title>var VS let</title>
-    <link href="https://godbmw.com/passages/2018-05-23-var-vs-let/"/>
-    <id>https://godbmw.com/passages/2018-05-23-var-vs-let/</id>
-    <published>2018-05-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;目前，如果大量使用&lt;code&gt;let&lt;/code&gt;，为了保证兼容性，&lt;code&gt;webpack&lt;/code&gt;会将&lt;code&gt;let&lt;/code&gt;转化为&lt;code&gt;var&lt;/code&gt;语法（&lt;strong&gt;这就会生成冗余代码&lt;/strong&gt;）。其实，结合&lt;code&gt;ES6&lt;/code&gt;的模块化规范，&lt;strong&gt;还是推荐使用：&lt;code&gt;var&lt;/code&gt;，以保证兼容老旧浏览器情况下减小代码体积&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;随着浏览器逐步升级，&lt;code&gt;let&lt;/code&gt;才是未来主流。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-  </entry>
-  
-  <entry>
     <title>module.exports和exports.md</title>
     <link href="https://godbmw.com/passages/2018-05-23-node-exports/"/>
     <id>https://godbmw.com/passages/2018-05-23-node-exports/</id>
@@ -2812,6 +2789,28 @@
     
     
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>理解es6中的const与“不变”</title>
+    <link href="https://godbmw.com/passages/2018-05-23-es6-const/"/>
+    <id>https://godbmw.com/passages/2018-05-23-es6-const/</id>
+    <published>2018-05-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt;实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -2839,24 +2838,25 @@
   </entry>
   
   <entry>
-    <title>理解es6中的const与“不变”</title>
-    <link href="https://godbmw.com/passages/2018-05-23-es6-const/"/>
-    <id>https://godbmw.com/passages/2018-05-23-es6-const/</id>
+    <title>var VS let</title>
+    <link href="https://godbmw.com/passages/2018-05-23-var-vs-let/"/>
+    <id>https://godbmw.com/passages/2018-05-23-var-vs-let/</id>
     <published>2018-05-22T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;const&lt;/code&gt;实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。&lt;/p&gt;
-&lt;/blockquote&gt;
+      &lt;ul&gt;
+&lt;li&gt;目前，如果大量使用&lt;code&gt;let&lt;/code&gt;，为了保证兼容性，&lt;code&gt;webpack&lt;/code&gt;会将&lt;code&gt;let&lt;/code&gt;转化为&lt;code&gt;var&lt;/code&gt;语法（&lt;strong&gt;这就会生成冗余代码&lt;/strong&gt;）。其实，结合&lt;code&gt;ES6&lt;/code&gt;的模块化规范，&lt;strong&gt;还是推荐使用：&lt;code&gt;var&lt;/code&gt;，以保证兼容老旧浏览器情况下减小代码体积&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;随着浏览器逐步升级，&lt;code&gt;let&lt;/code&gt;才是未来主流。&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
