@@ -193,6 +193,47 @@
         <div class="home-article-inner" data-cover="false">
           <div class="passage-meta">
             <span>
+              <i class="fa fa-calendar"></i>2018-10-07
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-10-07-ubuntu-user/">Ubuntu创建新用户的正确姿势</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <p>最近在学习《系统编程》，老师让创建新的用户，以<code>name+学号</code>的格式命名，来防止抄袭。</p>
+<p>因此，每次到一台新电脑，都要在 ubuntu 上创建新用户。<strong>然而，<code>sudo useradd 用户名</code>只能创建用户，却无法在<code>/home/</code>中创建用户目录，也无法设置用户权限。</strong></p>
+<p>查了很多篇博客，为了方便查阅，记录一下创建新用户并且分配权限的正确方法。</p>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-10-07-ubuntu-user/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/服务器/"><i class="fa fa-tags"></i>服务器</a>
+             
+              <a href="/tags/Ubuntu/"><i class="fa fa-tags"></i>Ubuntu</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
               <i class="fa fa-calendar"></i>2018-10-05
             </span>
             
@@ -377,9 +418,9 @@
           
             <div class="passage-tags">
              
-              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
-             
               <a href="/tags/第三方库/"><i class="fa fa-tags"></i>第三方库</a>
+             
+              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
              
               <a href="/tags/Latex/"><i class="fa fa-tags"></i>Latex</a>
             
@@ -545,18 +586,17 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-09-19-advance-sort/">高级排序算法实现与优化</a>
+            <a href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
           </h1>
           <div class="home-article-content passage-article">
             
-              <blockquote>
-<p>本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。</p>
-</blockquote>
-<p>我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。</p>
-<p>优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。</p>
+              <p>常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。</p>
+<p>但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。</p>
+<p>因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。</p>
+<p><a href="https://godbmw.com/passage/56">一起来看下吧 &gt;&gt;&gt;</a></p>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-09-19-advance-sort/">
+          <a class="home-article-read" href="/passages/2018-09-19-base-sort/">
             README MORE >>>
           </a>
           
@@ -617,52 +657,6 @@
               <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
              
               <a href="/tags/自动化/"><i class="fa fa-tags"></i>自动化</a>
-            
-            </div>
-          
-        </div>
-        
-      </div>
-    </div>
-  
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2018-09-19
-            </span>
-            
-              <span>
-                | <a href="/categories/数据结构和算法/"><i class="fa fa-bookmark"></i>数据结构和算法</a>
-              </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              <p>常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。</p>
-<p>但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。</p>
-<p>因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。</p>
-<p><a href="https://godbmw.com/passage/56">一起来看下吧 &gt;&gt;&gt;</a></p>
-            
-          </div>
-          <a class="home-article-read" href="/passages/2018-09-19-base-sort/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
-             
-              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
             
             </div>
           

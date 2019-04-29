@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>微信网页登录逻辑与实现 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript,前端开发,微信开发,">
+  
+
+  
+  <meta name="description" content="现在的网站开发，都绕不开微信登录（毕竟微信已经成为国民工具）。虽然文档已经写得很详细，但是对于没有经验的开发者还是容易踩坑。所以，专门记录一下微信网页认证的交互逻辑，也方便自己日后回查：加载微信网页sdk绘制登陆二维码：新tab页面绘制 / 本页面iframe绘制用户扫码登陆，前端跳入回调网址回调网址进一步做逻辑处理，如果是页内iframe绘制二维码，需要通知顶级页">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":false},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+    <link rel="stylesheet" href="/custom/style.css">
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/archives/" target="_self">文章归档</a>
+      
+        <a href="/categories/设计模式手册/" target="_self">设计模式手册</a>
+      
+        <a href="/categories/前端面试手记/" target="_self">前端体系整理</a>
+      
+        <a href="/categories/webpack4系列教程/" target="_self">Webpack4教程</a>
+      
+        <a href="/categories/" target="_self">分类云</a>
+      
+        <a href="/tags/" target="_self">标签云</a>
+      
+        <a href="/friends/" target="_self">友情链接</a>
+      
+        <a href="/about/" target="_self">了解本站</a>
+      
+        <a href="https://godbmw.com/atom.xml" target="_blank">订阅RSS</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            文章归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/设计模式手册/" target="_self">
+            设计模式手册
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/前端面试手记/" target="_self">
+            前端体系整理
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/webpack4系列教程/" target="_self">
+            Webpack4教程
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类云
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签云
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友情链接
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            了解本站
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="https://godbmw.com/atom.xml" target="_blank">
+            订阅RSS
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-04-15
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    微信网页登录逻辑与实现
+  </h1>
+  
+  <article class="passage-article">
+    <p>现在的网站开发，都绕不开微信登录（毕竟微信已经成为国民工具）。虽然文档已经写得很详细，但是对于没有经验的开发者还是容易踩坑。</p>
+<p>所以，专门记录一下微信网页认证的交互逻辑，也方便自己日后回查：</p>
+<ol>
+<li>加载微信网页sdk</li>
+<li>绘制登陆二维码：新tab页面绘制 / 本页面iframe绘制</li>
+<li>用户扫码登陆，前端跳入回调网址</li>
+<li>回调网址进一步做逻辑处理，如果是页内iframe绘制二维码，需要通知顶级页</li>
+</ol>
+<h3 id="微信网页SDK加载"><a href="#微信网页SDK加载" class="headerlink" title="微信网页SDK加载"></a>微信网页SDK加载</h3><p>在多人团队协作中，加载资源的代码需要格外小心。因为可能会有多个开发者在同一业务逻辑下调用，这会造成资源的重复加载。</p>
+<p>处理方法有两种，第一种是对外暴露多余接口，专门check是否重复加载。但是考虑到调用者每次在加载前，都需要显式调用<code>check()</code>方法进行检查，难免会有遗漏。</p>
+<p>所以采用第二种方法–设计模式中的缓存模式，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 备忘录模式: 防止重复加载</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> loadWeChatJs = <span class="function">(<span class="params">(</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> exists = <span class="literal">false</span>; <span class="comment">// 打点</span></span><br><span class="line">  <span class="keyword">const</span> src = <span class="string">'//res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'</span>; <span class="comment">// 微信sdk网址</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 防止重复加载</span></span><br><span class="line">    <span class="keyword">if</span>(exists) <span class="keyword">return</span> resolve(<span class="built_in">window</span>.WxLogin);</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">    script.src = src;</span><br><span class="line">    script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">    script.onerror = reject; <span class="comment">// <span class="doctag">TODO:</span> 失败时候, 可以移除script标签</span></span><br><span class="line">    script.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      exists = <span class="literal">true</span>;</span><br><span class="line">      resolve(<span class="built_in">window</span>.WxLogin);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h3 id="绘制登陆二维码"><a href="#绘制登陆二维码" class="headerlink" title="绘制登陆二维码"></a>绘制登陆二维码</h3><p>根据<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419316505&amp;token=&amp;lang=zh_CN" target="_blank" rel="noopener">《微信登陆开发指南》</a>，将参数传递给<code>window.WxLogin()</code>即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 微信默认配置</span></span><br><span class="line"><span class="keyword">const</span> baseOption = &#123;</span><br><span class="line">  self_redirect: <span class="literal">true</span>, <span class="comment">// true: 页内iframe跳转; false: 新标签页打开 </span></span><br><span class="line">  id: <span class="string">'wechat-container'</span>, </span><br><span class="line">  appid: <span class="string">'wechat-appid'</span>,</span><br><span class="line">  scope: <span class="string">'snsapi_login'</span>,</span><br><span class="line">  redirect_uri: <span class="built_in">encodeURIComponent</span>(<span class="string">'//1.1.1.1/'</span>),</span><br><span class="line">  state: <span class="string">''</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> loadQRCode = <span class="function">(<span class="params">option, intl = <span class="literal">false</span>, width, height</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> _option = &#123;...baseOption, ...option&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.WxLogin(_option);</span><br><span class="line">      <span class="keyword">const</span> ele = <span class="built_in">document</span>.getElementById(_option[<span class="string">'id'</span>]);</span><br><span class="line">      <span class="keyword">const</span> iframe = ele.querySelector(<span class="string">'iframe'</span>);</span><br><span class="line">      iframe.width = width? width : <span class="string">'300'</span>;</span><br><span class="line">      iframe.height = height? height : <span class="string">'420'</span>; </span><br><span class="line">      <span class="comment">// 处理国际化</span></span><br><span class="line">      intl &amp;&amp; (iframe.src = iframe.src + <span class="string">'&amp;lang=en'</span>);</span><br><span class="line">      resolve(<span class="literal">true</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span>(error) &#123;</span><br><span class="line">      reject(error);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在需要使用的业务组件中，可以在周期函数<code>componentDidMount</code>调用，下面是demo代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">const</span> wxOption = &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;;</span><br><span class="line">	loadWeChatJs()</span><br><span class="line">		.then(<span class="function"><span class="params">WxLogin</span> =&gt;</span> loadQRCode(wxOption))</span><br><span class="line">		.catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`Error: <span class="subst">$&#123;error.message&#125;</span>`</span>));   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="回调网址与iframe通信"><a href="#回调网址与iframe通信" class="headerlink" title="回调网址与iframe通信"></a>回调网址与iframe通信</h3><p>这一块我觉得是微信登陆交互中最复杂和难以理解的一段逻辑。开头有讲过，微信二维码渲染有2中方式，一种是打开新的标签页，另一种是在指定id的容器中插入iframe。</p>
+<p>毫无疑问，第二种交互方式更友好，因为要涉及不同级层的页面通信，代码处理也更具挑战。</p>
+<p>为了方便说明，请先看模拟的数据配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// redirect 地址会被后端拿到, 后端重定向到此地址, 前端会访问此页面</span></span><br><span class="line"><span class="comment">// redirect 地址中的参数, 是前端人员留给自己使用的; 后端会根据业务需要, 添加更多的字段, 然后一起返回前端</span></span><br><span class="line"><span class="keyword">const</span> querystr = <span class="string">'?'</span> + stringify(&#123;</span><br><span class="line">  redirect: <span class="built_in">encodeURIComponent</span>(<span class="string">`<span class="subst">$&#123;<span class="built_in">window</span>.location.origin&#125;</span>/account/redirect?`</span> + stringify(&#123;</span><br><span class="line">    to: <span class="built_in">encodeURIComponent</span>(<span class="built_in">window</span>.location.origin),</span><br><span class="line">    origin: <span class="built_in">encodeURIComponent</span>(<span class="built_in">window</span>.location.origin),</span><br><span class="line">    state: <span class="string">'login'</span></span><br><span class="line">  &#125;)),</span><br><span class="line">  type: <span class="string">'login'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wxOption = &#123;</span><br><span class="line">  id: <span class="string">'wechat-container'</span>,</span><br><span class="line">  self_redirect: <span class="literal">true</span>,</span><br><span class="line">  redirect_uri: <span class="built_in">encodeURIComponent</span>(<span class="string">`//1.1.1.1/api/socials/weixin/authorizations<span class="subst">$&#123;querystr&#125;</span>`</span>) <span class="comment">// 微信回调请求地址</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="前后端、微信服务器、用户端交互逻辑"><a href="#前后端、微信服务器、用户端交互逻辑" class="headerlink" title="前后端、微信服务器、用户端交互逻辑"></a>前后端、微信服务器、用户端交互逻辑</h3><p>按照上面的配置，我描述一下前端、用户端、微信服务器和后端交互的逻辑：</p>
+<ol>
+<li>前端根据wxOption加载了二维码，所有信息都放在了二维码中。同时监听微信服务器的消息。</li>
+<li>用户手机扫码，通知微信服务器确定登陆。</li>
+<li>微信服务器接受到用户的扫码请求，转发给前端。</li>
+<li>前端收到微信服务器传来消息，根据wxOption的redirect_uri参数，跳转到此url地址。注意：<ul>
+<li>这个接口地址是后端的，请求方式是GET</li>
+<li>前端通过拼接params携带参数</li>
+<li>地址会被拼接微信服务器传来的一个临时token，用于交给后端换取用户公众密钥</li>
+</ul>
+</li>
+<li>后端接收到<code>/api/socials/weixin/authorizations${querystr}</code>的请求，decode解码querystr中的信息。然后向微信服务端请求用户公众密钥。根绝前后端的约定（demo中用的是redirect字段），重定向到前端指定的redirect字段，并且拼接用户公众密钥等更多信息。</li>
+<li>前端知悉重定向，跳到重定向的路由（demo中用的是/account/redirect）</li>
+<li>在对应的路由处理后端传来的用户密钥等数据即可</li>
+<li>至此，微信认证的四端交互逻辑完成</li>
+</ol>
+<h3 id="跨Iframe通信"><a href="#跨Iframe通信" class="headerlink" title="跨Iframe通信"></a>跨Iframe通信</h3><p>前面流程走完了，现在的情况是页面中iframe的二维码区域，已经被替换成了<code>/account/redirect?...</code>的内容。</p>
+<p>为了实现通信，需要在页面的周期中监听<code>message</code>事件，并在组件卸载时，卸载此事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="comment">// ... ...</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>, <span class="keyword">this</span>.msgReceive, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">  <span class="built_in">window</span>.removeEventListener(<span class="string">'message'</span>, <span class="keyword">this</span>.msgReceive);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">msgReceive(event) &#123;</span><br><span class="line">  <span class="comment">// 监测是否是安全iframe</span></span><br><span class="line">  <span class="keyword">if</span>(!event.isTrusted) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(event.data); <span class="comment">// 获取iframe中传来的数据, 进一步进行逻辑处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而在<code>/account/redirect?...</code>路由对应的组件中，我们需要解析路由中的params参数，按照业务逻辑检查后，将结果传递给前面的页面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    <span class="comment">// step1: 获取url中params参数</span></span><br><span class="line">    <span class="keyword">const</span> querys = getQueryVariable(<span class="keyword">this</span>.props.location.search);</span><br><span class="line">    <span class="comment">// step2: 检查querys中的数据是否符合要求 ... </span></span><br><span class="line">    <span class="comment">// step3: 向顶级页面传递消息</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">window</span>.parent &amp;&amp; <span class="built_in">window</span>.parent.postMessage(<span class="string">'data'</span>, <span class="string">'*'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，微信网页认证的流程完成。</p>
+<p><em>更多：关于iframe通信的更多细节，请查看MDN的文档</em></p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#微信网页SDK加载"><span class="toc-text">微信网页SDK加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制登陆二维码"><span class="toc-text">绘制登陆二维码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调网址与iframe通信"><span class="toc-text">回调网址与iframe通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前后端、微信服务器、用户端交互逻辑"><span class="toc-text">前后端、微信服务器、用户端交互逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨Iframe通信"><span class="toc-text">跨Iframe通信</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-04-15-wechat-h5-login/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+     
+      <a href="/tags/前端开发/"><i class="fa fa-tags"></i>前端开发</a>
+     
+      <a href="/tags/微信开发/"><i class="fa fa-tags"></i>微信开发</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-04-15-wechat-h5-login";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-ad" target="_blank">Theme Art Design</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme BMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API Next</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">技术社交</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">JueJin</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">SegmentDefault</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://blog.csdn.net/AsuraDong" target="_blank">CSDN</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/blog" target="_blank">博客精彩文章</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i>
+        <span id="busuanzi_container_site_pv">您是本站第 <span id="busuanzi_value_site_pv"></span> 位访客</span> | 历史数据为 134728 位访客(未迁移)
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-04-11-changsha-travel/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>
