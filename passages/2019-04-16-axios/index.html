@@ -6,16 +6,16 @@
   <meta name="author" content="董沅鑫">
   
   
-  <title>分类: 开源项目 | 董沅鑫的个人网站</title>
+  <title>axios全局代理实战 | 董沅鑫的个人网站</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD">
+    <meta name="keywords" content="ES6,第三方库,设计模式,前端开发,">
   
 
   
-  <meta name="description" content="董沅鑫的个人网站, 安静写些东西.">
+  <meta name="description" content="在项目中，为了方便使用，对axios进行了二次封装，原因如下：由于内网服务器的安全策略，put、delete等方法的请求无法发送到后台为了方便快速对接后端服务器，api接口的前缀、安全策略过期时间等通用配置应该抽离">
 
   
     <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
@@ -42,7 +42,7 @@
     welcome: {"enable":true,"interval":30},
     start_time: "2018-02-10",
     passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "董沅鑫",
     share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
@@ -186,70 +186,101 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-04-16
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    axios全局代理实战
+  </h1>
   
-  <h2 class="timeline-title">系列: 开源项目</h2>
+  <article class="passage-article">
+    <p>在项目中，为了方便使用，对<code>axios</code>进行了二次封装，原因如下：</p>
+<ol>
+<li>由于内网服务器的安全策略，put、delete等方法的请求无法发送到后台</li>
+<li>为了方便快速对接后端服务器，api接口的前缀、安全策略过期时间等通用配置应该抽离</li>
+</ol>
+<h3 id="公共配置抽离"><a href="#公共配置抽离" class="headerlink" title="公共配置抽离"></a>公共配置抽离</h3><p>假设后端api的前缀地址是：<code>//1.1.1.1/api/</code>，安全过期时间是5000ms。</p>
+<p>那么通用配置信息如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CONFIG = &#123;</span><br><span class="line">    baseURL: <span class="string">'//1.1.1.1/api/'</span>,</span><br><span class="line">    timeout: <span class="number">5000</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> instance = axios.create(&#123; CONFIG &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> instance;</span><br></pre></td></tr></table></figure>
+<h3 id="编写拦截器"><a href="#编写拦截器" class="headerlink" title="编写拦截器"></a>编写拦截器</h3><p>“拦截器”的做法来源于设计模式中的“装饰器模式”，它能在不改变原有函数逻辑的情况下，添加其他业务逻辑。</p>
+<p>低耦合的设计非常适用于参数过滤、中间层拦截等场景。</p>
+<h4 id="请求拦截器"><a href="#请求拦截器" class="headerlink" title="请求拦截器"></a>请求拦截器</h4><p>考虑到业务场景，请求到后端的数据需要在Headers中带有认证数据。</p>
+<p>同时，由于不支持put、patch、delete方法，只能在headers中通过添加字段来标识。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleRequest = <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  config.headers.common[<span class="string">'Authorization'</span>] = token.get() || <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> method = config.method.toUpperCase();</span><br><span class="line">  <span class="keyword">switch</span>(method) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'PUT'</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'PATCH'</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'DELETE'</span>:</span><br><span class="line">      <span class="comment">//方法转换</span></span><br><span class="line">      config.headers.common[<span class="string">'X-Http-Method-Override'</span>] = method;</span><br><span class="line">      config.method = <span class="string">'POST'</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">instance.interceptors.request.use(handleRequest, error =&gt; <span class="built_in">Promise</span>.reject(error));</span><br></pre></td></tr></table></figure>
+<h4 id="返回拦截器"><a href="#返回拦截器" class="headerlink" title="返回拦截器"></a>返回拦截器</h4><p>当数据从后端返回，出现错误的时候，也做一层数据过滤拦截。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hanldeResponseError = <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; response = &#123;&#125; &#125; = error;</span><br><span class="line">  <span class="keyword">switch</span>(response.status) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">401</span>: <span class="comment">// 401:用户未登录需要先登录</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Unauthorized'</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">403</span>:</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Forbidden'</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>: <span class="comment">//操作失败</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">422</span>: <span class="comment">//表单验证失败</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`Error: <span class="subst">$&#123;response.data.message&#125;</span>`</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">404</span>:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">instance.interceptors.response.use(<span class="function"><span class="params">response</span> =&gt;</span> response, hanldeResponseError);</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#公共配置抽离"><span class="toc-text">公共配置抽离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写拦截器"><span class="toc-text">编写拦截器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#请求拦截器"><span class="toc-text">请求拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#返回拦截器"><span class="toc-text">返回拦截器</span></a></li></ol></li></ol>
+  </div>
+</aside>
   
-    
-      <h3 class="timeline-subtitle">2019</h3>
-    
-    <div class="timeline-item">
-      <time>2019-03-03</time>
-      <a target="_self" href="/passages/2019-03-03-theme-ad-docs-zh/">Theme Art Design 中文文档</a>
-    </div>
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-04-16-axios/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
   
-    
-      <h3 class="timeline-subtitle">2018</h3>
-    
-    <div class="timeline-item">
-      <time>2018-12-06</time>
-      <a target="_self" href="/passages/2018-12-06-theme-bmw-v4/">开源博客|Theme-bmw：&#34;微声&#34;版发布</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+     
+      <a href="/tags/第三方库/"><i class="fa fa-tags"></i>第三方库</a>
+     
+      <a href="/tags/设计模式/"><i class="fa fa-tags"></i>设计模式</a>
+     
+      <a href="/tags/前端开发/"><i class="fa fa-tags"></i>前端开发</a>
     
-    <div class="timeline-item">
-      <time>2018-11-15</time>
-      <a target="_self" href="/passages/2018-11-15-theme-bmw-docs-zh/">Theme-BMW 中文文档</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2018-11-14</time>
-      <a target="_self" href="/passages/2018-11-14-hexo-theme-bmw/">一款简约且实用的Hexo新主题：BMW</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2018-10-23</time>
-      <a target="_self" href="/passages/2018-10-23-design-pattern-code/">每天一个设计模式·多语言实现</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2018-10-19</time>
-      <a target="_self" href="/passages/2018-10-19-webpack-demos-introduction/">全网最贴心webpack系列教程和配套代码</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2018-10-05</time>
-      <a target="_self" href="/passages/2018-10-05-music-api-next-docs-zh/">music-api-next 中文文档</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2018-10-05</time>
-      <a target="_self" href="/passages/2018-10-05-music-api-next-docs/">music-api-next DOCS</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2018-10-05</time>
-      <a target="_self" href="/passages/2018-10-05-music-api-next/">music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</a>
     </div>
   
 </div>
+
     </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-04-16-axios";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
     
     <div class="site-footer-wrapper">
   <footer class="site-footer">
@@ -382,16 +413,16 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/passages/2019-04-15-wechat-h5-login/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
-      <a href="javascript:void(0);" data-enable="false">
+      <a href="#disqus_thread" data-enable="true">
         <i class="fa fa-commenting"></i>
       </a>
     
