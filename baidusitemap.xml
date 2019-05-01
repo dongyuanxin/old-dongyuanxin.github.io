@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://godbmw.com/passages/2019-04-15-wechat-h5-login/</loc>
+    <lastmod>2019-05-01</lastmod>
+  </url>  <url>
     <loc>https://godbmw.com/passages/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%97%A0%E6%A0%87%E9%A2%98/</loc>
     <lastmod>2019-05-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2019-04-16-axios/</loc>
-    <lastmod>2019-04-29</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2019-04-15-wechat-h5-login/</loc>
     <lastmod>2019-04-29</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2019-04-11-changsha-travel/</loc>
@@ -46,7 +46,7 @@
     <loc>https://godbmw.com/passages/2019-01-17-adapter-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2019-01-12-decorator-pattern/</loc>
+    <loc>https://godbmw.com/passages/2018-12-12-composite-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2019-01-31-template-pattern/</loc>
@@ -85,6 +85,15 @@
     <loc>https://godbmw.com/passages/2018-10-25-stragegy-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
+    <loc>https://godbmw.com/passages/2019-01-12-decorator-pattern/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2019-01-07-chain-of-responsibility-pattern/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-12-16-flyweight-pattern/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
     <loc>https://godbmw.com/passages/2018-11-01-proxy-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
@@ -95,15 +104,6 @@
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-11-25-command-pattern/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-12-12-composite-pattern/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-12-16-flyweight-pattern/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2019-01-07-chain-of-responsibility-pattern/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-10-27-graph-traversal-application/</loc>
@@ -301,10 +301,19 @@
     <loc>https://godbmw.com/passages/2018-05-29-scss-more/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
+    <loc>https://godbmw.com/passages/2018-08-17-webpack-css/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
     <loc>https://godbmw.com/passages/2018-06-19-batch-edit-log/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
+    <loc>https://godbmw.com/passages/2018-09-07-git-stash/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
     <loc>https://godbmw.com/passages/2018-07-29-webpack-demos-introduction/</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
+    <loc>https://godbmw.com/passages/2018-09-02-css-tree-shaking/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-09-01-js-tree-shaking/</loc>
@@ -316,22 +325,13 @@
     <loc>https://godbmw.com/passages/2018-08-18-webpack-scss/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
-    <loc>https://godbmw.com/passages/2018-08-17-webpack-css/</loc>
+    <loc>https://godbmw.com/passages/2018-09-06-git-tag-and-version/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-08-webpack-spa-split-lazy/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-08-06-webpack-mutiple-pages/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-02-css-tree-shaking/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-06-git-tag-and-version/</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
-    <loc>https://godbmw.com/passages/2018-09-07-git-stash/</loc>
     <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://godbmw.com/passages/2018-07-31-webpack-compile-es6/</loc>

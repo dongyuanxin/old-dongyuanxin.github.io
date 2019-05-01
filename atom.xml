@@ -63,7 +63,7 @@
     <link href="https://godbmw.com/passages/2019-04-15-wechat-h5-login/"/>
     <id>https://godbmw.com/passages/2019-04-15-wechat-h5-login/</id>
     <published>2019-04-15T00:00:00.000Z</published>
-    <updated>2019-04-29T05:34:57.817Z</updated>
+    <updated>2019-05-01T16:43:51.663Z</updated>
     
     <summary type="html">
     
@@ -1295,6 +1295,33 @@
   </entry>
   
   <entry>
+    <title>设计模式手册之单例模式</title>
+    <link href="https://godbmw.com/passages/2018-10-23-singleton-pattern/"/>
+    <id>https://godbmw.com/passages/2018-10-23-singleton-pattern/</id>
+    <published>2018-10-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;单例模式定义：保证一个类仅有一个实例，并提供访问此实例的全局访问点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果一个类负责连接数据库的线程池、日志记录逻辑等等，&lt;strong&gt;此时需要单例模式来保证对象不被重复创建，以达到降低开销的目的。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>每天一个设计模式·多语言实现</title>
     <link href="https://godbmw.com/passages/2018-10-23-design-pattern-code/"/>
     <id>https://godbmw.com/passages/2018-10-23-design-pattern-code/</id>
@@ -1318,33 +1345,6 @@
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式手册之单例模式</title>
-    <link href="https://godbmw.com/passages/2018-10-23-singleton-pattern/"/>
-    <id>https://godbmw.com/passages/2018-10-23-singleton-pattern/</id>
-    <published>2018-10-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;单例模式定义：保证一个类仅有一个实例，并提供访问此实例的全局访问点。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果一个类负责连接数据库的线程池、日志记录逻辑等等，&lt;strong&gt;此时需要单例模式来保证对象不被重复创建，以达到降低开销的目的。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
-    
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
@@ -1382,18 +1382,18 @@
   </entry>
   
   <entry>
-    <title>webpack4 系列教程(十六)：开发模式和生产模式·实战</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</id>
+    <title>webpack4 系列教程(十五)：开发模式与webpack-dev-server</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-server/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</id>
     <published>2018-10-18T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;这是&lt;code&gt;webpack4&lt;/code&gt;系列最后一篇教程了。这篇文章在之前所有教程的基础上，做了一个真正意义上的 webpack 项目！我花费了三个月整理了这份教程，并且完善了相关示例代码，也更熟悉 webpack 的理论和应用，当然，也感谢大家的支持。&lt;/p&gt;
+&lt;p&gt;为什么需要开发模式？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;好了，感慨完毕，开始正题 ?&lt;/p&gt;
+&lt;p&gt;借助&lt;code&gt;webpack&lt;/code&gt;，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而&lt;code&gt;source-map&lt;/code&gt;更是准确定位代码错误的利器。&lt;/p&gt;
     
     </summary>
     
@@ -1433,18 +1433,18 @@
   </entry>
   
   <entry>
-    <title>webpack4 系列教程(十五)：开发模式与webpack-dev-server</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-server/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</id>
+    <title>webpack4 系列教程(十六)：开发模式和生产模式·实战</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</id>
     <published>2018-10-18T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;为什么需要开发模式？&lt;/p&gt;
+&lt;p&gt;这是&lt;code&gt;webpack4&lt;/code&gt;系列最后一篇教程了。这篇文章在之前所有教程的基础上，做了一个真正意义上的 webpack 项目！我花费了三个月整理了这份教程，并且完善了相关示例代码，也更熟悉 webpack 的理论和应用，当然，也感谢大家的支持。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;借助&lt;code&gt;webpack&lt;/code&gt;，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而&lt;code&gt;source-map&lt;/code&gt;更是准确定位代码错误的利器。&lt;/p&gt;
+&lt;p&gt;好了，感慨完毕，开始正题 ?&lt;/p&gt;
     
     </summary>
     
@@ -1555,31 +1555,6 @@
   </entry>
   
   <entry>
-    <title>第一次遭遇云服务器完全崩溃</title>
-    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
-    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>webpack4 系列教程(十二)：处理第三方JavaScript库</title>
     <link href="https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/"/>
     <id>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</id>
@@ -1609,35 +1584,6 @@
       <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack4 系列教程(十一)：字体文件处理</title>
-    <link href="https://godbmw.com/passages/2018-10-09-webpack-chracter-file/"/>
-    <id>https://godbmw.com/passages/2018-10-09-webpack-chracter-file/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;在自己的项目中引入中意的字体样式，是让自己舒坦的重要方式 :)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;源码地址如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos/tree/master/demo11&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;本节课源码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;所有课程源码&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-      <category term="字体处理" scheme="https://godbmw.com/tags/%E5%AD%97%E4%BD%93%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
@@ -1673,6 +1619,60 @@
   </entry>
   
   <entry>
+    <title>webpack4 系列教程(十一)：字体文件处理</title>
+    <link href="https://godbmw.com/passages/2018-10-09-webpack-chracter-file/"/>
+    <id>https://godbmw.com/passages/2018-10-09-webpack-chracter-file/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在自己的项目中引入中意的字体样式，是让自己舒坦的重要方式 :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;源码地址如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos/tree/master/demo11&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;本节课源码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;所有课程源码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="字体处理" scheme="https://godbmw.com/tags/%E5%AD%97%E4%BD%93%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一次遭遇云服务器完全崩溃</title>
+    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
+    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Ubuntu创建新用户的正确姿势</title>
     <link href="https://godbmw.com/passages/2018-10-07-ubuntu-user/"/>
     <id>https://godbmw.com/passages/2018-10-07-ubuntu-user/</id>
@@ -1691,43 +1691,6 @@
       <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
       <category term="Ubuntu" scheme="https://godbmw.com/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
-    <published>2018-10-04T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
-&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
-&lt;li&gt;支持音乐链接下载&lt;/li&gt;
-&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
-&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
-&lt;li&gt;可用、高效、稳定&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
-    
-      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
     
   </entry>
   
@@ -1771,6 +1734,43 @@
 &lt;p&gt;The English document of &lt;code&gt;music-api-next&lt;/code&gt;: music API for search results, songs, comments from QQ, Xiami and Netease.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;If you have any question, welcome to comment here.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
+    <published>2018-10-04T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
+&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
+&lt;li&gt;支持音乐链接下载&lt;/li&gt;
+&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
+&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
+&lt;li&gt;可用、高效、稳定&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -1890,6 +1890,31 @@
   </entry>
   
   <entry>
+    <title>基础排序算法详解与优化</title>
+    <link href="https://godbmw.com/passages/2018-09-19-base-sort/"/>
+    <id>https://godbmw.com/passages/2018-09-19-base-sort/</id>
+    <published>2018-09-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。&lt;/p&gt;
+&lt;p&gt;但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。&lt;/p&gt;
+&lt;p&gt;因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://godbmw.com/passage/56&quot;&gt;一起来看下吧 &amp;gt;&amp;gt;&amp;gt;&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
+    
+  </entry>
+  
+  <entry>
     <title>测试数据之自动生成</title>
     <link href="https://godbmw.com/passages/2018-09-19-auto-init-data/"/>
     <id>https://godbmw.com/passages/2018-09-19-auto-init-data/</id>
@@ -1917,31 +1942,6 @@
       <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
       <category term="自动化" scheme="https://godbmw.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基础排序算法详解与优化</title>
-    <link href="https://godbmw.com/passages/2018-09-19-base-sort/"/>
-    <id>https://godbmw.com/passages/2018-09-19-base-sort/</id>
-    <published>2018-09-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。&lt;/p&gt;
-&lt;p&gt;但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。&lt;/p&gt;
-&lt;p&gt;因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://godbmw.com/passage/56&quot;&gt;一起来看下吧 &amp;gt;&amp;gt;&amp;gt;&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
   </entry>
   
@@ -2843,6 +2843,27 @@
   </entry>
   
   <entry>
+    <title>module.exports和exports.md</title>
+    <link href="https://godbmw.com/passages/2018-05-23-node-exports/"/>
+    <id>https://godbmw.com/passages/2018-05-23-node-exports/</id>
+    <published>2018-05-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;探讨下&lt;code&gt;CommonJs&lt;/code&gt;规范里面，&lt;code&gt;exports&lt;/code&gt;和&lt;code&gt;module.exports&lt;/code&gt;的区别&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在NodeJs8.x以上版本，写&lt;code&gt;module.exports&lt;/code&gt;即可。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+  </entry>
+  
+  <entry>
     <title>理解es6中的const与“不变”</title>
     <link href="https://godbmw.com/passages/2018-05-23-es6-const/"/>
     <id>https://godbmw.com/passages/2018-05-23-es6-const/</id>
@@ -2861,27 +2882,6 @@
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>module.exports和exports.md</title>
-    <link href="https://godbmw.com/passages/2018-05-23-node-exports/"/>
-    <id>https://godbmw.com/passages/2018-05-23-node-exports/</id>
-    <published>2018-05-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;探讨下&lt;code&gt;CommonJs&lt;/code&gt;规范里面，&lt;code&gt;exports&lt;/code&gt;和&lt;code&gt;module.exports&lt;/code&gt;的区别&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在NodeJs8.x以上版本，写&lt;code&gt;module.exports&lt;/code&gt;即可。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
     
   </entry>
   
