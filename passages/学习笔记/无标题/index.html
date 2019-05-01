@@ -6,16 +6,16 @@
   <meta name="author" content="董沅鑫">
   
   
-  <title>music-api-next DOCS | 董沅鑫的个人网站</title>
+  <title>董沅鑫的个人网站</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="开源项目,第三方库,爬虫,npm,">
+    <meta name="keywords" content="Hexo, Theme-AD">
   
 
   
-  <meta name="description" content="The English document of music-api-next: music API for search results, songs, comments from QQ, Xiami and Netease.If you have any question, welcome to comment here.">
+  <meta name="description" content="董沅鑫的个人网站, 安静写些东西.">
 
   
     <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
@@ -190,12 +190,8 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2018-10-05
+      <i class="fa fa-calendar"></i>2019-05-02
     </span>
-    
-      <span>
-        | <a href="/categories/开源项目/"><i class="fa fa-bookmark"></i>开源项目</a>
-      </span>
     
     
       <span>
@@ -204,53 +200,11 @@
     
   </div>
   <h1 class="passage-title">
-    music-api-next DOCS
+    
   </h1>
   
   <article class="passage-article">
-    <blockquote>
-<p>Music API for search results, songs, comments from QQ, Xiami and Netease.</p>
-</blockquote>
-<p>For more information on how to get started and how to use <code>music-api-next</code>, please see <a href="https://godbmw.com/">author’s blog</a> and comment there. For source files and issues, please visit <a href="https://github.com/dongyuanxin/music-api-next" target="_blank" rel="noopener">the github repo</a>.</p>
-<p><a href="https://godbmw.com/passage/62"><strong>DOCS</strong></a></p>
-<p><a href="https://godbmw.com/passage/63"><strong>中文文档</strong></a></p>
-<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install music-api-next --save</span><br></pre></td></tr></table></figure>
-<p>If you are in China, please use:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install music-api-next --save</span><br></pre></td></tr></table></figure>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> musicAPI = <span class="built_in">require</span>(<span class="string">"music-api-next"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Search API: search keywords on qq, xiami or netease</span></span><br><span class="line">musicAPI</span><br><span class="line">  .searchSong(&#123;</span><br><span class="line">    key: <span class="string">"周杰伦"</span>,</span><br><span class="line">    page: <span class="number">1</span>,</span><br><span class="line">    limit: <span class="number">10</span>,</span><br><span class="line">    vendor: <span class="string">"qq"</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">songs</span> =&gt;</span> <span class="built_in">console</span>.log(songs))</span><br><span class="line">  .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(error.message));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Song API: get music meta including URL</span></span><br><span class="line">musicAPI</span><br><span class="line">  .getSong(&#123;</span><br><span class="line">    id: <span class="string">"003OUlho2HcRHC"</span>,</span><br><span class="line">    vendor: <span class="string">"qq"</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">meta</span> =&gt;</span> <span class="built_in">console</span>.log(meta))</span><br><span class="line">  .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(error.message));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comment API: get comments for the specified song</span></span><br><span class="line">musicAPI</span><br><span class="line">  .getComment(&#123;</span><br><span class="line">    id: <span class="string">"003OUlho2HcRHC"</span>,</span><br><span class="line">    page: <span class="number">1</span>,</span><br><span class="line">    limit: <span class="number">20</span>,</span><br><span class="line">    vendor: <span class="string">"qq"</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">comments</span> =&gt;</span> <span class="built_in">console</span>.log(comments))</span><br><span class="line">  .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(error.message));</span><br></pre></td></tr></table></figure>
-<h2 id="Run-with-a-server"><a href="#Run-with-a-server" class="headerlink" title="Run with a server"></a>Run with a server</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:dongyuanxin/music-api-next.git</span><br><span class="line">cd music-api-next</span><br><span class="line">npm install</span><br><span class="line">// run server on port: 5050</span><br><span class="line">node server.js</span><br></pre></td></tr></table></figure>
-<p>You can see the results of music APIs by accessing the url.</p>
-<p>For example:</p>
-<ul>
-<li>Search API: <code>http://localhost:5050/search/song?key=周杰伦&amp;page=1&amp;limit=10&amp;vendor=qq</code></li>
-<li>Song API: <code>http://localhost:5050/get/song?id=003OUlho2HcRHC&amp;vendor=qq</code></li>
-<li>Comment API: <code>http://localhost:5050/get/comment?id=003OUlho2HcRHC&amp;page=1&amp;limit=10&amp;vendor=qq</code></li>
-</ul>
-<h2 id="Run-with-webpack"><a href="#Run-with-webpack" class="headerlink" title="Run with webpack"></a>Run with webpack</h2><p>First, package with webpack.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:dongyuanxin/music-api-next.git</span><br><span class="line">cd music-api-next</span><br><span class="line">npm install</span><br><span class="line">// use webpack to package program</span><br><span class="line">// pacakged file named 'music-api-next.js' is placed in ./dist/</span><br><span class="line">webpack</span><br></pre></td></tr></table></figure>
-<p>Then, you can move <code>music-api-next.js</code> very conveniently and use it in the following ways:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> musicAPI = <span class="built_in">require</span>(<span class="string">"./music-api-next"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
-<li><p><code>musicAPI.searchSong(query)</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query: &#123;</span><br><span class="line">  key: String,</span><br><span class="line">  page: Number,</span><br><span class="line">  limit: Number,</span><br><span class="line">  vendor: one of [&apos;netease&apos;, &apos;xiami&apos;, &apos;qq&apos;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>musicAPI.getSong(query)</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">query: &#123;</span><br><span class="line">  id: String or Number,</span><br><span class="line">  vendor: one of [&apos;netease&apos;, &apos;xiami&apos;, &apos;qq&apos;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>musicAPI.getComment(query)</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query: &#123;</span><br><span class="line">  id: String or Number,</span><br><span class="line">  page: Number,</span><br><span class="line">  limit: Number,</span><br><span class="line">  vendor: one of [&apos;netease&apos;, &apos;xiami&apos;, &apos;qq&apos;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h2><ol>
-<li><strong>It cannot be used for commercial purposes.</strong></li>
-<li><strong>It runs only on NodeJS instead of browser.</strong></li>
-<li><strong>Please use it politely and don’t put too much pressure on music platforms.</strong></li>
-</ol>
-<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p>The code for this project refers to the following open source projects and has been fixed, improved and added on NodeJS.</p>
-<ol>
-<li><a href="https://github.com/listen1/listen1_chrome_extension" target="_blank" rel="noopener">listen1_chrome_extension</a>: Has received a lawyer’s letter from Tencent. May stop maintenance at the end of the year 2018.</li>
-<li><a href="https://github.com/LIU9293/musicAPI" target="_blank" rel="noopener">musicAPI</a>: It has stopped maintenance one year ago. So its APIs are invalid.</li>
-</ol>
+    
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -258,7 +212,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install"><span class="toc-text">Install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run-with-a-server"><span class="toc-text">Run with a server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run-with-webpack"><span class="toc-text">Run with webpack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API"><span class="toc-text">API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Warning"><span class="toc-text">Warning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thanks"><span class="toc-text">Thanks</span></a></li></ol>
+    
   </div>
 </aside>
   
@@ -267,7 +221,7 @@
       
         <div>
           原文链接: 
-          <a href target="_blank">https://godbmw.com/passages/2018-10-05-music-api-next-docs/</a>
+          <a href target="_blank">https://godbmw.com/passages/学习笔记/无标题/</a>
         </div>
       
       <div>
@@ -275,16 +229,6 @@
       </div>
     </aside>
   
-  
-    <div class="passage-tags">
-     
-      <a href="/tags/第三方库/"><i class="fa fa-tags"></i>第三方库</a>
-     
-      <a href="/tags/爬虫/"><i class="fa fa-tags"></i>爬虫</a>
-     
-      <a href="/tags/npm/"><i class="fa fa-tags"></i>npm</a>
-    
-    </div>
   
 </div>
 
@@ -300,7 +244,7 @@
     <script async>
       var disqus_config = function() {
         this.page.url = `${window.location.origin}${window.location.pathname}`;
-        this.page.identifier = "2018-10-05-music-api-next-docs";
+        this.page.identifier = "无标题";
       };
       (function() {
         var d = document, s = d.createElement('script');
@@ -441,10 +385,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/passages/2018-10-05-music-api-next-docs-zh/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/passages/2018-10-03-js-mathjax/" data-enable="true">
+    <a href="/passages/2019-04-16-axios/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
