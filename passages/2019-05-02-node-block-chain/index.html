@@ -6,16 +6,16 @@
   <meta name="author" content="董沅鑫">
   
   
-  <title>webpack4系列教程(二): 编译ES6 | 董沅鑫的个人网站</title>
+  <title>NodeJS实现简易区块链 | 董沅鑫的个人网站</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="webpack4系列教程,ES6,webpack,">
+    <meta name="keywords" content="ES6,Node,区块链,数据结构,后台开发,">
   
 
   
-  <meta name="description" content="今天介绍webpack怎么编译ES6的各种函数和语法。敲黑板：这是webpack4版本哦, 有一些不同于webpack3的地方。&amp;gt;&amp;gt;&amp;gt; 本节课源码&amp;gt;&amp;gt;&amp;gt; 所有课程源码">
+  <meta name="description" content="董沅鑫的个人网站, 安静写些东西.">
 
   
     <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
@@ -190,12 +190,8 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2018-07-31
+      <i class="fa fa-calendar"></i>2019-05-02
     </span>
-    
-      <span>
-        | <a href="/categories/webpack4系列教程/"><i class="fa fa-bookmark"></i>webpack4系列教程</a>
-      </span>
     
     
       <span>
@@ -204,41 +200,18 @@
     
   </div>
   <h1 class="passage-title">
-    webpack4系列教程(二): 编译ES6
+    NodeJS实现简易区块链
   </h1>
   
   <article class="passage-article">
-    <blockquote>
-<p>今天介绍<code>webpack</code>怎么编译<code>ES6</code>的各种函数和语法。敲黑板：<strong>这是<code>webpack4</code>版本哦, 有一些不同于<code>webpack3</code>的地方。</strong></p>
-</blockquote>
-<p><a href="https://github.com/dongyuanxin/webpack-demos/tree/master/demo02" target="_blank" rel="noopener">&gt;&gt;&gt; 本节课源码</a></p>
-<p><a href="https://github.com/dongyuanxin/webpack-demos" target="_blank" rel="noopener">&gt;&gt;&gt; 所有课程源码</a></p>
-<h3 id="1-了解babel"><a href="#1-了解babel" class="headerlink" title="1. 了解babel"></a>1. 了解<code>babel</code></h3><p>说起编译<code>es6</code>，就必须提一下<code>babel</code>和相关的技术生态：</p>
-<ol>
-<li><code>babel-loader</code>: 负责es6语法转化</li>
-<li><code>babel-preset-env</code>: 包含es6、7等版本的语法转化规则</li>
-<li><code>babel-polyfill</code>: es6内置方法和函数转化垫片</li>
-<li><code>babel-plugin-transform-runtime</code>: 避免polyfill污染全局变量</li>
-</ol>
-<p>需要注意的是, <code>babel-loader</code>和<code>babel-polyfill</code>。前者负责语法转化，比如：箭头函数；后者负责内置方法和函数，比如：<code>new Set()</code>。</p>
-<h3 id="2-安装相关库"><a href="#2-安装相关库" class="headerlink" title="2. 安装相关库"></a>2. 安装相关库</h3><p>这次，我们的<code>package.json</code>文件配置如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"babel-core"</span>: <span class="string">"^6.26.3"</span>,</span><br><span class="line">    <span class="string">"babel-loader"</span>: <span class="string">"^7.1.5"</span>,</span><br><span class="line">    <span class="string">"babel-plugin-transform-runtime"</span>: <span class="string">"^6.23.0"</span>,</span><br><span class="line">    <span class="string">"babel-preset-env"</span>: <span class="string">"^1.7.0"</span>,</span><br><span class="line">    <span class="string">"webpack"</span>: <span class="string">"^4.15.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"babel-polyfill"</span>: <span class="string">"^6.26.0"</span>,</span><br><span class="line">    <span class="string">"babel-runtime"</span>: <span class="string">"^6.26.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/dongyuanxin/webpack-demos/blob/master/demo02/package.json" target="_blank" rel="noopener">&gt;&gt;&gt; package.json 配置地址</a></p>
-<h3 id="3-webpack中使用babel"><a href="#3-webpack中使用babel" class="headerlink" title="3. webpack中使用babel"></a>3. <code>webpack</code>中使用<code>babel</code></h3><blockquote>
-<p><code>babel</code>的相关配置，推荐单独写在<code>.babelrc</code>文件中。下面，我给出这次的相关配置：</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"env"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"targets"</span>: &#123;</span><br><span class="line">          <span class="string">"browsers"</span>: [<span class="string">"last 2 versions"</span>]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [<span class="string">"transform-runtime"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在<code>webpack</code>配置文件中，关于<code>babel</code>的调用需要写在<code>module</code>模块中。对于相关的匹配规则，除了匹配<code>js</code>结尾的文件，还应该去除<code>node_module/</code>文件夹下的第三库的文件（发布前已经被处理好了）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">"./app.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">"bundle.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        exclude: <span class="regexp">/(node_modules)/</span>,</span><br><span class="line">        use: &#123;</span><br><span class="line">          loader: <span class="string">"babel-loader"</span> </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/dongyuanxin/webpack-demos/blob/master/demo02/.babelrc" target="_blank" rel="noopener">&gt;&gt;&gt; .babelrc地址</a></p>
-<p><a href="https://github.com/dongyuanxin/webpack-demos/blob/master/demo02/webpack.config.js" target="_blank" rel="noopener">&gt;&gt;&gt; 配置文件地址</a></p>
-<h3 id="4-最后：babel-polyfill"><a href="#4-最后：babel-polyfill" class="headerlink" title="4. 最后：babel-polyfill"></a>4. 最后：<code>babel-polyfill</code></h3><p>我们发现整个过程中并没有使用<code>babel-polyfill</code>。<strong>它需要在我们项目的入口文件中被引入</strong>，或者在<code>webpack.config.js</code>中配置。这里我们采用第一种方法编写<code>app.js</code>:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"babel-polyfill"</span>;</span><br><span class="line"><span class="keyword">let</span> func = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> NUM = <span class="number">45</span>;</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> arrB = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arrB.includes(<span class="number">8</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"new Set(arrB) is "</span>, <span class="keyword">new</span> <span class="built_in">Set</span>(arrB));</span><br></pre></td></tr></table></figure>
-<p>命令行中进行打包，然后编写<code>html</code>文件引用打包后的文件即可在不支持<code>es6</code>规范的老浏览器中看到效果了。</p>
-<h3 id="5-相关资料"><a href="#5-相关资料" class="headerlink" title="5. 相关资料"></a>5. 相关资料</h3><ul>
-<li><a href="https://www.babeljs.cn/docs/usage/polyfill/" target="_blank" rel="noopener">polyfill引入</a>：<a href="https://www.babeljs.cn/docs/usage/polyfill/" target="_blank" rel="noopener">https://www.babeljs.cn/docs/usage/polyfill/</a></li>
-<li><a href="https://www.babeljs.cn/docs/plugins/preset-env/" target="_blank" rel="noopener">babel-preset-env配置</a>：<a href="https://www.babeljs.cn/docs/plugins/preset-env/" target="_blank" rel="noopener">https://www.babeljs.cn/docs/plugins/preset-env/</a></li>
-</ul>
+    <p>之前由于课程要求，基于Nodejs做了一个实现简易区块链。要求非常简单，结构体记录区块结构，顺便能向链中插入新的区块即可。</p>
+<p>但是如果要支持多用户使用，就需要考虑“可信度”的问题。那么按照区块链要求，链上的数据不能被篡改，除非算力超过除了攻击者本身之外其余所以机器的算力。</p>
+<p>想了想，就动手做试试咯。</p>
+<hr>
+<p>之前由于课程要求，基于Nodejs做了一个实现简易区块链。要求非常简单，结构体记录区块结构，顺便能向链中插入新的区块即可。</p>
+<p>但是如果要支持多用户使用，就需要考虑“可信度”的问题。那么按照区块链要求，链上的数据不能被篡改，除非算力超过除了攻击者本身之外其余所以机器的算力。</p>
+<p>想了想，就动手做试试咯。</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -246,7 +219,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-了解babel"><span class="toc-text">1. 了解babel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装相关库"><span class="toc-text">2. 安装相关库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-webpack中使用babel"><span class="toc-text">3. webpack中使用babel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-最后：babel-polyfill"><span class="toc-text">4. 最后：babel-polyfill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-相关资料"><span class="toc-text">5. 相关资料</span></a></li></ol>
+    
   </div>
 </aside>
   
@@ -255,7 +228,7 @@
       
         <div>
           原文链接: 
-          <a href target="_blank">https://godbmw.com/passages/2018-07-31-webpack-compile-es6/</a>
+          <a href target="_blank">https://godbmw.com/passages/2019-05-02-node-block-chain/</a>
         </div>
       
       <div>
@@ -268,7 +241,13 @@
      
       <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
      
-      <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+      <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
+     
+      <a href="/tags/区块链/"><i class="fa fa-tags"></i>区块链</a>
+     
+      <a href="/tags/数据结构/"><i class="fa fa-tags"></i>数据结构</a>
+     
+      <a href="/tags/后台开发/"><i class="fa fa-tags"></i>后台开发</a>
     
     </div>
   
@@ -286,7 +265,7 @@
     <script async>
       var disqus_config = function() {
         this.page.url = `${window.location.origin}${window.location.pathname}`;
-        this.page.identifier = "2018-07-31-webpack-compile-es6";
+        this.page.identifier = "2019-05-02-node-block-chain";
       };
       (function() {
         var d = document, s = d.createElement('script');
@@ -427,10 +406,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/passages/2018-08-06-webpack-mutiple-pages/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/passages/2018-07-30-webpack-pack-js/" data-enable="true">
+    <a href="/passages/2019-04-16-axios/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

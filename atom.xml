@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-05-02T07:00:15.402Z</updated>
+  <updated>2019-05-02T14:11:27.201Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NodeJS实现简易区块链</title>
+    <link href="https://godbmw.com/passages/2019-05-02-node-block-chain/"/>
+    <id>https://godbmw.com/passages/2019-05-02-node-block-chain/</id>
+    <published>2019-05-02T00:00:00.000Z</published>
+    <updated>2019-05-02T14:11:27.201Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;之前由于课程要求，基于Nodejs做了一个实现简易区块链。要求非常简单，结构体记录区块结构，顺便能向链中插入新的区块即可。&lt;/p&gt;
+&lt;p&gt;但是如果要支持多用户使用，就需要考虑“可信度”的问题。那么按照区块链要求，链上的数据不能被篡改，除非算力超过除了攻击者本身之外其余所以机
+        
+      
+    
+    </summary>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+      <category term="区块链" scheme="https://godbmw.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="后台开发" scheme="https://godbmw.com/tags/%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>axios全局代理实战</title>
@@ -34,9 +67,9 @@
     </summary>
     
     
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
@@ -108,9 +141,9 @@
     </summary>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="HTML5" scheme="https://godbmw.com/tags/HTML5/"/>
     
@@ -196,25 +229,6 @@
   </entry>
   
   <entry>
-    <title>《万物理论》影评：时间永留简史</title>
-    <link href="https://godbmw.com/passages/2019-04-01-brief-history-of-time/"/>
-    <id>https://godbmw.com/passages/2019-04-01-brief-history-of-time/</id>
-    <published>2019-04-01T00:00:00.000Z</published>
-    <updated>2019-04-03T04:41:45.429Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;整部电影，没有幸与不幸，也不是爱情主题，仅仅是简简单单地向观众推导了霍金的幸福方程式。最后想说: 时间永留简史。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://cdn.nlark.com/yuque/0/2019/png/233327/1554133684177-0708dd74-074d-4f18-b389-44bdce15f4c6.png#align=left&amp;amp;display=inline&amp;amp;height=358&amp;amp;name=image.png&amp;amp;originHeight=696&amp;amp;originWidth=1452&amp;amp;size=1503476&amp;amp;status=done&amp;amp;width=746&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>设计模式手册之抽象工厂模式</title>
     <link href="https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/"/>
     <id>https://godbmw.com/passages/2019-04-01-abstract-factory-pattern/</id>
@@ -234,6 +248,25 @@
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《万物理论》影评：时间永留简史</title>
+    <link href="https://godbmw.com/passages/2019-04-01-brief-history-of-time/"/>
+    <id>https://godbmw.com/passages/2019-04-01-brief-history-of-time/</id>
+    <published>2019-04-01T00:00:00.000Z</published>
+    <updated>2019-04-03T04:41:45.429Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;整部电影，没有幸与不幸，也不是爱情主题，仅仅是简简单单地向观众推导了霍金的幸福方程式。最后想说: 时间永留简史。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn.nlark.com/yuque/0/2019/png/233327/1554133684177-0708dd74-074d-4f18-b389-44bdce15f4c6.png#align=left&amp;amp;display=inline&amp;amp;height=358&amp;amp;name=image.png&amp;amp;originHeight=696&amp;amp;originWidth=1452&amp;amp;size=1503476&amp;amp;status=done&amp;amp;width=746&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
     
   </entry>
   
@@ -284,9 +317,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -313,9 +346,9 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -359,11 +392,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -390,11 +423,11 @@
       <category term="前端面试手记" scheme="https://godbmw.com/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
     
@@ -426,13 +459,13 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
-      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
     
@@ -777,9 +810,9 @@
     
       <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
     
@@ -872,9 +905,9 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="HTML" scheme="https://godbmw.com/tags/HTML/"/>
-    
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
+    
+      <category term="HTML" scheme="https://godbmw.com/tags/HTML/"/>
     
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
@@ -925,11 +958,11 @@
     </summary>
     
     
+      <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="VueJS" scheme="https://godbmw.com/tags/VueJS/"/>
-    
-      <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
     
       <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
     
@@ -1133,6 +1166,25 @@
   </entry>
   
   <entry>
+    <title>[置顶]我为什么坚持写博客</title>
+    <link href="https://godbmw.com/passages/2018-11-01-why-i-blog/"/>
+    <id>https://godbmw.com/passages/2018-11-01-why-i-blog/</id>
+    <published>2018-10-31T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://github.com/dongyuanxin/theme-bmw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo-theme-bmw&lt;/a&gt;(&lt;strong&gt;版本代号：微声&lt;/strong&gt;)重磅来袭：&lt;strong&gt;为自己发声&lt;/strong&gt;！&lt;/p&gt;
+&lt;p&gt;✨ 分享功能、打赏功能、版权声明、幻灯片播放、音乐播放、评论社交… 一大波高逼格功能已抵达 ✨&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>设计模式手册之代理模式</title>
     <link href="https://godbmw.com/passages/2018-11-01-proxy-pattern/"/>
     <id>https://godbmw.com/passages/2018-11-01-proxy-pattern/</id>
@@ -1158,25 +1210,6 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[置顶]我为什么坚持写博客</title>
-    <link href="https://godbmw.com/passages/2018-11-01-why-i-blog/"/>
-    <id>https://godbmw.com/passages/2018-11-01-why-i-blog/</id>
-    <published>2018-10-31T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/dongyuanxin/theme-bmw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo-theme-bmw&lt;/a&gt;(&lt;strong&gt;版本代号：微声&lt;/strong&gt;)重磅来袭：&lt;strong&gt;为自己发声&lt;/strong&gt;！&lt;/p&gt;
-&lt;p&gt;✨ 分享功能、打赏功能、版权声明、幻灯片播放、音乐播放、评论社交… 一大波高逼格功能已抵达 ✨&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
-    
     
   </entry>
   
@@ -1251,9 +1284,9 @@
       <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
       <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
   </entry>
   
@@ -1275,6 +1308,37 @@
     
       <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
     
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每天一个设计模式·多语言实现</title>
+    <link href="https://godbmw.com/passages/2018-10-23-design-pattern-code/"/>
+    <id>https://godbmw.com/passages/2018-10-23-design-pattern-code/</id>
+    <published>2018-10-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Wow！这是一本多语言实现的设计模式的小册 ?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最近拜读了腾讯团队出版的《Javascript 设计模式与开发实践》，边读边敲边 google 的过程中收货颇多：原来代码还可以这么写！&lt;/p&gt;
+&lt;p&gt;但是对于初学者，或者变更开发语言的程序员来说，重新阅读一本深入的、大篇幅的设计模式相关书籍成本过高。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如何快速地领会设计模式的精髓？如何在不同的语言中实现设计模式？便是这本小册的初衷。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
@@ -1308,37 +1372,6 @@
   </entry>
   
   <entry>
-    <title>每天一个设计模式·多语言实现</title>
-    <link href="https://godbmw.com/passages/2018-10-23-design-pattern-code/"/>
-    <id>https://godbmw.com/passages/2018-10-23-design-pattern-code/</id>
-    <published>2018-10-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Wow！这是一本多语言实现的设计模式的小册 ?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;最近拜读了腾讯团队出版的《Javascript 设计模式与开发实践》，边读边敲边 google 的过程中收货颇多：原来代码还可以这么写！&lt;/p&gt;
-&lt;p&gt;但是对于初学者，或者变更开发语言的程序员来说，重新阅读一本深入的、大篇幅的设计模式相关书籍成本过高。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;如何快速地领会设计模式的精髓？如何在不同的语言中实现设计模式？便是这本小册的初衷。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>小站实用手册</title>
     <link href="https://godbmw.com/passages/2018-10-21-how-to-use-site/"/>
     <id>https://godbmw.com/passages/2018-10-21-how-to-use-site/</id>
@@ -1368,32 +1401,6 @@
   </entry>
   
   <entry>
-    <title>全网最贴心webpack系列教程和配套代码</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
-    <published>2018-10-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
     <title>webpack4 系列教程(十五)：开发模式与webpack-dev-server</title>
     <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-server/"/>
     <id>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</id>
@@ -1412,9 +1419,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -1437,9 +1444,35 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
-      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+  </entry>
+  
+  <entry>
+    <title>全网最贴心webpack系列教程和配套代码</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
+    <published>2018-10-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -1534,9 +1567,9 @@
       <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
       <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
   </entry>
   
@@ -1565,9 +1598,67 @@
       <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
     
+      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
       <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
-      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+  </entry>
+  
+  <entry>
+    <title>webpack4 系列教程(十二)：处理第三方JavaScript库</title>
+    <link href="https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/"/>
+    <id>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;项目做大之后，开发者会更多专注在业务逻辑上，其他方面则尽力使用第三方&lt;code&gt;JS&lt;/code&gt;库来实现。&lt;/p&gt;
+&lt;p&gt;由于&lt;code&gt;js&lt;/code&gt;变化实在太快，所以出现了多种引入和管理第三方库的方法，常用的有 3 中：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CDN：&lt;code&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;标签引入即可&lt;/li&gt;
+&lt;li&gt;npm 包管理： 目前最常用和最推荐的方法&lt;/li&gt;
+&lt;li&gt;本地&lt;code&gt;js&lt;/code&gt;文件：一些库由于历史原因，没有提供&lt;code&gt;es6&lt;/code&gt;版本，需要手动下载，放入项目目录中，再手动引入。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文详细介绍了：在上面3种方法的基础上，如何配合&lt;code&gt;webpack&lt;/code&gt;更优雅地引入和使用第三方&lt;code&gt;js&lt;/code&gt;库。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一次遭遇云服务器完全崩溃</title>
+    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
+    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -1601,64 +1692,6 @@
   </entry>
   
   <entry>
-    <title>webpack4 系列教程(十二)：处理第三方JavaScript库</title>
-    <link href="https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/"/>
-    <id>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;项目做大之后，开发者会更多专注在业务逻辑上，其他方面则尽力使用第三方&lt;code&gt;JS&lt;/code&gt;库来实现。&lt;/p&gt;
-&lt;p&gt;由于&lt;code&gt;js&lt;/code&gt;变化实在太快，所以出现了多种引入和管理第三方库的方法，常用的有 3 中：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;CDN：&lt;code&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;标签引入即可&lt;/li&gt;
-&lt;li&gt;npm 包管理： 目前最常用和最推荐的方法&lt;/li&gt;
-&lt;li&gt;本地&lt;code&gt;js&lt;/code&gt;文件：一些库由于历史原因，没有提供&lt;code&gt;es6&lt;/code&gt;版本，需要手动下载，放入项目目录中，再手动引入。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;本文详细介绍了：在上面3种方法的基础上，如何配合&lt;code&gt;webpack&lt;/code&gt;更优雅地引入和使用第三方&lt;code&gt;js&lt;/code&gt;库。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第一次遭遇云服务器完全崩溃</title>
-    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
-    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ubuntu创建新用户的正确姿势</title>
     <link href="https://godbmw.com/passages/2018-10-07-ubuntu-user/"/>
     <id>https://godbmw.com/passages/2018-10-07-ubuntu-user/</id>
@@ -1677,6 +1710,43 @@
       <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
       <category term="Ubuntu" scheme="https://godbmw.com/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
+    <published>2018-10-04T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
+&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
+&lt;li&gt;支持音乐链接下载&lt;/li&gt;
+&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
+&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
+&lt;li&gt;可用、高效、稳定&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
     
   </entry>
   
@@ -1735,43 +1805,6 @@
   </entry>
   
   <entry>
-    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
-    <published>2018-10-04T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
-&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
-&lt;li&gt;支持音乐链接下载&lt;/li&gt;
-&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
-&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
-&lt;li&gt;可用、高效、稳定&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
-    
-      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
-    
-  </entry>
-  
-  <entry>
     <title>MathJax：让前端支持数学公式</title>
     <link href="https://godbmw.com/passages/2018-10-03-js-mathjax/"/>
     <id>https://godbmw.com/passages/2018-10-03-js-mathjax/</id>
@@ -1792,9 +1825,9 @@
     </summary>
     
     
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
       <category term="Latex" scheme="https://godbmw.com/tags/Latex/"/>
     
@@ -1845,9 +1878,9 @@
       <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
       <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
   </entry>
   
@@ -2101,11 +2134,11 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
       <category term="前端优化" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
   </entry>
   
@@ -2128,9 +2161,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
       <category term="前端优化" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
     
@@ -2184,32 +2217,6 @@
   </entry>
   
   <entry>
-    <title>来点音乐--吐槽大会</title>
-    <link href="https://godbmw.com/passages/2018-08-28-laidianmusic-chat/"/>
-    <id>https://godbmw.com/passages/2018-08-28-laidianmusic-chat/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;这里是来点音乐公司的吐槽大会的厂址，Come on!&lt;/p&gt;
-&lt;p&gt;听说有很多小姐姐可爱的人在用这款产品哦。&lt;/p&gt;
-&lt;p&gt;Hello, everyone!
-        
-      
-    
-    </summary>
-    
-      <category term="合作推广" scheme="https://godbmw.com/categories/%E5%90%88%E4%BD%9C%E6%8E%A8%E5%B9%BF/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Mysql连接缓慢</title>
     <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
     <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
@@ -2251,13 +2258,39 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
+      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
       <category term="前端优化" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/"/>
     
-      <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
-    
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>来点音乐--吐槽大会</title>
+    <link href="https://godbmw.com/passages/2018-08-28-laidianmusic-chat/"/>
+    <id>https://godbmw.com/passages/2018-08-28-laidianmusic-chat/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这里是来点音乐公司的吐槽大会的厂址，Come on!&lt;/p&gt;
+&lt;p&gt;听说有很多小姐姐可爱的人在用这款产品哦。&lt;/p&gt;
+&lt;p&gt;Hello, everyone!
+        
+      
+    
+    </summary>
+    
+      <category term="合作推广" scheme="https://godbmw.com/categories/%E5%90%88%E4%BD%9C%E6%8E%A8%E5%B9%BF/"/>
+    
     
   </entry>
   
@@ -2299,9 +2332,9 @@
     </summary>
     
     
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
   </entry>
   
@@ -2352,9 +2385,9 @@
     </summary>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
@@ -2408,9 +2441,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -2541,9 +2574,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -2565,9 +2598,9 @@
       <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
     
   </entry>
   
@@ -2755,6 +2788,27 @@
   </entry>
   
   <entry>
+    <title>详解scss的继承、占位符和混合宏</title>
+    <link href="https://godbmw.com/passages/2018-05-29-scss-more/"/>
+    <id>https://godbmw.com/passages/2018-05-29-scss-more/</id>
+    <published>2018-05-28T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;15px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;18px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;mixin&lt;/span&gt; size(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;...) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 0 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 1 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 2 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @&lt;span class=&quot;keyword&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Too many parameters&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+  </entry>
+  
+  <entry>
     <title>谈谈promise/async/await的执行顺序与V8引擎的BUG</title>
     <link href="https://godbmw.com/passages/2018-05-29-promise-async-await-order/"/>
     <id>https://godbmw.com/passages/2018-05-29-promise-async-await-order/</id>
@@ -2778,27 +2832,6 @@
       <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
     
       <category term="面试" scheme="https://godbmw.com/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>详解scss的继承、占位符和混合宏</title>
-    <link href="https://godbmw.com/passages/2018-05-29-scss-more/"/>
-    <id>https://godbmw.com/passages/2018-05-29-scss-more/</id>
-    <published>2018-05-28T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;15px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;18px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;mixin&lt;/span&gt; size(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;...) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 0 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 1 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 2 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @&lt;span class=&quot;keyword&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Too many parameters&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
     
   </entry>
   
@@ -2868,9 +2901,9 @@
     </summary>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -2911,9 +2944,9 @@
     </summary>
     
     
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
   </entry>
   
