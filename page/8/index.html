@@ -254,31 +254,25 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-09-19-auto-init-data/">测试数据之自动生成</a>
+            <a href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
           </h1>
           <div class="home-article-content passage-article">
             
-              <blockquote>
-<p>最近在学习排序算法的时候，需要利用程序自动生成测试数据，代码和思路整理在这篇文章里面。</p>
-</blockquote>
-<p>对于排序算法来说，自动生成测试数据的类型需要有以下几种：</p>
-<ol>
-<li><code>[a, b]</code>范围内的<code>n</code>个随机数据，比如：1、2、100、-1…</li>
-<li><code>n</code>个近乎有序的数据，比如：1、2、3、7、5、6、4…</li>
-<li><code>n</code>个近乎相同的数据，比如：1、1、1、2、2、2、2、2…</li>
-</ol>
-<p>如果排序算法在这三种数据类型中的跑分都和理论分析一样，才能保证算法较好的稳健性。</p>
+              <p>常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。</p>
+<p>但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。</p>
+<p>因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。</p>
+<p><a href="https://godbmw.com/passage/56">一起来看下吧 &gt;&gt;&gt;</a></p>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-09-19-auto-init-data/">
+          <a class="home-article-read" href="/passages/2018-09-19-base-sort/">
             README MORE >>>
           </a>
           
             <div class="passage-tags">
              
-              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
              
-              <a href="/tags/自动化/"><i class="fa fa-tags"></i>自动化</a>
+              <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
             
             </div>
           
@@ -306,25 +300,31 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-09-19-base-sort/">基础排序算法详解与优化</a>
+            <a href="/passages/2018-09-19-auto-init-data/">测试数据之自动生成</a>
           </h1>
           <div class="home-article-content passage-article">
             
-              <p>常见的基础排序有选择排序、冒泡排序和插入排序。众所周知，他们的时间复杂度是 O(n*n)。</p>
-<p>但是，现在有必要重新认识一下基础排序算法，尤其是“插入排序”：在近乎有序的情况下，插入排序的时间复杂度可以降低到 O(n)的程度。</p>
-<p>因此，在处理系统日志的任务中，因为日志记录是按照时间排序，但偶尔会有几条是乱序，此时使用插入排序再好不过。而对于高级排序算法，一个常见的优化就是利用插入排序做局部数据排序优化。</p>
-<p><a href="https://godbmw.com/passage/56">一起来看下吧 &gt;&gt;&gt;</a></p>
+              <blockquote>
+<p>最近在学习排序算法的时候，需要利用程序自动生成测试数据，代码和思路整理在这篇文章里面。</p>
+</blockquote>
+<p>对于排序算法来说，自动生成测试数据的类型需要有以下几种：</p>
+<ol>
+<li><code>[a, b]</code>范围内的<code>n</code>个随机数据，比如：1、2、100、-1…</li>
+<li><code>n</code>个近乎有序的数据，比如：1、2、3、7、5、6、4…</li>
+<li><code>n</code>个近乎相同的数据，比如：1、1、1、2、2、2、2、2…</li>
+</ol>
+<p>如果排序算法在这三种数据类型中的跑分都和理论分析一样，才能保证算法较好的稳健性。</p>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-09-19-base-sort/">
+          <a class="home-article-read" href="/passages/2018-09-19-auto-init-data/">
             README MORE >>>
           </a>
           
             <div class="passage-tags">
              
-              <a href="/tags/算法/"><i class="fa fa-tags"></i>算法</a>
-             
               <a href="/tags/C与C/"><i class="fa fa-tags"></i>C与C++</a>
+             
+              <a href="/tags/自动化/"><i class="fa fa-tags"></i>自动化</a>
             
             </div>
           
