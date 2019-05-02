@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-05-01T16:43:18.231Z</updated>
+  <updated>2019-05-02T07:00:15.402Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -15,20 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="https://godbmw.com/passages/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%97%A0%E6%A0%87%E9%A2%98/"/>
-    <id>https://godbmw.com/passages/学习笔记/无标题/</id>
-    <published>2019-05-01T16:43:18.231Z</published>
-    <updated>2019-05-01T16:43:18.231Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>axios全局代理实战</title>
@@ -787,15 +773,15 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
+      <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
+    
+      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
+    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
-    
-      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
-    
-      <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
     
       <category term="Golang" scheme="https://godbmw.com/tags/Golang/"/>
     
@@ -1075,31 +1061,6 @@
   </entry>
   
   <entry>
-    <title>被DDos后的及时补救与一些思考</title>
-    <link href="https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/"/>
-    <id>https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/</id>
-    <published>2018-11-05T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近3天，我的小站&lt;a href=&quot;https://godbmw.com&quot;&gt;godbmw.com&lt;/a&gt;经历了2次DDoS。第一次因为没有限制QPS，短短几分钟内CDN被盗刷了300G流量。第二次完善了相关保护措施后，CDN依然被D了90G的流量。经过2天的迁移和补救，终于使得网站服务恢复正常。用此篇记录下整个奋战过程。希望对广大站长有帮助。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;如果是个人项目，强烈推荐使用国外的“cloudflare”，免费、不限流量、抗攻击，就像国外的JetBrians（教育版免费），都是有情怀、不坑用户的公司，致敬！！！&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="CDN" scheme="https://godbmw.com/tags/CDN/"/>
-    
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>设计模式手册之迭代器模式</title>
     <link href="https://godbmw.com/passages/2018-11-06-iter-pattern/"/>
     <id>https://godbmw.com/passages/2018-11-06-iter-pattern/</id>
@@ -1123,6 +1084,31 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>被DDos后的及时补救与一些思考</title>
+    <link href="https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/"/>
+    <id>https://godbmw.com/passages/2018-11-06-ddos-recover-and-think/</id>
+    <published>2018-11-05T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近3天，我的小站&lt;a href=&quot;https://godbmw.com&quot;&gt;godbmw.com&lt;/a&gt;经历了2次DDoS。第一次因为没有限制QPS，短短几分钟内CDN被盗刷了300G流量。第二次完善了相关保护措施后，CDN依然被D了90G的流量。经过2天的迁移和补救，终于使得网站服务恢复正常。用此篇记录下整个奋战过程。希望对广大站长有帮助。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;如果是个人项目，强烈推荐使用国外的“cloudflare”，免费、不限流量、抗攻击，就像国外的JetBrians（教育版免费），都是有情怀、不坑用户的公司，致敬！！！&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="CDN" scheme="https://godbmw.com/tags/CDN/"/>
+    
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -1272,6 +1258,33 @@
   </entry>
   
   <entry>
+    <title>设计模式手册之单例模式</title>
+    <link href="https://godbmw.com/passages/2018-10-23-singleton-pattern/"/>
+    <id>https://godbmw.com/passages/2018-10-23-singleton-pattern/</id>
+    <published>2018-10-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;单例模式定义：保证一个类仅有一个实例，并提供访问此实例的全局访问点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果一个类负责连接数据库的线程池、日志记录逻辑等等，&lt;strong&gt;此时需要单例模式来保证对象不被重复创建，以达到降低开销的目的。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
+    
+    
+      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>网站version 4.0版本上线</title>
     <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
     <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
@@ -1326,33 +1339,6 @@
   </entry>
   
   <entry>
-    <title>设计模式手册之单例模式</title>
-    <link href="https://godbmw.com/passages/2018-10-23-singleton-pattern/"/>
-    <id>https://godbmw.com/passages/2018-10-23-singleton-pattern/</id>
-    <published>2018-10-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;单例模式定义：保证一个类仅有一个实例，并提供访问此实例的全局访问点。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果一个类负责连接数据库的线程池、日志记录逻辑等等，&lt;strong&gt;此时需要单例模式来保证对象不被重复创建，以达到降低开销的目的。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="设计模式手册" scheme="https://godbmw.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%89%8B%E5%86%8C/"/>
-    
-    
-      <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-      <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>小站实用手册</title>
     <link href="https://godbmw.com/passages/2018-10-21-how-to-use-site/"/>
     <id>https://godbmw.com/passages/2018-10-21-how-to-use-site/</id>
@@ -1378,31 +1364,6 @@
     
       <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>webpack4 系列教程(十六)：开发模式和生产模式·实战</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</id>
-    <published>2018-10-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;这是&lt;code&gt;webpack4&lt;/code&gt;系列最后一篇教程了。这篇文章在之前所有教程的基础上，做了一个真正意义上的 webpack 项目！我花费了三个月整理了这份教程，并且完善了相关示例代码，也更熟悉 webpack 的理论和应用，当然，也感谢大家的支持。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;好了，感慨完毕，开始正题 ?&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
     
   </entry>
   
@@ -1445,6 +1406,31 @@
 &lt;p&gt;为什么需要开发模式？&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;借助&lt;code&gt;webpack&lt;/code&gt;，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而&lt;code&gt;source-map&lt;/code&gt;更是准确定位代码错误的利器。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack4 系列教程(十六)：开发模式和生产模式·实战</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-and-prod/</id>
+    <published>2018-10-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;这是&lt;code&gt;webpack4&lt;/code&gt;系列最后一篇教程了。这篇文章在之前所有教程的基础上，做了一个真正意义上的 webpack 项目！我花费了三个月整理了这份教程，并且完善了相关示例代码，也更熟悉 webpack 的理论和应用，当然，也感谢大家的支持。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好了，感慨完毕，开始正题 ?&lt;/p&gt;
     
     </summary>
     
@@ -1555,27 +1541,62 @@
   </entry>
   
   <entry>
-    <title>第一次遭遇云服务器完全崩溃</title>
-    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
-    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
+    <title>二叉搜索树的实现与常见用法</title>
+    <link href="https://godbmw.com/passages/2018-10-09-binary-search-tree/"/>
+    <id>https://godbmw.com/passages/2018-10-09-binary-search-tree/</id>
     <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
+    <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
+&lt;p&gt;二叉搜索树是一颗空树，或者具有以下性质的二叉树：&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值&lt;/li&gt;
+&lt;li&gt;若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值&lt;/li&gt;
+&lt;li&gt;任意节点的左、右子树也分别为二叉查找树&lt;/li&gt;
+&lt;li&gt;没有键值相等的节点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$&lt;/p&gt;
     
     </summary>
     
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack4 系列教程(十一)：字体文件处理</title>
+    <link href="https://godbmw.com/passages/2018-10-09-webpack-chracter-file/"/>
+    <id>https://godbmw.com/passages/2018-10-09-webpack-chracter-file/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在自己的项目中引入中意的字体样式，是让自己舒坦的重要方式 :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;源码地址如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos/tree/master/demo11&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;本节课源码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;所有课程源码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="字体处理" scheme="https://godbmw.com/tags/%E5%AD%97%E4%BD%93%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
@@ -1613,62 +1634,27 @@
   </entry>
   
   <entry>
-    <title>webpack4 系列教程(十一)：字体文件处理</title>
-    <link href="https://godbmw.com/passages/2018-10-09-webpack-chracter-file/"/>
-    <id>https://godbmw.com/passages/2018-10-09-webpack-chracter-file/</id>
+    <title>第一次遭遇云服务器完全崩溃</title>
+    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
+    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
     <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
+    <updated>2019-04-01T15:22:04.539Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;在自己的项目中引入中意的字体样式，是让自己舒坦的重要方式 :)&lt;/p&gt;
+&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;源码地址如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos/tree/master/demo11&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;本节课源码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;所有课程源码&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
     
     </summary>
     
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
     
     
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
-      <category term="字体处理" scheme="https://godbmw.com/tags/%E5%AD%97%E4%BD%93%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二叉搜索树的实现与常见用法</title>
-    <link href="https://godbmw.com/passages/2018-10-09-binary-search-tree/"/>
-    <id>https://godbmw.com/passages/2018-10-09-binary-search-tree/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;二叉搜索树是一颗空树，或者具有以下性质的二叉树：&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值&lt;/li&gt;
-&lt;li&gt;若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值&lt;/li&gt;
-&lt;li&gt;任意节点的左、右子树也分别为二叉查找树&lt;/li&gt;
-&lt;li&gt;没有键值相等的节点&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这种数据结构可以高效解决查找问题、实现字典结构，值得一提的是，这些操作的算法复杂度均是：$O(\log_2 n)$&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
-      <category term="数据结构" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -1695,28 +1681,18 @@
   </entry>
   
   <entry>
-    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
+    <title>music-api-next 中文文档</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/</id>
     <published>2018-10-04T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;music-api-next&lt;/code&gt;中文文档：一个可以快速从QQ音乐、虾米音乐和网易音乐获得歌曲搜索结果、歌曲链接信息和歌曲评论的第三方库。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
-&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
-&lt;li&gt;支持音乐链接下载&lt;/li&gt;
-&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
-&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
-&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
-&lt;li&gt;可用、高效、稳定&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;如果您有任何问题或者建议，欢迎在本文页面评论。&lt;/p&gt;
     
     </summary>
     
@@ -1759,18 +1735,28 @@
   </entry>
   
   <entry>
-    <title>music-api-next 中文文档</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs-zh/</id>
+    <title>music-api-next：一款支持网易、虾米和QQ音乐的JS爬虫库</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next/</id>
     <published>2018-10-04T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;music-api-next&lt;/code&gt;中文文档：一个可以快速从QQ音乐、虾米音乐和网易音乐获得歌曲搜索结果、歌曲链接信息和歌曲评论的第三方库。&lt;/p&gt;
+&lt;p&gt;如果你苦于挑选一个全方位、多平台、简便易用的音乐爬虫库，&lt;code&gt;music-api-next&lt;/code&gt;是不二选择。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;如果您有任何问题或者建议，欢迎在本文页面评论。&lt;/p&gt;
+&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持网易、虾米和QQ三大主流音乐平台&lt;/li&gt;
+&lt;li&gt;支持音乐关键词搜索&lt;/li&gt;
+&lt;li&gt;支持音乐链接下载&lt;/li&gt;
+&lt;li&gt;支持音乐评论爬取&lt;/li&gt;
+&lt;li&gt;支持回调和&lt;code&gt;async/await&lt;/code&gt;写法&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;webpack&lt;/code&gt;打包部署&lt;/li&gt;
+&lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
+&lt;li&gt;可用、高效、稳定&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -1890,32 +1876,6 @@
   </entry>
   
   <entry>
-    <title>高级排序算法实现与优化</title>
-    <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
-    <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
-    <published>2018-09-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。&lt;/p&gt;
-&lt;p&gt;优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
-  </entry>
-  
-  <entry>
     <title>基础排序算法详解与优化</title>
     <link href="https://godbmw.com/passages/2018-09-19-base-sort/"/>
     <id>https://godbmw.com/passages/2018-09-19-base-sort/</id>
@@ -1968,6 +1928,32 @@
       <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
       <category term="自动化" scheme="https://godbmw.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高级排序算法实现与优化</title>
+    <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
+    <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
+    <published>2018-09-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。&lt;/p&gt;
+&lt;p&gt;优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
   </entry>
   
@@ -2088,9 +2074,9 @@
       <category term="Git实战手册" scheme="https://godbmw.com/categories/Git%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/"/>
     
     
-      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
-    
       <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
+    
+      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
     
   </entry>
   
@@ -2198,28 +2184,6 @@
   </entry>
   
   <entry>
-    <title>Mysql连接缓慢</title>
-    <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
-    <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在客户端和连接逐渐增多的情况下，禁用Mysql的&lt;code&gt;DNS&lt;/code&gt;解析服务，可以极大提高连接速度，解决&lt;code&gt;Handshake inactivity timeout&lt;/code&gt;等&lt;code&gt;TIMEOUT&lt;/code&gt;类型报错。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="Mysql" scheme="https://godbmw.com/tags/Mysql/"/>
-    
-      <category term="数据库" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>来点音乐--吐槽大会</title>
     <link href="https://godbmw.com/passages/2018-08-28-laidianmusic-chat/"/>
     <id>https://godbmw.com/passages/2018-08-28-laidianmusic-chat/</id>
@@ -2242,6 +2206,28 @@
     
       <category term="合作推广" scheme="https://godbmw.com/categories/%E5%90%88%E4%BD%9C%E6%8E%A8%E5%B9%BF/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql连接缓慢</title>
+    <link href="https://godbmw.com/passages/2018-08-28-mysql-low-speed/"/>
+    <id>https://godbmw.com/passages/2018-08-28-mysql-low-speed/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在客户端和连接逐渐增多的情况下，禁用Mysql的&lt;code&gt;DNS&lt;/code&gt;解析服务，可以极大提高连接速度，解决&lt;code&gt;Handshake inactivity timeout&lt;/code&gt;等&lt;code&gt;TIMEOUT&lt;/code&gt;类型报错。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="Mysql" scheme="https://godbmw.com/tags/Mysql/"/>
+    
+      <category term="数据库" scheme="https://godbmw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -2677,9 +2663,9 @@
       <category term="Git实战手册" scheme="https://godbmw.com/categories/Git%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/"/>
     
     
-      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
-    
       <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
+    
+      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
     
   </entry>
   
