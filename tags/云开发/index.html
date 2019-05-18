@@ -6,16 +6,16 @@
   <meta name="author" content="董沅鑫">
   
   
-  <title>设计模式手册之工厂模式 | 董沅鑫的个人网站</title>
+  <title>标签: 云开发 | 董沅鑫的个人网站</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="设计模式手册,ES6,设计模式,">
+    <meta name="keywords" content="Hexo, Theme-AD">
   
 
   
-  <meta name="description" content="工厂方法模式的实质是“定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。”简单来说：就是把new对象的操作包裹一层，对外提供一个可以根据不同参数创建不同对象的函数。">
+  <meta name="description" content="董沅鑫的个人网站, 安静写些东西.">
 
   
     <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
@@ -42,7 +42,7 @@
     welcome: {"enable":true,"interval":30},
     start_time: "2018-02-10",
     passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
-    is_post: true,
+    is_post: false,
     lock: false,
     author: "董沅鑫",
     share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
@@ -186,92 +186,19 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      
-  <div class="passage">
-  <div class="passage-meta">
-    <span>
-      <i class="fa fa-calendar"></i>2019-03-31
-    </span>
-    
-      <span>
-        | <a href="/categories/设计模式手册/"><i class="fa fa-bookmark"></i>设计模式手册</a>
-      </span>
-    
-    
-      <span>
-        | <i class="fa fa-unlock-alt"></i>UNLOCK
-      </span>
-    
-  </div>
-  <h1 class="passage-title">
-    设计模式手册之工厂模式
-  </h1>
+      <div class="timeline">
+  <h2 class="timeline-title">标签: 云开发</h2>
   
-  <article class="passage-article">
-    <h2 id="1-什么是工厂模式？"><a href="#1-什么是工厂模式？" class="headerlink" title="1. 什么是工厂模式？"></a>1. 什么是工厂模式？</h2><p>工厂方法模式的实质是“定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。”</p>
-<p>简单来说：<strong>就是把<code>new</code>对象的操作包裹一层，对外提供一个可以根据不同参数创建不同对象的函数</strong>。</p>
-<h2 id="2-工厂模式的优缺点"><a href="#2-工厂模式的优缺点" class="headerlink" title="2. 工厂模式的优缺点"></a>2. 工厂模式的优缺点</h2><p>优点显而易见，可以隐藏原始类，方便之后的代码迁移。调用者只需要记住类的代名词即可。</p>
-<p>由于多了层封装，会造成类的数目过多，系统复杂度增加。</p>
-<h2 id="3-多语言实现"><a href="#3-多语言实现" class="headerlink" title="3. 多语言实现"></a>3. 多语言实现</h2><h3 id="ES6实现"><a href="#ES6实现" class="headerlink" title="ES6实现"></a>ES6实现</h3><p>调用者通过向工厂类传递参数，来获取对应的实体。在这个过程中，具体实体类的创建过程，由工厂类全权负责。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 实体类：Dog、Cat</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'狗'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'猫'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 工厂类：Animal</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    name = name.toLocaleLowerCase()</span><br><span class="line">    <span class="keyword">switch</span> (name) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'dog'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dog()</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'cat'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Cat()</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">TypeError</span>(<span class="string">'class name wrong'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下是测试代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat = <span class="keyword">new</span> Animal(<span class="string">'cat'</span>)</span><br><span class="line">cat.run()</span><br><span class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> Animal(<span class="string">'dog'</span>)</span><br><span class="line">dog.run()</span><br></pre></td></tr></table></figure>
-  </article>
-  <aside class="table-content" id="site-toc">
-  <div class="table-content-title">
-    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
-    <span>目录</span>
-  </div>
-  <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是工厂模式？"><span class="toc-text">1. 什么是工厂模式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-工厂模式的优缺点"><span class="toc-text">2. 工厂模式的优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-多语言实现"><span class="toc-text">3. 多语言实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6实现"><span class="toc-text">ES6实现</span></a></li></ol></li></ol>
-  </div>
-</aside>
-  
-    <aside class="passage-copyright">
-      <div>本文作者: 董沅鑫</div>
-      
-        <div>
-          原文链接: 
-          <a href target="_blank">https://godbmw.com/passages/2019-03-31-factory-pattern/</a>
-        </div>
-      
-      <div>
-        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
-      </div>
-    </aside>
-  
-  
-    <div class="passage-tags">
-     
-      <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
-     
-      <a href="/tags/设计模式/"><i class="fa fa-tags"></i>设计模式</a>
     
+      <h3 class="timeline-subtitle">2019</h3>
+    
+    <div class="timeline-item">
+      <time>2019-05-18</time>
+      <a target="_self" href="/passages/2019-05-18-serverless-page-counter/">基于ServerLess的极简网页计数器：源码分析与最佳实践</a>
     </div>
   
 </div>
-
     </main>
-    
-      
-<div class="site-comment-contanier" data-plateform="disqus">
-  
-    <p id="site-comment-info">
-      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
-    </p>
-    <div id="disqus_thread"></div>
-    <script async>
-      var disqus_config = function() {
-        this.page.url = `${window.location.origin}${window.location.pathname}`;
-        this.page.identifier = "2019-03-31-factory-pattern";
-      };
-      (function() {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://godbmw.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-      })();
-    </script>
-  
-</div>
     
     <div class="site-footer-wrapper">
   <footer class="site-footer">
@@ -402,19 +329,19 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/passages/2019-04-01-brief-history-of-time/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/passages/2019-03-27-javascript-second/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
-      <a href="#disqus_thread" data-enable="true">
+      <a href="javascript:void(0);" data-enable="false">
         <i class="fa fa-commenting"></i>
       </a>
     

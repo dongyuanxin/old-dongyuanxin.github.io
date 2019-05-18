@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫">
+  
+  
+  <title>基于ServerLess的极简网页计数器：源码分析与最佳实践 | 董沅鑫的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="webpack,数据库,前端开发,云开发,ServerLess,">
+  
+
+  
+  <meta name="description" content="这几天基于支持HTML5无感认证的ServerLess平台开发了一款博客、门户网站等web平台常用的PV统计工具：page-counter 。主要用到的技术是js+webpack。回首看来，解决了以下几个比较有意思的问题：如何设计代码，用统一的方式支持多个ServerLess平台？如何架构项目，使得其支持CDN和npm两种方式引入？如何精简源码，源码大小控制在4kb？如何借助webpack分离生产和测试环境？源码地址：https://github.com/dongyuanxin/page-counternpm地址：https://www.npmjs.com/package/page-counter如果有兴趣的同学，欢迎在阅读完本文后一起接入其他平台的开发； 觉得不错的同学，欢迎给个Star哦 。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="董沅鑫的个人网站" type="application/atom+xml">
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"j3TlSqBMjoXnrIrNYB5En5Y1-gzGzoHsz","appkey":"d2rWR1nq5chvzXzh3bSyB8ug","comment":false,"count":false},
+    welcome: {"enable":true,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["b56888a08f3d2405dd37dba14af086c53fc7ed262bd33f1cabc87b2ad9343b69", ],
+    is_post: true,
+    lock: false,
+    author: "董沅鑫",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+    <link rel="stylesheet" href="/custom/style.css">
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">GODBMW</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/archives/" target="_self">文章归档</a>
+      
+        <a href="/categories/设计模式手册/" target="_self">设计模式手册</a>
+      
+        <a href="/categories/前端面试手记/" target="_self">前端体系整理</a>
+      
+        <a href="/categories/webpack4系列教程/" target="_self">Webpack4教程</a>
+      
+        <a href="/categories/" target="_self">分类云</a>
+      
+        <a href="/tags/" target="_self">标签云</a>
+      
+        <a href="/friends/" target="_self">友情链接</a>
+      
+        <a href="/about/" target="_self">了解本站</a>
+      
+        <a href="https://godbmw.com/atom.xml" target="_blank">订阅RSS</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/blog" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            文章归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/设计模式手册/" target="_self">
+            设计模式手册
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/前端面试手记/" target="_self">
+            前端体系整理
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/webpack4系列教程/" target="_self">
+            Webpack4教程
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类云
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签云
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友情链接
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            了解本站
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="https://godbmw.com/atom.xml" target="_blank">
+            订阅RSS
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-05-18
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    基于ServerLess的极简网页计数器：源码分析与最佳实践
+  </h1>
+  
+  <article class="passage-article">
+    <p><img src="https://cdn.nlark.com/yuque/0/2019/png/233327/1558170012750-30c5b80b-d61b-4c71-9a20-6f98dbc2d81d.png#align=left&amp;display=inline&amp;height=898&amp;name=image.png&amp;originHeight=898&amp;originWidth=1311&amp;size=43753&amp;status=done&amp;width=1311" alt="image.png"></p>
+<p>这几天基于支持HTML5无感认证的ServerLess平台开发了一款博客、门户网站等web平台常用的PV统计工具：<a href="https://github.com/dongyuanxin/page-counter" target="_blank" rel="noopener">page-counter</a> 。主要用到的技术是js+webpack。</p>
+<p>回首看来，解决了以下几个比较有意思的问题：</p>
+<ul>
+<li>如何设计代码，用统一的方式支持多个ServerLess平台？</li>
+<li>如何架构项目，使得其支持CDN和npm两种方式引入？</li>
+<li>如何精简源码，源码大小控制在4kb？</li>
+<li>如何借助webpack分离生产和测试环境？</li>
+</ul>
+<p>源码地址：<a href="https://github.com/dongyuanxin/page-counter" target="_blank" rel="noopener">https://github.com/dongyuanxin/page-counter</a></p>
+<p>npm地址：<a href="https://www.npmjs.com/package/page-counter" target="_blank" rel="noopener">https://www.npmjs.com/package/page-counter</a></p>
+<p>如果有兴趣的同学，欢迎在阅读完本文后一起接入其他平台的开发； <strong>觉得不错的同学，欢迎给个Star哦</strong> 。</p>
+<h2 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h2><p><img src="https://cdn.nlark.com/yuque/0/2019/png/233327/1558166588782-dbc988e3-916e-46ad-895e-1972db727e1c.png#align=left&amp;display=inline&amp;height=718&amp;originHeight=718&amp;originWidth=346&amp;status=done&amp;width=346" alt> </p>
+<p>如上图所示，bin/backend 目录是暂时没用的。几个比较重要的目录功能说明：</p>
+<ul>
+<li><code>build/</code> : webpack的配置文件，分别是公共配置、开发模式配置、生产模式配置</li>
+<li><code>dist/</code><ul>
+<li>index.template.html: 开发模式下配合webpack的html模板文件</li>
+<li>page-counter.min.js: 打包后的page-counter内容，供CDN引入</li>
+<li>page-counter.bomb-1.6.7.min.js：我手动修改并且打包的Bomb平台源码</li>
+</ul>
+</li>
+<li><code>examples/</code> : gh-pages页面，请看<a href="https://godbmw.com/page-counter/">此页面</a> </li>
+<li><code>deploy.sh</code> : gh-pages部署脚本，支持ssh和https协议</li>
+<li><code>index.js</code> : npm的入口文件</li>
+<li><code>index.build.js</code> : CDN打包入口文件</li>
+<li><code>src/</code> :<ul>
+<li><code>serverless/</code> : 暴露不同平台的统一接口</li>
+<li><code>config.js</code> : 自动读取全局配置</li>
+<li><code>utils.js</code> : 常用函数方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="抽象接口：支持多Serverless平台"><a href="#抽象接口：支持多Serverless平台" class="headerlink" title="抽象接口：支持多Serverless平台"></a>抽象接口：支持多Serverless平台</h2><p><code>src/serverless/interface.js</code> 中定义了不同平台的类的公共父类。虽然js不支持抽象接口，但是也可以通过抛出错误来实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerLessInterface</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;&#125;</span><br><span class="line"></span><br><span class="line">  ACL () &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Interface method "ACL" must be rewritten'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  setData () &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Interface method "setData" must be rewritten'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  count () &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Interface method "count" must be rewritten'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而 leancloud.js 、bomb.js 等不同平台的类都要实现这个接口中的这3个方法。然后通过 <code>src/serverless/index.js</code> 统一暴露出去：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> LeanCloud <span class="keyword">from</span> <span class="string">'./leancloud'</span></span><br><span class="line"><span class="keyword">import</span> Bomb <span class="keyword">from</span> <span class="string">'./bomb'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ServerLessFactory</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (name) &#123;</span><br><span class="line">    name = name.toLocaleLowerCase()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (name) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'leancloud'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LeanCloud()</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'bomb'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Bomb()</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Serverless must be one of [ leancloud, bomb ]'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> ServerLessFactory</span><br></pre></td></tr></table></figure>
+<p>这两种设计，既解耦了不同平台的代码，而且还约束了实现规则。如果想接入更多平台，只需要创建新文件，并且暴露一个继承 <code>ServerLessInterface</code> 接口的指定方法的子类即可。</p>
+<h2 id="快速方便：支持CDN和npm的使用"><a href="#快速方便：支持CDN和npm的使用" class="headerlink" title="快速方便：支持CDN和npm的使用"></a>快速方便：支持CDN和npm的使用</h2><p>一个成熟的前端小工具需要考虑到多种引入方式，目前主流的就是cdn和npm。例如jquery，cdn引入，jq会被自动挂载在window对象上；npm引入，则作用域只在当前文件模块有用。</p>
+<p>在考察了多种同类工具后，针对cdn和npm做了不同的处理。</p>
+<p><strong>npm</strong> </p>
+<p>对外暴露 <code>PageCounter</code> 对象，其上有3个方法：</p>
+<ul>
+<li><code>setData()</code> ：将当前页面信息发送到云数据库</li>
+<li><code>countTotal()</code> : 统计数据库总记录数（网站总PV），并且将返回结果<strong>自动放入</strong>id为page-counter-total-times的标签里</li>
+<li><code>countSingle()</code> : 统计数据库符合要求的记录数（当前页面PV），并且将返回结果<strong>自动放入</strong>id为page-counter-single-times的标签里</li>
+<li></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PageCounter <span class="keyword">from</span> <span class="string">'./src'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> PageCounter</span><br></pre></td></tr></table></figure>
+<p><strong>CDN</strong></p>
+<p>不会在全局挂载上述对象方法，会自动执行上面的3种方法。考虑到并发以及pv数允许1以内的误差，没有保证串行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PageCounter <span class="keyword">from</span> <span class="string">'./src'</span></span><br><span class="line"></span><br><span class="line">PageCounter.setData()</span><br><span class="line">PageCounter.countTotal()</span><br><span class="line">PageCounter.countSingle()</span><br></pre></td></tr></table></figure>
+<h2 id="精简源码：巧用package-json和第三方SDK"><a href="#精简源码：巧用package-json和第三方SDK" class="headerlink" title="精简源码：巧用package.json和第三方SDK"></a>精简源码：巧用package.json和第三方SDK</h2><p>经过精简，打包后cdn引入的源码只有4kb。npm引入的话，webpack会自动进行tree shaking。因为要对接不同的serverless平台，因此需要使用他们的sdk。</p>
+<p>而这些sdk分成2种：</p>
+<ul>
+<li>类似leancloud：既可以npm引入，也可以cdn引入后自动挂载到window对象</li>
+<li>类似bomb：无cdn引入，只要npm引入</li>
+</ul>
+<p>针对第二种情况，我采取的方案是手动打包编译。比如对于bomb的sdk，专门创建新的工程，然后配合webpack和以下代码，进行打包。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Bomb <span class="keyword">from</span> <span class="string">'hydrogen-js-sdk'</span></span><br><span class="line"><span class="built_in">window</span>.Bomb = Bomb</span><br></pre></td></tr></table></figure></p>
+<p>打包后的源码放入版本库，这样借助 <a href="https://unpkg.com/" target="_blank" rel="noopener">https://unpkg.com</a> 等常见的CDN平台就可以引入了。这么做的很重要的一点是： <strong>代码中都是通过window上的对象读取对应serverless平台的api，这样就不会被webpack识别，进而发生重复无用打包</strong> 。</p>
+<p>关于读取配置的文件，都放在了 <code>src/config.js</code> 下。考虑到script标签引入造成的变量挂载时间点不确定，读取采用了动态读取。<strong>为了操作起来更方便，而不是像调用函数那样，借助了 es6类语法中的 setter和getter。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 举个例子：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> serverless() &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">window</span>.PAGE_COUNTER_CONFIG) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Please init variable window.PAGE_COUNTER_CONFIG'</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">window</span>.PAGE_COUNTER_CONFIG.serverless || <span class="string">'leancloud'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> config = <span class="keyword">new</span> Config()</span><br><span class="line"><span class="built_in">console</span>.log(config.serverless) <span class="comment">// 返回当前最新的window.PAGE_COUNTER_CONFIG.serverless</span></span><br></pre></td></tr></table></figure>
+<p>最后讲讲package.json的小技巧。虽然代码中没有使用import语法读取sdk的对象，但是我还是把leancloud、bomb平台的sdk放入了 <code>dependencies</code> 。这样做有什么好处呢？</p>
+<p>用户只需要安装page-counter即可，其他sdk自动安装（不需要手动再敲命令）。然后用户就可以使用下面语法美滋滋引入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">'hydrogen-js-sdk'</span>) </span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 将 Bomb 对象挂载在 window 上</span></span><br><span class="line">    <span class="built_in">window</span>.Bomb = res.default</span><br><span class="line">    <span class="comment">// 设置应用信息</span></span><br><span class="line">    <span class="built_in">window</span>.PAGE_COUNTER_CONFIG = &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">import</span>(<span class="string">'page-counter'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> PageCounter = res.default</span><br><span class="line">    PageCounter.setData() <span class="comment">// 发送当前页面数据</span></span><br><span class="line">    PageCounter.countTotal() <span class="comment">// 将总浏览量放入 ID 为 page-counter-total-times 的DOM元素中</span></span><br><span class="line">    PageCounter.countSingle() <span class="comment">// 将当前页面浏览量放入 ID 为 page-counter-single-times 的DOM元素中</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Webpack：分离生产和开发环境"><a href="#Webpack：分离生产和开发环境" class="headerlink" title="Webpack：分离生产和开发环境"></a>Webpack：分离生产和开发环境</h2><p>不得不说，webpack真的好用呀。脏活累活以及常见工具，它都给你承包了。</p>
+<p><code>webpack.base.conf.js</code> 是两种模式的公共配置，指明入口文件以及代码环境（web）。并且能够识别模式，然后自行拼接配置。</p>
+<p><code>webpack.prod.conf.js</code> ：生产模式，主要为了打包源码，方便CDN引入。</p>
+<p><code>webpack.dev.conf.js</code> : 开启热更新以及本地服务器方便调试，渲染的前端调试页面的模板文件就是 <code>dist/index.template.html</code> 。</p>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目目录"><span class="toc-text">项目目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象接口：支持多Serverless平台"><span class="toc-text">抽象接口：支持多Serverless平台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速方便：支持CDN和npm的使用"><span class="toc-text">快速方便：支持CDN和npm的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#精简源码：巧用package-json和第三方SDK"><span class="toc-text">精简源码：巧用package.json和第三方SDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Webpack：分离生产和开发环境"><span class="toc-text">Webpack：分离生产和开发环境</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">https://godbmw.com/passages/2019-05-18-serverless-page-counter/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/webpack/"><i class="fa fa-tags"></i>webpack</a>
+     
+      <a href="/tags/数据库/"><i class="fa fa-tags"></i>数据库</a>
+     
+      <a href="/tags/前端开发/"><i class="fa fa-tags"></i>前端开发</a>
+     
+      <a href="/tags/云开发/"><i class="fa fa-tags"></i>云开发</a>
+     
+      <a href="/tags/ServerLess/"><i class="fa fa-tags"></i>ServerLess</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="disqus">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-warning" style="color: #FB8C00"></i> 请针对 Disqus 开启代理 
+    </p>
+    <div id="disqus_thread"></div>
+    <script async>
+      var disqus_config = function() {
+        this.page.url = `${window.location.origin}${window.location.pathname}`;
+        this.page.identifier = "2019-05-18-serverless-page-counter";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godbmw.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">实验室</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/webpack-demos" target="_blank">Webpack4 Demos</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-ad" target="_blank">Theme Art Design</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank">Theme BMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/news-emotion" target="_blank">金融情感分析模型</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/music-api-next" target="_blank">Music API Next</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">技术社交</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">JueJin</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://segmentfault.com/u/godbmw" target="_blank">SegmentDefault</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.jianshu.com/u/d1570f4a618a" target="_blank">简书</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">知乎</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://blog.csdn.net/AsuraDong" target="_blank">CSDN</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://github.com/dongyuanxin/blog" target="_blank">博客精彩文章</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.liaoxuefeng.com/" target="_blank">廖雪峰的官方网站</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i>
+        <span id="busuanzi_container_site_pv">您是本站第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+        | <a href="http://www.miit.gov.cn/" target="_blank">粤ICP备18028400号-1</a>
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> 深度合作: yuanxin.me@gmail.com | QQ交流群: 534018786
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/2019-05-17-why-i-stopped-using-sass/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#disqus_thread" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124601890-1"></script>
+  <script async>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124601890-1');
+  </script>
+
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+  <script async>
+    (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a":"https://jspassport.ssl.qhimg.com/11.0.1.js?bbf5bdfcccab2efb9fd4e96c19271f1a";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+  </script>
+
+
+    
+  </body>
+</html>

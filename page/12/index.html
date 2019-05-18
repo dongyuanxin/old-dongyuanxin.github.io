@@ -203,25 +203,66 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-05-23-var-vs-let/">var VS let</a>
+            <a href="/passages/2018-05-23-es-promise/">Promise 概述</a>
           </h1>
           <div class="home-article-content passage-article">
             
               <ul>
-<li>目前，如果大量使用<code>let</code>，为了保证兼容性，<code>webpack</code>会将<code>let</code>转化为<code>var</code>语法（<strong>这就会生成冗余代码</strong>）。其实，结合<code>ES6</code>的模块化规范，<strong>还是推荐使用：<code>var</code>，以保证兼容老旧浏览器情况下减小代码体积</strong>。</li>
-<li>随着浏览器逐步升级，<code>let</code>才是未来主流。</li>
+<li><code>Promise</code>实例一旦被创建就会被执行</li>
+<li><code>Promise</code>过程分为两个分支：<code>pending=&gt;resolved</code>和<code>pending=&gt;rejected</code></li>
+<li><code>Promise</code>状态改变后，依然会执行之后的代码：</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> warnDemo = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(ctx);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"After resolved, but Run"</span>); <span class="comment">// 依然会执行这个语句</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">warnDemo(<span class="string">"ctx"</span>).then(<span class="function"><span class="params">ctx</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`This is <span class="subst">$&#123;ctx&#125;</span>`</span>));</span><br></pre></td></tr></table></figure>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-05-23-var-vs-let/">
+          <a class="home-article-read" href="/passages/2018-05-23-es-promise/">
             README MORE >>>
           </a>
           
             <div class="passage-tags">
              
-              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+              <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+            
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-05-23
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/2018-05-23-es6-const/">理解es6中的const与“不变”</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              <blockquote>
+<p><code>const</code>实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。</p>
+</blockquote>
+            
+          </div>
+          <a class="home-article-read" href="/passages/2018-05-23-es6-const/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
              
               <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+             
+              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
             
             </div>
           
@@ -285,24 +326,25 @@
             
           </div>
           <h1 class="home-article-title">
-            <a href="/passages/2018-05-23-es6-const/">理解es6中的const与“不变”</a>
+            <a href="/passages/2018-05-23-var-vs-let/">var VS let</a>
           </h1>
           <div class="home-article-content passage-article">
             
-              <blockquote>
-<p><code>const</code>实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。</p>
-</blockquote>
+              <ul>
+<li>目前，如果大量使用<code>let</code>，为了保证兼容性，<code>webpack</code>会将<code>let</code>转化为<code>var</code>语法（<strong>这就会生成冗余代码</strong>）。其实，结合<code>ES6</code>的模块化规范，<strong>还是推荐使用：<code>var</code>，以保证兼容老旧浏览器情况下减小代码体积</strong>。</li>
+<li>随着浏览器逐步升级，<code>let</code>才是未来主流。</li>
+</ul>
             
           </div>
-          <a class="home-article-read" href="/passages/2018-05-23-es6-const/">
+          <a class="home-article-read" href="/passages/2018-05-23-var-vs-let/">
             README MORE >>>
           </a>
           
             <div class="passage-tags">
              
-              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
-             
               <a href="/tags/ES6/"><i class="fa fa-tags"></i>ES6</a>
+             
+              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
             
             </div>
           
