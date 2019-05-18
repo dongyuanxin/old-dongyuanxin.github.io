@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://godbmw.com/"/>
-  <updated>2019-05-03T05:43:06.655Z</updated>
+  <updated>2019-05-18T09:19:46.604Z</updated>
   <id>https://godbmw.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【译】逐步替换Sass</title>
+    <link href="https://godbmw.com/passages/2019-05-17-why-i-stopped-using-sass/"/>
+    <id>https://godbmw.com/passages/2019-05-17-why-i-stopped-using-sass/</id>
+    <published>2019-05-17T00:00:00.000Z</published>
+    <updated>2019-05-18T09:19:46.604Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一篇介绍现代css核心特性的文章，并且借助sass进行横向对比，充分体现了css作为一门设计语言的快速发展以及新特性为我们开发者带来的强大生产力。&lt;/p&gt;
+&lt;p&gt;第一次尝试翻译技术文，为了让文章更通俗易懂，很多地方结合了文章本意和自己的说话风格。另外，时间有限水平有限，难免有些失误或者翻译不恰当的地方，欢迎指出讨论。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;英文原文地址&lt;/strong&gt;：&lt;a href=&quot;https://cathydutton.co.uk/posts/why-i-stopped-using-sass/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://cathydutton.co.uk/posts/why-i-stopped-using-sass/&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+      <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
+    
+      <category term="UI设计" scheme="https://godbmw.com/tags/UI%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="前端开发" scheme="https://godbmw.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>NodeJS实现简易区块链</title>
@@ -801,15 +827,15 @@
       <category term="每周分享" scheme="https://godbmw.com/categories/%E6%AF%8F%E5%91%A8%E5%88%86%E4%BA%AB/"/>
     
     
+      <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
+    
+      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
+    
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
     
       <category term="CSS3" scheme="https://godbmw.com/tags/CSS3/"/>
     
       <category term="ReactJS" scheme="https://godbmw.com/tags/ReactJS/"/>
-    
-      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
-    
-      <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
     
       <category term="Golang" scheme="https://godbmw.com/tags/Golang/"/>
     
@@ -1161,6 +1187,25 @@
   </entry>
   
   <entry>
+    <title>[置顶]我为什么坚持写博客</title>
+    <link href="https://godbmw.com/passages/2018-11-01-why-i-blog/"/>
+    <id>https://godbmw.com/passages/2018-11-01-why-i-blog/</id>
+    <published>2018-10-31T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://github.com/dongyuanxin/theme-bmw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo-theme-bmw&lt;/a&gt;(&lt;strong&gt;版本代号：微声&lt;/strong&gt;)重磅来袭：&lt;strong&gt;为自己发声&lt;/strong&gt;！&lt;/p&gt;
+&lt;p&gt;✨ 分享功能、打赏功能、版权声明、幻灯片播放、音乐播放、评论社交… 一大波高逼格功能已抵达 ✨&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>设计模式手册之代理模式</title>
     <link href="https://godbmw.com/passages/2018-11-01-proxy-pattern/"/>
     <id>https://godbmw.com/passages/2018-11-01-proxy-pattern/</id>
@@ -1186,25 +1231,6 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[置顶]我为什么坚持写博客</title>
-    <link href="https://godbmw.com/passages/2018-11-01-why-i-blog/"/>
-    <id>https://godbmw.com/passages/2018-11-01-why-i-blog/</id>
-    <published>2018-10-31T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/dongyuanxin/theme-bmw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo-theme-bmw&lt;/a&gt;(&lt;strong&gt;版本代号：微声&lt;/strong&gt;)重磅来袭：&lt;strong&gt;为自己发声&lt;/strong&gt;！&lt;/p&gt;
-&lt;p&gt;✨ 分享功能、打赏功能、版权声明、幻灯片播放、音乐播放、评论社交… 一大波高逼格功能已抵达 ✨&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="夜话杂谈" scheme="https://godbmw.com/categories/%E5%A4%9C%E8%AF%9D%E6%9D%82%E8%B0%88/"/>
-    
     
   </entry>
   
@@ -1313,29 +1339,6 @@
   </entry>
   
   <entry>
-    <title>网站version 4.0版本上线</title>
-    <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
-    <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
-    <published>2018-10-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;更新时间：2018-10-22 ~ 2018-10-23&lt;/p&gt;
-&lt;p&gt;更新内容：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;前端&lt;/li&gt;
-&lt;li&gt;服务端&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>每天一个设计模式·多语言实现</title>
     <link href="https://godbmw.com/passages/2018-10-23-design-pattern-code/"/>
     <id>https://godbmw.com/passages/2018-10-23-design-pattern-code/</id>
@@ -1363,6 +1366,29 @@
       <category term="设计模式" scheme="https://godbmw.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="Python" scheme="https://godbmw.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网站version 4.0版本上线</title>
+    <link href="https://godbmw.com/passages/2018-10-23-site-v4/"/>
+    <id>https://godbmw.com/passages/2018-10-23-site-v4/</id>
+    <published>2018-10-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;更新时间：2018-10-22 ~ 2018-10-23&lt;/p&gt;
+&lt;p&gt;更新内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前端&lt;/li&gt;
+&lt;li&gt;服务端&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+    
     
   </entry>
   
@@ -1396,27 +1422,28 @@
   </entry>
   
   <entry>
-    <title>webpack4 系列教程(十五)：开发模式与webpack-dev-server</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-server/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</id>
+    <title>全网最贴心webpack系列教程和配套代码</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
     <published>2018-10-18T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;为什么需要开发模式？&lt;/p&gt;
+&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;借助&lt;code&gt;webpack&lt;/code&gt;，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而&lt;code&gt;source-map&lt;/code&gt;更是准确定位代码错误的利器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
     
     
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
     
   </entry>
   
@@ -1446,28 +1473,27 @@
   </entry>
   
   <entry>
-    <title>全网最贴心webpack系列教程和配套代码</title>
-    <link href="https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/"/>
-    <id>https://godbmw.com/passages/2018-10-19-webpack-demos-introduction/</id>
+    <title>webpack4 系列教程(十五)：开发模式与webpack-dev-server</title>
+    <link href="https://godbmw.com/passages/2018-10-19-webpack-dev-server/"/>
+    <id>https://godbmw.com/passages/2018-10-19-webpack-dev-server/</id>
     <published>2018-10-18T16:00:00.000Z</published>
     <updated>2019-04-01T15:22:04.535Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;Wow！全网最贴心的&lt;code&gt;webpack4&lt;/code&gt;系列中文教程和配套代码 ?&lt;/p&gt;
+&lt;p&gt;为什么需要开发模式？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;GitHub 地址(代码): &lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webpack-demos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;讲解地址(课程): &lt;a href=&quot;https://godbmw.com/search?category=webpack4%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B&quot;&gt;webpack4 系列教程&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;借助&lt;code&gt;webpack&lt;/code&gt;，在开发模式下我们可以使用热重载、路由重定向、代理服务器等功能，而&lt;code&gt;source-map&lt;/code&gt;更是准确定位代码错误的利器。&lt;/p&gt;
     
     </summary>
     
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
     
     
       <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="Node" scheme="https://godbmw.com/tags/Node/"/>
     
   </entry>
   
@@ -1569,6 +1595,60 @@
   </entry>
   
   <entry>
+    <title>webpack4 系列教程(十一)：字体文件处理</title>
+    <link href="https://godbmw.com/passages/2018-10-09-webpack-chracter-file/"/>
+    <id>https://godbmw.com/passages/2018-10-09-webpack-chracter-file/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在自己的项目中引入中意的字体样式，是让自己舒坦的重要方式 :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;源码地址如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos/tree/master/demo11&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;本节课源码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;所有课程源码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
+    
+      <category term="字体处理" scheme="https://godbmw.com/tags/%E5%AD%97%E4%BD%93%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一次遭遇云服务器完全崩溃</title>
+    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
+    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.539Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>webpack4 系列教程(十二)：处理第三方JavaScript库</title>
     <link href="https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/"/>
     <id>https://godbmw.com/passages/2018-10-09-webpack-js-pacakge/</id>
@@ -1598,35 +1678,6 @@
       <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack4 系列教程(十一)：字体文件处理</title>
-    <link href="https://godbmw.com/passages/2018-10-09-webpack-chracter-file/"/>
-    <id>https://godbmw.com/passages/2018-10-09-webpack-chracter-file/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;在自己的项目中引入中意的字体样式，是让自己舒坦的重要方式 :)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;源码地址如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos/tree/master/demo11&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;本节课源码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dongyuanxin/webpack-demos&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;gt;&amp;gt;&amp;gt;所有课程源码&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="webpack4系列教程" scheme="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"/>
-    
-    
-      <category term="webpack" scheme="https://godbmw.com/tags/webpack/"/>
-    
-      <category term="字体处理" scheme="https://godbmw.com/tags/%E5%AD%97%E4%BD%93%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
@@ -1662,31 +1713,6 @@
   </entry>
   
   <entry>
-    <title>第一次遭遇云服务器完全崩溃</title>
-    <link href="https://godbmw.com/passages/2018-10-09-server-dead-first/"/>
-    <id>https://godbmw.com/passages/2018-10-09-server-dead-first/</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.539Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;第一次遭遇云服务器完全崩溃：CPU 突然 100%、控制台无法重启、&lt;strong&gt;控制台无法强制关机&lt;/strong&gt;。一度怀疑人生。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;到目前为止，腾讯云的工程师和我本人都没有找到具体原因。我的猜测是：工程师们手动去关的服务器电源 :) 。至于原因，请看文章吧。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="网站日志" scheme="https://godbmw.com/categories/%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97/"/>
-    
-    
-      <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="网络安全" scheme="https://godbmw.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ubuntu创建新用户的正确姿势</title>
     <link href="https://godbmw.com/passages/2018-10-07-ubuntu-user/"/>
     <id>https://godbmw.com/passages/2018-10-07-ubuntu-user/</id>
@@ -1705,33 +1731,6 @@
       <category term="服务器" scheme="https://godbmw.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
       <category term="Ubuntu" scheme="https://godbmw.com/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>music-api-next DOCS</title>
-    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs/"/>
-    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs/</id>
-    <published>2018-10-04T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;The English document of &lt;code&gt;music-api-next&lt;/code&gt;: music API for search results, songs, comments from QQ, Xiami and Netease.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;If you have any question, welcome to comment here.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
-    
-      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
     
   </entry>
   
@@ -1785,6 +1784,33 @@
 &lt;li&gt;支持&lt;code&gt;pm2&lt;/code&gt;服务器部署&lt;/li&gt;
 &lt;li&gt;可用、高效、稳定&lt;/li&gt;
 &lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="开源项目" scheme="https://godbmw.com/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="第三方库" scheme="https://godbmw.com/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+      <category term="爬虫" scheme="https://godbmw.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="npm" scheme="https://godbmw.com/tags/npm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>music-api-next DOCS</title>
+    <link href="https://godbmw.com/passages/2018-10-05-music-api-next-docs/"/>
+    <id>https://godbmw.com/passages/2018-10-05-music-api-next-docs/</id>
+    <published>2018-10-04T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;The English document of &lt;code&gt;music-api-next&lt;/code&gt;: music API for search results, songs, comments from QQ, Xiami and Netease.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If you have any question, welcome to comment here.&lt;/p&gt;
     
     </summary>
     
@@ -1904,32 +1930,6 @@
   </entry>
   
   <entry>
-    <title>高级排序算法实现与优化</title>
-    <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
-    <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
-    <published>2018-09-18T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。&lt;/p&gt;
-&lt;p&gt;优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
-    
-  </entry>
-  
-  <entry>
     <title>基础排序算法详解与优化</title>
     <link href="https://godbmw.com/passages/2018-09-19-base-sort/"/>
     <id>https://godbmw.com/passages/2018-09-19-base-sort/</id>
@@ -1982,6 +1982,32 @@
       <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
       <category term="自动化" scheme="https://godbmw.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高级排序算法实现与优化</title>
+    <link href="https://godbmw.com/passages/2018-09-19-advance-sort/"/>
+    <id>https://godbmw.com/passages/2018-09-19-advance-sort/</id>
+    <published>2018-09-18T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本文主要介绍高级排序算法中的归并排序和快速排序。他们运用了分支思想，并且大多通过递归来实现。对于归并排序，分为自上向底和自底向上排序。对于快速排序，有常见的二路快排和系统级常用的三路快速排序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我的电脑的配置是：12G、2.9GHz、I5处理器、Win10）。在DevC编译器下去排序 1个亿 的数据量。&lt;/p&gt;
+&lt;p&gt;优化后的快排是 27s。如果不进行任何优化，300s 到 350s，性能提升还是很显著的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据结构和算法" scheme="https://godbmw.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://godbmw.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="C与C++" scheme="https://godbmw.com/tags/C%E4%B8%8EC/"/>
     
   </entry>
   
@@ -2102,9 +2128,9 @@
       <category term="Git实战手册" scheme="https://godbmw.com/categories/Git%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/"/>
     
     
-      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
-    
       <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
+    
+      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
     
   </entry>
   
@@ -2234,6 +2260,32 @@
   </entry>
   
   <entry>
+    <title>来点音乐--吐槽大会</title>
+    <link href="https://godbmw.com/passages/2018-08-28-laidianmusic-chat/"/>
+    <id>https://godbmw.com/passages/2018-08-28-laidianmusic-chat/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这里是来点音乐公司的吐槽大会的厂址，Come on!&lt;/p&gt;
+&lt;p&gt;听说有很多小姐姐可爱的人在用这款产品哦。&lt;/p&gt;
+&lt;p&gt;Hello, everyone!
+        
+      
+    
+    </summary>
+    
+      <category term="合作推广" scheme="https://godbmw.com/categories/%E5%90%88%E4%BD%9C%E6%8E%A8%E5%B9%BF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>webpack4 系列教程(七): SCSS提取和懒加载</title>
     <link href="https://godbmw.com/passages/2018-08-28-webpack-scss-lazy/"/>
     <id>https://godbmw.com/passages/2018-08-28-webpack-scss-lazy/</id>
@@ -2260,32 +2312,6 @@
       <category term="CSS" scheme="https://godbmw.com/tags/CSS/"/>
     
       <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>来点音乐--吐槽大会</title>
-    <link href="https://godbmw.com/passages/2018-08-28-laidianmusic-chat/"/>
-    <id>https://godbmw.com/passages/2018-08-28-laidianmusic-chat/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;这里是来点音乐公司的吐槽大会的厂址，Come on!&lt;/p&gt;
-&lt;p&gt;听说有很多小姐姐可爱的人在用这款产品哦。&lt;/p&gt;
-&lt;p&gt;Hello, everyone!
-        
-      
-    
-    </summary>
-    
-      <category term="合作推广" scheme="https://godbmw.com/categories/%E5%90%88%E4%BD%9C%E6%8E%A8%E5%B9%BF/"/>
-    
     
   </entry>
   
@@ -2691,9 +2717,9 @@
       <category term="Git实战手册" scheme="https://godbmw.com/categories/Git%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/"/>
     
     
-      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
-    
       <category term="GitHub" scheme="https://godbmw.com/tags/GitHub/"/>
+    
+      <category term="Git" scheme="https://godbmw.com/tags/Git/"/>
     
   </entry>
   
@@ -2763,27 +2789,6 @@
   </entry>
   
   <entry>
-    <title>详解scss的继承、占位符和混合宏</title>
-    <link href="https://godbmw.com/passages/2018-05-29-scss-more/"/>
-    <id>https://godbmw.com/passages/2018-05-29-scss-more/</id>
-    <published>2018-05-28T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;15px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;18px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;mixin&lt;/span&gt; size(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;...) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 0 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 1 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 2 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @&lt;span class=&quot;keyword&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Too many parameters&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
-    
-  </entry>
-  
-  <entry>
     <title>初识scss：配置与运行</title>
     <link href="https://godbmw.com/passages/2018-05-29-scss-fisrt-step/"/>
     <id>https://godbmw.com/passages/2018-05-29-scss-fisrt-step/</id>
@@ -2831,6 +2836,27 @@
   </entry>
   
   <entry>
+    <title>详解scss的继承、占位符和混合宏</title>
+    <link href="https://godbmw.com/passages/2018-05-29-scss-more/"/>
+    <id>https://godbmw.com/passages/2018-05-29-scss-more/</id>
+    <published>2018-05-28T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;如何让scss代码可复用？三种复用方式分别用在何处？下方是一段自定义大小的样例👇&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;15px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;18px&lt;/span&gt; !default;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;mixin&lt;/span&gt; size(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;...) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 0 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$height&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$width&lt;/span&gt;;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 1 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; if length(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt;) == 2 &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: nth(&lt;span class=&quot;variable&quot;&gt;$list&lt;/span&gt; , &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @&lt;span class=&quot;keyword&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Too many parameters&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Scss" scheme="https://godbmw.com/tags/Scss/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Js调用模式</title>
     <link href="https://godbmw.com/passages/2018-05-25-js-call-mode/"/>
     <id>https://godbmw.com/passages/2018-05-25-js-call-mode/</id>
@@ -2853,6 +2879,29 @@
     
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Promise 概述</title>
+    <link href="https://godbmw.com/passages/2018-05-23-es-promise/"/>
+    <id>https://godbmw.com/passages/2018-05-23-es-promise/</id>
+    <published>2018-05-22T16:00:00.000Z</published>
+    <updated>2019-04-01T15:22:04.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;实例一旦被创建就会被执行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;过程分为两个分支：&lt;code&gt;pending=&amp;gt;resolved&lt;/code&gt;和&lt;code&gt;pending=&amp;gt;rejected&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;状态改变后，依然会执行之后的代码：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; warnDemo = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; promise = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;resolve&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resolve(ctx);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;After resolved, but Run&quot;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// 依然会执行这个语句&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; promise;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;warnDemo(&lt;span class=&quot;string&quot;&gt;&quot;ctx&quot;&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;`This is &lt;span class=&quot;subst&quot;&gt;$&amp;#123;ctx&amp;#125;&lt;/span&gt;`&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
   </entry>
   
@@ -2917,29 +2966,6 @@
     
     
       <category term="JavaScript" scheme="https://godbmw.com/tags/JavaScript/"/>
-    
-      <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Promise 概述</title>
-    <link href="https://godbmw.com/passages/2018-05-23-es-promise/"/>
-    <id>https://godbmw.com/passages/2018-05-23-es-promise/</id>
-    <published>2018-05-22T16:00:00.000Z</published>
-    <updated>2019-04-01T15:22:04.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;实例一旦被创建就会被执行&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;过程分为两个分支：&lt;code&gt;pending=&amp;gt;resolved&lt;/code&gt;和&lt;code&gt;pending=&amp;gt;rejected&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Promise&lt;/code&gt;状态改变后，依然会执行之后的代码：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; warnDemo = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; promise = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;resolve&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resolve(ctx);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;After resolved, but Run&quot;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// 依然会执行这个语句&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; promise;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;warnDemo(&lt;span class=&quot;string&quot;&gt;&quot;ctx&quot;&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;ctx&lt;/span&gt; =&amp;gt;&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;`This is &lt;span class=&quot;subst&quot;&gt;$&amp;#123;ctx&amp;#125;&lt;/span&gt;`&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
     
       <category term="ES6" scheme="https://godbmw.com/tags/ES6/"/>
     
